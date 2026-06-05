@@ -1,0 +1,1175 @@
+{
+  "meta": {
+    "description": "Canonical catalog of all FileMaker Pro script steps, organised by category. Use this for prototype/syntax lookups before fetching live docs. doc_url points to the authoritative Claris Help Centre page for each step.",
+    "help_centre": "https://help.claris.com/en/pro-help/content/script-steps-reference.html",
+    "version": "FileMaker Pro 26 / Claris 2026",
+    "last_updated": "2026-06",
+    "update_instructions": "Re-fetch https://help.claris.com/en/pro-help/content/script-steps-reference.html and compare category listings. Add new steps, update slugs, bump last_updated.",
+    "note": "Syntax uses [] for required fields/options and {} for optional. Steps marked platform list restrictions (Pro, Server, Go, WebDirect, Cloud)."
+  },
+  "categories": [
+    {
+      "name": "Control",
+      "category_page": "control-script-steps.html",
+      "steps": [
+        {
+          "name": "Perform Script",
+          "syntax": "Perform Script [ Specified: From list ; \"ScriptName\" ; Parameter: value ]",
+          "purpose": "Runs a named script in the current or another file, optionally passing a parameter",
+          "slug": "perform-script",
+          "doc_url": "https://help.claris.com/en/pro-help/content/perform-script.html"
+        },
+        {
+          "name": "Perform Script on Server",
+          "syntax": "Perform Script on Server [ Wait for completion: On/Off ; Specified: From list ; \"ScriptName\" ; Parameter: value ]",
+          "purpose": "Runs a script on FileMaker Server (server-side scripting)",
+          "slug": "perform-script-on-server",
+          "doc_url": "https://help.claris.com/en/pro-help/content/perform-script-on-server.html"
+        },
+        {
+          "name": "Pause/Resume Script",
+          "syntax": "Pause/Resume Script [ Duration (seconds): value ]",
+          "purpose": "Pauses the current script for user input or a fixed duration",
+          "slug": "pause-resume-script",
+          "doc_url": "https://help.claris.com/en/pro-help/content/pause-resume-script.html"
+        },
+        {
+          "name": "Exit Script",
+          "syntax": "Exit Script [ Script Result: value ]",
+          "purpose": "Ends the current script and optionally sets a script result accessible via Get(ScriptResult)",
+          "slug": "exit-script",
+          "doc_url": "https://help.claris.com/en/pro-help/content/exit-script.html"
+        },
+        {
+          "name": "Halt Script",
+          "syntax": "Halt Script",
+          "purpose": "Stops all scripts in the call stack immediately",
+          "slug": "halt-script",
+          "doc_url": "https://help.claris.com/en/pro-help/content/halt-script.html"
+        },
+        {
+          "name": "If",
+          "syntax": "If [ condition ]",
+          "purpose": "Begins a conditional block; executes enclosed steps only when condition is true",
+          "slug": "if",
+          "doc_url": "https://help.claris.com/en/pro-help/content/if.html"
+        },
+        {
+          "name": "Else If",
+          "syntax": "Else If [ condition ]",
+          "purpose": "Additional condition branch within an If block",
+          "slug": "else-if",
+          "doc_url": "https://help.claris.com/en/pro-help/content/else-if.html"
+        },
+        {
+          "name": "Else",
+          "syntax": "Else",
+          "purpose": "Default branch executed when no If/Else If condition is true",
+          "slug": "else",
+          "doc_url": "https://help.claris.com/en/pro-help/content/else.html"
+        },
+        {
+          "name": "End If",
+          "syntax": "End If",
+          "purpose": "Closes an If block",
+          "slug": "end-if",
+          "doc_url": "https://help.claris.com/en/pro-help/content/end-if.html"
+        },
+        {
+          "name": "Loop",
+          "syntax": "Loop",
+          "purpose": "Begins a loop block that repeats until an Exit Loop If or Go to Record exits it",
+          "slug": "loop",
+          "doc_url": "https://help.claris.com/en/pro-help/content/loop.html"
+        },
+        {
+          "name": "Exit Loop If",
+          "syntax": "Exit Loop If [ condition ]",
+          "purpose": "Exits the enclosing Loop when condition is true",
+          "slug": "exit-loop-if",
+          "doc_url": "https://help.claris.com/en/pro-help/content/exit-loop-if.html"
+        },
+        {
+          "name": "End Loop",
+          "syntax": "End Loop",
+          "purpose": "Closes a Loop block and returns execution to the Loop step",
+          "slug": "end-loop",
+          "doc_url": "https://help.claris.com/en/pro-help/content/end-loop.html"
+        },
+        {
+          "name": "Allow User Abort",
+          "syntax": "Allow User Abort [ On/Off ]",
+          "purpose": "Controls whether users can stop the script with Escape/Cancel",
+          "slug": "allow-user-abort",
+          "doc_url": "https://help.claris.com/en/pro-help/content/allow-user-abort.html"
+        },
+        {
+          "name": "Set Error Capture",
+          "syntax": "Set Error Capture [ On/Off ]",
+          "purpose": "When On, suppresses FileMaker error dialogs so scripts can handle errors programmatically",
+          "slug": "set-error-capture",
+          "doc_url": "https://help.claris.com/en/pro-help/content/set-error-capture.html"
+        },
+        {
+          "name": "Set Variable",
+          "syntax": "Set Variable [ $name ; Value: expression ; Repetition: n ]",
+          "purpose": "Creates or sets a local ($var) or global ($$var) variable",
+          "slug": "set-variable",
+          "doc_url": "https://help.claris.com/en/pro-help/content/set-variable.html"
+        },
+        {
+          "name": "Install OnTimer Script",
+          "syntax": "Install OnTimer Script [ Interval: seconds ; Specified: From list ; \"ScriptName\" ; Parameter: value ]",
+          "purpose": "Installs a script that runs repeatedly on a timer interval",
+          "slug": "install-ontimer-script",
+          "doc_url": "https://help.claris.com/en/pro-help/content/install-ontimer-script.html"
+        },
+        {
+          "name": "Open Transaction",
+          "syntax": "Open Transaction",
+          "purpose": "Begins a database transaction (changes committed or rolled back as a unit)",
+          "slug": "open-transaction",
+          "doc_url": "https://help.claris.com/en/pro-help/content/open-transaction.html"
+        },
+        {
+          "name": "Commit Transaction",
+          "syntax": "Commit Transaction",
+          "purpose": "Commits an open transaction, making all changes permanent",
+          "slug": "commit-transaction",
+          "doc_url": "https://help.claris.com/en/pro-help/content/commit-transaction.html"
+        },
+        {
+          "name": "Revert Transaction",
+          "syntax": "Revert Transaction",
+          "purpose": "Rolls back an open transaction, discarding all changes since Open Transaction",
+          "slug": "revert-transaction",
+          "doc_url": "https://help.claris.com/en/pro-help/content/revert-transaction.html"
+        }
+      ]
+    },
+    {
+      "name": "Navigation",
+      "category_page": "navigation-script-steps.html",
+      "steps": [
+        {
+          "name": "Go to Layout",
+          "syntax": "Go to Layout [ \"LayoutName\" / layout number / original layout ]",
+          "purpose": "Switches to the specified layout",
+          "slug": "go-to-layout",
+          "doc_url": "https://help.claris.com/en/pro-help/content/go-to-layout.html"
+        },
+        {
+          "name": "Go to Record/Request/Page",
+          "syntax": "Go to Record/Request/Page [ First / Last / Previous / Next / By Calculation: n ]",
+          "purpose": "Navigates to a specific record in the current found set",
+          "slug": "go-to-record-request-page",
+          "doc_url": "https://help.claris.com/en/pro-help/content/go-to-record-request-page.html"
+        },
+        {
+          "name": "Go to Related Record",
+          "syntax": "Go to Related Record [ Show only related records ; From table: \"TableOccurrence\" ; Using layout: \"LayoutName\" ]",
+          "purpose": "Goes to a related record via a relationship, optionally filtering to related records only",
+          "slug": "go-to-related-record",
+          "doc_url": "https://help.claris.com/en/pro-help/content/go-to-related-record.html"
+        },
+        {
+          "name": "Go to Portal Row",
+          "syntax": "Go to Portal Row [ Select ; First / Last / Previous / Next / By Calculation: n ]",
+          "purpose": "Navigates to a specific row in a portal on the current layout",
+          "slug": "go-to-portal-row",
+          "doc_url": "https://help.claris.com/en/pro-help/content/go-to-portal-row.html"
+        },
+        {
+          "name": "Go to Field",
+          "syntax": "Go to Field [ Select/perform ; Table::Field ]",
+          "purpose": "Moves focus to the specified field",
+          "slug": "go-to-field",
+          "doc_url": "https://help.claris.com/en/pro-help/content/go-to-field.html"
+        },
+        {
+          "name": "Go to Next Field",
+          "syntax": "Go to Next Field",
+          "purpose": "Moves focus to the next field in tab order",
+          "slug": "go-to-next-field",
+          "doc_url": "https://help.claris.com/en/pro-help/content/go-to-next-field.html"
+        },
+        {
+          "name": "Go to Previous Field",
+          "syntax": "Go to Previous Field",
+          "purpose": "Moves focus to the previous field in tab order",
+          "slug": "go-to-previous-field",
+          "doc_url": "https://help.claris.com/en/pro-help/content/go-to-previous-field.html"
+        },
+        {
+          "name": "Enter Browse Mode",
+          "syntax": "Enter Browse Mode [ Pause ]",
+          "purpose": "Switches to Browse mode",
+          "slug": "enter-browse-mode",
+          "doc_url": "https://help.claris.com/en/pro-help/content/enter-browse-mode.html"
+        },
+        {
+          "name": "Enter Find Mode",
+          "syntax": "Enter Find Mode [ Pause ; Restore ]",
+          "purpose": "Switches to Find mode, optionally restoring saved find requests",
+          "slug": "enter-find-mode",
+          "doc_url": "https://help.claris.com/en/pro-help/content/enter-find-mode.html"
+        },
+        {
+          "name": "Enter Preview Mode",
+          "syntax": "Enter Preview Mode [ Pause ]",
+          "purpose": "Switches to Preview mode",
+          "slug": "enter-preview-mode",
+          "doc_url": "https://help.claris.com/en/pro-help/content/enter-preview-mode.html"
+        },
+        {
+          "name": "Scroll Window",
+          "syntax": "Scroll Window [ Home / End / Page Up / Page Down / To Selection ]",
+          "purpose": "Scrolls the window to the specified position",
+          "slug": "scroll-window",
+          "doc_url": "https://help.claris.com/en/pro-help/content/scroll-window.html"
+        },
+        {
+          "name": "Select Window",
+          "syntax": "Select Window [ Name: \"WindowName\" ; Current File / Any File ]",
+          "purpose": "Brings the specified window to the front",
+          "slug": "select-window",
+          "doc_url": "https://help.claris.com/en/pro-help/content/select-window.html"
+        },
+        {
+          "name": "Navigate to Object",
+          "syntax": "Navigate to Object [ Object Name: \"name\" ]",
+          "purpose": "Moves focus to a named layout object",
+          "slug": "navigate-to-object",
+          "doc_url": "https://help.claris.com/en/pro-help/content/navigate-to-object.html"
+        }
+      ]
+    },
+    {
+      "name": "Editing",
+      "category_page": "editing-script-steps.html",
+      "steps": [
+        {
+          "name": "Set Field",
+          "syntax": "Set Field [ Table::Field ; value ]",
+          "purpose": "Sets the value of a field in the current record",
+          "slug": "set-field",
+          "doc_url": "https://help.claris.com/en/pro-help/content/set-field.html"
+        },
+        {
+          "name": "Set Field By Name",
+          "syntax": "Set Field By Name [ fieldName expression ; value ]",
+          "purpose": "Sets a field whose name is determined at runtime by a calculation",
+          "slug": "set-field-by-name",
+          "doc_url": "https://help.claris.com/en/pro-help/content/set-field-by-name.html"
+        },
+        {
+          "name": "Set Next Serial Value",
+          "syntax": "Set Next Serial Value [ Table::Field ; value ]",
+          "purpose": "Sets the next auto-enter serial value for a field",
+          "slug": "set-next-serial-value",
+          "doc_url": "https://help.claris.com/en/pro-help/content/set-next-serial-value.html"
+        },
+        {
+          "name": "Insert Text",
+          "syntax": "Insert Text [ Select ; Table::Field ; \"text\" ]",
+          "purpose": "Inserts literal text into a field at the cursor position",
+          "slug": "insert-text",
+          "doc_url": "https://help.claris.com/en/pro-help/content/insert-text.html"
+        },
+        {
+          "name": "Insert Calculated Result",
+          "syntax": "Insert Calculated Result [ Select ; Table::Field ; value ]",
+          "purpose": "Inserts the result of a calculation into a field",
+          "slug": "insert-calculated-result",
+          "doc_url": "https://help.claris.com/en/pro-help/content/insert-calculated-result.html"
+        },
+        {
+          "name": "Insert From Index",
+          "syntax": "Insert From Index [ Select ; Table::Field ]",
+          "purpose": "Opens field index dialog so user can pick a value to insert",
+          "slug": "insert-from-index",
+          "doc_url": "https://help.claris.com/en/pro-help/content/insert-from-index.html"
+        },
+        {
+          "name": "Insert From Last Visited",
+          "syntax": "Insert From Last Visited [ Select ; Table::Field ]",
+          "purpose": "Inserts the value from the same field in the last visited record",
+          "slug": "insert-from-last-visited",
+          "doc_url": "https://help.claris.com/en/pro-help/content/insert-from-last-visited.html"
+        },
+        {
+          "name": "Insert From URL",
+          "syntax": "Insert From URL [ Select ; With dialog: On/Off ; Table::Field ; URL expression ; cURL options ]",
+          "purpose": "Fetches URL content and inserts it into a field; supports cURL options for headers, auth, POST",
+          "slug": "insert-from-url",
+          "doc_url": "https://help.claris.com/en/pro-help/content/insert-from-url.html"
+        },
+        {
+          "name": "Insert Current Date",
+          "syntax": "Insert Current Date [ Select ; Table::Field ]",
+          "purpose": "Inserts today's date into a field",
+          "slug": "insert-current-date",
+          "doc_url": "https://help.claris.com/en/pro-help/content/insert-current-date.html"
+        },
+        {
+          "name": "Insert Current Time",
+          "syntax": "Insert Current Time [ Select ; Table::Field ]",
+          "purpose": "Inserts the current time into a field",
+          "slug": "insert-current-time",
+          "doc_url": "https://help.claris.com/en/pro-help/content/insert-current-time.html"
+        },
+        {
+          "name": "Insert Current User Name",
+          "syntax": "Insert Current User Name [ Select ; Table::Field ]",
+          "purpose": "Inserts the current FileMaker account name into a field",
+          "slug": "insert-current-user-name",
+          "doc_url": "https://help.claris.com/en/pro-help/content/insert-current-user-name.html"
+        },
+        {
+          "name": "Insert File",
+          "syntax": "Insert File [ Compress ; Storage: Embedded/By Reference/Externally ; Table::Field ; source ]",
+          "purpose": "Inserts a file into a container field",
+          "slug": "insert-file",
+          "doc_url": "https://help.claris.com/en/pro-help/content/insert-file.html"
+        },
+        {
+          "name": "Insert Picture",
+          "syntax": "Insert Picture [ Compress ; Storage: Embedded/By Reference ; Table::Field ; source ]",
+          "purpose": "Inserts an image into a container field",
+          "slug": "insert-picture",
+          "doc_url": "https://help.claris.com/en/pro-help/content/insert-picture.html"
+        },
+        {
+          "name": "Insert Audio/Video",
+          "syntax": "Insert Audio/Video [ Storage: Embedded/By Reference/Externally ; Table::Field ; source ]",
+          "purpose": "Inserts audio or video into a container field",
+          "slug": "insert-audio-video",
+          "doc_url": "https://help.claris.com/en/pro-help/content/insert-audio-video.html"
+        },
+        {
+          "name": "Insert PDF",
+          "syntax": "Insert PDF [ Storage: Embedded/By Reference/Externally ; Table::Field ; source ]",
+          "purpose": "Inserts a PDF into a container field",
+          "slug": "insert-pdf",
+          "doc_url": "https://help.claris.com/en/pro-help/content/insert-pdf.html"
+        },
+        {
+          "name": "Replace Field Contents",
+          "syntax": "Replace Field Contents [ No dialog ; Table::Field ; Calculated result / Serial numbers / Values from index ]",
+          "purpose": "Replaces values in a field across all records in the found set",
+          "slug": "replace-field-contents",
+          "doc_url": "https://help.claris.com/en/pro-help/content/replace-field-contents.html"
+        },
+        {
+          "name": "Relookup Field Contents",
+          "syntax": "Relookup Field Contents [ No dialog ; Table::Field ]",
+          "purpose": "Forces a re-lookup of related field values for records in the found set",
+          "slug": "relookup-field-contents",
+          "doc_url": "https://help.claris.com/en/pro-help/content/relookup-field-contents.html"
+        },
+        {
+          "name": "Export Field Contents",
+          "syntax": "Export Field Contents [ Table::Field ; output file path ; Automatically open ]",
+          "purpose": "Exports the contents of a container or text field to a file",
+          "slug": "export-field-contents",
+          "doc_url": "https://help.claris.com/en/pro-help/content/export-field-contents.html"
+        },
+        {
+          "name": "Cut",
+          "syntax": "Cut [ Select ; Table::Field ]",
+          "purpose": "Cuts selected content from a field to the clipboard",
+          "slug": "cut",
+          "doc_url": "https://help.claris.com/en/pro-help/content/cut.html"
+        },
+        {
+          "name": "Copy",
+          "syntax": "Copy [ Select ; Table::Field ]",
+          "purpose": "Copies field content or selected text to the clipboard",
+          "slug": "copy",
+          "doc_url": "https://help.claris.com/en/pro-help/content/copy.html"
+        },
+        {
+          "name": "Paste",
+          "syntax": "Paste [ Select ; No style ; Table::Field ]",
+          "purpose": "Pastes clipboard content into a field",
+          "slug": "paste",
+          "doc_url": "https://help.claris.com/en/pro-help/content/paste.html"
+        },
+        {
+          "name": "Clear",
+          "syntax": "Clear [ Select ; Table::Field ]",
+          "purpose": "Clears the selected content or entire field contents",
+          "slug": "clear",
+          "doc_url": "https://help.claris.com/en/pro-help/content/clear.html"
+        },
+        {
+          "name": "Undo/Redo",
+          "syntax": "Undo/Redo",
+          "purpose": "Undoes or redoes the last user action",
+          "slug": "undo-redo",
+          "doc_url": "https://help.claris.com/en/pro-help/content/undo-redo.html"
+        },
+        {
+          "name": "Insert Embedding",
+          "syntax": "Insert Embedding [ Account Name: name ; Embedding Model: model ; Source Field: field ; Target Field: field ]",
+          "purpose": "Generates an embedding vector for source field content and stores it in the target container field",
+          "slug": "insert-embedding",
+          "doc_url": "https://help.claris.com/en/pro-help/content/insert-embedding.html"
+        }
+      ]
+    },
+    {
+      "name": "Fields",
+      "category_page": "fields-script-steps.html",
+      "steps": [
+        {
+          "name": "Set Selection",
+          "syntax": "Set Selection [ Table::Field ; Start Position: n ; End Position: n ]",
+          "purpose": "Sets the text selection range within a field",
+          "slug": "set-selection",
+          "doc_url": "https://help.claris.com/en/pro-help/content/set-selection.html"
+        },
+        {
+          "name": "Select All",
+          "syntax": "Select All",
+          "purpose": "Selects all content in the current field",
+          "slug": "select-all",
+          "doc_url": "https://help.claris.com/en/pro-help/content/select-all.html"
+        },
+        {
+          "name": "Set Use System Formats",
+          "syntax": "Set Use System Formats [ On/Off ]",
+          "purpose": "Controls whether the file uses system or file-defined date/time formats",
+          "slug": "set-use-system-formats",
+          "doc_url": "https://help.claris.com/en/pro-help/content/set-use-system-formats.html"
+        }
+      ]
+    },
+    {
+      "name": "Records",
+      "category_page": "records-script-steps.html",
+      "steps": [
+        {
+          "name": "New Record/Request",
+          "syntax": "New Record/Request",
+          "purpose": "Creates a new blank record (Browse mode) or find request (Find mode)",
+          "slug": "new-record-request",
+          "doc_url": "https://help.claris.com/en/pro-help/content/new-record-request.html"
+        },
+        {
+          "name": "Duplicate Record/Request",
+          "syntax": "Duplicate Record/Request",
+          "purpose": "Duplicates the current record or find request",
+          "slug": "duplicate-record-request",
+          "doc_url": "https://help.claris.com/en/pro-help/content/duplicate-record-request.html"
+        },
+        {
+          "name": "Delete Record/Request",
+          "syntax": "Delete Record/Request [ No dialog ]",
+          "purpose": "Deletes the current record or find request",
+          "slug": "delete-record-request",
+          "doc_url": "https://help.claris.com/en/pro-help/content/delete-record-request.html"
+        },
+        {
+          "name": "Delete All Records",
+          "syntax": "Delete All Records [ No dialog ]",
+          "purpose": "Deletes all records in the current found set",
+          "slug": "delete-all-records",
+          "doc_url": "https://help.claris.com/en/pro-help/content/delete-all-records.html"
+        },
+        {
+          "name": "Delete Portal Row",
+          "syntax": "Delete Portal Row [ No dialog ]",
+          "purpose": "Deletes the currently selected portal row (related record)",
+          "slug": "delete-portal-row",
+          "doc_url": "https://help.claris.com/en/pro-help/content/delete-portal-row.html"
+        },
+        {
+          "name": "Commit Records/Requests",
+          "syntax": "Commit Records/Requests [ No dialog ; Force commit ]",
+          "purpose": "Commits (saves) changes to the current record without leaving the record",
+          "slug": "commit-records-requests",
+          "doc_url": "https://help.claris.com/en/pro-help/content/commit-records-requests.html"
+        },
+        {
+          "name": "Revert Record/Request",
+          "syntax": "Revert Record/Request [ No dialog ]",
+          "purpose": "Reverts uncommitted changes to the current record",
+          "slug": "revert-record-request",
+          "doc_url": "https://help.claris.com/en/pro-help/content/revert-record-request.html"
+        },
+        {
+          "name": "Open Record/Request",
+          "syntax": "Open Record/Request",
+          "purpose": "Locks the current record for editing in a multi-user environment",
+          "slug": "open-record-request",
+          "doc_url": "https://help.claris.com/en/pro-help/content/open-record-request.html"
+        },
+        {
+          "name": "Copy Record/Request",
+          "syntax": "Copy Record/Request",
+          "purpose": "Copies all field values of the current record to the clipboard as tab-delimited text",
+          "slug": "copy-record-request",
+          "doc_url": "https://help.claris.com/en/pro-help/content/copy-record-request.html"
+        },
+        {
+          "name": "Copy All Records/Requests",
+          "syntax": "Copy All Records/Requests",
+          "purpose": "Copies all records in the found set to the clipboard as tab-delimited text",
+          "slug": "copy-all-records-requests",
+          "doc_url": "https://help.claris.com/en/pro-help/content/copy-all-records-requests.html"
+        },
+        {
+          "name": "Import Records",
+          "syntax": "Import Records [ No dialog ; Source file ; Target: Table ; Arrange by: matching names/order ]",
+          "purpose": "Imports records from an external file or data source into the current table",
+          "slug": "import-records",
+          "doc_url": "https://help.claris.com/en/pro-help/content/import-records.html"
+        },
+        {
+          "name": "Export Records",
+          "syntax": "Export Records [ No dialog ; Output file ; Fields in order ]",
+          "purpose": "Exports records in the found set to a file in the specified format",
+          "slug": "export-records",
+          "doc_url": "https://help.claris.com/en/pro-help/content/export-records.html"
+        },
+        {
+          "name": "Save Records as Excel",
+          "syntax": "Save Records as Excel [ No dialog ; Output file ; Auto-size columns ; Records being browsed / Current record ]",
+          "purpose": "Saves found records to an Excel (.xlsx) file",
+          "slug": "save-records-as-excel",
+          "doc_url": "https://help.claris.com/en/pro-help/content/save-records-as-excel.html"
+        },
+        {
+          "name": "Save Records as PDF",
+          "syntax": "Save Records as PDF [ No dialog ; Append ; Output file ; Current record / Records being browsed / Blank record ]",
+          "purpose": "Saves records or a blank layout to a PDF file",
+          "slug": "save-records-as-pdf",
+          "doc_url": "https://help.claris.com/en/pro-help/content/save-records-as-pdf.html"
+        },
+        {
+          "name": "Save Records as Snapshot Link",
+          "syntax": "Save Records as Snapshot Link [ No dialog ; Output file ]",
+          "purpose": "Saves a snapshot link (.fmpsl) representing the current found set and sort order",
+          "slug": "save-records-as-snapshot-link",
+          "doc_url": "https://help.claris.com/en/pro-help/content/save-records-as-snapshot-link.html"
+        }
+      ]
+    },
+    {
+      "name": "Found Sets",
+      "category_page": "found-sets-script-steps.html",
+      "steps": [
+        {
+          "name": "Perform Find",
+          "syntax": "Perform Find [ Restore ]",
+          "purpose": "Executes the current find request(s), updating the found set",
+          "slug": "perform-find",
+          "doc_url": "https://help.claris.com/en/pro-help/content/perform-find.html"
+        },
+        {
+          "name": "Perform Quick Find",
+          "syntax": "Perform Quick Find [ search text ]",
+          "purpose": "Performs a Quick Find across all quick-find-enabled fields",
+          "slug": "perform-quick-find",
+          "doc_url": "https://help.claris.com/en/pro-help/content/perform-quick-find.html"
+        },
+        {
+          "name": "Perform Semantic Find",
+          "syntax": "Perform Semantic Find [ Table::EmbeddingField ; Query Embedding: value ; Top K: n ]",
+          "purpose": "Finds records semantically similar to a query embedding using cosine similarity",
+          "slug": "perform-semantic-find",
+          "doc_url": "https://help.claris.com/en/pro-help/content/perform-semantic-find.html"
+        },
+        {
+          "name": "Constrain Found Set",
+          "syntax": "Constrain Found Set [ Restore ]",
+          "purpose": "Narrows the current found set using an additional find request",
+          "slug": "constrain-found-set",
+          "doc_url": "https://help.claris.com/en/pro-help/content/constrain-found-set.html"
+        },
+        {
+          "name": "Extend Found Set",
+          "syntax": "Extend Found Set [ Restore ]",
+          "purpose": "Adds records matching a find request to the current found set",
+          "slug": "extend-found-set",
+          "doc_url": "https://help.claris.com/en/pro-help/content/extend-found-set.html"
+        },
+        {
+          "name": "Modify Last Find",
+          "syntax": "Modify Last Find",
+          "purpose": "Reopens the last find request for modification",
+          "slug": "modify-last-find",
+          "doc_url": "https://help.claris.com/en/pro-help/content/modify-last-find.html"
+        },
+        {
+          "name": "Show All Records",
+          "syntax": "Show All Records",
+          "purpose": "Finds all records in the current table",
+          "slug": "show-all-records",
+          "doc_url": "https://help.claris.com/en/pro-help/content/show-all-records.html"
+        },
+        {
+          "name": "Show Omitted Only",
+          "syntax": "Show Omitted Only",
+          "purpose": "Swaps found set with omitted records",
+          "slug": "show-omitted-only",
+          "doc_url": "https://help.claris.com/en/pro-help/content/show-omitted-only.html"
+        },
+        {
+          "name": "Omit Record",
+          "syntax": "Omit Record",
+          "purpose": "Removes the current record from the found set",
+          "slug": "omit-record",
+          "doc_url": "https://help.claris.com/en/pro-help/content/omit-record.html"
+        },
+        {
+          "name": "Omit Multiple Records",
+          "syntax": "Omit Multiple Records [ No dialog ; n records ]",
+          "purpose": "Removes n records starting from the current record from the found set",
+          "slug": "omit-multiple-records",
+          "doc_url": "https://help.claris.com/en/pro-help/content/omit-multiple-records.html"
+        },
+        {
+          "name": "Sort Records",
+          "syntax": "Sort Records [ Restore ; No dialog ]",
+          "purpose": "Sorts the found set by the saved or specified sort order",
+          "slug": "sort-records",
+          "doc_url": "https://help.claris.com/en/pro-help/content/sort-records.html"
+        },
+        {
+          "name": "Sort Records by Field",
+          "syntax": "Sort Records by Field [ Ascending/Descending ; Table::Field ]",
+          "purpose": "Sorts the found set by a single specified field",
+          "slug": "sort-records-by-field",
+          "doc_url": "https://help.claris.com/en/pro-help/content/sort-records-by-field.html"
+        },
+        {
+          "name": "Unsort Records",
+          "syntax": "Unsort Records",
+          "purpose": "Returns records to creation order",
+          "slug": "unsort-records",
+          "doc_url": "https://help.claris.com/en/pro-help/content/unsort-records.html"
+        }
+      ]
+    },
+    {
+      "name": "Windows",
+      "category_page": "windows-script-steps.html",
+      "steps": [
+        {
+          "name": "New Window",
+          "syntax": "New Window [ Style: Document/Floating Document/Dialog ; Name: text ; Height: n ; Width: n ; Top: n ; Left: n ]",
+          "purpose": "Opens a new window of the specified style",
+          "slug": "new-window",
+          "doc_url": "https://help.claris.com/en/pro-help/content/new-window.html"
+        },
+        {
+          "name": "Close Window",
+          "syntax": "Close Window [ Current Window / Name: text ]",
+          "purpose": "Closes the current or named window",
+          "slug": "close-window",
+          "doc_url": "https://help.claris.com/en/pro-help/content/close-window.html"
+        },
+        {
+          "name": "Move/Resize Window",
+          "syntax": "Move/Resize Window [ Current Window / Name: text ; Height: n ; Width: n ; Top: n ; Left: n ]",
+          "purpose": "Moves and/or resizes a window",
+          "slug": "move-resize-window",
+          "doc_url": "https://help.claris.com/en/pro-help/content/move-resize-window.html"
+        },
+        {
+          "name": "Arrange All Windows",
+          "syntax": "Arrange All Windows [ Tile Horizontally / Tile Vertically / Cascade / Bring All to Front ]",
+          "purpose": "Arranges all open windows",
+          "slug": "arrange-all-windows",
+          "doc_url": "https://help.claris.com/en/pro-help/content/arrange-all-windows.html"
+        },
+        {
+          "name": "Freeze Window",
+          "syntax": "Freeze Window",
+          "purpose": "Prevents screen redraws while a script runs, improving performance",
+          "slug": "freeze-window",
+          "doc_url": "https://help.claris.com/en/pro-help/content/freeze-window.html"
+        },
+        {
+          "name": "Refresh Window",
+          "syntax": "Refresh Window [ Flush cached join results ]",
+          "purpose": "Forces a screen redraw; optionally flushes relationship cache",
+          "slug": "refresh-window",
+          "doc_url": "https://help.claris.com/en/pro-help/content/refresh-window.html"
+        },
+        {
+          "name": "Refresh Object",
+          "syntax": "Refresh Object [ Object Name: name ]",
+          "purpose": "Refreshes a named layout object without refreshing the whole window",
+          "slug": "refresh-object",
+          "doc_url": "https://help.claris.com/en/pro-help/content/refresh-object.html"
+        },
+        {
+          "name": "Set Window Title",
+          "syntax": "Set Window Title [ Current Window / Name: text ; New Name: expression ]",
+          "purpose": "Sets the title of a window",
+          "slug": "set-window-title",
+          "doc_url": "https://help.claris.com/en/pro-help/content/set-window-title.html"
+        },
+        {
+          "name": "Set Zoom Level",
+          "syntax": "Set Zoom Level [ Lock ; n% ]",
+          "purpose": "Sets the zoom level of the current window",
+          "slug": "set-zoom-level",
+          "doc_url": "https://help.claris.com/en/pro-help/content/set-zoom-level.html"
+        },
+        {
+          "name": "Show/Hide Menubar",
+          "syntax": "Show/Hide Menubar [ Lock ; Show/Hide ]",
+          "purpose": "Shows or hides the menu bar",
+          "slug": "show-hide-menubar",
+          "doc_url": "https://help.claris.com/en/pro-help/content/show-hide-menubar.html"
+        },
+        {
+          "name": "Show/Hide Text Ruler",
+          "syntax": "Show/Hide Text Ruler [ Show/Hide ]",
+          "purpose": "Shows or hides the text ruler",
+          "slug": "show-hide-text-ruler",
+          "doc_url": "https://help.claris.com/en/pro-help/content/show-hide-text-ruler.html"
+        },
+        {
+          "name": "Show/Hide Status Toolbar",
+          "syntax": "Show/Hide Status Toolbar [ Lock ; Show/Hide ]",
+          "purpose": "Shows or hides the status toolbar",
+          "slug": "show-hide-status-toolbar",
+          "doc_url": "https://help.claris.com/en/pro-help/content/show-hide-status-toolbar.html"
+        },
+        {
+          "name": "Set Window Animation",
+          "syntax": "Set Window Animation [ On/Off ]",
+          "purpose": "Enables or disables window transition animations",
+          "slug": "set-window-animation",
+          "doc_url": "https://help.claris.com/en/pro-help/content/set-window-animation.html"
+        }
+      ]
+    },
+    {
+      "name": "Files",
+      "category_page": "files-script-steps.html",
+      "steps": [
+        {
+          "name": "Close File",
+          "syntax": "Close File [ Specify: From list / Current File ]",
+          "purpose": "Closes a file, committing any pending changes",
+          "slug": "close-file",
+          "doc_url": "https://help.claris.com/en/pro-help/content/close-file.html"
+        },
+        {
+          "name": "Convert File",
+          "syntax": "Convert File [ No dialog ; source file ]",
+          "purpose": "Converts an older FileMaker or non-FileMaker file to current format",
+          "slug": "convert-file",
+          "doc_url": "https://help.claris.com/en/pro-help/content/convert-file.html"
+        },
+        {
+          "name": "New File",
+          "syntax": "New File",
+          "purpose": "Creates a new FileMaker file",
+          "slug": "new-file",
+          "doc_url": "https://help.claris.com/en/pro-help/content/new-file.html"
+        },
+        {
+          "name": "Open File",
+          "syntax": "Open File [ Open hidden ; Specify: From list / By name: expression ]",
+          "purpose": "Opens a FileMaker file",
+          "slug": "open-file",
+          "doc_url": "https://help.claris.com/en/pro-help/content/open-file.html"
+        },
+        {
+          "name": "Recover File",
+          "syntax": "Recover File [ No dialog ; source file ]",
+          "purpose": "Attempts to recover a damaged FileMaker file",
+          "slug": "recover-file",
+          "doc_url": "https://help.claris.com/en/pro-help/content/recover-file.html"
+        },
+        {
+          "name": "Save Records as JSONL",
+          "purpose": "Saves records to a specified JSONL file; each line is a JSON object representing a record. Used to output record data for fine-tuning a model.",
+          "syntax": "Save Records as JSONL [ No dialog ; File: <path> ; Fields: <field list> ]",
+          "doc_url": "https://help.claris.com/en/pro-help/content/save-records-as-jsonl.html"
+        },
+        {
+          "name": "Save a Copy as",
+          "syntax": "Save a Copy as [ No dialog ; output file ; Type: copy/compacted/self-contained ]",
+          "purpose": "Saves a copy of the current file in the specified format",
+          "slug": "save-a-copy-as",
+          "doc_url": "https://help.claris.com/en/pro-help/content/save-a-copy-as.html"
+        },
+        {
+          "name": "Set Multi-User",
+          "syntax": "Set Multi-User [ On - Hidden / On - Visible / Off ]",
+          "purpose": "Controls network sharing of the current file",
+          "slug": "set-multi-user",
+          "doc_url": "https://help.claris.com/en/pro-help/content/set-multi-user.html"
+        }
+      ]
+    },
+    {
+      "name": "Accounts",
+      "category_page": "accounts-script-steps.html",
+      "steps": [
+        {
+          "name": "Add Account",
+          "syntax": "Add Account [ Account Name: name ; Password: pwd ; Privilege Set: name ; Expire password ]",
+          "purpose": "Creates a new FileMaker account",
+          "slug": "add-account",
+          "doc_url": "https://help.claris.com/en/pro-help/content/add-account.html"
+        },
+        {
+          "name": "Delete Account",
+          "syntax": "Delete Account [ Account Name: name ]",
+          "purpose": "Deletes the specified FileMaker account",
+          "slug": "delete-account",
+          "doc_url": "https://help.claris.com/en/pro-help/content/delete-account.html"
+        },
+        {
+          "name": "Reset Account Password",
+          "syntax": "Reset Account Password [ Account Name: name ; New Password: pwd ; Expire password ]",
+          "purpose": "Resets the password for a FileMaker account",
+          "slug": "reset-account-password",
+          "doc_url": "https://help.claris.com/en/pro-help/content/reset-account-password.html"
+        },
+        {
+          "name": "Change Password",
+          "syntax": "Change Password [ No dialog ; Old Password: pwd ; New Password: pwd ]",
+          "purpose": "Allows the current user to change their own password",
+          "slug": "change-password",
+          "doc_url": "https://help.claris.com/en/pro-help/content/change-password.html"
+        },
+        {
+          "name": "Enable Account",
+          "syntax": "Enable Account [ Account Name: name ; Enable: On/Off ]",
+          "purpose": "Enables or disables the specified account",
+          "slug": "enable-account",
+          "doc_url": "https://help.claris.com/en/pro-help/content/enable-account.html"
+        },
+        {
+          "name": "Re-Login",
+          "syntax": "Re-Login [ No dialog ; Account Name: name ; Password: pwd ]",
+          "purpose": "Re-authenticates the current user, switching privilege sets without reopening the file",
+          "slug": "re-login",
+          "doc_url": "https://help.claris.com/en/pro-help/content/re-login.html"
+        },
+        {
+          "name": "Log Out",
+          "syntax": "Log Out",
+          "purpose": "Logs the current user out and returns to the login dialog",
+          "slug": "log-out",
+          "doc_url": "https://help.claris.com/en/pro-help/content/log-out.html"
+        }
+      ]
+    },
+    {
+      "name": "Spelling",
+      "category_page": "spelling-script-steps.html",
+      "steps": [
+        {
+          "name": "Check Spelling",
+          "syntax": "Check Spelling [ No dialog ; Check word / Check selection / Check record / Check all ]",
+          "purpose": "Runs spell check on the specified scope",
+          "slug": "check-spelling",
+          "doc_url": "https://help.claris.com/en/pro-help/content/check-spelling.html"
+        }
+      ]
+    },
+    {
+      "name": "Open Menu Item",
+      "category_page": "open-menu-item-script-steps.html",
+      "steps": [
+        {
+          "name": "Open Manage Database",
+          "syntax": "Open Manage Database",
+          "purpose": "Opens the Manage Database dialog",
+          "slug": "open-manage-database",
+          "doc_url": "https://help.claris.com/en/pro-help/content/open-manage-database.html"
+        },
+        {
+          "name": "Open Manage Value Lists",
+          "syntax": "Open Manage Value Lists",
+          "purpose": "Opens the Manage Value Lists dialog",
+          "slug": "open-manage-value-lists",
+          "doc_url": "https://help.claris.com/en/pro-help/content/open-manage-value-lists.html"
+        },
+        {
+          "name": "Open Manage Data Sources",
+          "syntax": "Open Manage Data Sources",
+          "purpose": "Opens the Manage External Data Sources dialog",
+          "slug": "open-manage-data-sources",
+          "doc_url": "https://help.claris.com/en/pro-help/content/open-manage-data-sources.html"
+        },
+        {
+          "name": "Open Preferences",
+          "syntax": "Open Preferences",
+          "purpose": "Opens the FileMaker Pro Preferences dialog",
+          "slug": "open-preferences",
+          "doc_url": "https://help.claris.com/en/pro-help/content/open-preferences.html"
+        },
+        {
+          "name": "Open File Options",
+          "syntax": "Open File Options",
+          "purpose": "Opens the File Options dialog for the current file",
+          "slug": "open-file-options",
+          "doc_url": "https://help.claris.com/en/pro-help/content/open-file-options.html"
+        },
+        {
+          "name": "Open Sharing",
+          "syntax": "Open Sharing",
+          "purpose": "Opens the FileMaker Network Sharing dialog",
+          "slug": "open-sharing",
+          "doc_url": "https://help.claris.com/en/pro-help/content/open-sharing.html"
+        },
+        {
+          "name": "Open Help",
+          "syntax": "Open Help",
+          "purpose": "Opens the FileMaker Help system",
+          "slug": "open-help",
+          "doc_url": "https://help.claris.com/en/pro-help/content/open-help.html"
+        },
+        {
+          "name": "Open URL",
+          "syntax": "Open URL [ No dialog ; URL expression ]",
+          "purpose": "Opens a URL in the default web browser, or a filemaker:// URL to open a file",
+          "slug": "open-url",
+          "doc_url": "https://help.claris.com/en/pro-help/content/open-url.html"
+        }
+      ]
+    },
+    {
+      "name": "Miscellaneous",
+      "category_page": "miscellaneous-script-steps.html",
+      "steps": [
+        {
+          "name": "Show Custom Dialog",
+          "syntax": "Show Custom Dialog [ Title: text ; Message: text ; Buttons ; Input fields ]",
+          "purpose": "Displays a custom dialog with title, message, up to 3 buttons, and up to 3 input fields",
+          "slug": "show-custom-dialog",
+          "doc_url": "https://help.claris.com/en/pro-help/content/show-custom-dialog.html"
+        },
+        {
+          "name": "Show Alert",
+          "syntax": "Show Alert [ Style: Stop/Warning/Note ; Title: text ; Message: text ]",
+          "purpose": "Displays a simple alert dialog (non-configurable buttons, server-compatible)",
+          "slug": "show-alert",
+          "doc_url": "https://help.claris.com/en/pro-help/content/show-alert.html"
+        },
+        {
+          "name": "Beep",
+          "syntax": "Beep",
+          "purpose": "Plays the system alert sound",
+          "slug": "beep",
+          "doc_url": "https://help.claris.com/en/pro-help/content/beep.html"
+        },
+        {
+          "name": "Speak",
+          "syntax": "Speak [ text ; Wait for speech completion ; Voice: name ]",
+          "purpose": "Speaks text using the system text-to-speech engine (macOS only)",
+          "slug": "speak",
+          "doc_url": "https://help.claris.com/en/pro-help/content/speak.html",
+          "platform": "macOS only"
+        },
+        {
+          "name": "Comment",
+          "syntax": "Comment [ text ]",
+          "purpose": "Non-executing annotation step for documenting scripts",
+          "slug": "comment",
+          "doc_url": "https://help.claris.com/en/pro-help/content/comment.html"
+        },
+        {
+          "name": "Flush Cache to Disk",
+          "syntax": "Flush Cache to Disk",
+          "purpose": "Forces the FileMaker cache to be written to disk immediately",
+          "slug": "flush-cache-to-disk",
+          "doc_url": "https://help.claris.com/en/pro-help/content/flush-cache-to-disk.html"
+        },
+        {
+          "name": "Exit Application",
+          "syntax": "Exit Application",
+          "purpose": "Closes all files and quits FileMaker Pro",
+          "slug": "exit-application",
+          "doc_url": "https://help.claris.com/en/pro-help/content/exit-application.html"
+        },
+        {
+          "name": "Show/Hide Script Editor",
+          "syntax": "Show/Hide Script Editor",
+          "purpose": "Shows or hides the Script Editor window",
+          "slug": "show-hide-script-editor",
+          "doc_url": "https://help.claris.com/en/pro-help/content/show-hide-script-editor.html"
+        },
+        {
+          "name": "Manage Add-ons",
+          "syntax": "Manage Add-ons",
+          "purpose": "Opens the Add-ons Manager",
+          "slug": "manage-add-ons",
+          "doc_url": "https://help.claris.com/en/pro-help/content/manage-add-ons.html"
+        },
+        {
+          "name": "Execute SQL Query by Natural Language",
+          "syntax": "Execute SQL Query by Natural Language [ AI Account Name: name ; Source Tables ; Query: text ; Target: field/variable ]",
+          "purpose": "Sends a natural-language query to an AI model which generates and executes SQL against the specified tables",
+          "slug": "execute-sql-query-by-natural-language",
+          "doc_url": "https://help.claris.com/en/pro-help/content/execute-sql-query-by-natural-language.html"
+        },
+        {
+          "name": "Perform SQL Query by Natural Language",
+          "syntax": "Perform SQL Query by Natural Language [ AI Account Name: name ; Source Tables ; Query: text ; Target: field/variable ]",
+          "purpose": "Alias for Execute SQL Query by Natural Language in some contexts",
+          "slug": "perform-sql-query-by-natural-language",
+          "doc_url": "https://help.claris.com/en/pro-help/content/perform-sql-query-by-natural-language.html"
+        },
+        {
+          "name": "Install Menu Set",
+          "syntax": "Install Menu Set [ Specify: From list ; \"MenuSetName\" / Standard FileMaker Menus ]",
+          "purpose": "Installs a custom menu set for the current window",
+          "slug": "install-menu-set",
+          "doc_url": "https://help.claris.com/en/pro-help/content/install-menu-set.html"
+        },
+        {
+          "name": "Install Plug-In File",
+          "syntax": "Install Plug-In File [ Table::ContainerField ]",
+          "purpose": "Installs a plug-in from a container field",
+          "slug": "install-plug-in-file",
+          "doc_url": "https://help.claris.com/en/pro-help/content/install-plug-in-file.html"
+        },
+        {
+          "name": "Send DDE Execute",
+          "syntax": "Send DDE Execute [ Service Name: text ; Topic: text ; Commands: text ]",
+          "purpose": "Sends a DDE command to another application (Windows only)",
+          "slug": "send-dde-execute",
+          "doc_url": "https://help.claris.com/en/pro-help/content/send-dde-execute.html",
+          "platform": "Windows only"
+        },
+        {
+          "name": "Send Event",
+          "syntax": "Send Event [ Send: an application / a document ; Application: name ; Calculation: text ]",
+          "purpose": "Sends an Apple Event to another application (macOS only)",
+          "slug": "send-event",
+          "doc_url": "https://help.claris.com/en/pro-help/content/send-event.html",
+          "platform": "macOS only"
+        }
+      ]
+    },
+    {
+      "name": "Printing",
+      "category_page": "printing-script-steps.html",
+      "steps": [
+        {
+          "name": "Print Setup",
+          "syntax": "Print Setup [ No dialog ; Restore ]",
+          "purpose": "Configures page/print settings",
+          "slug": "print-setup",
+          "doc_url": "https://help.claris.com/en/pro-help/content/print-setup.html"
+        },
+        {
+          "name": "Print",
+          "syntax": "Print [ No dialog ; Restore ; Current record / Records being browsed / Blank record showing fields ]",
+          "purpose": "Prints the current found set or record",
+          "slug": "print",
+          "doc_url": "https://help.claris.com/en/pro-help/content/print.html"
+        }
+      ]
+    },
+    {
+      "name": "AI",
+      "category_page": "ai-script-steps.html",
+      "steps": [
+        {
+          "name": "Configure AI Account",
+          "syntax": "Configure AI Account [ Account Name: name ; Model Provider: OpenAI/Anthropic/Custom ; API key: key ; Endpoint: url ]",
+          "purpose": "Configures a named AI account for use with AI functions and script steps",
+          "slug": "configure-ai-account",
+          "doc_url": "https://help.claris.com/en/pro-help/content/configure-ai-account.html"
+        },
+        {
+          "name": "Configure Machine Learning Model",
+          "syntax": "Configure Machine Learning Model [ Operation: Vision/Regression ; Name: name ; From: field ]",
+          "purpose": "Loads a Core ML model for use with ComputeModel or PredictFromModel (macOS/iOS only)",
+          "slug": "configure-machine-learning-model",
+          "doc_url": "https://help.claris.com/en/pro-help/content/configure-machine-learning-model.html"
+        },
+        {
+          "name": "Configure Prompt Template",
+          "purpose": "Set up a named prompt template to use in other AI script steps.",
+          "syntax": "Configure Prompt Template [ Account Name: <name> ; Template Name: <name> ; Template: <text> ]",
+          "doc_url": "https://help.claris.com/en/pro-help/content/configure-prompt-template.html"
+        },
+        {
+          "name": "Configure RAG Account",
+          "syntax": "Configure RAG Account [ Account Name: name ; API key: key ; Endpoint: url ]",
+          "purpose": "Configures a named RAG account pointing to the FileMaker Server AI Model Server",
+          "slug": "configure-rag-account",
+          "doc_url": "https://help.claris.com/en/pro-help/content/configure-rag-account.html"
+        },
+        {
+          "name": "Configure Regression Model",
+          "syntax": "Configure Regression Model [ Action: Train/Load/Unload ; Model Name: name ; ... ]",
+          "purpose": "Trains or loads a regression model for use with PredictFromModel",
+          "slug": "configure-regression-model",
+          "doc_url": "https://help.claris.com/en/pro-help/content/configure-regression-model.html"
+        },
+        {
+          "name": "Fine-Tune Model",
+          "purpose": "Fine-tune a model using a training data set.",
+          "syntax": "Fine-Tune Model [ Account Name: <name> ; Base Model: <model> ; Training Data: <field/variable> ; Output Model: <field/variable> ]",
+          "doc_url": "https://help.claris.com/en/pro-help/content/fine-tune-model.html"
+        },
+        {
+          "name": "Generate Response from Model",
+          "purpose": "Facilitate multistep agentic interaction between your custom app and AI models, supporting tool calls.",
+          "syntax": "Generate Response from Model [ Account Name: <name> ; Model: <model> ; User Prompt: <text> ; Agentic mode: On/Off ; Messages: <variable> ; Instructions: <text> ; Tool Definitions: <JSON> ; Response Target: <field/variable> ]",
+          "doc_url": "https://help.claris.com/en/pro-help/content/generate-response-from-model.html"
+        },
+        {
+          "name": "Insert Embedding",
+          "syntax": "Insert Embedding [ Account Name: name ; Embedding Model: model ; Source Field: field ; Target Field: field ]",
+          "purpose": "Generates an embedding vector and stores it in a container field",
+          "slug": "insert-embedding",
+          "doc_url": "https://help.claris.com/en/pro-help/content/insert-embedding.html"
+        },
+        {
+          "name": "Insert Embedding in Found Set",
+          "purpose": "Insert embedding vectors for all records in the current found set.",
+          "syntax": "Insert Embedding in Found Set [ Account Name: <name> ; Embedding Model: <model> ; Input: <field> ; Target: <field> ]",
+          "doc_url": "https://help.claris.com/en/pro-help/content/insert-embedding-in-found-set.html"
+        },
+        {
+          "name": "Perform Find by Natural Language",
+          "purpose": "Get a found set by sending a natural language prompt and layout fields to a model.",
+          "syntax": "Perform Find by Natural Language [ Account Name: <name> ; Model: <model> ; Prompt: <text> ; Response Target: <field/variable> ]",
+          "doc_url": "https://help.claris.com/en/pro-help/content/perform-find-by-natural-language.html"
+        },
+        {
+          "name": "Perform RAG Action",
+          "purpose": "Add or remove data in a RAG space, or send prompts to a RAG space.",
+          "syntax": "Perform RAG Action [ Account Name: <name> ; Action: <Add/Remove/Find> ; Data: <field/variable> ; Response Target: <field/variable> ]",
+          "doc_url": "https://help.claris.com/en/pro-help/content/perform-rag-action.html"
+        },
+        {
+          "name": "Perform SQL Query by Natural Language",
+          "purpose": "Send a natural language prompt and database schema to a model, which generates and runs SQL queries to return a result.",
+          "syntax": "Perform SQL Query by Natural Language [ Account Name: <name> ; Model: <model> ; Prompt: <text> ; Data Tables: <tables> ; Action: Query ; Response Target: <field/variable> ]",
+          "doc_url": "https://help.claris.com/en/pro-help/content/perform-sql-query-by-natural-language.html"
+        },
+        {
+          "name": "Perform Semantic Find",
+          "syntax": "Perform Semantic Find [ Table::EmbeddingField ; Query Embedding: value ; Top K: n ]",
+          "purpose": "Finds the top K records most semantically similar to a query embedding vector",
+          "slug": "perform-semantic-find",
+          "doc_url": "https://help.claris.com/en/pro-help/content/perform-semantic-find.html"
+        },
+        {
+          "name": "Set AI Call Logging",
+          "purpose": "Control logging of AI calls made from the current file.",
+          "syntax": "Set AI Call Logging [ On/Off ]",
+          "doc_url": "https://help.claris.com/en/pro-help/content/set-ai-call-logging.html"
+        }
+      ]
+    }
+  ]
+}

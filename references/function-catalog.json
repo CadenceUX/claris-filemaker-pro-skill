@@ -1,0 +1,4844 @@
+{
+  "meta": {
+    "description": "FileMaker calculation function catalog. Prototype signatures are canonical from the source repository. Category, slug, doc_url and purpose are sourced from the Claris Help Centre index.",
+    "source_repo": "function-catalog.json (master for name/prototype)",
+    "help_centre": "https://help.claris.com/en/pro-help/content/functions-reference.html",
+    "version": "22.0.5",
+    "last_updated": "2026-06",
+    "update_instructions": "Re-fetch source repo and compare against this file. Also re-fetch each category_page from help.claris.com to pick up new functions or updated slugs. For new functions, check the FileMaker Pro Release Notes at https://help.claris.com/en/pro-release-notes/content/ to determine the version introduced."
+  },
+  "functions": [
+    {
+      "name": "Abs",
+      "format": "Abs ( number )",
+      "parameters": [
+        "number"
+      ],
+      "purpose": "Returns absolute value",
+      "category": "Number functions",
+      "category_url": "number-functions.html",
+      "slug": "abs",
+      "doc_url": "https://help.claris.com/en/pro-help/content/abs.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Acos",
+      "format": "Acos ( number )",
+      "parameters": [
+        "number"
+      ],
+      "purpose": "Arccosine",
+      "category": "Trigonometric functions",
+      "category_url": "trigonometric-functions.html",
+      "slug": "acos",
+      "doc_url": "https://help.claris.com/en/pro-help/content/acos.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "AddEmbeddings",
+      "format": "AddEmbeddings ( v1 ; v2 )",
+      "parameters": [
+        "v1",
+        "v2"
+      ],
+      "purpose": "Adds two embedding vectors, returns normalised result",
+      "category": "Artificial intelligence functions",
+      "category_url": "artificial-intelligence-functions.html",
+      "slug": "addembeddings",
+      "doc_url": "https://help.claris.com/en/pro-help/content/addembeddings.html",
+      "originated_in_version": "22.0.1"
+    },
+    {
+      "name": "Asin",
+      "format": "Asin ( number )",
+      "parameters": [
+        "number"
+      ],
+      "purpose": "Arcsine",
+      "category": "Trigonometric functions",
+      "category_url": "trigonometric-functions.html",
+      "slug": "asin",
+      "doc_url": "https://help.claris.com/en/pro-help/content/asin.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Atan",
+      "format": "Atan ( number )",
+      "parameters": [
+        "number"
+      ],
+      "purpose": "Arctangent",
+      "category": "Trigonometric functions",
+      "category_url": "trigonometric-functions.html",
+      "slug": "atan",
+      "doc_url": "https://help.claris.com/en/pro-help/content/atan.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Average",
+      "format": "Average ( field {; field...} )",
+      "parameters": [
+        "field"
+      ],
+      "purpose": "Average of non-blank values",
+      "category": "Aggregate functions",
+      "category_url": "aggregate-functions.html",
+      "slug": "average",
+      "doc_url": "https://help.claris.com/en/pro-help/content/average.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Base64Decode",
+      "format": "Base64Decode ( text {; fileNameWithExtension } )",
+      "parameters": [
+        "text",
+        "fileNameWithExtension"
+      ],
+      "purpose": "Decodes Base64 text to container or text",
+      "category": "Container functions",
+      "category_url": "container-functions.html",
+      "slug": "base64decode",
+      "doc_url": "https://help.claris.com/en/pro-help/content/base64decode.html",
+      "originated_in_version": "12"
+    },
+    {
+      "name": "Base64Encode",
+      "format": "Base64Encode ( data )",
+      "parameters": [
+        "data"
+      ],
+      "purpose": "Encodes data as Base64 text",
+      "category": "Container functions",
+      "category_url": "container-functions.html",
+      "slug": "base64encode",
+      "doc_url": "https://help.claris.com/en/pro-help/content/base64encode.html",
+      "originated_in_version": "12"
+    },
+    {
+      "name": "Base64EncodeRFC",
+      "format": "Base64EncodeRFC ( RFCNumber ; data )",
+      "parameters": [
+        "RFCNumber",
+        "data"
+      ],
+      "purpose": "Encodes data in specified Base64 format",
+      "category": "Container functions",
+      "category_url": "container-functions.html",
+      "slug": "base64encoderfc",
+      "doc_url": "https://help.claris.com/en/pro-help/content/base64encoderfc.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "BaseTableIDs",
+      "format": "BaseTableIDs ( fileName )",
+      "parameters": [
+        "fileName"
+      ],
+      "purpose": "Returns list of base table IDs",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "basetableids",
+      "doc_url": "https://help.claris.com/en/pro-help/content/basetableids.html",
+      "originated_in_version": "20.1.1"
+    },
+    {
+      "name": "BaseTableNames",
+      "format": "BaseTableNames ( fileName )",
+      "parameters": [
+        "fileName"
+      ],
+      "purpose": "Returns list of base table names",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "basetablenames",
+      "doc_url": "https://help.claris.com/en/pro-help/content/basetablenames.html",
+      "originated_in_version": "20.1.1"
+    },
+    {
+      "name": "Case",
+      "format": "Case ( test1 ; result1 {; test2 ; result2 ; ... ; defaultResult } )",
+      "parameters": [
+        "test1",
+        "result1",
+        "test2",
+        "result2",
+        "defaultResult"
+      ],
+      "purpose": "Returns one of many results based on tests",
+      "category": "Logical functions",
+      "category_url": "logical-functions.html",
+      "slug": "case",
+      "doc_url": "https://help.claris.com/en/pro-help/content/case.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Ceiling",
+      "format": "Ceiling ( number )",
+      "parameters": [
+        "number"
+      ],
+      "purpose": "Rounds up to next integer",
+      "category": "Number functions",
+      "category_url": "number-functions.html",
+      "slug": "ceiling",
+      "doc_url": "https://help.claris.com/en/pro-help/content/ceiling.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Char",
+      "format": "Char ( number )",
+      "parameters": [
+        "number"
+      ],
+      "purpose": "Returns characters for Unicode code points",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "char",
+      "doc_url": "https://help.claris.com/en/pro-help/content/char.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Choose",
+      "format": "Choose ( test ; result0 {; result1 ; result2...} )",
+      "parameters": [
+        "test",
+        "result0",
+        "result1",
+        "result2"
+      ],
+      "purpose": "Returns result by integer index",
+      "category": "Logical functions",
+      "category_url": "logical-functions.html",
+      "slug": "choose",
+      "doc_url": "https://help.claris.com/en/pro-help/content/choose.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Code",
+      "format": "Code ( text )",
+      "parameters": [
+        "text"
+      ],
+      "purpose": "Returns Unicode code points for characters",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "code",
+      "doc_url": "https://help.claris.com/en/pro-help/content/code.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Combination",
+      "format": "Combination ( setSize ; numberOfChoices )",
+      "parameters": [
+        "setSize",
+        "numberOfChoices"
+      ],
+      "purpose": "Returns number of combinations",
+      "category": "Number functions",
+      "category_url": "number-functions.html",
+      "slug": "combination",
+      "doc_url": "https://help.claris.com/en/pro-help/content/combination.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "ComputeModel",
+      "format": "ComputeModel ( modelName ; parameterName1 ; value1 )",
+      "parameters": [
+        "modelName",
+        "parameterName1",
+        "value1"
+      ],
+      "purpose": "Evaluates a Core ML model (macOS/iOS only)",
+      "category": "Artificial intelligence functions",
+      "category_url": "artificial-intelligence-functions.html",
+      "slug": "compute-model",
+      "doc_url": "https://help.claris.com/en/pro-help/content/compute-model.html",
+      "originated_in_version": "19.3"
+    },
+    {
+      "name": "ConvertFromFileMakerPath",
+      "format": "ConvertFromFileMakerPath ( filemakerPath ; format )",
+      "parameters": [
+        "filemakerPath",
+        "format"
+      ],
+      "purpose": "Converts FM path to standard format",
+      "category": "Miscellaneous functions",
+      "category_url": "miscellaneous-functions.html",
+      "slug": "convert-from-filemaker-path",
+      "doc_url": "https://help.claris.com/en/pro-help/content/convert-from-filemaker-path.html",
+      "originated_in_version": "12"
+    },
+    {
+      "name": "ConvertToFileMakerPath",
+      "format": "ConvertToFileMakerPath ( standardPath ; format )",
+      "parameters": [
+        "standardPath",
+        "format"
+      ],
+      "purpose": "Converts standard path to FM format",
+      "category": "Miscellaneous functions",
+      "category_url": "miscellaneous-functions.html",
+      "slug": "convert-to-filemaker-path",
+      "doc_url": "https://help.claris.com/en/pro-help/content/convert-to-filemaker-path.html",
+      "originated_in_version": "12"
+    },
+    {
+      "name": "Cos",
+      "format": "Cos ( angleInRadians )",
+      "parameters": [
+        "angleInRadians"
+      ],
+      "purpose": "Cosine",
+      "category": "Trigonometric functions",
+      "category_url": "trigonometric-functions.html",
+      "slug": "cos",
+      "doc_url": "https://help.claris.com/en/pro-help/content/cos.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "CosineSimilarity",
+      "format": "CosineSimilarity ( v1 ; v2 )",
+      "parameters": [
+        "v1",
+        "v2"
+      ],
+      "purpose": "Returns similarity between two embedding vectors (-1 to 1)",
+      "category": "Artificial intelligence functions",
+      "category_url": "artificial-intelligence-functions.html",
+      "slug": "cosinesimilarity",
+      "doc_url": "https://help.claris.com/en/pro-help/content/cosinesimilarity.html",
+      "originated_in_version": "21.0.1"
+    },
+    {
+      "name": "Count",
+      "format": "Count ( field {; field...} )",
+      "parameters": [
+        "field"
+      ],
+      "purpose": "Count of non-blank values",
+      "category": "Aggregate functions",
+      "category_url": "aggregate-functions.html",
+      "slug": "count",
+      "doc_url": "https://help.claris.com/en/pro-help/content/count.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "CryptAuthCode",
+      "format": "CryptAuthCode ( data ; algorithm ; key )",
+      "parameters": [
+        "data",
+        "algorithm",
+        "key"
+      ],
+      "purpose": "Returns binary HMAC",
+      "category": "Container functions",
+      "category_url": "container-functions.html",
+      "slug": "cryptauthcode",
+      "doc_url": "https://help.claris.com/en/pro-help/content/cryptauthcode.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "CryptDecrypt",
+      "format": "CryptDecrypt ( container ; key )",
+      "parameters": [
+        "container",
+        "key"
+      ],
+      "purpose": "Decrypts container data",
+      "category": "Container functions",
+      "category_url": "container-functions.html",
+      "slug": "cryptdecrypt",
+      "doc_url": "https://help.claris.com/en/pro-help/content/cryptdecrypt.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "CryptDecryptBase64",
+      "format": "CryptDecryptBase64 ( text ; key )",
+      "parameters": [
+        "text",
+        "key"
+      ],
+      "purpose": "Decrypts Base64-encoded text",
+      "category": "Container functions",
+      "category_url": "container-functions.html",
+      "slug": "cryptdecryptbase64",
+      "doc_url": "https://help.claris.com/en/pro-help/content/cryptdecryptbase64.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "CryptDigest",
+      "format": "CryptDigest ( data ; algorithm )",
+      "parameters": [
+        "data",
+        "algorithm"
+      ],
+      "purpose": "Returns cryptographic hash",
+      "category": "Container functions",
+      "category_url": "container-functions.html",
+      "slug": "cryptdigest",
+      "doc_url": "https://help.claris.com/en/pro-help/content/cryptdigest.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "CryptEncrypt",
+      "format": "CryptEncrypt ( data ; key )",
+      "parameters": [
+        "data",
+        "key"
+      ],
+      "purpose": "Encrypts data to container",
+      "category": "Container functions",
+      "category_url": "container-functions.html",
+      "slug": "cryptencrypt",
+      "doc_url": "https://help.claris.com/en/pro-help/content/cryptencrypt.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "CryptEncryptBase64",
+      "format": "CryptEncryptBase64 ( data ; key )",
+      "parameters": [
+        "data",
+        "key"
+      ],
+      "purpose": "Encrypts data to Base64 text",
+      "category": "Container functions",
+      "category_url": "container-functions.html",
+      "slug": "cryptencryptbase64",
+      "doc_url": "https://help.claris.com/en/pro-help/content/cryptencryptbase64.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "CryptGenerateSignature",
+      "format": "CryptGenerateSignature ( data ; algorithm ; privateRSAKey ; keyPassword )",
+      "parameters": [
+        "data",
+        "algorithm",
+        "privateRSAKey",
+        "keyPassword"
+      ],
+      "purpose": "Generates digital signature",
+      "category": "Container functions",
+      "category_url": "container-functions.html",
+      "slug": "cryptgeneratesignature",
+      "doc_url": "https://help.claris.com/en/pro-help/content/cryptgeneratesignature.html",
+      "originated_in_version": "18"
+    },
+    {
+      "name": "CryptVerifySignature",
+      "format": "CryptVerifySignature ( data ; algorithm ; publicRSAKey ; signature )",
+      "parameters": [
+        "data",
+        "algorithm",
+        "publicRSAKey",
+        "signature"
+      ],
+      "purpose": "Verifies digital signature",
+      "category": "Container functions",
+      "category_url": "container-functions.html",
+      "slug": "cryptverifysignature",
+      "doc_url": "https://help.claris.com/en/pro-help/content/cryptverifysignature.html",
+      "originated_in_version": "18"
+    },
+    {
+      "name": "DatabaseNames",
+      "format": "DatabaseNames",
+      "purpose": "Returns names of all open files",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "databasenames",
+      "doc_url": "https://help.claris.com/en/pro-help/content/databasenames.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Date",
+      "format": "Date ( month ; day ; year )",
+      "parameters": [
+        "month",
+        "day",
+        "year"
+      ],
+      "purpose": "Returns a date from month/day/year",
+      "category": "Date functions",
+      "category_url": "date-functions.html",
+      "slug": "date",
+      "doc_url": "https://help.claris.com/en/pro-help/content/date.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Day",
+      "format": "Day ( date )",
+      "parameters": [
+        "date"
+      ],
+      "purpose": "Returns day of month (1\u201331)",
+      "category": "Date functions",
+      "category_url": "date-functions.html",
+      "slug": "day",
+      "doc_url": "https://help.claris.com/en/pro-help/content/day.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "DayName",
+      "format": "DayName ( date )",
+      "parameters": [
+        "date"
+      ],
+      "purpose": "Returns full weekday name",
+      "category": "Date functions",
+      "category_url": "date-functions.html",
+      "slug": "dayname",
+      "doc_url": "https://help.claris.com/en/pro-help/content/dayname.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "DayNameJ",
+      "format": "DayNameJ ( date )",
+      "parameters": [
+        "date"
+      ],
+      "purpose": "Returns Japanese weekday name",
+      "category": "Japanese functions",
+      "category_url": "japanese-functions.html",
+      "slug": "daynamej",
+      "doc_url": "https://help.claris.com/en/pro-help/content/daynamej.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "DayOfWeek",
+      "format": "DayOfWeek ( date )",
+      "parameters": [
+        "date"
+      ],
+      "purpose": "Returns day of week as number",
+      "category": "Date functions",
+      "category_url": "date-functions.html",
+      "slug": "dayofweek",
+      "doc_url": "https://help.claris.com/en/pro-help/content/dayofweek.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "DayOfYear",
+      "format": "DayOfYear ( date )",
+      "parameters": [
+        "date"
+      ],
+      "purpose": "Returns day of year (1\u2013366)",
+      "category": "Date functions",
+      "category_url": "date-functions.html",
+      "slug": "dayofyear",
+      "doc_url": "https://help.claris.com/en/pro-help/content/dayofyear.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Degrees",
+      "format": "Degrees ( angleInRadians )",
+      "parameters": [
+        "angleInRadians"
+      ],
+      "purpose": "Converts radians to degrees",
+      "category": "Trigonometric functions",
+      "category_url": "trigonometric-functions.html",
+      "slug": "degrees",
+      "doc_url": "https://help.claris.com/en/pro-help/content/degrees.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Div",
+      "format": "Div ( number ; divisor )",
+      "parameters": [
+        "number",
+        "divisor"
+      ],
+      "purpose": "Integer division (floor of quotient)",
+      "category": "Number functions",
+      "category_url": "number-functions.html",
+      "slug": "div",
+      "doc_url": "https://help.claris.com/en/pro-help/content/div.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Evaluate",
+      "format": "Evaluate ( expression {; [field1 ; field2 ;...]} )",
+      "parameters": [
+        "expression",
+        "field1",
+        "field2"
+      ],
+      "purpose": "Evaluates an expression as a calculation",
+      "category": "Logical functions",
+      "category_url": "logical-functions.html",
+      "slug": "evaluate",
+      "doc_url": "https://help.claris.com/en/pro-help/content/evaluate.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "EvaluationError",
+      "format": "EvaluationError ( expression )",
+      "parameters": [
+        "expression"
+      ],
+      "purpose": "Returns error code from an expression",
+      "category": "Logical functions",
+      "category_url": "logical-functions.html",
+      "slug": "evaluationerror",
+      "doc_url": "https://help.claris.com/en/pro-help/content/evaluationerror.html",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "Exact",
+      "format": "Exact ( originalText ; comparisonText )",
+      "parameters": [
+        "originalText",
+        "comparisonText"
+      ],
+      "purpose": "Returns 1 if two fields match exactly",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "exact",
+      "doc_url": "https://help.claris.com/en/pro-help/content/exact.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "ExecuteSQL",
+      "format": "ExecuteSQL ( sqlQuery ; fieldSeparator ; rowSeparator { ; arguments... } )",
+      "parameters": [
+        "sqlQuery",
+        "fieldSeparator",
+        "rowSeparator",
+        "arguments"
+      ],
+      "purpose": "Runs SQL SELECT against a table occurrence",
+      "category": "Logical functions",
+      "category_url": "logical-functions.html",
+      "slug": "executesql",
+      "doc_url": "https://help.claris.com/en/pro-help/content/executesql.html",
+      "originated_in_version": "12"
+    },
+    {
+      "name": "ExecuteSQLe",
+      "format": "ExecuteSQLe ( sqlQuery ; fieldSeparator ; rowSeparator { ; arguments... } )",
+      "parameters": [
+        "sqlQuery",
+        "fieldSeparator",
+        "rowSeparator",
+        "arguments"
+      ],
+      "purpose": "ExecuteSQL with error message on failure",
+      "category": "Logical functions",
+      "category_url": "logical-functions.html",
+      "slug": "executesqle",
+      "doc_url": "https://help.claris.com/en/pro-help/content/executesqle.html",
+      "originated_in_version": "21.1.1"
+    },
+    {
+      "name": "Exp",
+      "format": "Exp ( number )",
+      "parameters": [
+        "number"
+      ],
+      "purpose": "Returns e raised to a power",
+      "category": "Number functions",
+      "category_url": "number-functions.html",
+      "slug": "exp",
+      "doc_url": "https://help.claris.com/en/pro-help/content/exp.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Extend",
+      "format": "Extend ( non-repeatingField )",
+      "parameters": [
+        "non-repeatingField"
+      ],
+      "purpose": "Uses non-repeating value across all repetitions",
+      "category": "Repeating functions",
+      "category_url": "repeating-functions.html",
+      "slug": "extend",
+      "doc_url": "https://help.claris.com/en/pro-help/content/extend.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "FV",
+      "format": "FV ( payment ; interestRate ; periods )",
+      "parameters": [
+        "payment",
+        "interestRate",
+        "periods"
+      ],
+      "purpose": "Future value of an investment",
+      "category": "Financial functions",
+      "category_url": "financial-functions.html",
+      "slug": "fv",
+      "doc_url": "https://help.claris.com/en/pro-help/content/fv.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Factorial",
+      "format": "Factorial ( number {; numberOfFactors } )",
+      "parameters": [
+        "number",
+        "numberOfFactors"
+      ],
+      "purpose": "Returns factorial",
+      "category": "Number functions",
+      "category_url": "number-functions.html",
+      "slug": "factorial",
+      "doc_url": "https://help.claris.com/en/pro-help/content/factorial.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "FieldBounds",
+      "format": "FieldBounds ( fileName ; layoutName ; fieldName )",
+      "parameters": [
+        "fileName",
+        "layoutName",
+        "fieldName"
+      ],
+      "purpose": "Returns field boundary coordinates",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "fieldbounds",
+      "doc_url": "https://help.claris.com/en/pro-help/content/fieldbounds.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "FieldComment",
+      "format": "FieldComment ( fileName ; fieldName )",
+      "parameters": [
+        "fileName",
+        "fieldName"
+      ],
+      "purpose": "Returns field comment",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "fieldcomment",
+      "doc_url": "https://help.claris.com/en/pro-help/content/fieldcomment.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "FieldIDs",
+      "format": "FieldIDs ( fileName ; layoutName )",
+      "parameters": [
+        "fileName",
+        "layoutName"
+      ],
+      "purpose": "Returns list of field IDs",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "fieldids",
+      "doc_url": "https://help.claris.com/en/pro-help/content/fieldids.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "FieldNames",
+      "format": "FieldNames ( fileName ; layoutName )",
+      "parameters": [
+        "fileName",
+        "layoutName"
+      ],
+      "purpose": "Returns list of field names on layout",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "fieldnames",
+      "doc_url": "https://help.claris.com/en/pro-help/content/fieldnames.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "FieldRepetitions",
+      "format": "FieldRepetitions ( fileName ; layoutName ; fieldName )",
+      "parameters": [
+        "fileName",
+        "layoutName",
+        "fieldName"
+      ],
+      "purpose": "Returns repetition count and orientation",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "fieldrepetitions",
+      "doc_url": "https://help.claris.com/en/pro-help/content/fieldrepetitions.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "FieldStyle",
+      "format": "FieldStyle ( fileName ; layoutName ; fieldName )",
+      "parameters": [
+        "fileName",
+        "layoutName",
+        "fieldName"
+      ],
+      "purpose": "Returns field formatting style",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "fieldstyle",
+      "doc_url": "https://help.claris.com/en/pro-help/content/fieldstyle.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "FieldType",
+      "format": "FieldType ( fileName ; fieldName )",
+      "parameters": [
+        "fileName",
+        "fieldName"
+      ],
+      "purpose": "Returns field type information",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "fieldtype",
+      "doc_url": "https://help.claris.com/en/pro-help/content/fieldtype.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Filter",
+      "format": "Filter ( textToFilter ; filterText )",
+      "parameters": [
+        "textToFilter",
+        "filterText"
+      ],
+      "purpose": "Returns only specified characters from text",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "filter",
+      "doc_url": "https://help.claris.com/en/pro-help/content/filter.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "FilterValues",
+      "format": "FilterValues ( textToFilter ; filterValues )",
+      "parameters": [
+        "textToFilter",
+        "filterValues"
+      ],
+      "purpose": "Returns only values from a filtered list",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "filtervalues",
+      "doc_url": "https://help.claris.com/en/pro-help/content/filtervalues.html",
+      "originated_in_version": "12"
+    },
+    {
+      "name": "Floor",
+      "format": "Floor ( number )",
+      "parameters": [
+        "number"
+      ],
+      "purpose": "Rounds down to next integer",
+      "category": "Number functions",
+      "category_url": "number-functions.html",
+      "slug": "floor",
+      "doc_url": "https://help.claris.com/en/pro-help/content/floor.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Furigana",
+      "format": "Furigana ( text {; option } )",
+      "parameters": [
+        "text",
+        "option"
+      ],
+      "purpose": "Converts Japanese text to kana/roman",
+      "category": "Japanese functions",
+      "category_url": "japanese-functions.html",
+      "slug": "furigana",
+      "doc_url": "https://help.claris.com/en/pro-help/content/furigana.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Get(AccountExtendedPrivileges)",
+      "format": "Get ( AccountExtendedPrivileges )",
+      "parameters": [
+        "AccountExtendedPrivileges"
+      ],
+      "purpose": "Returns account extended privileges",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-accountextendedprivileges",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-accountextendedprivileges.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(AccountGroupName)",
+      "format": "Get ( AccountGroupName )",
+      "parameters": [
+        "AccountGroupName"
+      ],
+      "purpose": "Returns account group name",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-accountgroupname",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-accountgroupname.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "Get(AccountName)",
+      "format": "Get ( AccountName )",
+      "parameters": [
+        "AccountName"
+      ],
+      "purpose": "Returns account name",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-accountname",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-accountname.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(AccountPrivilegeSetName)",
+      "format": "Get ( AccountPrivilegeSetName )",
+      "parameters": [
+        "AccountPrivilegeSetName"
+      ],
+      "purpose": "Returns account privilege set name",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-accountprivilegesetname",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-accountprivilegesetname.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(AccountType)",
+      "format": "Get ( AccountType )",
+      "parameters": [
+        "AccountType"
+      ],
+      "purpose": "Returns account type",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-accounttype",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-accounttype.html",
+      "originated_in_version": "14"
+    },
+    {
+      "name": "Get(ActiveFieldContents)",
+      "format": "Get ( ActiveFieldContents )",
+      "parameters": [
+        "ActiveFieldContents"
+      ],
+      "purpose": "Returns active field contents",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-activefieldcontents",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-activefieldcontents.html",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "Get(ActiveFieldName)",
+      "format": "Get ( ActiveFieldName )",
+      "parameters": [
+        "ActiveFieldName"
+      ],
+      "purpose": "Returns active field name",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-activefieldname",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-activefieldname.html",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "Get(ActiveFieldTableName)",
+      "format": "Get ( ActiveFieldTableName )",
+      "parameters": [
+        "ActiveFieldTableName"
+      ],
+      "purpose": "Returns active field table name",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-activefieldtablename",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-activefieldtablename.html",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "Get(ActiveLayoutObjectName)",
+      "format": "Get ( ActiveLayoutObjectName )",
+      "parameters": [
+        "ActiveLayoutObjectName"
+      ],
+      "purpose": "Returns active layout object name",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-activelayoutobjectname",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-activelayoutobjectname.html",
+      "originated_in_version": "12"
+    },
+    {
+      "name": "Get(ActiveModifierKeys)",
+      "format": "Get ( ActiveModifierKeys )",
+      "parameters": [
+        "ActiveModifierKeys"
+      ],
+      "purpose": "Returns active modifier keys",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-activemodifierkeys",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-activemodifierkeys.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Get(ActivePortalRowNumber)",
+      "format": "Get ( ActivePortalRowNumber )",
+      "parameters": [
+        "ActivePortalRowNumber"
+      ],
+      "purpose": "Returns active portal row number",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-activeportalrownumber",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-activeportalrownumber.html",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "Get(ActiveRecordNumber)",
+      "format": "Get ( ActiveRecordNumber )",
+      "parameters": [
+        "ActiveRecordNumber"
+      ],
+      "purpose": "Returns active record number",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-activerecordnumber",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-activerecordnumber.html",
+      "originated_in_version": "17"
+    },
+    {
+      "name": "Get(ActiveRepetitionNumber)",
+      "format": "Get ( ActiveRepetitionNumber )",
+      "parameters": [
+        "ActiveRepetitionNumber"
+      ],
+      "purpose": "Returns active repetition number",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-activerepetitionnumber",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-activerepetitionnumber.html",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "Get(ActiveSelectionSize)",
+      "format": "Get ( ActiveSelectionSize )",
+      "parameters": [
+        "ActiveSelectionSize"
+      ],
+      "purpose": "Returns active selection size",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-activeselectionsize",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-activeselectionsize.html",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "Get(ActiveSelectionStart)",
+      "format": "Get ( ActiveSelectionStart )",
+      "parameters": [
+        "ActiveSelectionStart"
+      ],
+      "purpose": "Returns active selection start",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-activeselectionstart",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-activeselectionstart.html",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "Get(AllowAbortState)",
+      "format": "Get ( AllowAbortState )",
+      "parameters": [
+        "AllowAbortState"
+      ],
+      "purpose": "Returns allow abort state",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-allowabortstate",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-allowabortstate.html",
+      "originated_in_version": "10"
+    },
+    {
+      "name": "Get(AllowFormattingBarState)",
+      "format": "Get ( AllowFormattingBarState )",
+      "parameters": [
+        "AllowFormattingBarState"
+      ],
+      "purpose": "Returns allow formatting bar state",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-allowformattingbarstate",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-allowformattingbarstate.html",
+      "originated_in_version": "9"
+    },
+    {
+      "name": "Get(ApplicationArchitecture)",
+      "format": "Get ( ApplicationArchitecture )",
+      "parameters": [
+        "ApplicationArchitecture"
+      ],
+      "purpose": "Returns application architecture",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-applicationarchitecture",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-applicationarchitecture.html",
+      "originated_in_version": "18"
+    },
+    {
+      "name": "Get(ApplicationLanguage)",
+      "format": "Get ( ApplicationLanguage )",
+      "parameters": [
+        "ApplicationLanguage"
+      ],
+      "purpose": "Returns application language",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-applicationlanguage",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-applicationlanguage.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(ApplicationVersion)",
+      "format": "Get ( ApplicationVersion )",
+      "parameters": [
+        "ApplicationVersion"
+      ],
+      "purpose": "Returns application version",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-applicationversion",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-applicationversion.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(CacheFileName)",
+      "format": "Get ( CacheFileName )",
+      "parameters": [
+        "CacheFileName"
+      ],
+      "purpose": "Returns cache file name",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-cachefilename",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-cachefilename.html",
+      "originated_in_version": "20.1.1"
+    },
+    {
+      "name": "Get(CacheFilePath)",
+      "format": "Get ( CacheFilePath )",
+      "parameters": [
+        "CacheFilePath"
+      ],
+      "purpose": "Returns cache file path",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-cachefilepath",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-cachefilepath.html",
+      "originated_in_version": "20.1.1"
+    },
+    {
+      "name": "Get(CalculationRepetitionNumber)",
+      "format": "Get ( CalculationRepetitionNumber )",
+      "parameters": [
+        "CalculationRepetitionNumber"
+      ],
+      "purpose": "Returns calculation repetition number",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-calculationrepetitionnumber",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-calculationrepetitionnumber.html",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "Get(ConnectionAttributes)",
+      "format": "Get ( ConnectionAttributes )",
+      "parameters": [
+        "ConnectionAttributes"
+      ],
+      "purpose": "Returns connection attributes",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-connectionattributes",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-connectionattributes.html",
+      "originated_in_version": "18"
+    },
+    {
+      "name": "Get(ConnectionState)",
+      "format": "Get ( ConnectionState )",
+      "parameters": [
+        "ConnectionState"
+      ],
+      "purpose": "Returns connection state",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-connectionstate",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-connectionstate.html",
+      "originated_in_version": "13"
+    },
+    {
+      "name": "Get(CurrentDate)",
+      "format": "Get ( CurrentDate )",
+      "parameters": [
+        "CurrentDate"
+      ],
+      "purpose": "Returns current date",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-currentdate",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-currentdate.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Get(CurrentExtendedPrivileges)",
+      "format": "Get ( CurrentExtendedPrivileges )",
+      "parameters": [
+        "CurrentExtendedPrivileges"
+      ],
+      "purpose": "Returns current extended privileges",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-currentextendedprivileges",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-currentextendedprivileges.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(CurrentHostTimestamp)",
+      "format": "Get ( CurrentHostTimestamp )",
+      "parameters": [
+        "CurrentHostTimestamp"
+      ],
+      "purpose": "Returns current host timestamp",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-currenthosttimestamp",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-currenthosttimestamp.html",
+      "originated_in_version": "10"
+    },
+    {
+      "name": "Get(CurrentPrivilegeSetName)",
+      "format": "Get ( CurrentPrivilegeSetName )",
+      "parameters": [
+        "CurrentPrivilegeSetName"
+      ],
+      "purpose": "Returns current privilege set name",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-currentprivilegesetname",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-currentprivilegesetname.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(CurrentTime)",
+      "format": "Get ( CurrentTime )",
+      "parameters": [
+        "CurrentTime"
+      ],
+      "purpose": "Returns current time",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-currenttime",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-currenttime.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Get(CurrentTimeUTCMicroseconds)",
+      "format": "Get ( CurrentTimeUTCMicroseconds )",
+      "parameters": [
+        "CurrentTimeUTCMicroseconds"
+      ],
+      "purpose": "Returns current time u t c microseconds",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-currenttimeutcmicroseconds",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-currenttimeutcmicroseconds.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "Get(CurrentTimeUTCMilliseconds)",
+      "format": "Get ( CurrentTimeUTCMilliseconds )",
+      "parameters": [
+        "CurrentTimeUTCMilliseconds"
+      ],
+      "purpose": "Returns current time u t c milliseconds",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-currenttimeutcmilliseconds",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-currenttimeutcmilliseconds.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "Get(CurrentTimestamp)",
+      "format": "Get ( CurrentTimestamp )",
+      "parameters": [
+        "CurrentTimestamp"
+      ],
+      "purpose": "Returns current timestamp",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-currenttimestamp",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-currenttimestamp.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Get(CustomMenuSetName)",
+      "format": "Get ( CustomMenuSetName )",
+      "parameters": [
+        "CustomMenuSetName"
+      ],
+      "purpose": "Returns custom menu set name",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-custommenusetname",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-custommenusetname.html",
+      "originated_in_version": "9"
+    },
+    {
+      "name": "Get(DesktopPath)",
+      "format": "Get ( DesktopPath )",
+      "parameters": [
+        "DesktopPath"
+      ],
+      "purpose": "Returns desktop path",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-desktoppath",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-desktoppath.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(Device)",
+      "format": "Get ( Device )",
+      "parameters": [
+        "Device"
+      ],
+      "purpose": "Returns device",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-device",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-device.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(DocumentsPath)",
+      "format": "Get ( DocumentsPath )",
+      "parameters": [
+        "DocumentsPath"
+      ],
+      "purpose": "Returns documents path",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-documentspath",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-documentspath.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(DocumentsPathListing)",
+      "format": "Get ( DocumentsPathListing )",
+      "parameters": [
+        "DocumentsPathListing"
+      ],
+      "purpose": "Returns documents path listing",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-documentspathlisting",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-documentspathlisting.html",
+      "originated_in_version": "11"
+    },
+    {
+      "name": "Get(EncryptionState)",
+      "format": "Get ( EncryptionState )",
+      "parameters": [
+        "EncryptionState"
+      ],
+      "purpose": "Returns encryption state",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-encryptionstate",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-encryptionstate.html",
+      "originated_in_version": "13"
+    },
+    {
+      "name": "Get(ErrorCaptureState)",
+      "format": "Get ( ErrorCaptureState )",
+      "parameters": [
+        "ErrorCaptureState"
+      ],
+      "purpose": "Returns error capture state",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-errorcapturestate",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-errorcapturestate.html",
+      "originated_in_version": "10"
+    },
+    {
+      "name": "Get(FileLocaleElements)",
+      "format": "Get ( FileLocaleElements )",
+      "parameters": [
+        "FileLocaleElements"
+      ],
+      "purpose": "Returns file locale elements",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-filelocaleelements",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-filelocaleelements.html",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "Get(FileMakerPath)",
+      "format": "Get ( FileMakerPath )",
+      "parameters": [
+        "FileMakerPath"
+      ],
+      "purpose": "Returns file maker path",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-filemakerpath",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-filemakerpath.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(FileName)",
+      "format": "Get ( FileName )",
+      "parameters": [
+        "FileName"
+      ],
+      "purpose": "Returns file name",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-filename",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-filename.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(FilePath)",
+      "format": "Get ( FilePath )",
+      "parameters": [
+        "FilePath"
+      ],
+      "purpose": "Returns file path",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-filepath",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-filepath.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(FileSize)",
+      "format": "Get ( FileSize )",
+      "parameters": [
+        "FileSize"
+      ],
+      "purpose": "Returns file size",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-filesize",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-filesize.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(FoundCount)",
+      "format": "Get ( FoundCount )",
+      "parameters": [
+        "FoundCount"
+      ],
+      "purpose": "Returns found count",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-foundcount",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-foundcount.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(HighContrastState)",
+      "format": "Get ( HighContrastState )",
+      "parameters": [
+        "HighContrastState"
+      ],
+      "purpose": "Returns high contrast state",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-highcontraststate",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-highcontraststate.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Get(HostApplicationVersion)",
+      "format": "Get ( HostApplicationVersion )",
+      "parameters": [
+        "HostApplicationVersion"
+      ],
+      "purpose": "Returns host application version",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-hostapplicationversion",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-hostapplicationversion.html",
+      "originated_in_version": "11"
+    },
+    {
+      "name": "Get(HostIPAddress)",
+      "format": "Get ( HostIPAddress )",
+      "parameters": [
+        "HostIPAddress"
+      ],
+      "purpose": "Returns host i p address",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-hostipaddress",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-hostipaddress.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(HostName)",
+      "format": "Get ( HostName )",
+      "parameters": [
+        "HostName"
+      ],
+      "purpose": "Returns host name",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-hostname",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-hostname.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(InstalledFMPlugins)",
+      "format": "Get ( InstalledFMPlugins )",
+      "parameters": [
+        "InstalledFMPlugins"
+      ],
+      "purpose": "Returns installed f m plugins",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-installedfmplugins",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-installedfmplugins.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Get(InstalledFMPluginsAsJSON)",
+      "format": "Get ( InstalledFMPluginsAsJSON )",
+      "parameters": [
+        "InstalledFMPluginsAsJSON"
+      ],
+      "purpose": "Returns installed f m plugins as j s o n",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-installedfmpluginsasjson",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-installedfmpluginsasjson.html",
+      "originated_in_version": "19.3"
+    },
+    {
+      "name": "Get(LastError)",
+      "format": "Get ( LastError )",
+      "parameters": [
+        "LastError"
+      ],
+      "purpose": "Returns last error",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-lasterror",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-lasterror.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(LastErrorDetail)",
+      "format": "Get ( LastErrorDetail )",
+      "parameters": [
+        "LastErrorDetail"
+      ],
+      "purpose": "Returns last error detail",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-lasterrordetail",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-lasterrordetail.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "Get(LastErrorLocation)",
+      "format": "Get ( LastErrorLocation )",
+      "parameters": [
+        "LastErrorLocation"
+      ],
+      "purpose": "Returns last error location",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-lasterrorlocation",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-lasterrorlocation.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "Get(LastMessageChoice)",
+      "format": "Get ( LastMessageChoice )",
+      "parameters": [
+        "LastMessageChoice"
+      ],
+      "purpose": "Returns last message choice",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-lastmessagechoice",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-lastmessagechoice.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(LastStepTokensUsed)",
+      "format": "Get ( LastStepTokensUsed )",
+      "parameters": [
+        "LastStepTokensUsed"
+      ],
+      "purpose": "Returns last step tokens used",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-laststeptokensused",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-laststeptokensused.html",
+      "originated_in_version": "21.0.1"
+    },
+    {
+      "name": "Get(LayoutAccess)",
+      "format": "Get ( LayoutAccess )",
+      "parameters": [
+        "LayoutAccess"
+      ],
+      "purpose": "Returns layout access",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-layoutaccess",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-layoutaccess.html",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "Get(LayoutCount)",
+      "format": "Get ( LayoutCount )",
+      "parameters": [
+        "LayoutCount"
+      ],
+      "purpose": "Returns layout count",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-layoutcount",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-layoutcount.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(LayoutName)",
+      "format": "Get ( LayoutName )",
+      "parameters": [
+        "LayoutName"
+      ],
+      "purpose": "Returns layout name",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-layoutname",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-layoutname.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(LayoutNumber)",
+      "format": "Get ( LayoutNumber )",
+      "parameters": [
+        "LayoutNumber"
+      ],
+      "purpose": "Returns layout number",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-layoutnumber",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-layoutnumber.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(LayoutTableName)",
+      "format": "Get ( LayoutTableName )",
+      "parameters": [
+        "LayoutTableName"
+      ],
+      "purpose": "Returns layout table name",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-layouttablename",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-layouttablename.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(LayoutViewState)",
+      "format": "Get ( LayoutViewState )",
+      "parameters": [
+        "LayoutViewState"
+      ],
+      "purpose": "Returns layout view state",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-layoutviewstate",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-layoutviewstate.html",
+      "originated_in_version": "9"
+    },
+    {
+      "name": "Get(MenubarState)",
+      "format": "Get ( MenubarState )",
+      "parameters": [
+        "MenubarState"
+      ],
+      "purpose": "Returns menubar state",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-menubarstate",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-menubarstate.html",
+      "originated_in_version": "9"
+    },
+    {
+      "name": "Get(ModifiedFields)",
+      "format": "Get ( ModifiedFields )",
+      "parameters": [
+        "ModifiedFields"
+      ],
+      "purpose": "Returns modified fields",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-modifiedfields",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-modifiedfields.html",
+      "originated_in_version": "11"
+    },
+    {
+      "name": "Get(MultiUserState)",
+      "format": "Get ( MultiUserState )",
+      "parameters": [
+        "MultiUserState"
+      ],
+      "purpose": "Returns multi user state",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-multiuserstate",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-multiuserstate.html",
+      "originated_in_version": "10"
+    },
+    {
+      "name": "Get(NetworkProtocol)",
+      "format": "Get ( NetworkProtocol )",
+      "parameters": [
+        "NetworkProtocol"
+      ],
+      "purpose": "Returns network protocol",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-networkprotocol",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-networkprotocol.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(NetworkType)",
+      "format": "Get ( NetworkType )",
+      "parameters": [
+        "NetworkType"
+      ],
+      "purpose": "Returns network type",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-networktype",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-networktype.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(OpenDataFileInfo)",
+      "format": "Get ( OpenDataFileInfo )",
+      "parameters": [
+        "OpenDataFileInfo"
+      ],
+      "purpose": "Returns open data file info",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-opendatafileinfo",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-opendatafileinfo.html",
+      "originated_in_version": "19"
+    },
+    {
+      "name": "Get(PageCount)",
+      "format": "Get ( PageCount )",
+      "parameters": [
+        "PageCount"
+      ],
+      "purpose": "Returns page count",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-pagecount",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-pagecount.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(PageNumber)",
+      "format": "Get ( PageNumber )",
+      "parameters": [
+        "PageNumber"
+      ],
+      "purpose": "Returns page number",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-pagenumber",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-pagenumber.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(PersistentID)",
+      "format": "Get ( PersistentID )",
+      "parameters": [
+        "PersistentID"
+      ],
+      "purpose": "Returns persistent i d",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-persistentid",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-persistentid.html",
+      "originated_in_version": "18"
+    },
+    {
+      "name": "Get(PreferencesPath)",
+      "format": "Get ( PreferencesPath )",
+      "parameters": [
+        "PreferencesPath"
+      ],
+      "purpose": "Returns preferences path",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-preferencespath",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-preferencespath.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(PrinterName)",
+      "format": "Get ( PrinterName )",
+      "parameters": [
+        "PrinterName"
+      ],
+      "purpose": "Returns printer name",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-printername",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-printername.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(QuickFindText)",
+      "format": "Get ( QuickFindText )",
+      "parameters": [
+        "QuickFindText"
+      ],
+      "purpose": "Returns quick find text",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-quickfindtext",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-quickfindtext.html",
+      "originated_in_version": "12"
+    },
+    {
+      "name": "Get(RecordAccess)",
+      "format": "Get ( RecordAccess )",
+      "parameters": [
+        "RecordAccess"
+      ],
+      "purpose": "Returns record access",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-recordaccess",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-recordaccess.html",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "Get(RecordID)",
+      "format": "Get ( RecordID )",
+      "parameters": [
+        "RecordID"
+      ],
+      "purpose": "Returns record i d",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-recordid",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-recordid.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(RecordModificationCount)",
+      "format": "Get ( RecordModificationCount )",
+      "parameters": [
+        "RecordModificationCount"
+      ],
+      "purpose": "Returns record modification count",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-recordmodificationcount",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-recordmodificationcount.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(RecordNumber)",
+      "format": "Get ( RecordNumber )",
+      "parameters": [
+        "RecordNumber"
+      ],
+      "purpose": "Returns record number",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-recordnumber",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-recordnumber.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(RecordOpenCount)",
+      "format": "Get ( RecordOpenCount )",
+      "parameters": [
+        "RecordOpenCount"
+      ],
+      "purpose": "Returns record open count",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-recordopencount",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-recordopencount.html",
+      "originated_in_version": "11"
+    },
+    {
+      "name": "Get(RecordOpenState)",
+      "format": "Get ( RecordOpenState )",
+      "parameters": [
+        "RecordOpenState"
+      ],
+      "purpose": "Returns record open state",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-recordopenstate",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-recordopenstate.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(RegionMonitorEvents)",
+      "format": "Get ( RegionMonitorEvents )",
+      "parameters": [
+        "RegionMonitorEvents"
+      ],
+      "purpose": "Returns region monitor events",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-regionmonitorevents",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-regionmonitorevents.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "Get(RequestCount)",
+      "format": "Get ( RequestCount )",
+      "parameters": [
+        "RequestCount"
+      ],
+      "purpose": "Returns request count",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-requestcount",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-requestcount.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(RequestOmitState)",
+      "format": "Get ( RequestOmitState )",
+      "parameters": [
+        "RequestOmitState"
+      ],
+      "purpose": "Returns request omit state",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-requestomitstate",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-requestomitstate.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(RevertTransactionOnErrorState)",
+      "format": "Get ( RevertTransactionOnErrorState )",
+      "parameters": [
+        "RevertTransactionOnErrorState"
+      ],
+      "purpose": "Returns revert transaction on error state",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-reverttransactiononerrorstate",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-reverttransactiononerrorstate.html",
+      "originated_in_version": "21.1.1"
+    },
+    {
+      "name": "Get(ScreenDepth)",
+      "format": "Get ( ScreenDepth )",
+      "parameters": [
+        "ScreenDepth"
+      ],
+      "purpose": "Returns screen depth",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-screendepth",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-screendepth.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(ScreenHeight)",
+      "format": "Get ( ScreenHeight )",
+      "parameters": [
+        "ScreenHeight"
+      ],
+      "purpose": "Returns screen height",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-screenheight",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-screenheight.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(ScreenScaleFactor)",
+      "format": "Get ( ScreenScaleFactor )",
+      "parameters": [
+        "ScreenScaleFactor"
+      ],
+      "purpose": "Returns screen scale factor",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-screenscalefactor",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-screenscalefactor.html",
+      "originated_in_version": "12"
+    },
+    {
+      "name": "Get(ScreenWidth)",
+      "format": "Get ( ScreenWidth )",
+      "parameters": [
+        "ScreenWidth"
+      ],
+      "purpose": "Returns screen width",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-screenwidth",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-screenwidth.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(ScriptAnimationState)",
+      "format": "Get ( ScriptAnimationState )",
+      "parameters": [
+        "ScriptAnimationState"
+      ],
+      "purpose": "Returns script animation state",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-scriptanimationstate",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-scriptanimationstate.html",
+      "originated_in_version": "13"
+    },
+    {
+      "name": "Get(ScriptName)",
+      "format": "Get ( ScriptName )",
+      "parameters": [
+        "ScriptName"
+      ],
+      "purpose": "Returns script name",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-scriptname",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-scriptname.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(ScriptParameter)",
+      "format": "Get ( ScriptParameter )",
+      "parameters": [
+        "ScriptParameter"
+      ],
+      "purpose": "Returns script parameter",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-scriptparameter",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-scriptparameter.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(ScriptResult)",
+      "format": "Get ( ScriptResult )",
+      "parameters": [
+        "ScriptResult"
+      ],
+      "purpose": "Returns script result",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-scriptresult",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-scriptresult.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(SessionIdentifier)",
+      "format": "Get ( SessionIdentifier )",
+      "parameters": [
+        "SessionIdentifier"
+      ],
+      "purpose": "Returns session identifier",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-sessionidentifier",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-sessionidentifier.html",
+      "originated_in_version": "19"
+    },
+    {
+      "name": "Get(SortState)",
+      "format": "Get ( SortState )",
+      "parameters": [
+        "SortState"
+      ],
+      "purpose": "Returns sort state",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-sortstate",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-sortstate.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(StatusAreaState)",
+      "format": "Get ( StatusAreaState )",
+      "parameters": [
+        "StatusAreaState"
+      ],
+      "purpose": "Returns status area state",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-statusareastate",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-statusareastate.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(SystemAppearance)",
+      "format": "Get ( SystemAppearance )",
+      "parameters": [
+        "SystemAppearance"
+      ],
+      "purpose": "Returns system appearance",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-systemappearance",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-systemappearance.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Get(SystemDrive)",
+      "format": "Get ( SystemDrive )",
+      "parameters": [
+        "SystemDrive"
+      ],
+      "purpose": "Returns system drive",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-systemdrive",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-systemdrive.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(SystemIPAddress)",
+      "format": "Get ( SystemIPAddress )",
+      "parameters": [
+        "SystemIPAddress"
+      ],
+      "purpose": "Returns system i p address",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-systemipaddress",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-systemipaddress.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(SystemLanguage)",
+      "format": "Get ( SystemLanguage )",
+      "parameters": [
+        "SystemLanguage"
+      ],
+      "purpose": "Returns system language",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-systemlanguage",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-systemlanguage.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(SystemLocaleElements)",
+      "format": "Get ( SystemLocaleElements )",
+      "parameters": [
+        "SystemLocaleElements"
+      ],
+      "purpose": "Returns system locale elements",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-systemlocaleelements",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-systemlocaleelements.html",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "Get(SystemNICAddress)",
+      "format": "Get ( SystemNICAddress )",
+      "parameters": [
+        "SystemNICAddress"
+      ],
+      "purpose": "Returns system n i c address",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-systemnicaddress",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-systemnicaddress.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(SystemPlatform)",
+      "format": "Get ( SystemPlatform )",
+      "parameters": [
+        "SystemPlatform"
+      ],
+      "purpose": "Returns system platform",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-systemplatform",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-systemplatform.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(SystemStorageAvailable)",
+      "format": "Get ( SystemStorageAvailable )",
+      "parameters": [
+        "SystemStorageAvailable"
+      ],
+      "purpose": "Returns system storage available",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-systemstorageavailable",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-systemstorageavailable.html",
+      "originated_in_version": "21.1.1"
+    },
+    {
+      "name": "Get(SystemVersion)",
+      "format": "Get ( SystemVersion )",
+      "parameters": [
+        "SystemVersion"
+      ],
+      "purpose": "Returns system version",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-systemversion",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-systemversion.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(TemporaryPath)",
+      "format": "Get ( TemporaryPath )",
+      "parameters": [
+        "TemporaryPath"
+      ],
+      "purpose": "Returns temporary path",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-temporarypath",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-temporarypath.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(TextRulerVisible)",
+      "format": "Get ( TextRulerVisible )",
+      "parameters": [
+        "TextRulerVisible"
+      ],
+      "purpose": "Returns text ruler visible",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-textrulervisible",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-textrulervisible.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(TotalRecordCount)",
+      "format": "Get ( TotalRecordCount )",
+      "parameters": [
+        "TotalRecordCount"
+      ],
+      "purpose": "Returns total record count",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-totalrecordcount",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-totalrecordcount.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(TouchKeyboardState)",
+      "format": "Get ( TouchKeyboardState )",
+      "parameters": [
+        "TouchKeyboardState"
+      ],
+      "purpose": "Returns touch keyboard state",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-touchkeyboardstate",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-touchkeyboardstate.html",
+      "originated_in_version": "14"
+    },
+    {
+      "name": "Get(TransactionOpenState)",
+      "format": "Get ( TransactionOpenState )",
+      "parameters": [
+        "TransactionOpenState"
+      ],
+      "purpose": "Returns transaction open state",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-transactionopenstate",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-transactionopenstate.html",
+      "originated_in_version": "19"
+    },
+    {
+      "name": "Get(TriggerCurrentPanel)",
+      "format": "Get ( TriggerCurrentPanel )",
+      "parameters": [
+        "TriggerCurrentPanel"
+      ],
+      "purpose": "Returns trigger current panel",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-triggercurrentpanel",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-triggercurrentpanel.html",
+      "originated_in_version": "15"
+    },
+    {
+      "name": "Get(TriggerExternalEvent)",
+      "format": "Get ( TriggerExternalEvent )",
+      "parameters": [
+        "TriggerExternalEvent"
+      ],
+      "purpose": "Returns trigger external event",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-triggerexternalevent",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-triggerexternalevent.html",
+      "originated_in_version": "15"
+    },
+    {
+      "name": "Get(TriggerGestureInfo)",
+      "format": "Get ( TriggerGestureInfo )",
+      "parameters": [
+        "TriggerGestureInfo"
+      ],
+      "purpose": "Returns trigger gesture info",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-triggergestureinfo",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-triggergestureinfo.html",
+      "originated_in_version": "15"
+    },
+    {
+      "name": "Get(TriggerKeystroke)",
+      "format": "Get ( TriggerKeystroke )",
+      "parameters": [
+        "TriggerKeystroke"
+      ],
+      "purpose": "Returns trigger keystroke",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-triggerkeystroke",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-triggerkeystroke.html",
+      "originated_in_version": "11"
+    },
+    {
+      "name": "Get(TriggerModifierKeys)",
+      "format": "Get ( TriggerModifierKeys )",
+      "parameters": [
+        "TriggerModifierKeys"
+      ],
+      "purpose": "Returns trigger modifier keys",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-triggermodifierkeys",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-triggermodifierkeys.html",
+      "originated_in_version": "11"
+    },
+    {
+      "name": "Get(TriggerTargetPanel)",
+      "format": "Get ( TriggerTargetPanel )",
+      "parameters": [
+        "TriggerTargetPanel"
+      ],
+      "purpose": "Returns trigger target panel",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-triggertargetpanel",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-triggertargetpanel.html",
+      "originated_in_version": "15"
+    },
+    {
+      "name": "Get(UUID)",
+      "format": "Get ( UUID )",
+      "parameters": [
+        "UUID"
+      ],
+      "purpose": "Returns UUID",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-uuid",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-uuid.html",
+      "originated_in_version": "15"
+    },
+    {
+      "name": "Get(UUIDNumber)",
+      "format": "Get ( UUIDNumber )",
+      "parameters": [
+        "UUIDNumber"
+      ],
+      "purpose": "Returns UUID as number",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-uuidnumber",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-uuidnumber.html",
+      "originated_in_version": "17"
+    },
+    {
+      "name": "Get(UseSystemFormatsState)",
+      "format": "Get ( UseSystemFormatsState )",
+      "parameters": [
+        "UseSystemFormatsState"
+      ],
+      "purpose": "Returns use system formats state",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-usesystemformatsstate",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-usesystemformatsstate.html",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "Get(UserCount)",
+      "format": "Get ( UserCount )",
+      "parameters": [
+        "UserCount"
+      ],
+      "purpose": "Returns user count",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-usercount",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-usercount.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(UserName)",
+      "format": "Get ( UserName )",
+      "parameters": [
+        "UserName"
+      ],
+      "purpose": "Returns user name",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-username",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-username.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(WindowContentHeight)",
+      "format": "Get ( WindowContentHeight )",
+      "parameters": [
+        "WindowContentHeight"
+      ],
+      "purpose": "Returns window content height",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-windowcontentheight",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowcontentheight.html",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "Get(WindowContentWidth)",
+      "format": "Get ( WindowContentWidth )",
+      "parameters": [
+        "WindowContentWidth"
+      ],
+      "purpose": "Returns window content width",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-windowcontentwidth",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowcontentwidth.html",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "Get(WindowDesktopHeight)",
+      "format": "Get ( WindowDesktopHeight )",
+      "parameters": [
+        "WindowDesktopHeight"
+      ],
+      "purpose": "Returns window desktop height",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-windowdesktopheight",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowdesktopheight.html",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "Get(WindowDesktopWidth)",
+      "format": "Get ( WindowDesktopWidth )",
+      "parameters": [
+        "WindowDesktopWidth"
+      ],
+      "purpose": "Returns window desktop width",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-windowdesktopwidth",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowdesktopwidth.html",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "Get(WindowHeight)",
+      "format": "Get ( WindowHeight )",
+      "parameters": [
+        "WindowHeight"
+      ],
+      "purpose": "Returns window height",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-windowheight",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowheight.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(WindowLeft)",
+      "format": "Get ( WindowLeft )",
+      "parameters": [
+        "WindowLeft"
+      ],
+      "purpose": "Returns window left",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-windowleft",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowleft.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(WindowMode)",
+      "format": "Get ( WindowMode )",
+      "parameters": [
+        "WindowMode"
+      ],
+      "purpose": "Returns window mode",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-windowmode",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowmode.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(WindowName)",
+      "format": "Get ( WindowName )",
+      "parameters": [
+        "WindowName"
+      ],
+      "purpose": "Returns window name",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-windowname",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowname.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(WindowOrientation)",
+      "format": "Get ( WindowOrientation )",
+      "parameters": [
+        "WindowOrientation"
+      ],
+      "purpose": "Returns window orientation",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-windoworientation",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-windoworientation.html",
+      "originated_in_version": "13"
+    },
+    {
+      "name": "Get(WindowStyle)",
+      "format": "Get ( WindowStyle )",
+      "parameters": [
+        "WindowStyle"
+      ],
+      "purpose": "Returns window style",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-windowstyle",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowstyle.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "Get(WindowTop)",
+      "format": "Get ( WindowTop )",
+      "parameters": [
+        "WindowTop"
+      ],
+      "purpose": "Returns window top",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-windowtop",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowtop.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(WindowVisible)",
+      "format": "Get ( WindowVisible )",
+      "parameters": [
+        "WindowVisible"
+      ],
+      "purpose": "Returns window visible",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-windowvisible",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowvisible.html",
+      "originated_in_version": "13"
+    },
+    {
+      "name": "Get(WindowWidth)",
+      "format": "Get ( WindowWidth )",
+      "parameters": [
+        "WindowWidth"
+      ],
+      "purpose": "Returns window width",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-windowwidth",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowwidth.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Get(WindowZoomLevel)",
+      "format": "Get ( WindowZoomLevel )",
+      "parameters": [
+        "WindowZoomLevel"
+      ],
+      "purpose": "Returns window zoom level",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-windowzoomlevel",
+      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowzoomlevel.html",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "GetAVPlayerAttribute",
+      "format": "GetAVPlayerAttribute ( attributeName )",
+      "parameters": [
+        "attributeName"
+      ],
+      "purpose": "Returns AV player attribute for container",
+      "category": "Mobile functions",
+      "category_url": "mobile-functions.html",
+      "slug": "getavplayerattribute",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getavplayerattribute.html",
+      "originated_in_version": "15"
+    },
+    {
+      "name": "GetAddonInfo",
+      "format": "GetAddonInfo ( addonID )",
+      "parameters": [
+        "addonID"
+      ],
+      "purpose": "Returns JSON info about an add-on",
+      "category": "Miscellaneous functions",
+      "category_url": "miscellaneous-functions.html",
+      "slug": "getaddoninfo",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getaddoninfo.html",
+      "originated_in_version": "19.3"
+    },
+    {
+      "name": "GetAsBoolean",
+      "format": "GetAsBoolean ( data )",
+      "parameters": [
+        "data"
+      ],
+      "purpose": "Returns 1/0 for true/false",
+      "category": "Logical functions",
+      "category_url": "logical-functions.html",
+      "slug": "getasboolean",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getasboolean.html",
+      "originated_in_version": "12"
+    },
+    {
+      "name": "GetAsCSS",
+      "format": "GetAsCSS ( text )",
+      "parameters": [
+        "text"
+      ],
+      "purpose": "Converts text to CSS format",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "getascss",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getascss.html",
+      "originated_in_version": "11"
+    },
+    {
+      "name": "GetAsDate",
+      "format": "GetAsDate ( text )",
+      "parameters": [
+        "text"
+      ],
+      "purpose": "Returns text dates as Date type",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "getasdate",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getasdate.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "GetAsNumber",
+      "format": "GetAsNumber ( text )",
+      "parameters": [
+        "text"
+      ],
+      "purpose": "Returns only numbers from text, as Number type",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "getasnumber",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getasnumber.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "GetAsSVG",
+      "format": "GetAsSVG ( text )",
+      "parameters": [
+        "text"
+      ],
+      "purpose": "Converts text to SVG format",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "getassvg",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getassvg.html",
+      "originated_in_version": "11"
+    },
+    {
+      "name": "GetAsText",
+      "format": "GetAsText ( data )",
+      "parameters": [
+        "data"
+      ],
+      "purpose": "Returns data as Text type",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "getastext",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getastext.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "GetAsTime",
+      "format": "GetAsTime ( text )",
+      "parameters": [
+        "text"
+      ],
+      "purpose": "Returns text times as Time type",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "getastime",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getastime.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "GetAsTimestamp",
+      "format": "GetAsTimestamp ( text )",
+      "parameters": [
+        "text"
+      ],
+      "purpose": "Returns text as Timestamp type",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "getastimestamp",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getastimestamp.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "GetAsURLEncoded",
+      "format": "GetAsURLEncoded ( text )",
+      "parameters": [
+        "text"
+      ],
+      "purpose": "URL-encodes text",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "getasurlencoded",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getasurlencoded.html",
+      "originated_in_version": "15"
+    },
+    {
+      "name": "GetBaseTableName",
+      "format": "GetBaseTableName ( field )",
+      "parameters": [
+        "field"
+      ],
+      "purpose": "Returns base table name of a field reference",
+      "category": "Miscellaneous functions",
+      "category_url": "miscellaneous-functions.html",
+      "slug": "getbasetablename",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getbasetablename.html",
+      "originated_in_version": "20.1.1"
+    },
+    {
+      "name": "GetContainerAttribute",
+      "format": "GetContainerAttribute ( field ; attributeName )",
+      "parameters": [
+        "field",
+        "attributeName"
+      ],
+      "purpose": "Returns container file metadata",
+      "category": "Container functions",
+      "category_url": "container-functions.html",
+      "slug": "getcontainerattribute",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getcontainerattribute.html",
+      "originated_in_version": "13"
+    },
+    {
+      "name": "GetEmbedding",
+      "format": "GetEmbedding ( account ; model ; input )",
+      "parameters": [
+        "account",
+        "model",
+        "input"
+      ],
+      "purpose": "Sends input to embedding model, returns vector as container",
+      "category": "Artificial intelligence functions",
+      "category_url": "artificial-intelligence-functions.html",
+      "slug": "getembedding",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getembedding.html",
+      "originated_in_version": "21.0.1"
+    },
+    {
+      "name": "GetEmbeddingAsFile",
+      "format": "GetEmbeddingAsFile ( text {; fileNameWithExtension } )",
+      "parameters": [
+        "text",
+        "fileNameWithExtension"
+      ],
+      "purpose": "Converts embedding from text (JSON) to binary container",
+      "category": "Artificial intelligence functions",
+      "category_url": "artificial-intelligence-functions.html",
+      "slug": "getembeddingasfile",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getembeddingasfile.html",
+      "originated_in_version": "21.0.1"
+    },
+    {
+      "name": "GetEmbeddingAsText",
+      "format": "GetEmbeddingAsText ( data )",
+      "parameters": [
+        "data"
+      ],
+      "purpose": "Converts embedding from binary container to text (JSON)",
+      "category": "Artificial intelligence functions",
+      "category_url": "artificial-intelligence-functions.html",
+      "slug": "getembeddingastext",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getembeddingastext.html",
+      "originated_in_version": "21.0.1"
+    },
+    {
+      "name": "GetField",
+      "format": "GetField ( fieldName )",
+      "parameters": [
+        "fieldName"
+      ],
+      "purpose": "Returns contents of a named field",
+      "category": "Logical functions",
+      "category_url": "logical-functions.html",
+      "slug": "getfield",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getfield.html",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "GetFieldName",
+      "format": "GetFieldName ( field )",
+      "parameters": [
+        "field"
+      ],
+      "purpose": "Returns fully qualified field name",
+      "category": "Miscellaneous functions",
+      "category_url": "miscellaneous-functions.html",
+      "slug": "getfieldname",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getfieldname.html",
+      "originated_in_version": "10"
+    },
+    {
+      "name": "GetFieldsOnLayout",
+      "format": "GetFieldsOnLayout ( layoutName )",
+      "parameters": [
+        "layoutName"
+      ],
+      "purpose": "Returns find-accessible fields on a layout as JSON",
+      "category": "Artificial intelligence functions",
+      "category_url": "artificial-intelligence-functions.html",
+      "slug": "getfieldsonlayout",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getfieldsonlayout.html",
+      "originated_in_version": "22.0.1"
+    },
+    {
+      "name": "GetHeight",
+      "format": "GetHeight ( field )",
+      "parameters": [
+        "field"
+      ],
+      "purpose": "Returns pixel height of container image",
+      "category": "Container functions",
+      "category_url": "container-functions.html",
+      "slug": "getheight",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getheight.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "GetLayoutObjectAttribute",
+      "format": "GetLayoutObjectAttribute ( objectName ; attributeName {; repetitionNumber ; portalRowNumber } )",
+      "parameters": [
+        "objectName",
+        "attributeName",
+        "repetitionNumber",
+        "portalRowNumber"
+      ],
+      "purpose": "Returns attributes of a named layout object",
+      "category": "Miscellaneous functions",
+      "category_url": "miscellaneous-functions.html",
+      "slug": "getlayoutobjectattribute",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getlayoutobjectattribute.html",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "GetLayoutObjectOwnerInfo",
+      "format": "GetLayoutObjectOwnerInfo ( objectID )",
+      "parameters": [
+        "objectID"
+      ],
+      "purpose": "Returns ownership info for a layout object",
+      "category": "Miscellaneous functions",
+      "category_url": "miscellaneous-functions.html",
+      "slug": "getlayoutobjectownerinfo",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getlayoutobjectownerinfo.html",
+      "originated_in_version": "19"
+    },
+    {
+      "name": "GetLiveText",
+      "format": "GetLiveText ( container ; language )",
+      "parameters": [
+        "container",
+        "language"
+      ],
+      "purpose": "OCR: returns text found in image",
+      "category": "Container functions",
+      "category_url": "container-functions.html",
+      "slug": "getlivetext",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getlivetext.html",
+      "originated_in_version": "19"
+    },
+    {
+      "name": "GetLiveTextAsJSON",
+      "format": "GetLiveTextAsJSON ( container ; language )",
+      "parameters": [
+        "container",
+        "language"
+      ],
+      "purpose": "OCR: returns text + position as JSON",
+      "category": "Container functions",
+      "category_url": "container-functions.html",
+      "slug": "getlivetextasjson",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getlivetextasjson.html",
+      "originated_in_version": "21.0.1"
+    },
+    {
+      "name": "GetModelAttributes",
+      "format": "GetModelAttributes ( modelName )",
+      "parameters": [
+        "modelName"
+      ],
+      "purpose": "Returns metadata about a loaded Core ML model (macOS/iOS only)",
+      "category": "Artificial intelligence functions",
+      "category_url": "artificial-intelligence-functions.html",
+      "slug": "getmodelattributes",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getmodelattributes.html",
+      "originated_in_version": "19.3"
+    },
+    {
+      "name": "GetNextSerialValue",
+      "format": "GetNextSerialValue ( fileName ; fieldName )",
+      "parameters": [
+        "fileName",
+        "fieldName"
+      ],
+      "purpose": "Returns next serial number for a field",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "getnextserialvalue",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getnextserialvalue.html",
+      "originated_in_version": "13"
+    },
+    {
+      "name": "GetNthRecord",
+      "format": "GetNthRecord ( field ; recordNumber )",
+      "parameters": [
+        "field",
+        "recordNumber"
+      ],
+      "purpose": "Returns field contents from record N",
+      "category": "Logical functions",
+      "category_url": "logical-functions.html",
+      "slug": "getnthrecord",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getnthrecord.html",
+      "originated_in_version": "10"
+    },
+    {
+      "name": "GetRAGSpaceInfo",
+      "format": "GetRAGSpaceInfo ( ragAccountName {; spaceID } )",
+      "parameters": [
+        "ragAccountName",
+        "spaceID"
+      ],
+      "purpose": "Returns info about RAG spaces for a RAG account",
+      "category": "Artificial intelligence functions",
+      "category_url": "artificial-intelligence-functions.html",
+      "slug": "getragspaceinfo",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getragspaceinfo.html",
+      "originated_in_version": "22.0.1"
+    },
+    {
+      "name": "GetRecordIDsFromFoundSet",
+      "format": "GetRecordIDsFromFoundSet ( type )",
+      "parameters": [
+        "type"
+      ],
+      "purpose": "Returns record IDs from found set as list or JSON",
+      "category": "Miscellaneous functions",
+      "category_url": "miscellaneous-functions.html",
+      "slug": "getrecordidsfromfoundset",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getrecordidsfromfoundset.html",
+      "originated_in_version": "22.0.1"
+    },
+    {
+      "name": "GetRepetition",
+      "format": "GetRepetition ( repeatingField ; number )",
+      "parameters": [
+        "repeatingField",
+        "number"
+      ],
+      "purpose": "Returns contents of a specific repetition",
+      "category": "Repeating functions",
+      "category_url": "repeating-functions.html",
+      "slug": "getrepetition",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getrepetition.html",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "GetSensor",
+      "format": "GetSensor ( sensorName {; option1 ; option2 } )",
+      "parameters": [
+        "sensorName",
+        "option1",
+        "option2"
+      ],
+      "purpose": "Returns sensor value on iOS/iPadOS",
+      "category": "Mobile functions",
+      "category_url": "mobile-functions.html",
+      "slug": "getsensor",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getsensor.html",
+      "originated_in_version": "15"
+    },
+    {
+      "name": "GetSummary",
+      "format": "GetSummary ( summaryField ; breakField )",
+      "parameters": [
+        "summaryField",
+        "breakField"
+      ],
+      "purpose": "Returns summary field value for current sort",
+      "category": "Logical functions",
+      "category_url": "logical-functions.html",
+      "slug": "getsummary",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getsummary.html",
+      "originated_in_version": "9"
+    },
+    {
+      "name": "GetTableDDL",
+      "format": "GetTableDDL ( tableOccurrenceNames ; ignoreError )",
+      "parameters": [
+        "tableOccurrenceNames",
+        "ignoreError"
+      ],
+      "purpose": "Returns DDL for table occurrences as SQL CREATE TABLE text",
+      "category": "Artificial intelligence functions",
+      "category_url": "artificial-intelligence-functions.html",
+      "slug": "gettableddl",
+      "doc_url": "https://help.claris.com/en/pro-help/content/gettableddl.html",
+      "originated_in_version": "21.0.1"
+    },
+    {
+      "name": "GetTextFromPDF",
+      "format": "GetTextFromPDF ( container )",
+      "parameters": [
+        "container"
+      ],
+      "purpose": "Returns text from PDF in container",
+      "category": "Container functions",
+      "category_url": "container-functions.html",
+      "slug": "gettextfrompdf",
+      "doc_url": "https://help.claris.com/en/pro-help/content/gettextfrompdf.html",
+      "originated_in_version": "22.0.1"
+    },
+    {
+      "name": "GetThumbnail",
+      "format": "GetThumbnail ( field ; width ; height )",
+      "parameters": [
+        "field",
+        "width",
+        "height"
+      ],
+      "purpose": "Returns thumbnail of container content",
+      "category": "Container functions",
+      "category_url": "container-functions.html",
+      "slug": "getthumbnail",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getthumbnail.html",
+      "originated_in_version": "12"
+    },
+    {
+      "name": "GetTokenCount",
+      "format": "GetTokenCount ( text )",
+      "parameters": [
+        "text"
+      ],
+      "purpose": "Returns approximate token count for text",
+      "category": "Artificial intelligence functions",
+      "category_url": "artificial-intelligence-functions.html",
+      "slug": "gettokencount",
+      "doc_url": "https://help.claris.com/en/pro-help/content/gettokencount.html",
+      "originated_in_version": "21.0.1"
+    },
+    {
+      "name": "GetValue",
+      "format": "GetValue ( listOfValues ; valueNumber )",
+      "parameters": [
+        "listOfValues",
+        "valueNumber"
+      ],
+      "purpose": "Returns a value from a return-delimited list by position",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "getvalue",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getvalue.html",
+      "originated_in_version": "15"
+    },
+    {
+      "name": "GetWidth",
+      "format": "GetWidth ( field )",
+      "parameters": [
+        "field"
+      ],
+      "purpose": "Returns pixel width of container image",
+      "category": "Container functions",
+      "category_url": "container-functions.html",
+      "slug": "getwidth",
+      "doc_url": "https://help.claris.com/en/pro-help/content/getwidth.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "HexDecode",
+      "format": "HexDecode ( data {; fileNameWithExtension } )",
+      "parameters": [
+        "data",
+        "fileNameWithExtension"
+      ],
+      "purpose": "Decodes hex text to container or text",
+      "category": "Container functions",
+      "category_url": "container-functions.html",
+      "slug": "hexdecode",
+      "doc_url": "https://help.claris.com/en/pro-help/content/hexdecode.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "HexEncode",
+      "format": "HexEncode ( data )",
+      "parameters": [
+        "data"
+      ],
+      "purpose": "Encodes data as hexadecimal text",
+      "category": "Container functions",
+      "category_url": "container-functions.html",
+      "slug": "hexencode",
+      "doc_url": "https://help.claris.com/en/pro-help/content/hexencode.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "Hiragana",
+      "format": "Hiragana ( text )",
+      "parameters": [
+        "text"
+      ],
+      "purpose": "Converts katakana to hiragana",
+      "category": "Japanese functions",
+      "category_url": "japanese-functions.html",
+      "slug": "hiragana",
+      "doc_url": "https://help.claris.com/en/pro-help/content/hiragana.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Hour",
+      "format": "Hour ( time )",
+      "parameters": [
+        "time"
+      ],
+      "purpose": "Returns hour portion of time (0\u201323)",
+      "category": "Time functions",
+      "category_url": "time-functions.html",
+      "slug": "hour",
+      "doc_url": "https://help.claris.com/en/pro-help/content/hour.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "If",
+      "format": "If ( test ; result1 {; result2 } )",
+      "parameters": [
+        "test",
+        "result1",
+        "result2"
+      ],
+      "purpose": "Returns result1 if true, result2 if false",
+      "category": "Logical functions",
+      "category_url": "logical-functions.html",
+      "slug": "if-function",
+      "doc_url": "https://help.claris.com/en/pro-help/content/if-function.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Int",
+      "format": "Int ( number )",
+      "parameters": [
+        "number"
+      ],
+      "purpose": "Truncates to integer (no rounding)",
+      "category": "Number functions",
+      "category_url": "number-functions.html",
+      "slug": "int",
+      "doc_url": "https://help.claris.com/en/pro-help/content/int.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "IsEmpty",
+      "format": "IsEmpty ( field )",
+      "parameters": [
+        "field"
+      ],
+      "purpose": "Returns 1 if field is empty",
+      "category": "Logical functions",
+      "category_url": "logical-functions.html",
+      "slug": "isempty",
+      "doc_url": "https://help.claris.com/en/pro-help/content/isempty.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "IsValid",
+      "format": "IsValid ( field )",
+      "parameters": [
+        "field"
+      ],
+      "purpose": "Returns 0 if data is invalid",
+      "category": "Logical functions",
+      "category_url": "logical-functions.html",
+      "slug": "isvalid",
+      "doc_url": "https://help.claris.com/en/pro-help/content/isvalid.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "IsValidExpression",
+      "format": "IsValidExpression ( expression )",
+      "parameters": [
+        "expression"
+      ],
+      "purpose": "Returns 1 if expression syntax is valid",
+      "category": "Logical functions",
+      "category_url": "logical-functions.html",
+      "slug": "isvalidexpression",
+      "doc_url": "https://help.claris.com/en/pro-help/content/isvalidexpression.html",
+      "originated_in_version": "9"
+    },
+    {
+      "name": "JSONDeleteElement",
+      "format": "JSONDeleteElement ( json ; keyOrIndexOrPath )",
+      "parameters": [
+        "json",
+        "keyOrIndexOrPath"
+      ],
+      "purpose": "Deletes a JSON element by name/index/path",
+      "category": "JSON functions",
+      "category_url": "json-functions-category.html",
+      "slug": "jsondeleteelement",
+      "doc_url": "https://help.claris.com/en/pro-help/content/jsondeleteelement.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "JSONFormatElements",
+      "format": "JSONFormatElements ( json )",
+      "parameters": [
+        "json"
+      ],
+      "purpose": "Pretty-prints JSON for readability",
+      "category": "JSON functions",
+      "category_url": "json-functions-category.html",
+      "slug": "jsonformatelements",
+      "doc_url": "https://help.claris.com/en/pro-help/content/jsonformatelements.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "JSONGetElement",
+      "format": "JSONGetElement ( json ; keyOrIndexOrPath )",
+      "parameters": [
+        "json",
+        "keyOrIndexOrPath"
+      ],
+      "purpose": "Queries JSON for an element",
+      "category": "JSON functions",
+      "category_url": "json-functions-category.html",
+      "slug": "jsongetelement",
+      "doc_url": "https://help.claris.com/en/pro-help/content/jsongetelement.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "JSONGetElementType",
+      "format": "JSONGetElementType ( json ; keyOrIndexOrPath )",
+      "parameters": [
+        "json",
+        "keyOrIndexOrPath"
+      ],
+      "purpose": "Returns JSON data type of an element",
+      "category": "JSON functions",
+      "category_url": "json-functions-category.html",
+      "slug": "jsongetelementtype",
+      "doc_url": "https://help.claris.com/en/pro-help/content/jsongetelementtype.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "JSONListKeys",
+      "format": "JSONListKeys ( json ; keyOrIndexOrPath )",
+      "parameters": [
+        "json",
+        "keyOrIndexOrPath"
+      ],
+      "purpose": "Lists object keys or array indexes",
+      "category": "JSON functions",
+      "category_url": "json-functions-category.html",
+      "slug": "jsonlistkeys",
+      "doc_url": "https://help.claris.com/en/pro-help/content/jsonlistkeys.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "JSONListValues",
+      "format": "JSONListValues ( json ; keyOrIndexOrPath )",
+      "parameters": [
+        "json",
+        "keyOrIndexOrPath"
+      ],
+      "purpose": "Lists values in JSON",
+      "category": "JSON functions",
+      "category_url": "json-functions-category.html",
+      "slug": "jsonlistvalues",
+      "doc_url": "https://help.claris.com/en/pro-help/content/jsonlistvalues.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "JSONMakeArray",
+      "format": "JSONMakeArray ( listOfValues ; separator ; type )",
+      "parameters": [
+        "listOfValues",
+        "separator",
+        "type"
+      ],
+      "purpose": "Converts a value list to JSON array",
+      "category": "JSON functions",
+      "category_url": "json-functions-category.html",
+      "slug": "jsonmakearray",
+      "doc_url": "https://help.claris.com/en/pro-help/content/jsonmakearray.html",
+      "originated_in_version": "21.0.1"
+    },
+    {
+      "name": "JSONParse",
+      "format": "JSONParse ( json )",
+      "parameters": [
+        "json"
+      ],
+      "purpose": "Parses and caches JSON in memory",
+      "category": "JSON functions",
+      "category_url": "json-functions-category.html",
+      "slug": "jsonparse",
+      "doc_url": "https://help.claris.com/en/pro-help/content/jsonparse.html",
+      "originated_in_version": "22.0.1"
+    },
+    {
+      "name": "JSONParsedState",
+      "format": "JSONParsedState ( json )",
+      "parameters": [
+        "json"
+      ],
+      "purpose": "Returns parse state of cached JSON",
+      "category": "JSON functions",
+      "category_url": "json-functions-category.html",
+      "slug": "jsonparsedstate",
+      "doc_url": "https://help.claris.com/en/pro-help/content/jsonparsedstate.html",
+      "originated_in_version": "22.0.1"
+    },
+    {
+      "name": "JSONSetElement",
+      "format": "JSONSetElement ( json ; keyOrIndexOrPath ; value ; type )",
+      "parameters": [
+        "json",
+        "keyOrIndexOrPath",
+        "value",
+        "type"
+      ],
+      "purpose": "Adds or modifies a JSON element",
+      "category": "JSON functions",
+      "category_url": "json-functions-category.html",
+      "slug": "jsonsetelement",
+      "doc_url": "https://help.claris.com/en/pro-help/content/jsonsetelement.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "KanaHankaku",
+      "format": "KanaHankaku ( text )",
+      "parameters": [
+        "text"
+      ],
+      "purpose": "Converts zenkaku to hankaku katakana",
+      "category": "Japanese functions",
+      "category_url": "japanese-functions.html",
+      "slug": "kanahankaku",
+      "doc_url": "https://help.claris.com/en/pro-help/content/kanahankaku.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "KanaZenkaku",
+      "format": "KanaZenkaku ( text )",
+      "parameters": [
+        "text"
+      ],
+      "purpose": "Converts hankaku to zenkaku katakana",
+      "category": "Japanese functions",
+      "category_url": "japanese-functions.html",
+      "slug": "kanazenkaku",
+      "doc_url": "https://help.claris.com/en/pro-help/content/kanazenkaku.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "KanjiNumeral",
+      "format": "KanjiNumeral ( text )",
+      "parameters": [
+        "text"
+      ],
+      "purpose": "Converts arabic to kanji numerals",
+      "category": "Japanese functions",
+      "category_url": "japanese-functions.html",
+      "slug": "kanjinumeral",
+      "doc_url": "https://help.claris.com/en/pro-help/content/kanjinumeral.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Katakana",
+      "format": "Katakana ( text )",
+      "parameters": [
+        "text"
+      ],
+      "purpose": "Converts hiragana to zenkaku katakana",
+      "category": "Japanese functions",
+      "category_url": "japanese-functions.html",
+      "slug": "katakana",
+      "doc_url": "https://help.claris.com/en/pro-help/content/katakana.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Last",
+      "format": "Last ( repeatingField )",
+      "parameters": [
+        "repeatingField"
+      ],
+      "purpose": "Returns last non-blank value in a field",
+      "category": "Repeating functions",
+      "category_url": "repeating-functions.html",
+      "slug": "last",
+      "doc_url": "https://help.claris.com/en/pro-help/content/last.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "LayoutIDs",
+      "format": "LayoutIDs ( fileName )",
+      "parameters": [
+        "fileName"
+      ],
+      "purpose": "Returns list of layout IDs",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "layoutids",
+      "doc_url": "https://help.claris.com/en/pro-help/content/layoutids.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "LayoutNames",
+      "format": "LayoutNames ( fileName )",
+      "parameters": [
+        "fileName"
+      ],
+      "purpose": "Returns list of layout names",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "layoutnames",
+      "doc_url": "https://help.claris.com/en/pro-help/content/layoutnames.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "LayoutObjectNames",
+      "format": "LayoutObjectNames ( fileName ; layoutName )",
+      "parameters": [
+        "fileName",
+        "layoutName"
+      ],
+      "purpose": "Returns list of named layout objects",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "layoutobjectnames",
+      "doc_url": "https://help.claris.com/en/pro-help/content/layoutobjectnames.html",
+      "originated_in_version": "12"
+    },
+    {
+      "name": "LayoutObjectUUID",
+      "format": "LayoutObjectUUID",
+      "purpose": "Returns UUID of the layout object defining the calc",
+      "category": "Miscellaneous functions",
+      "category_url": "miscellaneous-functions.html",
+      "slug": "layoutobjectuuid",
+      "doc_url": "https://help.claris.com/en/pro-help/content/layoutobjectuuid.html",
+      "originated_in_version": "19"
+    },
+    {
+      "name": "Left",
+      "format": "Left ( text ; numberOfCharacters )",
+      "parameters": [
+        "text",
+        "numberOfCharacters"
+      ],
+      "purpose": "Returns N characters from left of text",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "left",
+      "doc_url": "https://help.claris.com/en/pro-help/content/left.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "LeftValues",
+      "format": "LeftValues ( text ; numberOfValues )",
+      "parameters": [
+        "text",
+        "numberOfValues"
+      ],
+      "purpose": "Returns N values from left of a value list",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "leftvalues",
+      "doc_url": "https://help.claris.com/en/pro-help/content/leftvalues.html",
+      "originated_in_version": "15"
+    },
+    {
+      "name": "LeftWords",
+      "format": "LeftWords ( text ; numberOfWords )",
+      "parameters": [
+        "text",
+        "numberOfWords"
+      ],
+      "purpose": "Returns N words from left of text",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "leftwords",
+      "doc_url": "https://help.claris.com/en/pro-help/content/leftwords.html",
+      "originated_in_version": "9"
+    },
+    {
+      "name": "Length",
+      "format": "Length ( text )",
+      "parameters": [
+        "text"
+      ],
+      "purpose": "Returns character count of text",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "length",
+      "doc_url": "https://help.claris.com/en/pro-help/content/length.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Let",
+      "format": "Let ( {[} var1 = expression1 {; var2 = expression2...]} ; calculation )",
+      "parameters": [
+        "var1",
+        "var2",
+        "calculation"
+      ],
+      "purpose": "Sets variables for duration of calculation",
+      "category": "Logical functions",
+      "category_url": "logical-functions.html",
+      "slug": "let",
+      "doc_url": "https://help.claris.com/en/pro-help/content/let.html",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "Lg",
+      "format": "Lg ( number )",
+      "parameters": [
+        "number"
+      ],
+      "purpose": "Base-2 logarithm",
+      "category": "Number functions",
+      "category_url": "number-functions.html",
+      "slug": "lg",
+      "doc_url": "https://help.claris.com/en/pro-help/content/lg.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "List",
+      "format": "List ( field {; field...} )",
+      "parameters": [
+        "field"
+      ],
+      "purpose": "Concatenated return-delimited list of values",
+      "category": "Aggregate functions",
+      "category_url": "aggregate-functions.html",
+      "slug": "list",
+      "doc_url": "https://help.claris.com/en/pro-help/content/list.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Ln",
+      "format": "Ln ( number )",
+      "parameters": [
+        "number"
+      ],
+      "purpose": "Natural logarithm",
+      "category": "Number functions",
+      "category_url": "number-functions.html",
+      "slug": "ln",
+      "doc_url": "https://help.claris.com/en/pro-help/content/ln.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Location",
+      "format": "Location ( accuracy {; timeout } )",
+      "parameters": [
+        "accuracy",
+        "timeout"
+      ],
+      "purpose": "Returns latitude/longitude on FileMaker Go",
+      "category": "Mobile functions",
+      "category_url": "mobile-functions.html",
+      "slug": "location",
+      "doc_url": "https://help.claris.com/en/pro-help/content/location.html",
+      "originated_in_version": "15"
+    },
+    {
+      "name": "LocationValues",
+      "format": "LocationValues ( accuracy {; timeout } )",
+      "parameters": [
+        "accuracy",
+        "timeout"
+      ],
+      "purpose": "Returns lat/long/altitude with accuracy",
+      "category": "Mobile functions",
+      "category_url": "mobile-functions.html",
+      "slug": "locationvalues",
+      "doc_url": "https://help.claris.com/en/pro-help/content/locationvalues.html",
+      "originated_in_version": "19"
+    },
+    {
+      "name": "Log",
+      "format": "Log ( number )",
+      "parameters": [
+        "number"
+      ],
+      "purpose": "Base-10 logarithm",
+      "category": "Number functions",
+      "category_url": "number-functions.html",
+      "slug": "log",
+      "doc_url": "https://help.claris.com/en/pro-help/content/log.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Lookup",
+      "format": "Lookup ( sourceField {; failExpression } )",
+      "parameters": [
+        "sourceField",
+        "failExpression"
+      ],
+      "purpose": "Returns related field value via relationship",
+      "category": "Logical functions",
+      "category_url": "logical-functions.html",
+      "slug": "lookup",
+      "doc_url": "https://help.claris.com/en/pro-help/content/lookup.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "LookupNext",
+      "format": "LookupNext ( sourceField ; lower/higherFlag )",
+      "parameters": [
+        "sourceField",
+        "lower/higherFlag"
+      ],
+      "purpose": "Returns next higher/lower related value",
+      "category": "Logical functions",
+      "category_url": "logical-functions.html",
+      "slug": "lookupnext",
+      "doc_url": "https://help.claris.com/en/pro-help/content/lookupnext.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Lower",
+      "format": "Lower ( text )",
+      "parameters": [
+        "text"
+      ],
+      "purpose": "Converts text to lowercase",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "lower",
+      "doc_url": "https://help.claris.com/en/pro-help/content/lower.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Max",
+      "format": "Max ( field {; field...} )",
+      "parameters": [
+        "field"
+      ],
+      "purpose": "Highest value",
+      "category": "Aggregate functions",
+      "category_url": "aggregate-functions.html",
+      "slug": "max",
+      "doc_url": "https://help.claris.com/en/pro-help/content/max.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Middle",
+      "format": "Middle ( text ; start ; numberOfCharacters )",
+      "parameters": [
+        "text",
+        "start",
+        "numberOfCharacters"
+      ],
+      "purpose": "Extracts characters from middle of text",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "middle",
+      "doc_url": "https://help.claris.com/en/pro-help/content/middle.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "MiddleValues",
+      "format": "MiddleValues ( text ; startingValue ; numberOfValues )",
+      "parameters": [
+        "text",
+        "startingValue",
+        "numberOfValues"
+      ],
+      "purpose": "Returns values from middle of a value list",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "middlevalues",
+      "doc_url": "https://help.claris.com/en/pro-help/content/middlevalues.html",
+      "originated_in_version": "15"
+    },
+    {
+      "name": "MiddleWords",
+      "format": "MiddleWords ( text ; startingWord ; numberOfWords )",
+      "parameters": [
+        "text",
+        "startingWord",
+        "numberOfWords"
+      ],
+      "purpose": "Returns words from middle of text",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "middlewords",
+      "doc_url": "https://help.claris.com/en/pro-help/content/middlewords.html",
+      "originated_in_version": "9"
+    },
+    {
+      "name": "Min",
+      "format": "Min ( field {; field...} )",
+      "parameters": [
+        "field"
+      ],
+      "purpose": "Lowest non-blank value",
+      "category": "Aggregate functions",
+      "category_url": "aggregate-functions.html",
+      "slug": "min",
+      "doc_url": "https://help.claris.com/en/pro-help/content/min.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Minute",
+      "format": "Minute ( time )",
+      "parameters": [
+        "time"
+      ],
+      "purpose": "Returns minute portion (0\u201359)",
+      "category": "Time functions",
+      "category_url": "time-functions.html",
+      "slug": "minute",
+      "doc_url": "https://help.claris.com/en/pro-help/content/minute.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Mod",
+      "format": "Mod ( number ; divisor )",
+      "parameters": [
+        "number",
+        "divisor"
+      ],
+      "purpose": "Returns remainder of division",
+      "category": "Number functions",
+      "category_url": "number-functions.html",
+      "slug": "mod",
+      "doc_url": "https://help.claris.com/en/pro-help/content/mod.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Month",
+      "format": "Month ( date )",
+      "parameters": [
+        "date"
+      ],
+      "purpose": "Returns month number (1\u201312)",
+      "category": "Date functions",
+      "category_url": "date-functions.html",
+      "slug": "month",
+      "doc_url": "https://help.claris.com/en/pro-help/content/month.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "MonthName",
+      "format": "MonthName ( date )",
+      "parameters": [
+        "date"
+      ],
+      "purpose": "Returns full month name",
+      "category": "Date functions",
+      "category_url": "date-functions.html",
+      "slug": "monthname",
+      "doc_url": "https://help.claris.com/en/pro-help/content/monthname.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "MonthNameJ",
+      "format": "MonthNameJ ( date )",
+      "parameters": [
+        "date"
+      ],
+      "purpose": "Returns Japanese month name",
+      "category": "Japanese functions",
+      "category_url": "japanese-functions.html",
+      "slug": "monthnamej",
+      "doc_url": "https://help.claris.com/en/pro-help/content/monthnamej.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "NPV",
+      "format": "NPV ( payment ; interestRate )",
+      "parameters": [
+        "payment",
+        "interestRate"
+      ],
+      "purpose": "Net present value of unequal payments",
+      "category": "Financial functions",
+      "category_url": "financial-functions.html",
+      "slug": "npv",
+      "doc_url": "https://help.claris.com/en/pro-help/content/npv.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "NormalizeEmbedding",
+      "format": "NormalizeEmbedding ( data { ; dimension } )",
+      "parameters": [
+        "data",
+        "dimension"
+      ],
+      "purpose": "Normalises an embedding vector (optionally truncating dimensions)",
+      "category": "Artificial intelligence functions",
+      "category_url": "artificial-intelligence-functions.html",
+      "slug": "normalizeembedding",
+      "doc_url": "https://help.claris.com/en/pro-help/content/normalizeembedding.html",
+      "originated_in_version": "22.0.1"
+    },
+    {
+      "name": "NumToJText",
+      "format": "NumToJText ( number ; separator ; characterType )",
+      "parameters": [
+        "number",
+        "separator",
+        "characterType"
+      ],
+      "purpose": "Converts numbers to Japanese text",
+      "category": "Japanese functions",
+      "category_url": "japanese-functions.html",
+      "slug": "numtojtext",
+      "doc_url": "https://help.claris.com/en/pro-help/content/numtojtext.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "PMT",
+      "format": "PMT ( principal ; interestRate ; term )",
+      "parameters": [
+        "principal",
+        "interestRate",
+        "term"
+      ],
+      "purpose": "Payment required for a loan",
+      "category": "Financial functions",
+      "category_url": "financial-functions.html",
+      "slug": "pmt",
+      "doc_url": "https://help.claris.com/en/pro-help/content/pmt.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "PV",
+      "format": "PV ( payment ; interestRate ; periods )",
+      "parameters": [
+        "payment",
+        "interestRate",
+        "periods"
+      ],
+      "purpose": "Present value of equal payments",
+      "category": "Financial functions",
+      "category_url": "financial-functions.html",
+      "slug": "pv",
+      "doc_url": "https://help.claris.com/en/pro-help/content/pv.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "PatternCount",
+      "format": "PatternCount ( text ; searchString )",
+      "parameters": [
+        "text",
+        "searchString"
+      ],
+      "purpose": "Counts occurrences of a pattern in text",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "patterncount",
+      "doc_url": "https://help.claris.com/en/pro-help/content/patterncount.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Pi",
+      "format": "Pi",
+      "purpose": "Value of \u03c0",
+      "category": "Trigonometric functions",
+      "category_url": "trigonometric-functions.html",
+      "slug": "pi",
+      "doc_url": "https://help.claris.com/en/pro-help/content/pi.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Position",
+      "format": "Position ( text ; searchString ; start ; occurrence )",
+      "parameters": [
+        "text",
+        "searchString",
+        "start",
+        "occurrence"
+      ],
+      "purpose": "Returns position of a pattern in text",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "position",
+      "doc_url": "https://help.claris.com/en/pro-help/content/position.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "PredictFromModel",
+      "format": "PredictFromModel ( modelName ; v1 )",
+      "parameters": [
+        "modelName",
+        "v1"
+      ],
+      "purpose": "Returns predicted value from a regression model",
+      "category": "Artificial intelligence functions",
+      "category_url": "artificial-intelligence-functions.html",
+      "slug": "predictfrommodel",
+      "doc_url": "https://help.claris.com/en/pro-help/content/predictfrommodel.html",
+      "originated_in_version": "22.0.1"
+    },
+    {
+      "name": "Proper",
+      "format": "Proper ( text )",
+      "parameters": [
+        "text"
+      ],
+      "purpose": "Capitalises first letter of each word",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "proper",
+      "doc_url": "https://help.claris.com/en/pro-help/content/proper.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Quote",
+      "format": "Quote ( text )",
+      "parameters": [
+        "text"
+      ],
+      "purpose": "Wraps text in quotation marks",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "quote",
+      "doc_url": "https://help.claris.com/en/pro-help/content/quote.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "RGB",
+      "format": "RGB ( red ; green ; blue )",
+      "parameters": [
+        "red",
+        "green",
+        "blue"
+      ],
+      "purpose": "Returns an integer from red/green/blue values",
+      "category": "Text formatting functions",
+      "category_url": "text-formatting-functions.html",
+      "slug": "rgb",
+      "doc_url": "https://help.claris.com/en/pro-help/content/rgb.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Radians",
+      "format": "Radians ( angleInDegrees )",
+      "parameters": [
+        "angleInDegrees"
+      ],
+      "purpose": "Converts degrees to radians",
+      "category": "Trigonometric functions",
+      "category_url": "trigonometric-functions.html",
+      "slug": "radians",
+      "doc_url": "https://help.claris.com/en/pro-help/content/radians.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Random",
+      "format": "Random",
+      "purpose": "Returns random number 0\u2013<1",
+      "category": "Number functions",
+      "category_url": "number-functions.html",
+      "slug": "random",
+      "doc_url": "https://help.claris.com/en/pro-help/content/random.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "RangeBeacons",
+      "format": "RangeBeacons ( UUID {; timeout ; major ; minor } )",
+      "parameters": [
+        "UUID",
+        "timeout",
+        "major",
+        "minor"
+      ],
+      "purpose": "Returns nearby iBeacons",
+      "category": "Mobile functions",
+      "category_url": "mobile-functions.html",
+      "slug": "rangebeacons",
+      "doc_url": "https://help.claris.com/en/pro-help/content/rangebeacons.html",
+      "originated_in_version": "19"
+    },
+    {
+      "name": "ReadQRCode",
+      "format": "ReadQRCode ( container )",
+      "parameters": [
+        "container"
+      ],
+      "purpose": "Returns value of QR code in container",
+      "category": "Container functions",
+      "category_url": "container-functions.html",
+      "slug": "readqrcode",
+      "doc_url": "https://help.claris.com/en/pro-help/content/readqrcode.html",
+      "originated_in_version": "19"
+    },
+    {
+      "name": "RelationInfo",
+      "format": "RelationInfo ( fileName ; tableName )",
+      "parameters": [
+        "fileName",
+        "tableName"
+      ],
+      "purpose": "Returns relationship information",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "relationinfo",
+      "doc_url": "https://help.claris.com/en/pro-help/content/relationinfo.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Replace",
+      "format": "Replace ( text ; start ; numberOfCharacters ; replacementText )",
+      "parameters": [
+        "text",
+        "start",
+        "numberOfCharacters",
+        "replacementText"
+      ],
+      "purpose": "Replaces characters in text",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "replace",
+      "doc_url": "https://help.claris.com/en/pro-help/content/replace.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Right",
+      "format": "Right ( text ; numberOfCharacters )",
+      "parameters": [
+        "text",
+        "numberOfCharacters"
+      ],
+      "purpose": "Returns N characters from right of text",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "right",
+      "doc_url": "https://help.claris.com/en/pro-help/content/right.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "RightValues",
+      "format": "RightValues ( text ; numberOfValues )",
+      "parameters": [
+        "text",
+        "numberOfValues"
+      ],
+      "purpose": "Returns N values from right of a value list",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "rightvalues",
+      "doc_url": "https://help.claris.com/en/pro-help/content/rightvalues.html",
+      "originated_in_version": "15"
+    },
+    {
+      "name": "RightWords",
+      "format": "RightWords ( text ; numberOfWords )",
+      "parameters": [
+        "text",
+        "numberOfWords"
+      ],
+      "purpose": "Returns N words from right of text",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "rightwords",
+      "doc_url": "https://help.claris.com/en/pro-help/content/rightwords.html",
+      "originated_in_version": "9"
+    },
+    {
+      "name": "RomanHankaku",
+      "format": "RomanHankaku ( text )",
+      "parameters": [
+        "text"
+      ],
+      "purpose": "Converts zenkaku to hankaku alphanumeric",
+      "category": "Japanese functions",
+      "category_url": "japanese-functions.html",
+      "slug": "romanhankaku",
+      "doc_url": "https://help.claris.com/en/pro-help/content/romanhankaku.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "RomanZenkaku",
+      "format": "RomanZenkaku ( text )",
+      "parameters": [
+        "text"
+      ],
+      "purpose": "Converts hankaku to zenkaku alphanumeric",
+      "category": "Japanese functions",
+      "category_url": "japanese-functions.html",
+      "slug": "romanzenkaku",
+      "doc_url": "https://help.claris.com/en/pro-help/content/romanzenkaku.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Round",
+      "format": "Round ( number ; precision )",
+      "parameters": [
+        "number",
+        "precision"
+      ],
+      "purpose": "Rounds to specified decimal places",
+      "category": "Number functions",
+      "category_url": "number-functions.html",
+      "slug": "round",
+      "doc_url": "https://help.claris.com/en/pro-help/content/round.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "ScriptIDs",
+      "format": "ScriptIDs ( fileName )",
+      "parameters": [
+        "fileName"
+      ],
+      "purpose": "Returns list of script IDs",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "scriptids",
+      "doc_url": "https://help.claris.com/en/pro-help/content/scriptids.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "ScriptNames",
+      "format": "ScriptNames ( fileName )",
+      "parameters": [
+        "fileName"
+      ],
+      "purpose": "Returns list of script names",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "scriptnames",
+      "doc_url": "https://help.claris.com/en/pro-help/content/scriptnames.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Seconds",
+      "format": "Seconds ( time )",
+      "parameters": [
+        "time"
+      ],
+      "purpose": "Returns seconds portion (0\u201359)",
+      "category": "Time functions",
+      "category_url": "time-functions.html",
+      "slug": "seconds",
+      "doc_url": "https://help.claris.com/en/pro-help/content/seconds.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Self",
+      "format": "Self",
+      "purpose": "Returns content of the object defining the calc",
+      "category": "Logical functions",
+      "category_url": "logical-functions.html",
+      "slug": "self",
+      "doc_url": "https://help.claris.com/en/pro-help/content/self.html",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "SerialIncrement",
+      "format": "SerialIncrement ( text ; incrementBy )",
+      "parameters": [
+        "text",
+        "incrementBy"
+      ],
+      "purpose": "Increments numbers in a serial text string",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "serialincrement",
+      "doc_url": "https://help.claris.com/en/pro-help/content/serialincrement.html",
+      "originated_in_version": "12"
+    },
+    {
+      "name": "SetPrecision",
+      "format": "SetPrecision ( expression ; precision )",
+      "parameters": [
+        "expression",
+        "precision"
+      ],
+      "purpose": "Sets precision to 16\u2013400 decimal places",
+      "category": "Number functions",
+      "category_url": "number-functions.html",
+      "slug": "setprecision",
+      "doc_url": "https://help.claris.com/en/pro-help/content/setprecision.html",
+      "originated_in_version": "9"
+    },
+    {
+      "name": "SetRecursion",
+      "format": "SetRecursion ( expression ; maxIterations )",
+      "parameters": [
+        "expression",
+        "maxIterations"
+      ],
+      "purpose": "Sets max recursion/loop iterations",
+      "category": "Logical functions",
+      "category_url": "logical-functions.html",
+      "slug": "set-recursion",
+      "doc_url": "https://help.claris.com/en/pro-help/content/set-recursion.html",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "Sign",
+      "format": "Sign ( number )",
+      "parameters": [
+        "number"
+      ],
+      "purpose": "Returns -1, 0, or 1 for negative/zero/positive",
+      "category": "Number functions",
+      "category_url": "number-functions.html",
+      "slug": "sign",
+      "doc_url": "https://help.claris.com/en/pro-help/content/sign.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Sin",
+      "format": "Sin ( angleInRadians )",
+      "parameters": [
+        "angleInRadians"
+      ],
+      "purpose": "Sine",
+      "category": "Trigonometric functions",
+      "category_url": "trigonometric-functions.html",
+      "slug": "sin",
+      "doc_url": "https://help.claris.com/en/pro-help/content/sin.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "SortValues",
+      "format": "SortValues ( values {; datatype ; locale } )",
+      "parameters": [
+        "values",
+        "datatype",
+        "locale"
+      ],
+      "purpose": "Sorts a return-delimited value list",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "sortvalues",
+      "doc_url": "https://help.claris.com/en/pro-help/content/sortvalues.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "Sqrt",
+      "format": "Sqrt ( number )",
+      "parameters": [
+        "number"
+      ],
+      "purpose": "Square root",
+      "category": "Number functions",
+      "category_url": "number-functions.html",
+      "slug": "sqrt",
+      "doc_url": "https://help.claris.com/en/pro-help/content/sqrt.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "StDev",
+      "format": "StDev ( field {; field...} )",
+      "parameters": [
+        "field"
+      ],
+      "purpose": "Sample standard deviation",
+      "category": "Aggregate functions",
+      "category_url": "aggregate-functions.html",
+      "slug": "stdev",
+      "doc_url": "https://help.claris.com/en/pro-help/content/stdev.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "StDevP",
+      "format": "StDevP ( field {; field...} )",
+      "parameters": [
+        "field"
+      ],
+      "purpose": "Population standard deviation",
+      "category": "Aggregate functions",
+      "category_url": "aggregate-functions.html",
+      "slug": "stdevp",
+      "doc_url": "https://help.claris.com/en/pro-help/content/stdevp.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Substitute",
+      "format": "Substitute ( text ; searchString ; replaceString )",
+      "parameters": [
+        "text",
+        "searchString",
+        "replaceString"
+      ],
+      "purpose": "Replaces all occurrences of a string",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "substitute",
+      "doc_url": "https://help.claris.com/en/pro-help/content/substitute.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "SubtractEmbeddings",
+      "format": "SubtractEmbeddings ( v1 ; v2 )",
+      "parameters": [
+        "v1",
+        "v2"
+      ],
+      "purpose": "Subtracts embedding v2 from v1, returns normalised result",
+      "category": "Artificial intelligence functions",
+      "category_url": "artificial-intelligence-functions.html",
+      "slug": "subtractembeddings",
+      "doc_url": "https://help.claris.com/en/pro-help/content/subtractembeddings.html",
+      "originated_in_version": "22.0.1"
+    },
+    {
+      "name": "Sum",
+      "format": "Sum ( field {; field...} )",
+      "parameters": [
+        "field"
+      ],
+      "purpose": "Total of non-blank values",
+      "category": "Aggregate functions",
+      "category_url": "aggregate-functions.html",
+      "slug": "sum",
+      "doc_url": "https://help.claris.com/en/pro-help/content/sum.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "TableIDs",
+      "format": "TableIDs ( fileName )",
+      "parameters": [
+        "fileName"
+      ],
+      "purpose": "Returns list of table occurrence IDs",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "tableids",
+      "doc_url": "https://help.claris.com/en/pro-help/content/tableids.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "TableNames",
+      "format": "TableNames ( fileName )",
+      "parameters": [
+        "fileName"
+      ],
+      "purpose": "Returns list of table occurrences",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "tablenames",
+      "doc_url": "https://help.claris.com/en/pro-help/content/tablenames.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Tan",
+      "format": "Tan ( angleInRadians )",
+      "parameters": [
+        "angleInRadians"
+      ],
+      "purpose": "Tangent",
+      "category": "Trigonometric functions",
+      "category_url": "trigonometric-functions.html",
+      "slug": "tan",
+      "doc_url": "https://help.claris.com/en/pro-help/content/tan.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "TextColor",
+      "format": "TextColor ( text ; RGB ( red ; green ; blue ) )",
+      "parameters": [
+        "text",
+        "RGB ( red",
+        "green",
+        "blue )"
+      ],
+      "purpose": "Changes text colour",
+      "category": "Text formatting functions",
+      "category_url": "text-formatting-functions.html",
+      "slug": "textcolor",
+      "doc_url": "https://help.claris.com/en/pro-help/content/textcolor.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "TextColorRemove",
+      "format": "TextColorRemove ( text {; RGB ( red ; green ; blue )} )",
+      "parameters": [
+        "text",
+        "RGB ( red",
+        "green",
+        "blue )"
+      ],
+      "purpose": "Removes font colours from text",
+      "category": "Text formatting functions",
+      "category_url": "text-formatting-functions.html",
+      "slug": "textcolorremove",
+      "doc_url": "https://help.claris.com/en/pro-help/content/textcolorremove.html",
+      "originated_in_version": "9"
+    },
+    {
+      "name": "TextDecode",
+      "format": "TextDecode ( container ; encoding )",
+      "parameters": [
+        "container",
+        "encoding"
+      ],
+      "purpose": "Decodes container data to text",
+      "category": "Container functions",
+      "category_url": "container-functions.html",
+      "slug": "textdecode",
+      "doc_url": "https://help.claris.com/en/pro-help/content/textdecode.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "TextEncode",
+      "format": "TextEncode ( text ; encoding ; lineEndings )",
+      "parameters": [
+        "text",
+        "encoding",
+        "lineEndings"
+      ],
+      "purpose": "Encodes text to container data",
+      "category": "Container functions",
+      "category_url": "container-functions.html",
+      "slug": "textencode",
+      "doc_url": "https://help.claris.com/en/pro-help/content/textencode.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "TextFont",
+      "format": "TextFont ( text ; fontName )",
+      "parameters": [
+        "text",
+        "fontName"
+      ],
+      "purpose": "Changes font of text",
+      "category": "Text formatting functions",
+      "category_url": "text-formatting-functions.html",
+      "slug": "textfont",
+      "doc_url": "https://help.claris.com/en/pro-help/content/textfont.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "TextFontRemove",
+      "format": "TextFontRemove ( text {; fontToRemove } )",
+      "parameters": [
+        "text",
+        "fontToRemove"
+      ],
+      "purpose": "Removes fonts from text",
+      "category": "Text formatting functions",
+      "category_url": "text-formatting-functions.html",
+      "slug": "textfontremove",
+      "doc_url": "https://help.claris.com/en/pro-help/content/textfontremove.html",
+      "originated_in_version": "9"
+    },
+    {
+      "name": "TextFormatRemove",
+      "format": "TextFormatRemove ( text )",
+      "parameters": [
+        "text"
+      ],
+      "purpose": "Removes all formatting from text",
+      "category": "Text formatting functions",
+      "category_url": "text-formatting-functions.html",
+      "slug": "textformatremove",
+      "doc_url": "https://help.claris.com/en/pro-help/content/textformatremove.html",
+      "originated_in_version": "12"
+    },
+    {
+      "name": "TextSize",
+      "format": "TextSize ( text ; fontSize )",
+      "parameters": [
+        "text",
+        "fontSize"
+      ],
+      "purpose": "Changes font size of text",
+      "category": "Text formatting functions",
+      "category_url": "text-formatting-functions.html",
+      "slug": "textsize",
+      "doc_url": "https://help.claris.com/en/pro-help/content/textsize.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "TextSizeRemove",
+      "format": "TextSizeRemove ( text {; sizeToRemove } )",
+      "parameters": [
+        "text",
+        "sizeToRemove"
+      ],
+      "purpose": "Removes font sizes from text",
+      "category": "Text formatting functions",
+      "category_url": "text-formatting-functions.html",
+      "slug": "textsizeremove",
+      "doc_url": "https://help.claris.com/en/pro-help/content/textsizeremove.html",
+      "originated_in_version": "9"
+    },
+    {
+      "name": "TextStyleAdd",
+      "format": "TextStyleAdd ( text ; styles )",
+      "parameters": [
+        "text",
+        "styles"
+      ],
+      "purpose": "Adds styles to text",
+      "category": "Text formatting functions",
+      "category_url": "text-formatting-functions.html",
+      "slug": "textstyleadd",
+      "doc_url": "https://help.claris.com/en/pro-help/content/textstyleadd.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "TextStyleRemove",
+      "format": "TextStyleRemove ( text ; styles )",
+      "parameters": [
+        "text",
+        "styles"
+      ],
+      "purpose": "Removes styles from text",
+      "category": "Text formatting functions",
+      "category_url": "text-formatting-functions.html",
+      "slug": "textstyleremove",
+      "doc_url": "https://help.claris.com/en/pro-help/content/textstyleremove.html",
+      "originated_in_version": "9"
+    },
+    {
+      "name": "Time",
+      "format": "Time ( hours ; minutes ; seconds )",
+      "parameters": [
+        "hours",
+        "minutes",
+        "seconds"
+      ],
+      "purpose": "Returns a time from hours/minutes/seconds",
+      "category": "Time functions",
+      "category_url": "time-functions.html",
+      "slug": "time",
+      "doc_url": "https://help.claris.com/en/pro-help/content/time.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Timestamp",
+      "format": "Timestamp ( date ; time )",
+      "parameters": [
+        "date",
+        "time"
+      ],
+      "purpose": "Returns a timestamp from date + time",
+      "category": "Timestamp functions",
+      "category_url": "timestamp-functions.html",
+      "slug": "timestamp",
+      "doc_url": "https://help.claris.com/en/pro-help/content/timestamp.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Trim",
+      "format": "Trim ( text )",
+      "parameters": [
+        "text"
+      ],
+      "purpose": "Removes leading/trailing spaces",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "trim",
+      "doc_url": "https://help.claris.com/en/pro-help/content/trim.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "TrimAll",
+      "format": "TrimAll ( text ; trimSpaces ; trimType )",
+      "parameters": [
+        "text",
+        "trimSpaces",
+        "trimType"
+      ],
+      "purpose": "Removes or inserts specified spaces",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "trimall",
+      "doc_url": "https://help.claris.com/en/pro-help/content/trimall.html",
+      "originated_in_version": "9"
+    },
+    {
+      "name": "Truncate",
+      "format": "Truncate ( number ; precision )",
+      "parameters": [
+        "number",
+        "precision"
+      ],
+      "purpose": "Truncates to specified decimal places",
+      "category": "Number functions",
+      "category_url": "number-functions.html",
+      "slug": "truncate",
+      "doc_url": "https://help.claris.com/en/pro-help/content/truncate.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "UniqueValues",
+      "format": "UniqueValues ( values {; datatype ; locale } )",
+      "parameters": [
+        "values",
+        "datatype",
+        "locale"
+      ],
+      "purpose": "Returns unique values from a list",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "uniquevalues",
+      "doc_url": "https://help.claris.com/en/pro-help/content/uniquevalues.html",
+      "originated_in_version": "16"
+    },
+    {
+      "name": "Upper",
+      "format": "Upper ( text )",
+      "parameters": [
+        "text"
+      ],
+      "purpose": "Converts text to uppercase",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "upper",
+      "doc_url": "https://help.claris.com/en/pro-help/content/upper.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "ValueCount",
+      "format": "ValueCount ( text )",
+      "parameters": [
+        "text"
+      ],
+      "purpose": "Counts values in a return-delimited list",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "valuecount",
+      "doc_url": "https://help.claris.com/en/pro-help/content/valuecount.html",
+      "originated_in_version": "15"
+    },
+    {
+      "name": "ValueListIDs",
+      "format": "ValueListIDs ( fileName )",
+      "parameters": [
+        "fileName"
+      ],
+      "purpose": "Returns list of value list IDs",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "valuelistids",
+      "doc_url": "https://help.claris.com/en/pro-help/content/valuelistids.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "ValueListItems",
+      "format": "ValueListItems ( fileName ; valueList )",
+      "parameters": [
+        "fileName",
+        "valueList"
+      ],
+      "purpose": "Returns items in a value list",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "valuelistitems",
+      "doc_url": "https://help.claris.com/en/pro-help/content/valuelistitems.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "ValueListNames",
+      "format": "ValueListNames ( fileName )",
+      "parameters": [
+        "fileName"
+      ],
+      "purpose": "Returns list of value list names",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "valuelistnames",
+      "doc_url": "https://help.claris.com/en/pro-help/content/valuelistnames.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "Variance",
+      "format": "Variance ( field {; field...} )",
+      "parameters": [
+        "field"
+      ],
+      "purpose": "Sample variance",
+      "category": "Aggregate functions",
+      "category_url": "aggregate-functions.html",
+      "slug": "variance",
+      "doc_url": "https://help.claris.com/en/pro-help/content/variance.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "VarianceP",
+      "format": "VarianceP ( field {; field...} )",
+      "parameters": [
+        "field"
+      ],
+      "purpose": "Population variance",
+      "category": "Aggregate functions",
+      "category_url": "aggregate-functions.html",
+      "slug": "variancep",
+      "doc_url": "https://help.claris.com/en/pro-help/content/variancep.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "VerifyContainer",
+      "format": "VerifyContainer ( field )",
+      "parameters": [
+        "field"
+      ],
+      "purpose": "Verifies container data integrity",
+      "category": "Container functions",
+      "category_url": "container-functions.html",
+      "slug": "verifycontainer",
+      "doc_url": "https://help.claris.com/en/pro-help/content/verifycontainer.html",
+      "originated_in_version": "18"
+    },
+    {
+      "name": "WeekOfYear",
+      "format": "WeekOfYear ( date )",
+      "parameters": [
+        "date"
+      ],
+      "purpose": "Returns week number of year",
+      "category": "Date functions",
+      "category_url": "date-functions.html",
+      "slug": "weekofyear",
+      "doc_url": "https://help.claris.com/en/pro-help/content/weekofyear.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "WeekOfYearFiscal",
+      "format": "WeekOfYearFiscal ( date ; startingDay )",
+      "parameters": [
+        "date",
+        "startingDay"
+      ],
+      "purpose": "Returns fiscal week number",
+      "category": "Date functions",
+      "category_url": "date-functions.html",
+      "slug": "weekofyearfiscal",
+      "doc_url": "https://help.claris.com/en/pro-help/content/weekofyearfiscal.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "While",
+      "format": "While ( [ initialVariable ] ; condition ; [ logic ] ; result )",
+      "parameters": [
+        "initialVariable",
+        "condition",
+        "logic",
+        "result"
+      ],
+      "purpose": "Repeats logic while condition is true",
+      "category": "Logical functions",
+      "category_url": "logical-functions.html",
+      "slug": "while",
+      "doc_url": "https://help.claris.com/en/pro-help/content/while.html",
+      "originated_in_version": "18"
+    },
+    {
+      "name": "WindowNames",
+      "format": "WindowNames {( fileName )}",
+      "purpose": "Returns list of open window names",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "windownames",
+      "doc_url": "https://help.claris.com/en/pro-help/content/windownames.html",
+      "originated_in_version": "7"
+    },
+    {
+      "name": "WordCount",
+      "format": "WordCount ( text )",
+      "parameters": [
+        "text"
+      ],
+      "purpose": "Counts words in text",
+      "category": "Text functions",
+      "category_url": "text-functions.html",
+      "slug": "wordcount",
+      "doc_url": "https://help.claris.com/en/pro-help/content/wordcount.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "Year",
+      "format": "Year ( date )",
+      "parameters": [
+        "date"
+      ],
+      "purpose": "Returns year as number",
+      "category": "Date functions",
+      "category_url": "date-functions.html",
+      "slug": "year",
+      "doc_url": "https://help.claris.com/en/pro-help/content/year.html",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "YearName",
+      "format": "YearName ( date ; format )",
+      "parameters": [
+        "date",
+        "format"
+      ],
+      "purpose": "Returns Japanese year name for a date",
+      "category": "Japanese functions",
+      "category_url": "japanese-functions.html",
+      "slug": "yearname",
+      "doc_url": "https://help.claris.com/en/pro-help/content/yearname.html",
+      "originated_in_version": "legacy"
+    }
+  ]
+}

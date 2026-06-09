@@ -3,7 +3,7 @@
     "description": "Canonical catalog of all FileMaker Pro script steps, organised by category. Use this for prototype/syntax lookups before fetching live docs. doc_url points to the authoritative Claris Help Centre page for each step.",
     "help_centre": "https://help.claris.com/en/pro-help/content/script-steps-reference.html",
     "version": "FileMaker Pro 26 / Claris 2026",
-    "last_updated": "2026-06",
+    "last_updated": "2026-06 (v1.5 — removed stale Execute SQL Query by Natural Language and duplicate Perform SQL Query by Natural Language from Miscellaneous; fixed Editing Insert Embedding and Found Sets Perform Semantic Find entries)",
     "update_instructions": "Re-fetch https://help.claris.com/en/pro-help/content/script-steps-reference.html and compare category listings. Add new steps, update slugs, bump last_updated.",
     "note": "Syntax uses [] for required fields/options and {} for optional. Steps marked platform list restrictions (Pro, Server, Go, WebDirect, Cloud)."
   },
@@ -414,7 +414,8 @@
           "syntax": "Insert Embedding [ Account Name: name ; Embedding Model: model ; Source Field: field ; Target Field: field ]",
           "purpose": "Generates an embedding vector for source field content and stores it in the target container field",
           "slug": "insert-embedding",
-          "doc_url": "https://help.claris.com/en/pro-help/content/insert-embedding.html"
+          "doc_url": "https://help.claris.com/en/pro-help/content/insert-embedding.html",
+          "originated_in_version": "21.0.1"
         }
       ]
     },
@@ -577,9 +578,11 @@
         {
           "name": "Perform Semantic Find",
           "syntax": "Perform Semantic Find [ Table::EmbeddingField ; Query Embedding: value ; Top K: n ]",
-          "purpose": "Finds records semantically similar to a query embedding using cosine similarity",
+          "purpose": "Finds the top K records most semantically similar to a query embedding vector",
           "slug": "perform-semantic-find",
-          "doc_url": "https://help.claris.com/en/pro-help/content/perform-semantic-find.html"
+          "doc_url": "https://help.claris.com/en/pro-help/content/perform-semantic-find.html",
+          "notes": "Query by: Embedding (vector) or Image (pass a container field or variable containing an image — the step generates the query embedding internally). Save result option: set a variable to receive a JSON array of objects with recordID and cosineSimilarity scores for each matched record. Normalised embedding vectors required for accurate results. Both query and stored embeddings must have identical dimensions.",
+          "originated_in_version": "21.0.1"
         },
         {
           "name": "Constrain Found Set",
@@ -793,7 +796,9 @@
           "name": "Save Records as JSONL",
           "purpose": "Saves records to a specified JSONL file; each line is a JSON object representing a record. Used to output record data for fine-tuning a model.",
           "syntax": "Save Records as JSONL [ No dialog ; File: <path> ; Fields: <field list> ]",
-          "doc_url": "https://help.claris.com/en/pro-help/content/save-records-as-jsonl.html"
+          "doc_url": "https://help.claris.com/en/pro-help/content/save-records-as-jsonl.html",
+          "notes": "Format for fine-tuning On: requires three explicit prompts — System Prompt (optional), User Prompt, Assistant Prompt. Format for fine-tuning Off: Completion Field required; all other fields become user prompt content. Container fields are skipped (Off mode) or exported as filename string (On mode). Compatibility: not supported on FileMaker Go or WebDirect.",
+          "originated_in_version": "22.0.1"
         },
         {
           "name": "Save a Copy as",
@@ -1010,20 +1015,6 @@
           "doc_url": "https://help.claris.com/en/pro-help/content/manage-add-ons.html"
         },
         {
-          "name": "Execute SQL Query by Natural Language",
-          "syntax": "Execute SQL Query by Natural Language [ AI Account Name: name ; Source Tables ; Query: text ; Target: field/variable ]",
-          "purpose": "Sends a natural-language query to an AI model which generates and executes SQL against the specified tables",
-          "slug": "execute-sql-query-by-natural-language",
-          "doc_url": "https://help.claris.com/en/pro-help/content/execute-sql-query-by-natural-language.html"
-        },
-        {
-          "name": "Perform SQL Query by Natural Language",
-          "syntax": "Perform SQL Query by Natural Language [ AI Account Name: name ; Source Tables ; Query: text ; Target: field/variable ]",
-          "purpose": "Alias for Execute SQL Query by Natural Language in some contexts",
-          "slug": "perform-sql-query-by-natural-language",
-          "doc_url": "https://help.claris.com/en/pro-help/content/perform-sql-query-by-natural-language.html"
-        },
-        {
           "name": "Install Menu Set",
           "syntax": "Install Menu Set [ Specify: From list ; \"MenuSetName\" / Standard FileMaker Menus ]",
           "purpose": "Installs a custom menu set for the current window",
@@ -1052,6 +1043,22 @@
           "slug": "send-event",
           "doc_url": "https://help.claris.com/en/pro-help/content/send-event.html",
           "platform": "macOS only"
+        },
+        {
+          "name": "Trigger Claris Connect Flow",
+          "purpose": "Trigger a Claris Connect flow from a FileMaker script.",
+          "syntax": "Trigger Claris Connect Flow [ Flow Name: <name> ; Parameters: <JSON> ; Response Target: <field/variable> ]",
+          "notes": "Passes JSON parameters to a Claris Connect flow and optionally captures the response. Requires Claris Connect configured and the file hosted on FileMaker Server. Not available in FileMaker Go or WebDirect.",
+          "originated_in_version": "20.1",
+          "doc_url": "https://help.claris.com/en/pro-help/content/trigger-claris-connect-flow.html"
+        },
+        {
+          "name": "Set Session Identifier",
+          "purpose": "Assign a custom identifier string to the current session for use with Get(SessionIdentifier).",
+          "syntax": "Set Session Identifier [ Value: <text> ]",
+          "notes": "Does not change Get(UserName). Only meaningful for hosted files — used to tag sessions for logging or tracking. Pairs with Get(SessionIdentifier) to retrieve the value in calculations or scripts.",
+          "originated_in_version": "19.4.1",
+          "doc_url": "https://help.claris.com/en/pro-help/content/set-session-identifier.html"
         }
       ]
     },
@@ -1097,33 +1104,43 @@
           "name": "Configure Prompt Template",
           "purpose": "Set up a named prompt template to use in other AI script steps.",
           "syntax": "Configure Prompt Template [ Account Name: <name> ; Template Name: <name> ; Template: <text> ]",
-          "doc_url": "https://help.claris.com/en/pro-help/content/configure-prompt-template.html"
+          "doc_url": "https://help.claris.com/en/pro-help/content/configure-prompt-template.html",
+          "notes": "Template Types: SQL Query, Find Request, RAG Prompt. Template constants: :schema: (DDL schema), :question: (user prompt), :context: (RAG context), :sql_query: (generated SQL), :sql_results: (query results), :date_format: (date format string). Template names are case-sensitive. Templates are session-scoped and cleared on file close.",
+          "originated_in_version": "22.0.1"
         },
         {
           "name": "Configure RAG Account",
           "syntax": "Configure RAG Account [ Account Name: name ; API key: key ; Endpoint: url ]",
-          "purpose": "Configures a named RAG account pointing to the FileMaker Server AI Model Server",
+          "purpose": "Configure a named RAG account connecting to a FileMaker Server AI Model Server knowledge store.",
           "slug": "configure-rag-account",
-          "doc_url": "https://help.claris.com/en/pro-help/content/configure-rag-account.html"
+          "doc_url": "https://help.claris.com/en/pro-help/content/configure-rag-account.html",
+          "notes": "Endpoint URL must end with /. API Key obtained from FileMaker Server Admin Console. Verify SSL Certificates option behaves the same as Configure AI Account. Account is cleared on file close (session-scoped).",
+          "originated_in_version": "22.0.1"
         },
         {
           "name": "Configure Regression Model",
           "syntax": "Configure Regression Model [ Action: Train/Load/Unload ; Model Name: name ; ... ]",
           "purpose": "Trains or loads a regression model for use with PredictFromModel",
           "slug": "configure-regression-model",
-          "doc_url": "https://help.claris.com/en/pro-help/content/configure-regression-model.html"
+          "doc_url": "https://help.claris.com/en/pro-help/content/configure-regression-model.html",
+          "notes": "Actions: Train (uses Random Forest algorithm), Save, Load, Unload. Train parameters: numTrees (default 10), maxDepth (10), minSamplesSplit (2), numFeatures (-1 = all), maxFeatures (1 = sqrt of features). Models remain in memory until Unload action or session end. Pairs with PredictFromModel function.",
+          "originated_in_version": "22.0.1"
         },
         {
           "name": "Fine-Tune Model",
           "purpose": "Fine-tune a model using a training data set.",
           "syntax": "Fine-Tune Model [ Account Name: <name> ; Base Model: <model> ; Training Data: <field/variable> ; Output Model: <field/variable> ]",
-          "doc_url": "https://help.claris.com/en/pro-help/content/fine-tune-model.html"
+          "doc_url": "https://help.claris.com/en/pro-help/content/fine-tune-model.html",
+          "notes": "Training data source: Table or JSONL File. Uses LoRA (Low-Rank Adaptation) technique. ONLY supported on OpenAI or AI Model Server running on Apple silicon Mac — not available for other providers or Linux/Windows hosts. Fine-tune parameters: max_steps (1000), learning_rate (2e-4), lora_layers (4), batch_size (1), fine_tuned_model_name. AI Model Server prefixes model name with fm-mlx- (e.g. my-model → fm-mlx-my-model). Response Target returns job JSON with status 'queued' — training is asynchronous; monitor via Admin Console. Pairs with Save Records as JSONL for training data preparation.",
+          "originated_in_version": "22.0.1"
         },
         {
           "name": "Generate Response from Model",
-          "purpose": "Facilitate multistep agentic interaction between your custom app and AI models, supporting tool calls.",
-          "syntax": "Generate Response from Model [ Account Name: <name> ; Model: <model> ; User Prompt: <text> ; Agentic mode: On/Off ; Messages: <variable> ; Instructions: <text> ; Tool Definitions: <JSON> ; Response Target: <field/variable> ]",
-          "doc_url": "https://help.claris.com/en/pro-help/content/generate-response-from-model.html"
+          "purpose": "Facilitate multistep agentic interaction between your custom app and AI models, supporting built-in and custom function tool calls.",
+          "syntax": "Generate Response from Model [ Account Name: <name> ; Model: <model> ; User Prompt: <text> ; Agentic mode: On/Off ; Messages: <variable> ; Save Message History To: <variable> ; Message History Count: <n> ; Instructions: <text> ; Tool Definitions: <JSON> ; Temperature: <value> ; Stream: On/Off ; Perform JavaScript in Web Viewer: <viewer> ; Response Target: <field/variable> ]",
+          "doc_url": "https://help.claris.com/en/pro-help/content/generate-response-from-model.html",
+          "notes": "Agentic mode On: enables full multi-round tool execution. Agentic mode Off: stops after first tool call and returns tool call JSON (useful for debugging). Built-in tool definitions: execute_sql (generates and runs SQL; append DDL schema to parameter description), retrieve_image (fetches image from container field via SQL ROWID). Custom function tools: name must exactly match FileMaker custom function name; parameters must be in same order and count, always typed as string. Stream On: incremental delivery; target field must be on current layout. Messages/Save Message History To/Message History Count: manage multi-turn conversation history. Temperature range varies by model provider. Error: 'No tool call exists for the prompt' when model doesn't call a tool. Error: 'Function not found' when custom function is missing. Full platform compatibility.",
+          "originated_in_version": "22.0.1"
         },
         {
           "name": "Insert Embedding",
@@ -1136,38 +1153,49 @@
           "name": "Insert Embedding in Found Set",
           "purpose": "Insert embedding vectors for all records in the current found set.",
           "syntax": "Insert Embedding in Found Set [ Account Name: <name> ; Embedding Model: <model> ; Input: <field> ; Target: <field> ]",
-          "doc_url": "https://help.claris.com/en/pro-help/content/insert-embedding-in-found-set.html"
+          "doc_url": "https://help.claris.com/en/pro-help/content/insert-embedding-in-found-set.html",
+          "notes": "Parameters JSON keys: MaxRecPerCall (default 20, max 500), MaxRetryPerWorker (5), MaxWaitPerRetry (60000 ms, OpenAI only), TruncateTokenLimit (8185), TruncateEnabled (1), RetryOnError (0). RetryOnError overrides the Continue on error option.",
+          "originated_in_version": "21.0.1"
         },
         {
           "name": "Perform Find by Natural Language",
           "purpose": "Get a found set by sending a natural language prompt and layout fields to a model.",
           "syntax": "Perform Find by Natural Language [ Account Name: <name> ; Model: <model> ; Prompt: <text> ; Response Target: <field/variable> ]",
-          "doc_url": "https://help.claris.com/en/pro-help/content/perform-find-by-natural-language.html"
+          "doc_url": "https://help.claris.com/en/pro-help/content/perform-find-by-natural-language.html",
+          "notes": "Get options: Found Set (updates current found set), Found Set as JSON (Data API format), Find Request as JSON (debug — inspect the find criteria without performing the find). Uses GetFieldsOnLayout to determine which fields are sent to the model. Supports context_prompt parameter key for date/time context. Cannot perform finds requiring aggregate functions (e.g. find the record with the highest value in a field). Returns error 401 when no records match.",
+          "originated_in_version": "22.0.1"
         },
         {
           "name": "Perform RAG Action",
-          "purpose": "Add or remove data in a RAG space, or send prompts to a RAG space.",
-          "syntax": "Perform RAG Action [ Account Name: <name> ; Action: <Add/Remove/Find> ; Data: <field/variable> ; Response Target: <field/variable> ]",
-          "doc_url": "https://help.claris.com/en/pro-help/content/perform-rag-action.html"
+          "purpose": "Add or remove data in a RAG knowledge space, or send a prompt to a RAG space for context-aware AI responses.",
+          "syntax": "Perform RAG Action [ RAG Account Name: <name> ; AI Account Name: <name> ; Action: Add Data / Send Prompt / Remove Data ; Input: <field/file/container/variable> ; Prompt Template Name: <name> ; Response Target: <field/variable> ]",
+          "doc_url": "https://help.claris.com/en/pro-help/content/perform-rag-action.html",
+          "notes": "Add Data actions: From Text, From File, From File (Async), From Container, From Container (Async). Async is recommended for large PDFs. WebDirect ignores Input File path and opens Insert dialog instead. Send Prompt: uses both a RAG Account and an AI Account; supports context_prompt parameter key; optional Prompt Template Name. Remove Data: pass JSON with id array; irreversible — warn users to retain originals. PDF with encryption cannot be added. Adding a PDF with the same filename removes the existing entry.",
+          "originated_in_version": "22.0.1"
         },
         {
           "name": "Perform SQL Query by Natural Language",
           "purpose": "Send a natural language prompt and database schema to a model, which generates and runs SQL queries to return a result.",
           "syntax": "Perform SQL Query by Natural Language [ Account Name: <name> ; Model: <model> ; Prompt: <text> ; Data Tables: <tables> ; Action: Query ; Response Target: <field/variable> ]",
-          "doc_url": "https://help.claris.com/en/pro-help/content/perform-sql-query-by-natural-language.html"
+          "doc_url": "https://help.claris.com/en/pro-help/content/perform-sql-query-by-natural-language.html",
+          "notes": "Action options: Query (run SQL and return data), Query for Data Only (suppress column headers), Get SQL (return all generated SQL without executing), Get First SQL Only (first SQL only — saves tokens), Get DDL (returns schema only, no model call). Data Tables: From list (select in dialog), By name (field/variable), By DDL (custom DDL for fine-grained schema control). Options: From list or By JSON data (dynamic configuration). Field comments in Manage Database dialog are sent to the model as schema context. Compatibility partial for Server, Cloud, Data API, Custom Web Publishing — Perform JavaScript in Web Viewer not supported server-side.",
+          "originated_in_version": "22.0.1"
         },
         {
           "name": "Perform Semantic Find",
           "syntax": "Perform Semantic Find [ Table::EmbeddingField ; Query Embedding: value ; Top K: n ]",
           "purpose": "Finds the top K records most semantically similar to a query embedding vector",
           "slug": "perform-semantic-find",
-          "doc_url": "https://help.claris.com/en/pro-help/content/perform-semantic-find.html"
+          "doc_url": "https://help.claris.com/en/pro-help/content/perform-semantic-find.html",
+          "notes": "Query by: Embedding (vector) or Image (pass a container field or variable containing an image — the step generates the query embedding internally). Save result option: set a variable to receive a JSON array of objects with recordID and cosineSimilarity scores for each matched record. Normalised embedding vectors required for accurate results. Both query and stored embeddings must have identical dimensions."
         },
         {
           "name": "Set AI Call Logging",
           "purpose": "Control logging of AI calls made from the current file.",
-          "syntax": "Set AI Call Logging [ On/Off ]",
-          "doc_url": "https://help.claris.com/en/pro-help/content/set-ai-call-logging.html"
+          "syntax": "Set AI Call Logging [ On/Off ; Mode: Standard/Verbose ; Truncate Messages: On/Off ]",
+          "doc_url": "https://help.claris.com/en/pro-help/content/set-ai-call-logging.html",
+          "notes": "Verbose mode: logs embedding vectors, token counts, semantic find return count, and cosine similarity scores. Truncate Messages: shortens verbose output for large embedding vectors. Standard mode logs prompts and responses without embedding detail.",
+          "originated_in_version": "21.0.1"
         }
       ]
     }

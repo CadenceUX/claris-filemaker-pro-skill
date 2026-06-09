@@ -4,7 +4,144 @@ All notable changes to this skill are documented here.
 
 ---
 
-## [1.2] — 2026-06
+## [1.5] — 2026-06
+
+### Fixed — script-steps-catalog.json catalogue integrity pass
+
+Full audit of `script-steps-catalog.json` against the `skill-update-recommendations.md` comparison
+report (2026-06-08) and the source FileMaker 22 documentation.
+
+**Removed — 2 stale/duplicate entries:**
+
+- `Execute SQL Query by Natural Language` (Miscellaneous category) — **stale entry**. This name did
+  not exist in FileMaker 22. The step was always named `Perform SQL Query by Natural Language` and
+  this entry appears to be an artefact from an earlier draft. Its slug
+  (`execute-sql-query-by-natural-language`) does not resolve to a valid Claris Help page. Removed.
+- `Perform SQL Query by Natural Language` (Miscellaneous category) — **duplicate with wrong purpose**.
+  Purpose field incorrectly read `"Alias for Execute SQL Query by Natural Language in some contexts"`.
+  The authoritative entry with full notes (action options, Data Tables modes, server-side compatibility
+  caveat) is correctly located in the AI category. Cross-listing a partial copy with an inaccurate
+  purpose in Miscellaneous created confusion and inflated the step count. Removed.
+
+**Fixed — 2 cross-category entries:**
+
+- `Insert Embedding` (Editing category) — added `originated_in_version: "21.0.1"`. This step
+  legitimately appears in FileMaker's Editing category in the Script Workspace; the Editing entry
+  is retained as a discovery path alongside the primary AI category entry.
+- `Perform Semantic Find` (Found Sets category) — synced `purpose` text with the AI category entry
+  (`"Finds the top K records most semantically similar to a query embedding vector"`) and added
+  `originated_in_version: "21.0.1"`. Step legitimately appears in Found Sets in the Script
+  Workspace; entry retained for discoverability.
+
+**Step count:** corrected from 157 → **155** (2 stale/duplicate Miscellaneous entries removed).
+Note: `Insert Embedding` and `Perform Semantic Find` each appear in two categories by design
+(FileMaker natively cross-lists them); these are not counted as duplicates.
+
+### Changed
+
+- `SKILL.md` — version bumped to 1.5; step count references updated 157 → 155 in frontmatter
+  description and reference table.
+- `script-steps-catalog.json` — `meta.last_updated` updated to reflect v1.5 audit.
+
+---
+
+## [1.4] — 2026-06
+
+### Fixed — Error codes complete rewrite (`quickrefs.md`)
+Full audit of `quickrefs.md` error codes section against the live Claris Help Centre
+(`https://help.claris.com/en/pro-help/content/error-codes.html`), verified June 2026.
+
+**Coverage:** 121 codes → 282 discrete codes + 2 ranges (1552–1559 plug-in, 5000–5499 custom).
+
+**Removed — 12 phantom codes not in official docs:**
+- `8`, `26`, `213`, `403` (system/account range)
+- `701`, `702`, `703`, `704`, `709`, `710`, `712`, `713` (labelled "Network errors" — not in Claris table)
+
+**Fixed — 18 description mismatches (code number existed but meaning was wrong):**
+- `17–21`: Replaced fabricated descriptions (foreign key, failed import, unexpected, record open, data type mismatch) with official Claris descriptions (UTF-16 conversion, account info required, ASCII-only string, triggered-script cancel, unsupported request)
+- `205–208`: Replaced Data-API-sourced descriptions (record already present, modification in progress, transaction timeout, TOO_MANY_RECORDS) with correct `Get(LastError)` desktop descriptions (access privileges, password change privileges, schema privileges, password length)
+- `212`: "Password not valid" → "Invalid user account or password"
+- `406–408, 413–414`: Replaced import-centric descriptions with correct find/sort/field descriptions matching official docs
+- `715–719`: **Critical fix** — replaced password-policy descriptions (passwords don't match, uppercase/lowercase/numeric/special char requirements) with correct official descriptions (Excel worksheet missing, ODBC SQL restriction, XML/XSL import errors)
+
+**Added — 173 missing codes across 11 blocks:**
+- `-1`: Unknown error
+- `119`, `130–131`: Email client, installation/language pack errors
+- `209–212`, `219`: Account/password errors (new password, inactive, expired, too many attempts, licensing)
+- `300–310`: Full concurrency/locking block (file, record, table, schema, layout, theme locking)
+- `415–418`: Remaining find/data errors (related records, primary key, data source, INSERT failure)
+- `600–603`: Full print error block
+- `720–738`: Upper import/export block (XML, theme, format, permission errors)
+- `800–853`: Full file I/O block (disk, network file ops, container storage)
+- `900–923`: Full spelling engine block
+- `951–960`: Full web publishing / Custom Web Publishing block
+- `1200–1225`: Full calculation error block
+- `1300–1301`: Custom function name errors
+- `1400–1415`, `1450–1451`: Full ODBC block + PHP/remote errors
+- `1501–1507`: Full SMTP/email block
+- `1541–1543`: JWT / token errors
+- `1550–1551`: Plug-in load/install errors; `1552–1559` range documented
+- `1626–1629`, `1632–1635`, `1638`: Remaining network/SSL errors (protocol, auth, SSL, timeout, cert expiry, self-signed, unencrypted, connection limit)
+- `1700–1715`: Full Data API REST block (resource, auth, verb, header, parameter, JSON, license, OS, external auth)
+- `5000–5499`: Custom Revert Transaction range documented
+
+**Restructured sections:**
+- "Network errors (700–799)" renamed to "File type / import / export errors (700–738)" — these are not network errors
+- "Account/security errors" corrected to official descriptions throughout
+- "Import/export errors (400–499)" renamed to "Find / sort / data errors (400–418)"
+- "Printing/spelling errors (500–599)" renamed to "Validation errors (500–513)"
+- New sections added: Concurrency/locking (300s), Print (600s), File I/O (800s), Spelling engine (900s), Web publishing (951–960), Calculation (1200s), Custom functions (1300s), ODBC (1400s), SMTP (1500s), JWT (1541–1543), Plug-in (1550s), Data API REST (1700s), Custom (5000–5499)
+
+---
+
+## [1.3] — 2026-05
+
+### Added
+- **7 new Tips** in SKILL.md: Generate Response from Model (agentic tool use, DDL schema requirement),
+  Fine-Tune Model (Apple silicon restriction), GetFieldsOnLayout [LLM] prefix filtering, GetEmbedding
+  binary container performance note, GetTableDDL ignoreError parameter, GetModelAttributes/ComputeModel
+  macOS/iOS platform restriction, NormalizeEmbedding usage guidance, PredictFromModel + Configure
+  Regression Model paired workflow, GetRecordIDsFromFoundSet + Go to List of Records pairing,
+  RAG three-step workflow sequence
+- **5 new mandatory trigger examples** in SKILL.md: PredictFromModel, GetRecordIDsFromFoundSet,
+  Fine-Tune Model, AddEmbeddings, Configure RAG Account
+- **2 new rows** in fetching strategy table: AI regression / PredictFromModel and
+  Miscellaneous / GetRecordIDsFromFoundSet
+- **Trigger Claris Connect Flow** (v20.1) added to script-steps-catalog.json Miscellaneous category
+- **Set Session Identifier** (v19.4.1) added to script-steps-catalog.json Miscellaneous category
+
+### Changed
+- `script-steps-catalog.json` — 9 FM 22 AI steps enriched with full `notes` field documentation:
+  - **Generate Response from Model**: agentic mode detail, built-in tool definitions (execute_sql,
+    retrieve_image), custom function tool requirements, streaming, conversation history, error messages
+  - **Perform RAG Action**: Add Data sub-actions, Async notes, Send Prompt parameters, Remove Data warning
+  - **Configure RAG Account**: endpoint URL trailing-slash requirement, session scope, Admin Console key
+  - **Configure Prompt Template**: template types (SQL Query, Find Request, RAG Prompt), all 6 constants,
+    case-sensitivity, session scope
+  - **Configure Regression Model**: Train/Save/Load/Unload actions, Random Forest parameters, memory scope
+  - **Fine-Tune Model**: LoRA technique, OpenAI/Apple silicon restriction, fm-mlx- prefix, async response
+  - **Perform SQL Query by Natural Language**: 5 action options, 3 Data Tables modes, field comment context,
+    server-side compatibility caveat
+  - **Perform Find by Natural Language**: 3 Get options, GetFieldsOnLayout integration, error 401 detail
+  - **Save Records as JSONL**: fine-tuning On/Off format differences, container field handling, Go/WebDirect restriction
+- `script-steps-catalog.json` — 3 existing steps enriched:
+  - **Insert Embedding in Found Set**: Parameters JSON keys documented (MaxRecPerCall, MaxRetryPerWorker,
+    MaxWaitPerRetry, TruncateTokenLimit, TruncateEnabled, RetryOnError)
+  - **Perform Semantic Find**: image query mode and Save result JSON array documented
+  - **Set AI Call Logging**: Verbose mode detail, Truncate Messages option documented
+- SKILL.md reference table: script steps count updated 155 → 157
+- SKILL.md specialty-functions-examples.md description: GetRecordIDsFromFoundSet added to Miscellaneous list
+- SKILL.md AI functions list in logical-json-ai description: new v22 functions explicitly listed
+- SKILL.md heading and frontmatter version bumped to 1.3
+
+---
+
+## [1.2] — 2026-05
+
+### Changed (description update)
+- Clarified skill scope in frontmatter description: this is a **reference skill** (syntax, parameters, examples, live doc fetches) — not a platform administration guide
+- Explicitly scoped out FileMaker Server admin, Claris Connect, Claris Studio, and ODBC/JDBC deep configuration (reserved for future skills)
+- Replaced broad "ANY FileMaker Pro topic" language with explicit in-scope / out-of-scope boundaries
 
 ### Added
 - 8 new FM 2025 v22 AI script steps: Configure Prompt Template, Fine-Tune Model, Generate Response from Model, Insert Embedding in Found Set, Perform Find by Natural Language, Perform RAG Action, Perform SQL Query by Natural Language, Set AI Call Logging
@@ -27,7 +164,7 @@ All notable changes to this skill are documented here.
 
 ---
 
-## [1.1] — 2025
+## [1.1] — 2026-05
 
 ### Changed
 - `originated_in_version` audit and corrections across `function-catalog.json` — 28 functions corrected across 8 version buckets, verified against official Claris/FileMaker archived new-features pages (FM13–FM18) and community release roundups
@@ -42,7 +179,7 @@ Updated version distribution: 103 legacy, 90 FM7, 25 FM8, 15 FM9, 6 FM10, 8 FM11
 
 ---
 
-## [1.0] — 2025
+## [1.0] — 2026-05
 
 Initial public release.
 
@@ -61,42 +198,42 @@ Initial public release.
 
 ---
 
-## [0.9] — 2025
+## [0.9] — 2026-05
 
 ### Added
 - `originated_in_version` field added to all 360 functions in `function-catalog.json`, ranging from `legacy` (pre-FM7) through `22.0.1`
 
 ---
 
-## [0.8] — 2025
+## [0.8] — 2026-05
 
 ### Fixed
 - SKILL.md accuracy pass — corrected container key functions list, script step counts, design functions list, Get() category breakdown, AI functions list
 
 ---
 
-## [0.7] — 2025
+## [0.7] — 2026-05
 
 ### Changed
 - Reference file quality pass — `design-container-functions-examples.md` complete rewrite; `get-functions-examples.md` expanded with 47 missing functions; deprecated function synonyms documented
 
 ---
 
-## [0.6] — 2025
+## [0.6] — 2026-05
 
 ### Added
 - Complete function coverage — time/timestamp, financial, trigonometric, repeating, miscellaneous, mobile, and Japanese example files; all 360 functions now covered by a local example file
 
 ---
 
-## [0.5] — 2025
+## [0.5] — 2026-05
 
 ### Added
 - `aggregate-functions-examples.md`, `date-functions-examples.md`, `design-functions-examples.md`, `container-functions-examples.md`
 
 ---
 
-## [0.4] — 2025
+## [0.4] — 2026-05
 
 ### Added
 - `script-steps-catalog.json`
@@ -104,7 +241,7 @@ Initial public release.
 
 ---
 
-## [0.3] — 2025
+## [0.3] — 2026-05
 
 ### Changed
 - Replaced `functions-index.md` with enriched `function-catalog.json`
@@ -112,14 +249,14 @@ Initial public release.
 
 ---
 
-## [0.2] — 2025
+## [0.2] — 2026-05
 
 ### Added
 - `get-functions-examples.md`
 
 ---
 
-## [0.1] — 2025
+## [0.1] — 2026-05
 
 ### Added
 - `functions-index.md` — initial function index

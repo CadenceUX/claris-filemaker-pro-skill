@@ -24,7 +24,7 @@ When this skill is active, Claude will:
 | Reference file | Contents |
 |---|---|
 | `function-catalog.json` | All 360 functions — format, parameters, purpose, category, doc_url, originated_in_version |
-| `script-steps-catalog.json` | All 155 script steps across 14 categories — syntax, purpose, doc_url |
+| `script-steps-catalog.json` | All 155 script steps across 14 categories — syntax, purpose, doc_url, and full notes for all FM 22 AI steps |
 | `logical-json-ai-functions-examples.md` | Logical (20), JSON (10), AI/embedding (14) functions with usage examples |
 | `get-functions-examples.md` | All 135 Get() functions across 12 categories |
 | `design-container-functions-examples.md` | Design (23) + Container/Crypt/OCR (24) functions |

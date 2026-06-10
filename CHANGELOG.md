@@ -4,6 +4,67 @@ All notable changes to this skill are documented here.
 
 ---
 
+## [1.7] — 2026-06
+
+### Added — 2 missing script steps added to script-steps-catalog.json
+
+Full audit of `script-steps-catalog.json` against FileMaker Pro 22.0.1 and 21.1.1 release notes
+identified two steps that were missing from the local catalog.
+
+**Added — `Go to List of Records`** (Found Sets category, FM 22.0.1):
+
+- Goes to a layout and returns a found set specified by a list of record IDs.
+- Accepts: carriage-return-separated value list, JSON array of string/number IDs, or JSON array
+  of objects with `recordId` keys.
+- Companion to `GetRecordIDsFromFoundSet` — together they enable saving and restoring found sets
+  across script jumps or file switches.
+- Not supported in FileMaker WebDirect.
+- `doc_url`: `https://help.claris.com/markdown/en/pro-help/go-to-list-of-records.md`
+
+**Added — `Set Revert Transaction on Error`** (Control category, FM 21.1.1):
+
+- Controls whether an error inside an Open Transaction block auto-reverts the transaction.
+- When set to Off, the script continues after an error and can decide to commit or revert manually.
+- Use `Get(RevertTransactionOnErrorState)` to query the current state.
+- Always reset to On before exiting a script that set it to Off.
+- `doc_url`: `https://help.claris.com/markdown/en/pro-help/set-revert-transaction-on-error.md`
+
+**Step count:** corrected from 155 → **157**.
+
+### Changed
+
+- `SKILL.md` — version bumped to 1.7; step count references updated 155 → 157 in frontmatter
+  description and reference table.
+- `SKILL.md` — "Coverage gap — FM 26 (2026)" section renamed to "FM 26 (2026) coverage status"
+  and updated to reflect that FM 26 was released June 9, 2026; docs are new and still settling.
+- `SKILL.md` — version self-check installed version updated from `"1.6"` → `"1.7"`.
+- `SKILL.md` — Automatic version notes table: added FM 21.1.1 row for Set Revert Transaction on Error.
+- `SKILL.md` — Mandatory triggers: added Go to List of Records, Set Revert Transaction on Error,
+  GetTextFromPDF, JSONParse/JSONParsedState examples.
+- `SKILL.md` — Fetching strategy table: added Go to List of Records, Set Revert Transaction on Error,
+  JSONParse/JSONParsedState, GetTextFromPDF rows.
+- `SKILL.md` — Tips section: added Go to List of Records, JSONParse/JSONParsedState,
+  GetTextFromPDF, Set Revert Transaction on Error guidance.
+- `SKILL.md` — Reference table: updated Container count (24 → 25 including GetTextFromPDF),
+  JSON count (10 → 12 including JSONParse/JSONParsedState), script steps catalog description.
+- `script-steps-catalog.json` — `meta.last_updated` updated to reflect v1.7 additions.
+- `VERSION` — bumped to `1.7`.
+
+---
+
+## [1.6] — 2026-06
+
+### Changed
+
+- `SKILL.md` — `last_known_fm_version` updated from `22` → `26` in preparation for FM 26 release
+  (which released June 2026, after v1.5 shipped).
+- `SKILL.md` — Added "Coverage gap — FM 26 (2026)" section documenting known FM 26 additions
+  that require live fetch until a full v1.7 catalog rebuild.
+- `SKILL.md` — Version drift detection examples updated to reference `last_known_fm_version: 26`.
+- `SKILL.md` — heading and frontmatter version bumped to 1.6.
+
+---
+
 ## [1.5] — 2026-06
 
 ### Fixed — script-steps-catalog.json catalogue integrity pass
@@ -45,7 +106,6 @@ Note: `Insert Embedding` and `Perform Semantic Find` each appear in two categori
 
 ---
 
-## [1.4] — 2026-06
 
 ### Fixed — Error codes complete rewrite (`quickrefs.md`)
 Full audit of `quickrefs.md` error codes section against the live Claris Help Centre

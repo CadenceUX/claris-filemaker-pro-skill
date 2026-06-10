@@ -24,7 +24,7 @@ When this skill is active, Claude will:
 | Reference file | Contents |
 |---|---|
 | `function-catalog.json` | All 360 functions — format, parameters, purpose, category, doc_url, originated_in_version |
-| `script-steps-catalog.json` | All 155 script steps across 14 categories — syntax, purpose, doc_url, and full notes for all FM 22 AI steps |
+| `script-steps-catalog.json` | All 157 script steps across 14 categories — syntax, purpose, doc_url, and full notes for all FM 22 AI steps, Go to List of Records (FM 22.0.1), and Set Revert Transaction on Error (FM 21.1.1) |
 | `logical-json-ai-functions-examples.md` | Logical (20), JSON (10), AI/embedding (14) functions with usage examples |
 | `get-functions-examples.md` | All 135 Get() functions across 12 categories |
 | `design-container-functions-examples.md` | Design (23) + Container/Crypt/OCR (24) functions |
@@ -34,7 +34,7 @@ When this skill is active, Claude will:
 | `specialty-functions-examples.md` | Aggregate (10) + Japanese (12) + Mobile/Go (5) + Miscellaneous (9) |
 | `quickrefs.md` | Error codes, ExecuteSQL syntax, Data API endpoints, full help centre sitemap (33 guides) |
 
-**FileMaker version coverage:** Functions tagged from `legacy` (pre-FM7) through `22.0.1` (FM 2025 v22). Script steps current as of FM 2025 v22.
+**FileMaker version coverage:** Functions tagged from `legacy` (pre-FM7) through `22.0.1` (FM 2025 v22). Script steps current as of FM 2025 v22.0.1 (157 steps). FM 26 additions require live doc fetch — see SKILL.md for details.
 
 ---
 
@@ -64,7 +64,7 @@ This means you get fast, accurate answers for everyday questions, and authoritat
 
 ## Keeping it current
 
-The skill's `last_known_fm_version` is `22` (FM 2025 v22.0.4, released November 2025).
+The skill's `last_known_fm_version` is `26` (FM Pro 26, released June 2026).
 
 When a new FileMaker release ships:
 1. The version drift detector will flag it on the first live doc fetch that references the new version

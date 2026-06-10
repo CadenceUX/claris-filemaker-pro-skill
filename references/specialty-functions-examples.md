@@ -947,10 +947,24 @@ GetLayoutObjectOwnerInfo ( 1234 )
 
 ---
 
-## GetRecordIDsFromFoundSet ( type )
-Returns the record IDs of all records in the current found set as either a newline-delimited list or a JSON array.  
-Parameters: `type` — `0` for newline-delimited list; `1` for JSON array.  
+## GetRecordIDsFromFoundSet ( type {; tableOccurrenceName} )
+Returns the record IDs of all records in the current found set as a list or a JSON array.  
+Parameters: `type` — numeric 0–4 selecting the result format (constant name or number accepted);
+`tableOccurrenceName` *(optional, FM 26+)* — a table occurrence or portal object name; when supplied,
+IDs come from the related record set or filtered portal instead of the current found set.  
 Returns: text
+
+| type | Constant | Result format |
+|---|---|---|
+| 0 | `ValueNumber` | Carriage return–separated list of IDs |
+| 1 | `JSONString` | JSON array of IDs as strings |
+| 2 | `JSONNumber` | JSON array of IDs as numbers |
+| 3 | `ValueNumberRanges` | Return-separated list with consecutive IDs compressed into ranges |
+| 4 | `JSONStringRanges` | JSON array with consecutive IDs compressed into range strings |
+
+The two Ranges formats reduce result size for large, contiguous found sets. An empty found set
+returns `""` for list formats and `"[]"` for JSON formats. Pair with the `Go to List of Records`
+script step to recreate the found set.
 
 ```
 GetRecordIDsFromFoundSet ( 0 )

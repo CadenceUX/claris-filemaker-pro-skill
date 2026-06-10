@@ -782,7 +782,7 @@ Let ( json = GetLiveTextAsJSON ( CapturedImage ; "en" ) ;
 
 ## GetTextFromPDF ( container )
 
-Returns text. Extracts embedded text from a PDF stored in a container. Does not OCR scanned pages — the PDF must contain actual text.
+Returns text. Extracts embedded text from a PDF stored in a container. Through FM 22–25 it does not OCR scanned pages — the PDF must contain a text layer. **FM 26 change:** on macOS, scanned PDFs are now supported via built-in OCR; on other platforms a scanned PDF still returns an empty string.
 
 ```
 GetTextFromPDF ( Documents::Contract )

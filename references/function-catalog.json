@@ -4,7 +4,7 @@
     "source_repo": "function-catalog.json (master for name/prototype)",
     "help_centre": "https://help.claris.com/markdown/en/pro-help/functions-reference.md",
     "version": "26.0",
-    "last_updated": "2026-06 (v1.8 \u2014 added 8 FM 26 functions; total now 368)",
+    "last_updated": "2026-06 (v1.9 — GetRecordIDsFromFoundSet FM 26 optional second parameter; GetTextFromPDF FM 26 scanned-PDF note; total 368)",
     "update_instructions": "Re-fetch source repo and compare against this file. Also re-fetch each category_page from help.claris.com to pick up new functions or updated slugs. For new functions, check the FileMaker Pro Release Notes at https://help.claris.com/en/pro-release-notes/content/ to determine the version introduced."
   },
   "functions": [
@@ -485,7 +485,7 @@
       "parameters": [
         "date"
       ],
-      "purpose": "Returns day of month (1\u201331)",
+      "purpose": "Returns day of month (1–31)",
       "category": "Date functions",
       "category_url": "date-functions.html",
       "slug": "day",
@@ -537,7 +537,7 @@
       "parameters": [
         "date"
       ],
-      "purpose": "Returns day of year (1\u2013366)",
+      "purpose": "Returns day of year (1–366)",
       "category": "Date functions",
       "category_url": "date-functions.html",
       "slug": "dayofyear",
@@ -1503,7 +1503,7 @@
       "parameters": [
         "GuidedAccessState"
       ],
-      "purpose": "FileMaker Go only \u2014 returns 1 if iOS Guided Access is currently active; use to detect kiosk/locked-screen mode",
+      "purpose": "FileMaker Go only — returns 1 if iOS Guided Access is currently active; use to detect kiosk/locked-screen mode",
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-guidedaccessstate",
@@ -3072,11 +3072,12 @@
     },
     {
       "name": "GetRecordIDsFromFoundSet",
-      "format": "GetRecordIDsFromFoundSet ( type )",
+      "format": "GetRecordIDsFromFoundSet ( type {; tableOccurrenceName} )",
       "parameters": [
-        "type"
+        "type",
+        "tableOccurrenceName (optional, FM 26+)"
       ],
-      "purpose": "Returns record IDs from found set as list or JSON",
+      "purpose": "Returns record IDs from found set as list or JSON; FM 26 adds optional table occurrence/portal name for related sets",
       "category": "Miscellaneous functions",
       "category_url": "miscellaneous-functions.html",
       "slug": "getrecordidsfromfoundset",
@@ -3146,7 +3147,7 @@
       "parameters": [
         "container"
       ],
-      "purpose": "Returns text from PDF in container",
+      "purpose": "Returns text from PDF in container (FM 26: macOS supports scanned PDFs via OCR)",
       "category": "Container functions",
       "category_url": "container-functions.html",
       "slug": "gettextfrompdf",
@@ -3254,7 +3255,7 @@
       "parameters": [
         "time"
       ],
-      "purpose": "Returns hour portion of time (0\u201323)",
+      "purpose": "Returns hour portion of time (0–23)",
       "category": "Time functions",
       "category_url": "time-functions.html",
       "slug": "hour",
@@ -3864,7 +3865,7 @@
       "parameters": [
         "time"
       ],
-      "purpose": "Returns minute portion (0\u201359)",
+      "purpose": "Returns minute portion (0–59)",
       "category": "Time functions",
       "category_url": "time-functions.html",
       "slug": "minute",
@@ -3891,7 +3892,7 @@
       "parameters": [
         "date"
       ],
-      "purpose": "Returns month number (1\u201312)",
+      "purpose": "Returns month number (1–12)",
       "category": "Date functions",
       "category_url": "date-functions.html",
       "slug": "month",
@@ -3984,7 +3985,7 @@
     {
       "name": "Pi",
       "format": "Pi",
-      "purpose": "Value of \u03c0",
+      "purpose": "Value of π",
       "category": "Trigonometric functions",
       "category_url": "trigonometric-functions.html",
       "slug": "pi",
@@ -4093,7 +4094,7 @@
     {
       "name": "Random",
       "format": "Random",
-      "purpose": "Returns random number 0\u2013<1",
+      "purpose": "Returns random number 0–<1",
       "category": "Number functions",
       "category_url": "number-functions.html",
       "slug": "random",
@@ -4288,7 +4289,7 @@
       "parameters": [
         "time"
       ],
-      "purpose": "Returns seconds portion (0\u201359)",
+      "purpose": "Returns seconds portion (0–59)",
       "category": "Time functions",
       "category_url": "time-functions.html",
       "slug": "seconds",
@@ -4326,7 +4327,7 @@
         "expression",
         "precision"
       ],
-      "purpose": "Sets precision to 16\u2013400 decimal places",
+      "purpose": "Sets precision to 16–400 decimal places",
       "category": "Number functions",
       "category_url": "number-functions.html",
       "slug": "setprecision",

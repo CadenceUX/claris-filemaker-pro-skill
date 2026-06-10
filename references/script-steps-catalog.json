@@ -3,7 +3,7 @@
     "description": "Canonical catalog of all FileMaker Pro script steps, organised by category. Use this for prototype/syntax lookups before fetching live docs. doc_url points to the authoritative Claris Help Centre page for each step.",
     "help_centre": "https://help.claris.com/markdown/en/pro-help/script-steps-reference.md",
     "version": "FileMaker Pro 26 / Claris 2026",
-    "last_updated": "2026-06 (v1.8 \u2014 added 10 FM 26 steps; new PDF Files and Persistent Data categories; Save Records as PDF moved to PDF Files; step count 157 \u2192 167)",
+    "last_updated": "2026-06 (v1.9 — corrected step count note: 165 unique steps after FM 26 additions and duplicate removal)",
     "update_instructions": "Re-fetch https://help.claris.com/markdown/en/pro-help/script-steps-reference.md and compare category listings. Add new steps, update slugs, bump last_updated.",
     "note": "Syntax uses [] for required fields/options and {} for optional. Steps marked platform list restrictions (Pro, Server, Go, WebDirect, Cloud)."
   },
@@ -151,7 +151,7 @@
           "syntax": "Set Revert Transaction on Error [On/Off]",
           "purpose": "Controls whether a transaction is automatically reverted when an error occurs within an Open Transaction / Commit Transaction block. Default is On (auto-revert on error).",
           "originated_in_version": "21.1.1",
-          "notes": "When set to Off, the script continues after an error inside a transaction block, allowing the script to handle errors itself before deciding to commit or revert. Use Get(RevertTransactionOnErrorState) to query the current setting. The setting is scoped to the current script \u2014 it does not propagate to subscripts. Reset to On before exiting scripts that set it to Off.",
+          "notes": "When set to Off, the script continues after an error inside a transaction block, allowing the script to handle errors itself before deciding to commit or revert. Use Get(RevertTransactionOnErrorState) to query the current setting. The setting is scoped to the current script — it does not propagate to subscripts. Reset to On before exiting scripts that set it to Off.",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/set-revert-transaction-on-error.md",
           "platforms": {
             "Pro": "Yes",
@@ -652,7 +652,7 @@
           "syntax": "Go to List of Records [Layout; Record IDs]",
           "purpose": "Goes to a layout and returns the found set specified by a list of record IDs. Accepts a carriage-return-separated value list, a JSON array of record IDs as strings or numbers, or a JSON array of objects with recordId keys.",
           "originated_in_version": "22.0.1",
-          "notes": "Use with GetRecordIDsFromFoundSet to preserve and restore found sets across script jumps or file switches. Layout option: specify a layout name (defaults to current layout). The Record IDs parameter accepts: (1) value list \u2014 one ID per line, (2) JSONArray of number or string IDs, (3) JSONArray of objects with 'recordId' key. Records not found are silently skipped. If none of the IDs match, the found set is empty. Not supported in FileMaker WebDirect.",
+          "notes": "Use with GetRecordIDsFromFoundSet to preserve and restore found sets across script jumps or file switches. Layout option: specify a layout name (defaults to current layout). The Record IDs parameter accepts: (1) value list — one ID per line, (2) JSONArray of number or string IDs, (3) JSONArray of objects with 'recordId' key. Records not found are silently skipped. If none of the IDs match, the found set is empty. Not supported in FileMaker WebDirect.",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-list-of-records.md",
           "platforms": {
             "Pro": "Yes",
@@ -805,7 +805,7 @@
           "purpose": "Saves records to a specified JSONL file; each line is a JSON object representing a record. Used to output record data for fine-tuning a model.",
           "syntax": "Save Records as JSONL [ No dialog ; File: <path> ; Fields: <field list> ]",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/save-records-as-jsonl.md",
-          "notes": "Format for fine-tuning On: requires three explicit prompts \u2014 System Prompt (optional), User Prompt, Assistant Prompt. Format for fine-tuning Off: Completion Field required; all other fields become user prompt content. Container fields are skipped (Off mode) or exported as filename string (On mode). Compatibility: not supported on FileMaker Go or WebDirect.",
+          "notes": "Format for fine-tuning On: requires three explicit prompts — System Prompt (optional), User Prompt, Assistant Prompt. Format for fine-tuning Off: Completion Field required; all other fields become user prompt content. Container fields are skipped (Off mode) or exported as filename string (On mode). Compatibility: not supported on FileMaker Go or WebDirect.",
           "originated_in_version": "22.0.1"
         },
         {
@@ -1064,7 +1064,7 @@
           "name": "Set Session Identifier",
           "purpose": "Assign a custom identifier string to the current session for use with Get(SessionIdentifier).",
           "syntax": "Set Session Identifier [ Value: <text> ]",
-          "notes": "Does not change Get(UserName). Only meaningful for hosted files \u2014 used to tag sessions for logging or tracking. Pairs with Get(SessionIdentifier) to retrieve the value in calculations or scripts.",
+          "notes": "Does not change Get(UserName). Only meaningful for hosted files — used to tag sessions for logging or tracking. Pairs with Get(SessionIdentifier) to retrieve the value in calculations or scripts.",
           "originated_in_version": "19.4.1",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/set-session-identifier.md"
         },
@@ -1143,7 +1143,7 @@
           "purpose": "Prints a PDF from a file path, container field, or variable without opening it for editing",
           "slug": "print-pdf",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/print-pdf.md",
-          "notes": "Standalone print step \u2014 does not require Create PDF or Open PDF. Source can be a file path, a container field holding a PDF, or a variable. The No dialog option suppresses the print dialog.",
+          "notes": "Standalone print step — does not require Create PDF or Open PDF. Source can be a file path, a container field holding a PDF, or a variable. The No dialog option suppresses the print dialog.",
           "originated_in_version": "26"
         }
       ]
@@ -1217,7 +1217,7 @@
           "purpose": "Fine-tune a model using a training data set.",
           "syntax": "Fine-Tune Model [ Account Name: <name> ; Base Model: <model> ; Training Data: <field/variable> ; Output Model: <field/variable> ]",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/fine-tune-model.md",
-          "notes": "Training data source: Table or JSONL File. Uses LoRA (Low-Rank Adaptation) technique. ONLY supported on OpenAI or AI Model Server running on Apple silicon Mac \u2014 not available for other providers or Linux/Windows hosts. Fine-tune parameters: max_steps (1000), learning_rate (2e-4), lora_layers (4), batch_size (1), fine_tuned_model_name. AI Model Server prefixes model name with fm-mlx- (e.g. my-model \u2192 fm-mlx-my-model). Response Target returns job JSON with status 'queued' \u2014 training is asynchronous; monitor via Admin Console. Pairs with Save Records as JSONL for training data preparation.",
+          "notes": "Training data source: Table or JSONL File. Uses LoRA (Low-Rank Adaptation) technique. ONLY supported on OpenAI or AI Model Server running on Apple silicon Mac — not available for other providers or Linux/Windows hosts. Fine-tune parameters: max_steps (1000), learning_rate (2e-4), lora_layers (4), batch_size (1), fine_tuned_model_name. AI Model Server prefixes model name with fm-mlx- (e.g. my-model → fm-mlx-my-model). Response Target returns job JSON with status 'queued' — training is asynchronous; monitor via Admin Console. Pairs with Save Records as JSONL for training data preparation.",
           "originated_in_version": "22.0.1"
         },
         {
@@ -1248,7 +1248,7 @@
           "purpose": "Get a found set by sending a natural language prompt and layout fields to a model.",
           "syntax": "Perform Find by Natural Language [ Account Name: <name> ; Model: <model> ; Prompt: <text> ; Response Target: <field/variable> ]",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-find-by-natural-language.md",
-          "notes": "Get options: Found Set (updates current found set), Found Set as JSON (Data API format), Find Request as JSON (debug \u2014 inspect the find criteria without performing the find). Uses GetFieldsOnLayout to determine which fields are sent to the model. Supports context_prompt parameter key for date/time context. Cannot perform finds requiring aggregate functions (e.g. find the record with the highest value in a field). Returns error 401 when no records match.",
+          "notes": "Get options: Found Set (updates current found set), Found Set as JSON (Data API format), Find Request as JSON (debug — inspect the find criteria without performing the find). Uses GetFieldsOnLayout to determine which fields are sent to the model. Supports context_prompt parameter key for date/time context. Cannot perform finds requiring aggregate functions (e.g. find the record with the highest value in a field). Returns error 401 when no records match.",
           "originated_in_version": "22.0.1"
         },
         {
@@ -1256,7 +1256,7 @@
           "purpose": "Add or remove data in a RAG knowledge space, or send a prompt to a RAG space for context-aware AI responses.",
           "syntax": "Perform RAG Action [ RAG Account Name: <name> ; AI Account Name: <name> ; Action: Add Data / Send Prompt / Remove Data ; Input: <field/file/container/variable> ; Prompt Template Name: <name> ; Response Target: <field/variable> ]",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-rag-action.md",
-          "notes": "Add Data actions: From Text, From File, From File (Async), From Container, From Container (Async). Async is recommended for large PDFs. WebDirect ignores Input File path and opens Insert dialog instead. Send Prompt: uses both a RAG Account and an AI Account; supports context_prompt parameter key; optional Prompt Template Name. Remove Data: pass JSON with id array; irreversible \u2014 warn users to retain originals. PDF with encryption cannot be added. Adding a PDF with the same filename removes the existing entry.",
+          "notes": "Add Data actions: From Text, From File, From File (Async), From Container, From Container (Async). Async is recommended for large PDFs. WebDirect ignores Input File path and opens Insert dialog instead. Send Prompt: uses both a RAG Account and an AI Account; supports context_prompt parameter key; optional Prompt Template Name. Remove Data: pass JSON with id array; irreversible — warn users to retain originals. PDF with encryption cannot be added. Adding a PDF with the same filename removes the existing entry.",
           "originated_in_version": "22.0.1"
         },
         {
@@ -1264,7 +1264,7 @@
           "purpose": "Send a natural language prompt and database schema to a model, which generates and runs SQL queries to return a result.",
           "syntax": "Perform SQL Query by Natural Language [ Account Name: <name> ; Model: <model> ; Prompt: <text> ; Data Tables: <tables> ; Action: Query ; Response Target: <field/variable> ]",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-sql-query-by-natural-language.md",
-          "notes": "Action options: Query (run SQL and return data), Query for Data Only (suppress column headers), Get SQL (return all generated SQL without executing), Get First SQL Only (first SQL only \u2014 saves tokens), Get DDL (returns schema only, no model call). Data Tables: From list (select in dialog), By name (field/variable), By DDL (custom DDL for fine-grained schema control). Options: From list or By JSON data (dynamic configuration). Field comments in Manage Database dialog are sent to the model as schema context. Compatibility partial for Server, Cloud, Data API, Custom Web Publishing \u2014 Perform JavaScript in Web Viewer not supported server-side.",
+          "notes": "Action options: Query (run SQL and return data), Query for Data Only (suppress column headers), Get SQL (return all generated SQL without executing), Get First SQL Only (first SQL only — saves tokens), Get DDL (returns schema only, no model call). Data Tables: From list (select in dialog), By name (field/variable), By DDL (custom DDL for fine-grained schema control). Options: From list or By JSON data (dynamic configuration). Field comments in Manage Database dialog are sent to the model as schema context. Compatibility partial for Server, Cloud, Data API, Custom Web Publishing — Perform JavaScript in Web Viewer not supported server-side.",
           "originated_in_version": "22.0.1"
         },
         {
@@ -1273,7 +1273,7 @@
           "purpose": "Finds the top K records most semantically similar to a query embedding vector",
           "slug": "perform-semantic-find",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-semantic-find.md",
-          "notes": "Query by: Embedding (vector) or Image (pass a container field or variable containing an image \u2014 the step generates the query embedding internally). Save result option: set a variable to receive a JSON array of objects with recordID and cosineSimilarity scores for each matched record. Normalised embedding vectors required for accurate results. Both query and stored embeddings must have identical dimensions."
+          "notes": "Query by: Embedding (vector) or Image (pass a container field or variable containing an image — the step generates the query embedding internally). Save result option: set a variable to receive a JSON array of objects with recordID and cosineSimilarity scores for each matched record. Normalised embedding vectors required for accurate results. Both query and stored embeddings must have identical dimensions."
         },
         {
           "name": "Set AI Call Logging",

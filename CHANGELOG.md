@@ -1,3 +1,82 @@
+## [1.8] — 2026-06 (revised)
+
+### Changed — FM 26 functions and script steps added to local reference files; FM 26 special-case routing removed
+
+All 18 FM 26 additions (8 functions, 10 script steps) are now present in the local reference
+catalogs. The previous v1.8 documented FM 26 additions but kept them fetch-live-only. This
+revision adds them to local files so they are handled identically to all other functions and
+steps: check local first, then fetch the live doc_url for full parameter detail.
+
+Two pre-existing duplicate entries were also removed from `script-steps-catalog.json` (Insert
+Embedding was present in both Editing and AI categories; Perform Semantic Find was present in
+both Found Sets and AI categories). Corrected unique step count: 157 → 165 after removing 2
+duplicates and adding 10 FM 26 steps.
+
+#### functions added to function-catalog.json (8):
+
+| Category | Function | Signature |
+|---|---|---|
+| Design | `BaseTableComment` | `BaseTableComment ( fileName ; baseTableName )` |
+| Design | `FieldAnnotation` | `FieldAnnotation ( fileName ; layoutName ; fieldName )` |
+| Design | `FieldDisplayNames` | `FieldDisplayNames ( fileName ; layoutName ; fieldName )` |
+| Get | `Get(AccountPasswordDaysRemaining)` | `Get ( AccountPasswordDaysRemaining )` |
+| Get | `Get(GuidedAccessState)` | `Get ( GuidedAccessState )` |
+| Get | `Get(WindowUUID)` | `Get ( WindowUUID )` |
+| Persistent Data | `GetPersistentData` | `GetPersistentData ( name ; instanceID )` |
+| Persistent Data | `ListPersistentDataIDs` | `ListPersistentDataIDs ( name )` |
+
+**Total functions: 368** (360 through FM 22 + 8 FM 26).
+
+#### Script steps added to script-steps-catalog.json (10 new + 1 moved + 2 duplicates removed):
+
+| Category | Step | Change |
+|---|---|---|
+| AI | `Insert Image Caption` | New FM 26 |
+| AI | `Insert Image Captions in Found Set` | New FM 26 |
+| Miscellaneous | `Flush Web Viewer Cookies` | New FM 26 |
+| Persistent Data *(new category)* | `Configure Persistent Data` | New FM 26 |
+| PDF Files *(new category)* | `Create PDF` | New FM 26 |
+| PDF Files | `Open PDF` | New FM 26 |
+| PDF Files | `Append PDF` | New FM 26 |
+| PDF Files | `Close PDF` | New FM 26 |
+| PDF Files | `Cancel PDF` | New FM 26 |
+| PDF Files | `Print PDF` | New FM 26 |
+| PDF Files | `Save Records as PDF` | Moved from Records; updated with FM 26 Save to option |
+| Editing | `Insert Embedding` | Duplicate removed (kept AI category version) |
+| Found Sets | `Perform Semantic Find` | Duplicate removed (kept AI category version) |
+
+**Total script steps: 165** (two new categories: PDF Files with 7 steps, Persistent Data with 1 step).
+
+#### Reference example files updated:
+
+- **`design-container-functions-examples.md`** — Added BaseTableComment, FieldAnnotation, FieldDisplayNames with examples. Updated header: 23 → 26 design functions.
+- **`get-functions-examples.md`** — Added Get(AccountPasswordDaysRemaining) (Account section), Get(GuidedAccessState) (Device section), Get(WindowUUID) (Layout/Window section) to tables. Updated header: 135 → 138 Get() functions.
+- **`specialty-functions-examples.md`** — Added new **Persistent Data Functions** section with GetPersistentData and ListPersistentDataIDs examples.
+
+#### SKILL.md changes:
+
+- Removed **"FM 26 (2026) coverage status"** section (previously flagged FM 26 as fetch-live-only with a special routing table — no longer needed).
+- Removed **"FM 26 — live fetch strategy"** section and its special routing table.
+- Updated mandatory trigger examples: FM 26 triggers now point to local files instead of "FM 26 live docs".
+- Removed FM 26 row from "Always fetch live" table (FM 26 is no longer a coverage gap).
+- Updated reference table entries: function-catalog.json now lists 368 functions including FM 26 additions; script-steps-catalog.json now lists 165 steps including FM 26 additions and new categories.
+- Updated fetching strategy table: added explicit local-file routing rows for all FM 26 additions.
+- Updated version notes table: FM 26 row no longer says "Fetch live docs for full detail" as a special instruction — it gets the same note as other recent versions.
+- Updated frontmatter description: function count 368, step count 165.
+
+### Fixed
+
+- Removed duplicate `Insert Embedding` entry from Editing category in `script-steps-catalog.json`.
+- Removed duplicate `Perform Semantic Find` entry from Found Sets category in `script-steps-catalog.json`.
+- `meta.last_updated` and `meta.version` updated in both JSON catalogs.
+
+### Updated
+
+- `VERSION` — remains `1.8` (this is a content revision of the same version)
+- `README.md` — updated function and step counts, added FM 26 coverage note
+
+---
+
 ## [1.8] — 2026-06
 
 ### Changed — FM 26 coverage section rewritten with confirmed additions

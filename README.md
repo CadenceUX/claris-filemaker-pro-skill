@@ -11,7 +11,7 @@ Built and maintained by [Cadence UX](https://cadenceux.com.au).
 When this skill is active, Claude will:
 
 - Look up any of the **368 calculation functions** by name, category, or description — with correct syntax, parameters, and a direct link to the Claris Help Centre page
-- Look up any of the **167 script steps** across 14+ categories, including all FM 2025 v22 AI steps and FM 26 additions
+- Look up any of the **165 script steps** across 16 categories, including all FM 2025 v22 AI steps, FM 26 AI additions, and the new FM 26 PDF Files and Persistent Data categories
 - Reference **accurate error codes** (0–899, 1630–1631, AI/ML 870–892) with official descriptions
 - Fetch **live Claris documentation** using the correct URL pattern for any of the 33 help guides
 - Detect **version drift** — if a fetched page references a newer FileMaker version than the skill was built against, it flags it so you know the local reference files may be behind
@@ -23,18 +23,18 @@ When this skill is active, Claude will:
 
 | Reference file | Contents |
 |---|---|
-| `function-catalog.json` | All 360 functions through FM 22 — format, parameters, purpose, category, doc_url, originated_in_version. FM 26 adds 8 new functions (fetch-live). |
-| `script-steps-catalog.json` | All 157 script steps through FM 22 across 14 categories — syntax, purpose, doc_url, and full notes for all FM 22 AI steps, Go to List of Records (FM 22.0.1), and Set Revert Transaction on Error (FM 21.1.1). FM 26 adds 10 new steps including the new PDF Files category (fetch-live). |
-| `logical-json-ai-functions-examples.md` | Logical (20), JSON (10), AI/embedding (14) functions with usage examples |
-| `get-functions-examples.md` | All 135 Get() functions across 12 categories |
-| `design-container-functions-examples.md` | Design (23) + Container/Crypt/OCR (24) functions |
+| `function-catalog.json` | All 368 functions through FM 26 — format, parameters, purpose, category, doc_url, originated_in_version. Includes 8 FM 26 additions: BaseTableComment, FieldAnnotation, FieldDisplayNames (Design); Get(AccountPasswordDaysRemaining), Get(GuidedAccessState), Get(WindowUUID) (Get); GetPersistentData, ListPersistentDataIDs (Persistent Data). |
+| `script-steps-catalog.json` | All 165 script steps through FM 26 across 16 categories — syntax, purpose, doc_url, and full notes for all FM 22 AI steps and FM 26 additions. New FM 26 categories: PDF Files (7 steps), Persistent Data (1 step). |
+| `logical-json-ai-functions-examples.md` | Logical (20), JSON (12), AI/embedding (14) functions with usage examples |
+| `get-functions-examples.md` | All 138 Get() functions across 12 categories (includes FM 26 Get additions) |
+| `design-container-functions-examples.md` | Design (26, includes FM 26 additions) + Container/Crypt/OCR (25) functions |
 | `text-functions-examples.md` | Text (39) + Text Formatting (10) functions |
 | `date-time-functions-examples.md` | Date (10) + Time/Timestamp (5) functions |
 | `numeric-functions-examples.md` | Number (18) + Financial (4) + Trigonometric (9) + Repeating (3) |
-| `specialty-functions-examples.md` | Aggregate (10) + Japanese (12) + Mobile/Go (5) + Miscellaneous (9) |
+| `specialty-functions-examples.md` | Aggregate (10) + Japanese (12) + Mobile/Go (5) + Miscellaneous (9) + Persistent Data (2 FM 26 functions) |
 | `quickrefs.md` | Error codes, ExecuteSQL syntax, Data API endpoints, full help centre sitemap (33 guides) |
 
-**FileMaker version coverage:** Functions tagged from `legacy` (pre-FM7) through `22.0.1` (FM 2025 v22). Script steps current as of FM 22.0.1 (157 steps in local catalog). FM 26 adds 8 functions and 10 script steps — all confirmed in SKILL.md, fetch-live until the next catalog rebuild.
+**FileMaker version coverage:** Functions tagged from `legacy` (pre-FM7) through `26` (FM Pro 26, June 2026). Script steps current through FM 26 — 165 unique steps in local catalog across 16 categories.
 
 ---
 
@@ -59,6 +59,8 @@ The skill uses a **local-first, live-verify** strategy:
 3. **Version drift detection** watches for FileMaker version strings in fetched pages that exceed `last_known_fm_version` and warns you if the local files may be behind
 
 This means you get fast, accurate answers for everyday questions, and authoritative live-doc answers for anything nuanced — without Claude hallucinating function signatures or inventing error code meanings.
+
+All functions and script steps — including FM 26 additions — are handled identically: check local first, then fetch the live doc_url if full parameter detail is needed. There is no special-case routing for any version.
 
 ---
 

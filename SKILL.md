@@ -6,13 +6,14 @@ metadata:
 description: >
   REFERENCE skill — FileMaker Pro script steps, calculation functions, and custom functions ONLY.
   Use for: syntax lookups, function parameters, usage examples, and live doc fetches across all
-  368 built-in functions (If, Case, Let, While, ExecuteSQL, JSON, AI/embedding), all 167 script
-  steps, Data API (REST), SQL/ExecuteSQL, WebDirect, FileMaker Go, error codes, and custom
-  function patterns. Not a platform administration guide. Out of scope: FileMaker Server admin,
-  Claris Connect, Claris Studio, ODBC/JDBC deep configuration. Trigger on any FileMaker function
-  name — even inside code, a calc field, or a script. Always check function-catalog.json first
-  for format, doc_url, and originated_in_version before fetching live docs. Prefer live doc
-  fetches over training data — Claris docs are versioned and frequently updated.
+  376 built-in functions (If, Case, Let, While, ExecuteSQL, JSON, AI/embedding, Persistent Data),
+  all 165 script steps (including FM 26 PDF Files and Persistent Data categories), Data API (REST),
+  SQL/ExecuteSQL, WebDirect, FileMaker Go, error codes, and custom function patterns. Not a platform
+  administration guide. Out of scope: FileMaker Server admin, Claris Connect, Claris Studio,
+  ODBC/JDBC deep configuration. Trigger on any FileMaker function name — even inside code, a calc
+  field, or a script. Always check local reference files first for format, doc_url, and
+  originated_in_version before fetching live docs. Prefer live doc fetches over training data —
+  Claris docs are versioned and frequently updated.
 ---
 
 # Claris FileMaker Pro — Skill v1.8
@@ -32,55 +33,6 @@ For the latest FileMaker Pro release notes, see the [FileMaker Pro Release Notes
 The frontmatter field `last_known_fm_version` records the highest FileMaker version this skill's
 local reference files were built against. It is updated with each skill rebuild — it is **not** a
 cap on which version you can answer questions about.
-
----
-
-## FM 26 (2026) coverage status
-
-FileMaker Pro 26 was released **June 9, 2026**. The local reference catalogs in this skill were
-built to FM 22.0.x (2025). All FM 26 additions listed below are **not in the local catalogs** —
-always fetch live docs for any FM 26 topic.
-
-**Confirmed FM 26 additions — always fetch live:**
-
-**New script steps (10):**
-
-| Category | Step | Notes |
-|---|---|---|
-| AI | `Insert Image Caption` | Sends an image to a captioning model; inserts returned caption into a field or variable |
-| AI | `Insert Image Captions in Found Set` | Runs Insert Image Caption for every record in the found set |
-| Miscellaneous / Web Viewer | `Flush Web Viewer Cookies` | Immediately clears all web viewer cookies across all open files in the client |
-| Persistent Data | `Configure Persistent Data` | Sets or deletes an entry in the persistent data store |
-| PDF Files *(new category)* | `Create PDF` | Creates an empty PDF in memory |
-| PDF Files | `Open PDF` | Opens an existing PDF for modification |
-| PDF Files | `Append PDF` | Appends pages to the currently open PDF |
-| PDF Files | `Close PDF` | Closes and saves the open PDF to a path, variable, or container |
-| PDF Files | `Cancel PDF` | Closes the open PDF without saving |
-| PDF Files | `Print PDF` | Prints a PDF from a file path, container field, or variable |
-
-Note: `Save Records as PDF` has been **moved** to the new PDF Files category and gained a
-**Save to** option (file path, container, variable, or append to an open PDF).
-
-**New functions (8):**
-
-| Category | Function | Returns |
-|---|---|---|
-| Design | `FieldAnnotation ( fileName ; layoutName ; fieldName )` | DDL annotation set in Advanced Options for Field |
-| Design | `FieldDisplayNames ( fileName ; layoutName ; fieldName )` | Field's display names as JSON (custom names set in Advanced Options for Field) |
-| Design | `BaseTableComment ( fileName ; baseTableName )` | Base table's comment as set in Manage Database |
-| Get() | `Get(GuidedAccessState)` | FileMaker Go only — 1 if iOS Guided Access is on |
-| Get() | `Get(AccountPasswordDaysRemaining)` | Days remaining before the current account password must change |
-| Get() | `Get(WindowUUID)` | UUID of the currently active window |
-| Persistent Data | `GetPersistentData ( name ; instanceID )` | Value from the persistent data store by name and instance ID |
-| Persistent Data | `ListPersistentDataIDs ( name )` | List of instance IDs for a named entry in the persistent data store |
-
-**Finding the FM 26 release notes:**
-
-Fetch `https://help.claris.com/markdown/en/pro-release-notes/index.md` for the full FM 26 section,
-or use `https://help.claris.com/llms-full.txt` to locate the exact page slug.
-
-When answering FM 26 questions, always say: "FM 26 was released June 2026. My local reference
-files cover FM 22. For FM 26-specific syntax, let me fetch the live docs."
 
 ---
 
@@ -166,18 +118,18 @@ Examples that are mandatory triggers:
 - "Set up a RAG account" → `script-steps-catalog.json` (Configure RAG Account)
 - "Control transaction revert on error" → `script-steps-catalog.json` (Set Revert Transaction on Error)
 - "Get text out of a PDF in a container" → `design-container-functions-examples.md` (GetTextFromPDF)
-- "Caption this image with AI" → FM 26 live docs (Insert Image Caption)
-- "Caption all images in found set" → FM 26 live docs (Insert Image Captions in Found Set)
-- "Clear web viewer cookies" → FM 26 live docs (Flush Web Viewer Cookies)
-- "Save persistent data / app variable" → FM 26 live docs (Configure Persistent Data / GetPersistentData)
-- "Create / build / merge a PDF in script" → FM 26 live docs (PDF Files category)
-- "Print a PDF from a container" → FM 26 live docs (Print PDF)
-- "Get the annotation on a field" → FM 26 live docs (FieldAnnotation)
-- "Get display names for a field" → FM 26 live docs (FieldDisplayNames)
-- "Get base table comment" → FM 26 live docs (BaseTableComment)
-- "Is Guided Access on?" → FM 26 live docs (Get(GuidedAccessState))
-- "Password expiry / days remaining" → FM 26 live docs (Get(AccountPasswordDaysRemaining))
-- "Get the window UUID" → FM 26 live docs (Get(WindowUUID))
+- "Caption this image with AI" → `script-steps-catalog.json` (AI category — Insert Image Caption)
+- "Caption all images in found set" → `script-steps-catalog.json` (AI category — Insert Image Captions in Found Set)
+- "Clear web viewer cookies" → `script-steps-catalog.json` (Miscellaneous — Flush Web Viewer Cookies)
+- "Save persistent data / app variable" → `script-steps-catalog.json` (Persistent Data — Configure Persistent Data); `specialty-functions-examples.md` (GetPersistentData, ListPersistentDataIDs)
+- "Create / build / merge a PDF in script" → `script-steps-catalog.json` (PDF Files category)
+- "Print a PDF from a container" → `script-steps-catalog.json` (PDF Files — Print PDF)
+- "Get the annotation on a field" → `design-container-functions-examples.md` (FieldAnnotation)
+- "Get display names for a field" → `design-container-functions-examples.md` (FieldDisplayNames)
+- "Get base table comment" → `design-container-functions-examples.md` (BaseTableComment)
+- "Is Guided Access on?" → `get-functions-examples.md` (Get(GuidedAccessState), Device section)
+- "Password expiry / days remaining" → `get-functions-examples.md` (Get(AccountPasswordDaysRemaining), Account section)
+- "Get the window UUID" → `get-functions-examples.md` (Get(WindowUUID), Layout & Window section)
 
 **Workflow for function questions:**
 1. Check the relevant reference file (see table below) for syntax, parameters, and usage patterns
@@ -262,7 +214,6 @@ for quick lookups but not authoritative. When in doubt, fetch `llms-full.txt`.
 | User mentions "latest", "current", a specific version, or "has this changed" | Explicit recency signal |
 | Version drift detected in this session | Local files are behind |
 | Exact parameter behaviour, option names, or restrictions | Claris updates docs within a version without bumping the version number — local files capture a point in time only |
-| Any FM 26 topic | Coverage gap — confirmed additions listed in FM 26 section above; local catalogs cover FM 22 only |
 
 ---
 
@@ -277,7 +228,7 @@ and inject the appropriate version note automatically — do not ask the user wh
 | FM 21.0.1 | "AI/embedding feature — requires FM 21 or later." |
 | FM 21.1.1 | "Requires FM 21.1.1 or later (FileMaker Pro 2024 update, November 2024)." |
 | FM 22.0.1 | "Introduced in FM 22 (2025) — not available in earlier versions." |
-| FM 26 or later | "Introduced in FM 26 (2026) — not available in earlier versions. Fetch live docs for full detail." |
+| FM 26 | "Introduced in FM 26 (2026) — not available in earlier versions." |
 | FM 18 or earlier | No version note unless the user asks |
 
 FM 19 is the practical floor for version-awareness — anything older noted as "may not be available
@@ -289,15 +240,15 @@ on legacy versions" without detail.
 
 | File | Contains |
 |---|---|
-| `function-catalog.json` | All 360 functions through FM 22 — format, parameters, purpose, category, category_url, slug, doc_url, originated_in_version. Master for call signatures. FM 26 adds 8 new functions (not yet in catalog — fetch live). |
-| `script-steps-catalog.json` | All 157 script steps through FM 22, across 14 categories — syntax, purpose, notes, doc_url. Includes FM 22.0.1 steps (AI category: 14 steps; Go to List of Records; Save Records as JSONL) and FM 21.1.1 step (Set Revert Transaction on Error). FM 26 adds 10 new steps (not yet in catalog — fetch live); PDF Files is a new category. |
+| `function-catalog.json` | All 368 functions through FM 26 — format, parameters, purpose, category, category_url, slug, doc_url, originated_in_version. Master for call signatures. Includes FM 26 additions: BaseTableComment, FieldAnnotation, FieldDisplayNames (Design); Get(AccountPasswordDaysRemaining), Get(GuidedAccessState), Get(WindowUUID) (Get); GetPersistentData, ListPersistentDataIDs (Persistent Data). |
+| `script-steps-catalog.json` | All 165 script steps through FM 26, across 16 categories — syntax, purpose, notes, doc_url. Includes FM 26 additions: Insert Image Caption, Insert Image Captions in Found Set (AI category); Flush Web Viewer Cookies (Miscellaneous); Configure Persistent Data (new Persistent Data category); Create PDF, Open PDF, Append PDF, Close PDF, Cancel PDF, Print PDF + updated Save Records as PDF (new PDF Files category). Note: 2 pre-existing duplicates (Insert Embedding, Perform Semantic Find) were removed; net unique steps corrected from 157 to 165. |
 | `logical-json-ai-functions-examples.md` | **Logical** (20 functions: If, Case, Let, While, ExecuteSQL, ExecuteSQLe, Evaluate, GetField, GetNthRecord…) + **JSON** (12 functions: JSONGetElement, JSONSetElement, JSONListKeys, JSONMakeArray, JSONParse, JSONParsedState…) + **AI** (14 functions: GetEmbedding, CosineSimilarity, GetTokenCount, GetTableDDL, GetRAGSpaceInfo, PredictFromModel, AddEmbeddings, SubtractEmbeddings, NormalizeEmbedding, GetFieldsOnLayout…) |
-| `get-functions-examples.md` | All 135 Get() functions through FM 22, grouped by 12 categories: Date/Time, Account, File, Paths, Record, Layout/Window, Script/Trigger, Field, Sorting, Network, Device, Calculation. FM 26 adds Get(GuidedAccessState), Get(AccountPasswordDaysRemaining), Get(WindowUUID) — fetch live. |
-| `design-container-functions-examples.md` | **Design** (23 functions through FM 22: FieldNames, FieldType, LayoutNames, TableNames, ValueListItems, ScriptNames, BaseTableIDs… FM 26 adds FieldAnnotation, FieldDisplayNames, BaseTableComment — fetch live) + **Container** (25 functions: Base64Encode/Decode, CryptEncrypt/Decrypt, CryptDigest, GetContainerAttribute, GetLiveText, ReadQRCode, GetTextFromPDF…) |
+| `get-functions-examples.md` | All 138 Get() functions through FM 26, grouped by 12 categories: Date/Time, Account, File, Paths, Record, Layout/Window, Script/Trigger, Field, Sorting, Network, Device, Calculation. FM 26 additions: Get(AccountPasswordDaysRemaining) (Account); Get(GuidedAccessState) (Device); Get(WindowUUID) (Layout/Window). |
+| `design-container-functions-examples.md` | **Design** (26 functions through FM 26: FieldNames, FieldType, LayoutNames, TableNames, ValueListItems, ScriptNames, BaseTableIDs, BaseTableComment, FieldAnnotation, FieldDisplayNames…) + **Container** (25 functions: Base64Encode/Decode, CryptEncrypt/Decrypt, CryptDigest, GetContainerAttribute, GetLiveText, ReadQRCode, GetTextFromPDF…) |
 | `text-functions-examples.md` | **Text** (39 functions: Left, Right, Middle, Position, Substitute, PatternCount, Trim, Filter…) + **Text Formatting** (10 functions: TextColor, TextSize, TextFont, TextStyleAdd…) |
 | `date-time-functions-examples.md` | **Date** (10 functions: Date, Day, Month, Year, DayOfWeek, DayName, MonthName, WeekOfYear…) + **Time & Timestamp** (5 functions: Hour, Minute, Seconds, Time, Timestamp) |
 | `numeric-functions-examples.md` | **Number** (18 functions: Round, Int, Mod, Abs, Ceiling, Floor, Random…) + **Financial** (4: FV, NPV, PMT, PV) + **Trigonometric** (9: Sin, Cos, Tan, Asin, Acos, Atan, Degrees, Radians, Pi) + **Repeating** (3: Extend, GetRepetition, Last) |
-| `specialty-functions-examples.md` | **Aggregate** (10: Sum, Count, Average, List, Max, Min, StDev…) + **Japanese** (12: Hiragana, Katakana, NumToJText, Furigana, YearName…) + **Mobile/Go** (5: Location, LocationValues, GetSensor, GetAVPlayerAttribute, RangeBeacons) + **Miscellaneous** (9: GetLayoutObjectAttribute, GetFieldName, ConvertFromFileMakerPath, LayoutObjectUUID, GetRecordIDsFromFoundSet…) |
+| `specialty-functions-examples.md` | **Aggregate** (10: Sum, Count, Average, List, Max, Min, StDev…) + **Japanese** (12: Hiragana, Katakana, NumToJText, Furigana, YearName…) + **Mobile/Go** (5: Location, LocationValues, GetSensor, GetAVPlayerAttribute, RangeBeacons) + **Miscellaneous** (9: GetLayoutObjectAttribute, GetFieldName, ConvertFromFileMakerPath, LayoutObjectUUID, GetRecordIDsFromFoundSet…) + **Persistent Data** (2 FM 26 functions: GetPersistentData, ListPersistentDataIDs) |
 | `quickrefs.md` | **Error codes** (0-899 + 1630-1631, AI/ML errors 870-892 verified against live docs 2026-06) + **ExecuteSQL** syntax, clauses, data types, date literals + **Data API** REST endpoints, auth, CRUD, find, portal data + **Sitemap** of common Claris Help guides (fast-path shortcut — use llms-full.txt for authoritative lookups) |
 
 ---
@@ -311,7 +262,11 @@ on legacy versions" without detail.
 | JSONParse / JSONParsedState (performance caching) | `logical-json-ai-functions-examples.md` | `function-catalog.json` → live doc |
 | AI / embedding functions | `logical-json-ai-functions-examples.md` | `function-catalog.json` → live doc |
 | Get() functions | `get-functions-examples.md` | `function-catalog.json` → live doc |
+| Get(AccountPasswordDaysRemaining) | `get-functions-examples.md` (Account section) | `function-catalog.json` → live doc |
+| Get(GuidedAccessState) | `get-functions-examples.md` (Device section) | `function-catalog.json` → live doc |
+| Get(WindowUUID) | `get-functions-examples.md` (Layout/Window section) | `function-catalog.json` → live doc |
 | Design / FieldNames / LayoutNames | `design-container-functions-examples.md` | `function-catalog.json` → live doc |
+| FieldAnnotation / FieldDisplayNames / BaseTableComment | `design-container-functions-examples.md` | `function-catalog.json` → live doc |
 | Container / Base64 / Crypt / OCR | `design-container-functions-examples.md` | `function-catalog.json` → live doc |
 | GetTextFromPDF | `design-container-functions-examples.md` | `function-catalog.json` → live doc |
 | Text / Substitute / PatternCount | `text-functions-examples.md` | `function-catalog.json` → live doc |
@@ -326,11 +281,17 @@ on legacy versions" without detail.
 | Japanese text functions | `specialty-functions-examples.md` | `function-catalog.json` → live doc |
 | FileMaker Go / mobile | `specialty-functions-examples.md` | `function-catalog.json` → live doc |
 | Miscellaneous / GetLayoutObjectAttribute | `specialty-functions-examples.md` | `function-catalog.json` → live doc |
+| GetPersistentData / ListPersistentDataIDs | `specialty-functions-examples.md` (Persistent Data section) | `function-catalog.json` → live doc |
 | AI regression / PredictFromModel | `logical-json-ai-functions-examples.md` | `function-catalog.json` → live doc |
 | Miscellaneous / GetRecordIDsFromFoundSet | `specialty-functions-examples.md` | `function-catalog.json` → live doc |
 | Script steps | `script-steps-catalog.json` | live doc_url |
 | Go to List of Records | `script-steps-catalog.json` (Found Sets) | live doc_url |
 | Set Revert Transaction on Error | `script-steps-catalog.json` (Control) | live doc_url |
+| Insert Image Caption / in Found Set | `script-steps-catalog.json` (AI category) | live doc_url |
+| Flush Web Viewer Cookies | `script-steps-catalog.json` (Miscellaneous) | live doc_url |
+| Configure Persistent Data | `script-steps-catalog.json` (Persistent Data) | live doc_url |
+| PDF Files steps (Create/Open/Append/Close/Cancel/Print PDF) | `script-steps-catalog.json` (PDF Files category) | live doc_url |
+| Save Records as PDF (FM 26 Save to option) | `script-steps-catalog.json` (PDF Files category) | live doc_url |
 | Error codes | `quickrefs.md` | fetch `https://help.claris.com/markdown/en/pro-help/error-codes.md` for obscure codes |
 | ExecuteSQL syntax | `quickrefs.md` | live sql-reference guide |
 | Data API / REST | `quickrefs.md` | live data-api-guide |
@@ -346,10 +307,10 @@ on legacy versions" without detail.
 - For script step option details (platform support on Go, WebDirect, Server) always fetch the live
   doc_url — platform restrictions are not fully captured in the catalog.
 - AI/embedding functions are in `logical-json-ai-functions-examples.md`; AI script steps are in
-  `script-steps-catalog.json` (AI category through FM 22: 14 steps including Generate Response from
+  `script-steps-catalog.json` (AI category through FM 26: 16 steps including Generate Response from
   Model, Configure AI Account, Perform SQL Query by Natural Language, Perform Find by Natural Language,
-  Insert Embedding, etc. FM 26 adds Insert Image Caption and Insert Image Captions in Found Set = 16
-  total — fetch live for the FM 26 steps).
+  Insert Embedding, Insert Image Caption, Insert Image Captions in Found Set, etc. — fetch live for
+  all AI steps as they evolve rapidly).
 - **Error codes:** The AI/ML error range (870–892) in `quickrefs.md` is verified against live docs (2026-06). The general error tables (0–899, 1630–1631) are a good quick reference but descriptions may drift — always fetch `https://help.claris.com/markdown/en/pro-help/error-codes.md` for authoritative descriptions of any unfamiliar code.
 - **Sub-version doc drift:** Claris updates documentation pages between FM version releases — adding
   notes, correcting parameters, documenting edge cases — without changing the `version` field in
@@ -364,7 +325,7 @@ on legacy versions" without detail.
   GPS distance formula in `numeric-functions-examples.md` is a ready-to-use real-world example.
 - **Financial functions** require `interestRate` per period, not annual — divide annual rate by
   payment frequency (12 for monthly). `PMT()` returns a negative number; use `Abs()` for display.
-- **Generate Response from Model** is the most powerful AI step in FM 22. In agentic mode, always
+- **Generate Response from Model** is the most powerful AI step in FM 22+. In agentic mode, always
   append the DDL schema (from `GetTableDDL`) to the `execute_sql` tool parameter description so the
   model knows the schema. Custom function tool definitions must match the function name and parameter
   order exactly, with all parameters typed as `"string"`.
@@ -412,7 +373,7 @@ on legacy versions" without detail.
 - **Insert Image Caption** (FM 26) — sends an image (container field or variable) to a captioning
   model; inserts the returned caption into a target field or variable. `Insert Image Captions in
   Found Set` is the batch version — runs the step on every record in the current found set in sequence.
-  Both steps require a configured AI account. Fetch live docs for model and parameter detail.
+  Both steps require a configured AI account. Always fetch live docs for model and parameter detail.
 - **PDF Files category** (FM 26 — new category) — the scripted PDF workflow: `Create PDF` (blank in
   memory) or `Open PDF` (existing file) → `Append PDF` pages or `Save Records as PDF` (with Save to:
   open PDF option) → `Close PDF` (saves to path/variable/container) or `Cancel PDF` (discards). `Print
@@ -438,24 +399,6 @@ on legacy versions" without detail.
   dialogs in startup scripts.
 - **Get(WindowUUID)** (FM 26) — returns a unique, stable UUID for the currently active window.
   Useful for scripted window management when multiple windows of the same file are open.
-
----
-
-## FM 26 — live fetch strategy
-
-All FM 26 additions are absent from local catalogs. For any FM 26 topic, skip local files and fetch
-live docs directly using the patterns below.
-
-| Topic | Action |
-|---|---|
-| Insert Image Caption / Insert Image Captions in Found Set | Search `llms-full.txt` for the page slug in the `pro-help` guide's AI category |
-| Flush Web Viewer Cookies | Search `llms-full.txt` for `flush-web-viewer-cookies` in `pro-help` |
-| Configure Persistent Data | Search `llms-full.txt` for `configure-persistent-data` in `pro-help` |
-| Create PDF / Open PDF / Append PDF / Close PDF / Cancel PDF / Print PDF | Search `llms-full.txt` for each slug in `pro-help`; the PDF Files section is new — check the guide index for the category path |
-| Save Records as PDF (FM 26 Save to option) | Fetch the existing doc_url from `script-steps-catalog.json` — the page has been updated in place |
-| FieldAnnotation / FieldDisplayNames / BaseTableComment | Search `llms-full.txt` for slugs in the `fmfunctions` guide (Design category pages) |
-| Get(GuidedAccessState) / Get(AccountPasswordDaysRemaining) / Get(WindowUUID) | Fetch `https://help.claris.com/markdown/en/pro-help/index.md` to find the Get() functions index page, then the specific Get() page |
-| GetPersistentData / ListPersistentDataIDs | Search `llms-full.txt` for slugs in the `fmfunctions` guide |
 
 ---
 

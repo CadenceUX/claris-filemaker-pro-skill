@@ -1,3 +1,83 @@
+## [1.8] — 2026-06
+
+### Changed — FM 26 coverage section rewritten with confirmed additions
+
+Full audit of FM 26 (released June 9, 2026) new script steps and functions, sourced directly
+from the Claris release notes. The speculative "may include" FM 26 section in SKILL.md has been
+replaced with two precise reference tables.
+
+**No local reference file changes** — `function-catalog.json` and `script-steps-catalog.json`
+remain at FM 22.0.x. All FM 26 additions are fetch-live-only until a future catalog rebuild.
+
+#### New script steps documented (10, all fetch-live):
+
+| Category | Step |
+|---|---|
+| AI | `Insert Image Caption` |
+| AI | `Insert Image Captions in Found Set` |
+| Miscellaneous / Web Viewer | `Flush Web Viewer Cookies` |
+| Persistent Data | `Configure Persistent Data` |
+| PDF Files *(new category)* | `Create PDF` |
+| PDF Files | `Open PDF` |
+| PDF Files | `Append PDF` |
+| PDF Files | `Close PDF` |
+| PDF Files | `Cancel PDF` |
+| PDF Files | `Print PDF` |
+
+Note: `Save Records as PDF` moved to the new PDF Files category and gained a **Save to** option
+(file path, container, variable, or append to an open PDF).
+
+#### New functions documented (8, all fetch-live):
+
+| Category | Function |
+|---|---|
+| Design | `FieldAnnotation ( fileName ; layoutName ; fieldName )` |
+| Design | `FieldDisplayNames ( fileName ; layoutName ; fieldName )` |
+| Design | `BaseTableComment ( fileName ; baseTableName )` |
+| Get() | `Get(GuidedAccessState)` |
+| Get() | `Get(AccountPasswordDaysRemaining)` |
+| Get() | `Get(WindowUUID)` |
+| Persistent Data | `GetPersistentData ( name ; instanceID )` |
+| Persistent Data | `ListPersistentDataIDs ( name )` |
+
+**Total known functions:** 368 (+8 FM 26, fetch-live).
+**Total known script steps:** 167 (+10 FM 26, fetch-live). PDF Files is a new script step category.
+
+### Added to SKILL.md
+
+- **FM 26 coverage section** — complete rewrite; two tables (script steps, functions) with category,
+  name/signature, and one-line description for each FM 26 addition. `Save Records as PDF` move and
+  new Save to option documented.
+- **FM 26 — live fetch strategy section** — new dedicated routing table giving the exact
+  `llms-full.txt` search or direct fetch action for every FM 26 item.
+- **14 new trigger examples** — one per FM 26 addition, covering AI captioning, PDF Files workflow,
+  persistent data, all three Design functions, all three Get() functions.
+- **9 new tips** — Insert Image Caption/batch, PDF Files workflow (full Create→Close chain),
+  Configure Persistent Data/GetPersistentData/ListPersistentDataIDs (instance ID model, delete
+  pattern), FieldAnnotation, FieldDisplayNames, BaseTableComment, Get(GuidedAccessState),
+  Get(AccountPasswordDaysRemaining), Get(WindowUUID).
+
+### Updated in SKILL.md
+
+- Frontmatter `version`: `"1.7"` → `"1.8"`
+- Frontmatter description: function count 360 → 368; step count 157 → 167
+- Overview heading: v1.7 → v1.8
+- Version self-check installed version: `"1.7"` → `"1.8"`
+- AI script step count in tips: 14 → 16 (Insert Image Caption and Insert Image Captions in Found Set)
+- `function-catalog.json` reference table entry: notes FM 26 adds 8 functions (fetch-live)
+- `script-steps-catalog.json` reference table entry: notes FM 26 adds 10 steps (fetch-live);
+  PDF Files is a new category
+- `design-container-functions-examples.md` reference entry: flags FM 26 Design additions by name
+- `get-functions-examples.md` reference entry: flags FM 26 Get() additions by name
+- "Always fetch live" table: FM 26 row clarified to reference the confirmed additions list
+
+### Updated
+
+- `VERSION` — bumped to `1.8`
+- `README.md` — function count 360 → 368; step count 157 → 167; version coverage note updated
+
+---
+
 # Changelog
 
 All notable changes to this skill are documented here.

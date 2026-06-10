@@ -10,8 +10,8 @@ Built and maintained by [Cadence UX](https://cadenceux.com.au).
 
 When this skill is active, Claude will:
 
-- Look up any of the **360 calculation functions** by name, category, or description — with correct syntax, parameters, and a direct link to the Claris Help Centre page
-- Look up any of the **155 script steps** across 14 categories, including all FM 2025 v22 AI steps
+- Look up any of the **368 calculation functions** by name, category, or description — with correct syntax, parameters, and a direct link to the Claris Help Centre page
+- Look up any of the **167 script steps** across 14+ categories, including all FM 2025 v22 AI steps and FM 26 additions
 - Reference **accurate error codes** (0–899, 1630–1631, AI/ML 870–892) with official descriptions
 - Fetch **live Claris documentation** using the correct URL pattern for any of the 33 help guides
 - Detect **version drift** — if a fetched page references a newer FileMaker version than the skill was built against, it flags it so you know the local reference files may be behind
@@ -23,8 +23,8 @@ When this skill is active, Claude will:
 
 | Reference file | Contents |
 |---|---|
-| `function-catalog.json` | All 360 functions — format, parameters, purpose, category, doc_url, originated_in_version |
-| `script-steps-catalog.json` | All 157 script steps across 14 categories — syntax, purpose, doc_url, and full notes for all FM 22 AI steps, Go to List of Records (FM 22.0.1), and Set Revert Transaction on Error (FM 21.1.1) |
+| `function-catalog.json` | All 360 functions through FM 22 — format, parameters, purpose, category, doc_url, originated_in_version. FM 26 adds 8 new functions (fetch-live). |
+| `script-steps-catalog.json` | All 157 script steps through FM 22 across 14 categories — syntax, purpose, doc_url, and full notes for all FM 22 AI steps, Go to List of Records (FM 22.0.1), and Set Revert Transaction on Error (FM 21.1.1). FM 26 adds 10 new steps including the new PDF Files category (fetch-live). |
 | `logical-json-ai-functions-examples.md` | Logical (20), JSON (10), AI/embedding (14) functions with usage examples |
 | `get-functions-examples.md` | All 135 Get() functions across 12 categories |
 | `design-container-functions-examples.md` | Design (23) + Container/Crypt/OCR (24) functions |
@@ -34,7 +34,7 @@ When this skill is active, Claude will:
 | `specialty-functions-examples.md` | Aggregate (10) + Japanese (12) + Mobile/Go (5) + Miscellaneous (9) |
 | `quickrefs.md` | Error codes, ExecuteSQL syntax, Data API endpoints, full help centre sitemap (33 guides) |
 
-**FileMaker version coverage:** Functions tagged from `legacy` (pre-FM7) through `22.0.1` (FM 2025 v22). Script steps current as of FM 2025 v22.0.1 (157 steps). FM 26 additions require live doc fetch — see SKILL.md for details.
+**FileMaker version coverage:** Functions tagged from `legacy` (pre-FM7) through `22.0.1` (FM 2025 v22). Script steps current as of FM 22.0.1 (157 steps in local catalog). FM 26 adds 8 functions and 10 script steps — all confirmed in SKILL.md, fetch-live until the next catalog rebuild.
 
 ---
 

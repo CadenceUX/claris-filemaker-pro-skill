@@ -2,7 +2,7 @@
   "meta": {
     "description": "FileMaker calculation function catalog. Prototype signatures are canonical from the source repository. Category, slug, doc_url and purpose are sourced from the Claris Help Centre index.",
     "source_repo": "function-catalog.json (master for name/prototype)",
-    "help_centre": "https://help.claris.com/en/pro-help/content/functions-reference.html",
+    "help_centre": "https://help.claris.com/markdown/en/pro-help/functions-reference.md",
     "version": "22.0.5",
     "last_updated": "2026-06",
     "update_instructions": "Re-fetch source repo and compare against this file. Also re-fetch each category_page from help.claris.com to pick up new functions or updated slugs. For new functions, check the FileMaker Pro Release Notes at https://help.claris.com/en/pro-release-notes/content/ to determine the version introduced."
@@ -18,7 +18,7 @@
       "category": "Number functions",
       "category_url": "number-functions.html",
       "slug": "abs",
-      "doc_url": "https://help.claris.com/en/pro-help/content/abs.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/abs.md",
       "originated_in_version": "legacy"
     },
     {
@@ -31,7 +31,7 @@
       "category": "Trigonometric functions",
       "category_url": "trigonometric-functions.html",
       "slug": "acos",
-      "doc_url": "https://help.claris.com/en/pro-help/content/acos.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/acos.md",
       "originated_in_version": "legacy"
     },
     {
@@ -45,7 +45,7 @@
       "category": "Artificial intelligence functions",
       "category_url": "artificial-intelligence-functions.html",
       "slug": "addembeddings",
-      "doc_url": "https://help.claris.com/en/pro-help/content/addembeddings.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/addembeddings.md",
       "originated_in_version": "22.0.1"
     },
     {
@@ -58,7 +58,7 @@
       "category": "Trigonometric functions",
       "category_url": "trigonometric-functions.html",
       "slug": "asin",
-      "doc_url": "https://help.claris.com/en/pro-help/content/asin.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/asin.md",
       "originated_in_version": "legacy"
     },
     {
@@ -71,7 +71,7 @@
       "category": "Trigonometric functions",
       "category_url": "trigonometric-functions.html",
       "slug": "atan",
-      "doc_url": "https://help.claris.com/en/pro-help/content/atan.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/atan.md",
       "originated_in_version": "legacy"
     },
     {
@@ -84,7 +84,7 @@
       "category": "Aggregate functions",
       "category_url": "aggregate-functions.html",
       "slug": "average",
-      "doc_url": "https://help.claris.com/en/pro-help/content/average.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/average.md",
       "originated_in_version": "legacy"
     },
     {
@@ -98,7 +98,7 @@
       "category": "Container functions",
       "category_url": "container-functions.html",
       "slug": "base64decode",
-      "doc_url": "https://help.claris.com/en/pro-help/content/base64decode.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/base64decode.md",
       "originated_in_version": "12"
     },
     {
@@ -111,7 +111,7 @@
       "category": "Container functions",
       "category_url": "container-functions.html",
       "slug": "base64encode",
-      "doc_url": "https://help.claris.com/en/pro-help/content/base64encode.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/base64encode.md",
       "originated_in_version": "12"
     },
     {
@@ -125,7 +125,7 @@
       "category": "Container functions",
       "category_url": "container-functions.html",
       "slug": "base64encoderfc",
-      "doc_url": "https://help.claris.com/en/pro-help/content/base64encoderfc.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/base64encoderfc.md",
       "originated_in_version": "16"
     },
     {
@@ -138,7 +138,7 @@
       "category": "Design functions",
       "category_url": "design-functions.html",
       "slug": "basetableids",
-      "doc_url": "https://help.claris.com/en/pro-help/content/basetableids.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/basetableids.md",
       "originated_in_version": "20.1.1"
     },
     {
@@ -151,7 +151,7 @@
       "category": "Design functions",
       "category_url": "design-functions.html",
       "slug": "basetablenames",
-      "doc_url": "https://help.claris.com/en/pro-help/content/basetablenames.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/basetablenames.md",
       "originated_in_version": "20.1.1"
     },
     {
@@ -168,7 +168,7 @@
       "category": "Logical functions",
       "category_url": "logical-functions.html",
       "slug": "case",
-      "doc_url": "https://help.claris.com/en/pro-help/content/case.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/case.md",
       "originated_in_version": "legacy"
     },
     {
@@ -181,7 +181,7 @@
       "category": "Number functions",
       "category_url": "number-functions.html",
       "slug": "ceiling",
-      "doc_url": "https://help.claris.com/en/pro-help/content/ceiling.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/ceiling.md",
       "originated_in_version": "legacy"
     },
     {
@@ -194,7 +194,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "char",
-      "doc_url": "https://help.claris.com/en/pro-help/content/char.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/char.md",
       "originated_in_version": "legacy"
     },
     {
@@ -210,7 +210,7 @@
       "category": "Logical functions",
       "category_url": "logical-functions.html",
       "slug": "choose",
-      "doc_url": "https://help.claris.com/en/pro-help/content/choose.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/choose.md",
       "originated_in_version": "legacy"
     },
     {
@@ -223,7 +223,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "code",
-      "doc_url": "https://help.claris.com/en/pro-help/content/code.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/code.md",
       "originated_in_version": "legacy"
     },
     {
@@ -237,7 +237,7 @@
       "category": "Number functions",
       "category_url": "number-functions.html",
       "slug": "combination",
-      "doc_url": "https://help.claris.com/en/pro-help/content/combination.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/combination.md",
       "originated_in_version": "legacy"
     },
     {
@@ -252,7 +252,7 @@
       "category": "Artificial intelligence functions",
       "category_url": "artificial-intelligence-functions.html",
       "slug": "compute-model",
-      "doc_url": "https://help.claris.com/en/pro-help/content/compute-model.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/compute-model.md",
       "originated_in_version": "19.3"
     },
     {
@@ -266,7 +266,7 @@
       "category": "Miscellaneous functions",
       "category_url": "miscellaneous-functions.html",
       "slug": "convert-from-filemaker-path",
-      "doc_url": "https://help.claris.com/en/pro-help/content/convert-from-filemaker-path.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/convert-from-filemaker-path.md",
       "originated_in_version": "12"
     },
     {
@@ -280,7 +280,7 @@
       "category": "Miscellaneous functions",
       "category_url": "miscellaneous-functions.html",
       "slug": "convert-to-filemaker-path",
-      "doc_url": "https://help.claris.com/en/pro-help/content/convert-to-filemaker-path.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/convert-to-filemaker-path.md",
       "originated_in_version": "12"
     },
     {
@@ -293,7 +293,7 @@
       "category": "Trigonometric functions",
       "category_url": "trigonometric-functions.html",
       "slug": "cos",
-      "doc_url": "https://help.claris.com/en/pro-help/content/cos.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/cos.md",
       "originated_in_version": "legacy"
     },
     {
@@ -307,7 +307,7 @@
       "category": "Artificial intelligence functions",
       "category_url": "artificial-intelligence-functions.html",
       "slug": "cosinesimilarity",
-      "doc_url": "https://help.claris.com/en/pro-help/content/cosinesimilarity.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/cosinesimilarity.md",
       "originated_in_version": "21.0.1"
     },
     {
@@ -320,7 +320,7 @@
       "category": "Aggregate functions",
       "category_url": "aggregate-functions.html",
       "slug": "count",
-      "doc_url": "https://help.claris.com/en/pro-help/content/count.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/count.md",
       "originated_in_version": "legacy"
     },
     {
@@ -335,7 +335,7 @@
       "category": "Container functions",
       "category_url": "container-functions.html",
       "slug": "cryptauthcode",
-      "doc_url": "https://help.claris.com/en/pro-help/content/cryptauthcode.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/cryptauthcode.md",
       "originated_in_version": "16"
     },
     {
@@ -349,7 +349,7 @@
       "category": "Container functions",
       "category_url": "container-functions.html",
       "slug": "cryptdecrypt",
-      "doc_url": "https://help.claris.com/en/pro-help/content/cryptdecrypt.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/cryptdecrypt.md",
       "originated_in_version": "16"
     },
     {
@@ -363,7 +363,7 @@
       "category": "Container functions",
       "category_url": "container-functions.html",
       "slug": "cryptdecryptbase64",
-      "doc_url": "https://help.claris.com/en/pro-help/content/cryptdecryptbase64.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/cryptdecryptbase64.md",
       "originated_in_version": "16"
     },
     {
@@ -377,7 +377,7 @@
       "category": "Container functions",
       "category_url": "container-functions.html",
       "slug": "cryptdigest",
-      "doc_url": "https://help.claris.com/en/pro-help/content/cryptdigest.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/cryptdigest.md",
       "originated_in_version": "16"
     },
     {
@@ -391,7 +391,7 @@
       "category": "Container functions",
       "category_url": "container-functions.html",
       "slug": "cryptencrypt",
-      "doc_url": "https://help.claris.com/en/pro-help/content/cryptencrypt.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/cryptencrypt.md",
       "originated_in_version": "16"
     },
     {
@@ -405,7 +405,7 @@
       "category": "Container functions",
       "category_url": "container-functions.html",
       "slug": "cryptencryptbase64",
-      "doc_url": "https://help.claris.com/en/pro-help/content/cryptencryptbase64.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/cryptencryptbase64.md",
       "originated_in_version": "16"
     },
     {
@@ -421,7 +421,7 @@
       "category": "Container functions",
       "category_url": "container-functions.html",
       "slug": "cryptgeneratesignature",
-      "doc_url": "https://help.claris.com/en/pro-help/content/cryptgeneratesignature.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/cryptgeneratesignature.md",
       "originated_in_version": "18"
     },
     {
@@ -437,7 +437,7 @@
       "category": "Container functions",
       "category_url": "container-functions.html",
       "slug": "cryptverifysignature",
-      "doc_url": "https://help.claris.com/en/pro-help/content/cryptverifysignature.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/cryptverifysignature.md",
       "originated_in_version": "18"
     },
     {
@@ -447,7 +447,7 @@
       "category": "Design functions",
       "category_url": "design-functions.html",
       "slug": "databasenames",
-      "doc_url": "https://help.claris.com/en/pro-help/content/databasenames.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/databasenames.md",
       "originated_in_version": "7"
     },
     {
@@ -462,7 +462,7 @@
       "category": "Date functions",
       "category_url": "date-functions.html",
       "slug": "date",
-      "doc_url": "https://help.claris.com/en/pro-help/content/date.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/date.md",
       "originated_in_version": "legacy"
     },
     {
@@ -475,7 +475,7 @@
       "category": "Date functions",
       "category_url": "date-functions.html",
       "slug": "day",
-      "doc_url": "https://help.claris.com/en/pro-help/content/day.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/day.md",
       "originated_in_version": "legacy"
     },
     {
@@ -488,7 +488,7 @@
       "category": "Date functions",
       "category_url": "date-functions.html",
       "slug": "dayname",
-      "doc_url": "https://help.claris.com/en/pro-help/content/dayname.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/dayname.md",
       "originated_in_version": "legacy"
     },
     {
@@ -501,7 +501,7 @@
       "category": "Japanese functions",
       "category_url": "japanese-functions.html",
       "slug": "daynamej",
-      "doc_url": "https://help.claris.com/en/pro-help/content/daynamej.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/daynamej.md",
       "originated_in_version": "legacy"
     },
     {
@@ -514,7 +514,7 @@
       "category": "Date functions",
       "category_url": "date-functions.html",
       "slug": "dayofweek",
-      "doc_url": "https://help.claris.com/en/pro-help/content/dayofweek.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/dayofweek.md",
       "originated_in_version": "legacy"
     },
     {
@@ -527,7 +527,7 @@
       "category": "Date functions",
       "category_url": "date-functions.html",
       "slug": "dayofyear",
-      "doc_url": "https://help.claris.com/en/pro-help/content/dayofyear.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/dayofyear.md",
       "originated_in_version": "legacy"
     },
     {
@@ -540,7 +540,7 @@
       "category": "Trigonometric functions",
       "category_url": "trigonometric-functions.html",
       "slug": "degrees",
-      "doc_url": "https://help.claris.com/en/pro-help/content/degrees.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/degrees.md",
       "originated_in_version": "legacy"
     },
     {
@@ -554,7 +554,7 @@
       "category": "Number functions",
       "category_url": "number-functions.html",
       "slug": "div",
-      "doc_url": "https://help.claris.com/en/pro-help/content/div.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/div.md",
       "originated_in_version": "legacy"
     },
     {
@@ -569,7 +569,7 @@
       "category": "Logical functions",
       "category_url": "logical-functions.html",
       "slug": "evaluate",
-      "doc_url": "https://help.claris.com/en/pro-help/content/evaluate.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/evaluate.md",
       "originated_in_version": "7"
     },
     {
@@ -582,7 +582,7 @@
       "category": "Logical functions",
       "category_url": "logical-functions.html",
       "slug": "evaluationerror",
-      "doc_url": "https://help.claris.com/en/pro-help/content/evaluationerror.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/evaluationerror.md",
       "originated_in_version": "8"
     },
     {
@@ -596,7 +596,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "exact",
-      "doc_url": "https://help.claris.com/en/pro-help/content/exact.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/exact.md",
       "originated_in_version": "legacy"
     },
     {
@@ -612,7 +612,7 @@
       "category": "Logical functions",
       "category_url": "logical-functions.html",
       "slug": "executesql",
-      "doc_url": "https://help.claris.com/en/pro-help/content/executesql.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/executesql.md",
       "originated_in_version": "12"
     },
     {
@@ -628,7 +628,7 @@
       "category": "Logical functions",
       "category_url": "logical-functions.html",
       "slug": "executesqle",
-      "doc_url": "https://help.claris.com/en/pro-help/content/executesqle.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/executesqle.md",
       "originated_in_version": "21.1.1"
     },
     {
@@ -641,7 +641,7 @@
       "category": "Number functions",
       "category_url": "number-functions.html",
       "slug": "exp",
-      "doc_url": "https://help.claris.com/en/pro-help/content/exp.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/exp.md",
       "originated_in_version": "legacy"
     },
     {
@@ -654,7 +654,7 @@
       "category": "Repeating functions",
       "category_url": "repeating-functions.html",
       "slug": "extend",
-      "doc_url": "https://help.claris.com/en/pro-help/content/extend.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/extend.md",
       "originated_in_version": "7"
     },
     {
@@ -669,7 +669,7 @@
       "category": "Financial functions",
       "category_url": "financial-functions.html",
       "slug": "fv",
-      "doc_url": "https://help.claris.com/en/pro-help/content/fv.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/fv.md",
       "originated_in_version": "legacy"
     },
     {
@@ -683,7 +683,7 @@
       "category": "Number functions",
       "category_url": "number-functions.html",
       "slug": "factorial",
-      "doc_url": "https://help.claris.com/en/pro-help/content/factorial.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/factorial.md",
       "originated_in_version": "legacy"
     },
     {
@@ -698,7 +698,7 @@
       "category": "Design functions",
       "category_url": "design-functions.html",
       "slug": "fieldbounds",
-      "doc_url": "https://help.claris.com/en/pro-help/content/fieldbounds.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/fieldbounds.md",
       "originated_in_version": "7"
     },
     {
@@ -712,7 +712,7 @@
       "category": "Design functions",
       "category_url": "design-functions.html",
       "slug": "fieldcomment",
-      "doc_url": "https://help.claris.com/en/pro-help/content/fieldcomment.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/fieldcomment.md",
       "originated_in_version": "7"
     },
     {
@@ -726,7 +726,7 @@
       "category": "Design functions",
       "category_url": "design-functions.html",
       "slug": "fieldids",
-      "doc_url": "https://help.claris.com/en/pro-help/content/fieldids.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/fieldids.md",
       "originated_in_version": "7"
     },
     {
@@ -740,7 +740,7 @@
       "category": "Design functions",
       "category_url": "design-functions.html",
       "slug": "fieldnames",
-      "doc_url": "https://help.claris.com/en/pro-help/content/fieldnames.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/fieldnames.md",
       "originated_in_version": "7"
     },
     {
@@ -755,7 +755,7 @@
       "category": "Design functions",
       "category_url": "design-functions.html",
       "slug": "fieldrepetitions",
-      "doc_url": "https://help.claris.com/en/pro-help/content/fieldrepetitions.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/fieldrepetitions.md",
       "originated_in_version": "7"
     },
     {
@@ -770,7 +770,7 @@
       "category": "Design functions",
       "category_url": "design-functions.html",
       "slug": "fieldstyle",
-      "doc_url": "https://help.claris.com/en/pro-help/content/fieldstyle.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/fieldstyle.md",
       "originated_in_version": "7"
     },
     {
@@ -784,7 +784,7 @@
       "category": "Design functions",
       "category_url": "design-functions.html",
       "slug": "fieldtype",
-      "doc_url": "https://help.claris.com/en/pro-help/content/fieldtype.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/fieldtype.md",
       "originated_in_version": "7"
     },
     {
@@ -798,7 +798,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "filter",
-      "doc_url": "https://help.claris.com/en/pro-help/content/filter.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/filter.md",
       "originated_in_version": "legacy"
     },
     {
@@ -812,7 +812,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "filtervalues",
-      "doc_url": "https://help.claris.com/en/pro-help/content/filtervalues.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/filtervalues.md",
       "originated_in_version": "12"
     },
     {
@@ -825,7 +825,7 @@
       "category": "Number functions",
       "category_url": "number-functions.html",
       "slug": "floor",
-      "doc_url": "https://help.claris.com/en/pro-help/content/floor.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/floor.md",
       "originated_in_version": "legacy"
     },
     {
@@ -839,7 +839,7 @@
       "category": "Japanese functions",
       "category_url": "japanese-functions.html",
       "slug": "furigana",
-      "doc_url": "https://help.claris.com/en/pro-help/content/furigana.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/furigana.md",
       "originated_in_version": "legacy"
     },
     {
@@ -852,7 +852,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-accountextendedprivileges",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-accountextendedprivileges.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-accountextendedprivileges.md",
       "originated_in_version": "7"
     },
     {
@@ -865,7 +865,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-accountgroupname",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-accountgroupname.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-accountgroupname.md",
       "originated_in_version": "16"
     },
     {
@@ -878,7 +878,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-accountname",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-accountname.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-accountname.md",
       "originated_in_version": "7"
     },
     {
@@ -891,7 +891,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-accountprivilegesetname",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-accountprivilegesetname.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-accountprivilegesetname.md",
       "originated_in_version": "7"
     },
     {
@@ -904,7 +904,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-accounttype",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-accounttype.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-accounttype.md",
       "originated_in_version": "14"
     },
     {
@@ -917,7 +917,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-activefieldcontents",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-activefieldcontents.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-activefieldcontents.md",
       "originated_in_version": "8"
     },
     {
@@ -930,7 +930,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-activefieldname",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-activefieldname.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-activefieldname.md",
       "originated_in_version": "8"
     },
     {
@@ -943,7 +943,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-activefieldtablename",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-activefieldtablename.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-activefieldtablename.md",
       "originated_in_version": "8"
     },
     {
@@ -956,7 +956,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-activelayoutobjectname",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-activelayoutobjectname.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-activelayoutobjectname.md",
       "originated_in_version": "12"
     },
     {
@@ -969,7 +969,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-activemodifierkeys",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-activemodifierkeys.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-activemodifierkeys.md",
       "originated_in_version": "legacy"
     },
     {
@@ -982,7 +982,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-activeportalrownumber",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-activeportalrownumber.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-activeportalrownumber.md",
       "originated_in_version": "8"
     },
     {
@@ -995,7 +995,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-activerecordnumber",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-activerecordnumber.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-activerecordnumber.md",
       "originated_in_version": "17"
     },
     {
@@ -1008,7 +1008,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-activerepetitionnumber",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-activerepetitionnumber.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-activerepetitionnumber.md",
       "originated_in_version": "8"
     },
     {
@@ -1021,7 +1021,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-activeselectionsize",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-activeselectionsize.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-activeselectionsize.md",
       "originated_in_version": "8"
     },
     {
@@ -1034,7 +1034,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-activeselectionstart",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-activeselectionstart.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-activeselectionstart.md",
       "originated_in_version": "8"
     },
     {
@@ -1047,7 +1047,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-allowabortstate",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-allowabortstate.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-allowabortstate.md",
       "originated_in_version": "10"
     },
     {
@@ -1060,7 +1060,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-allowformattingbarstate",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-allowformattingbarstate.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-allowformattingbarstate.md",
       "originated_in_version": "9"
     },
     {
@@ -1073,7 +1073,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-applicationarchitecture",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-applicationarchitecture.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-applicationarchitecture.md",
       "originated_in_version": "18"
     },
     {
@@ -1086,7 +1086,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-applicationlanguage",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-applicationlanguage.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-applicationlanguage.md",
       "originated_in_version": "7"
     },
     {
@@ -1099,7 +1099,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-applicationversion",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-applicationversion.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-applicationversion.md",
       "originated_in_version": "7"
     },
     {
@@ -1112,7 +1112,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-cachefilename",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-cachefilename.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-cachefilename.md",
       "originated_in_version": "20.1.1"
     },
     {
@@ -1125,7 +1125,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-cachefilepath",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-cachefilepath.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-cachefilepath.md",
       "originated_in_version": "20.1.1"
     },
     {
@@ -1138,7 +1138,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-calculationrepetitionnumber",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-calculationrepetitionnumber.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-calculationrepetitionnumber.md",
       "originated_in_version": "8"
     },
     {
@@ -1151,7 +1151,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-connectionattributes",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-connectionattributes.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-connectionattributes.md",
       "originated_in_version": "18"
     },
     {
@@ -1164,7 +1164,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-connectionstate",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-connectionstate.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-connectionstate.md",
       "originated_in_version": "13"
     },
     {
@@ -1177,7 +1177,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-currentdate",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-currentdate.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-currentdate.md",
       "originated_in_version": "legacy"
     },
     {
@@ -1190,7 +1190,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-currentextendedprivileges",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-currentextendedprivileges.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-currentextendedprivileges.md",
       "originated_in_version": "7"
     },
     {
@@ -1203,7 +1203,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-currenthosttimestamp",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-currenthosttimestamp.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-currenthosttimestamp.md",
       "originated_in_version": "10"
     },
     {
@@ -1216,7 +1216,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-currentprivilegesetname",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-currentprivilegesetname.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-currentprivilegesetname.md",
       "originated_in_version": "7"
     },
     {
@@ -1229,7 +1229,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-currenttime",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-currenttime.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-currenttime.md",
       "originated_in_version": "legacy"
     },
     {
@@ -1242,7 +1242,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-currenttimeutcmicroseconds",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-currenttimeutcmicroseconds.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-currenttimeutcmicroseconds.md",
       "originated_in_version": "16"
     },
     {
@@ -1255,7 +1255,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-currenttimeutcmilliseconds",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-currenttimeutcmilliseconds.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-currenttimeutcmilliseconds.md",
       "originated_in_version": "16"
     },
     {
@@ -1268,7 +1268,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-currenttimestamp",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-currenttimestamp.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-currenttimestamp.md",
       "originated_in_version": "legacy"
     },
     {
@@ -1281,7 +1281,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-custommenusetname",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-custommenusetname.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-custommenusetname.md",
       "originated_in_version": "9"
     },
     {
@@ -1294,7 +1294,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-desktoppath",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-desktoppath.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-desktoppath.md",
       "originated_in_version": "7"
     },
     {
@@ -1307,7 +1307,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-device",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-device.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-device.md",
       "originated_in_version": "7"
     },
     {
@@ -1320,7 +1320,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-documentspath",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-documentspath.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-documentspath.md",
       "originated_in_version": "7"
     },
     {
@@ -1333,7 +1333,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-documentspathlisting",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-documentspathlisting.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-documentspathlisting.md",
       "originated_in_version": "11"
     },
     {
@@ -1346,7 +1346,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-encryptionstate",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-encryptionstate.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-encryptionstate.md",
       "originated_in_version": "13"
     },
     {
@@ -1359,7 +1359,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-errorcapturestate",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-errorcapturestate.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-errorcapturestate.md",
       "originated_in_version": "10"
     },
     {
@@ -1372,7 +1372,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-filelocaleelements",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-filelocaleelements.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-filelocaleelements.md",
       "originated_in_version": "8"
     },
     {
@@ -1385,7 +1385,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-filemakerpath",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-filemakerpath.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-filemakerpath.md",
       "originated_in_version": "7"
     },
     {
@@ -1398,7 +1398,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-filename",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-filename.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-filename.md",
       "originated_in_version": "7"
     },
     {
@@ -1411,7 +1411,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-filepath",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-filepath.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-filepath.md",
       "originated_in_version": "7"
     },
     {
@@ -1424,7 +1424,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-filesize",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-filesize.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-filesize.md",
       "originated_in_version": "7"
     },
     {
@@ -1437,7 +1437,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-foundcount",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-foundcount.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-foundcount.md",
       "originated_in_version": "7"
     },
     {
@@ -1450,7 +1450,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-highcontraststate",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-highcontraststate.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-highcontraststate.md",
       "originated_in_version": "legacy"
     },
     {
@@ -1463,7 +1463,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-hostapplicationversion",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-hostapplicationversion.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-hostapplicationversion.md",
       "originated_in_version": "11"
     },
     {
@@ -1476,7 +1476,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-hostipaddress",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-hostipaddress.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-hostipaddress.md",
       "originated_in_version": "7"
     },
     {
@@ -1489,7 +1489,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-hostname",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-hostname.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-hostname.md",
       "originated_in_version": "7"
     },
     {
@@ -1502,7 +1502,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-installedfmplugins",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-installedfmplugins.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-installedfmplugins.md",
       "originated_in_version": "legacy"
     },
     {
@@ -1515,7 +1515,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-installedfmpluginsasjson",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-installedfmpluginsasjson.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-installedfmpluginsasjson.md",
       "originated_in_version": "19.3"
     },
     {
@@ -1528,7 +1528,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-lasterror",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-lasterror.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-lasterror.md",
       "originated_in_version": "7"
     },
     {
@@ -1541,7 +1541,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-lasterrordetail",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-lasterrordetail.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-lasterrordetail.md",
       "originated_in_version": "16"
     },
     {
@@ -1554,7 +1554,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-lasterrorlocation",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-lasterrorlocation.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-lasterrorlocation.md",
       "originated_in_version": "16"
     },
     {
@@ -1567,7 +1567,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-lastmessagechoice",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-lastmessagechoice.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-lastmessagechoice.md",
       "originated_in_version": "7"
     },
     {
@@ -1580,7 +1580,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-laststeptokensused",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-laststeptokensused.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-laststeptokensused.md",
       "originated_in_version": "21.0.1"
     },
     {
@@ -1593,7 +1593,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-layoutaccess",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-layoutaccess.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-layoutaccess.md",
       "originated_in_version": "8"
     },
     {
@@ -1606,7 +1606,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-layoutcount",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-layoutcount.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-layoutcount.md",
       "originated_in_version": "7"
     },
     {
@@ -1619,7 +1619,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-layoutname",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-layoutname.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-layoutname.md",
       "originated_in_version": "7"
     },
     {
@@ -1632,7 +1632,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-layoutnumber",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-layoutnumber.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-layoutnumber.md",
       "originated_in_version": "7"
     },
     {
@@ -1645,7 +1645,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-layouttablename",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-layouttablename.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-layouttablename.md",
       "originated_in_version": "7"
     },
     {
@@ -1658,7 +1658,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-layoutviewstate",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-layoutviewstate.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-layoutviewstate.md",
       "originated_in_version": "9"
     },
     {
@@ -1671,7 +1671,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-menubarstate",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-menubarstate.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-menubarstate.md",
       "originated_in_version": "9"
     },
     {
@@ -1684,7 +1684,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-modifiedfields",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-modifiedfields.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-modifiedfields.md",
       "originated_in_version": "11"
     },
     {
@@ -1697,7 +1697,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-multiuserstate",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-multiuserstate.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-multiuserstate.md",
       "originated_in_version": "10"
     },
     {
@@ -1710,7 +1710,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-networkprotocol",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-networkprotocol.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-networkprotocol.md",
       "originated_in_version": "7"
     },
     {
@@ -1723,7 +1723,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-networktype",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-networktype.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-networktype.md",
       "originated_in_version": "7"
     },
     {
@@ -1736,7 +1736,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-opendatafileinfo",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-opendatafileinfo.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-opendatafileinfo.md",
       "originated_in_version": "19"
     },
     {
@@ -1749,7 +1749,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-pagecount",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-pagecount.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-pagecount.md",
       "originated_in_version": "7"
     },
     {
@@ -1762,7 +1762,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-pagenumber",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-pagenumber.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-pagenumber.md",
       "originated_in_version": "7"
     },
     {
@@ -1775,7 +1775,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-persistentid",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-persistentid.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-persistentid.md",
       "originated_in_version": "18"
     },
     {
@@ -1788,7 +1788,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-preferencespath",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-preferencespath.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-preferencespath.md",
       "originated_in_version": "7"
     },
     {
@@ -1801,7 +1801,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-printername",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-printername.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-printername.md",
       "originated_in_version": "7"
     },
     {
@@ -1814,7 +1814,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-quickfindtext",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-quickfindtext.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-quickfindtext.md",
       "originated_in_version": "12"
     },
     {
@@ -1827,7 +1827,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-recordaccess",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-recordaccess.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-recordaccess.md",
       "originated_in_version": "8"
     },
     {
@@ -1840,7 +1840,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-recordid",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-recordid.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-recordid.md",
       "originated_in_version": "7"
     },
     {
@@ -1853,7 +1853,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-recordmodificationcount",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-recordmodificationcount.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-recordmodificationcount.md",
       "originated_in_version": "7"
     },
     {
@@ -1866,7 +1866,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-recordnumber",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-recordnumber.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-recordnumber.md",
       "originated_in_version": "7"
     },
     {
@@ -1879,7 +1879,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-recordopencount",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-recordopencount.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-recordopencount.md",
       "originated_in_version": "11"
     },
     {
@@ -1892,7 +1892,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-recordopenstate",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-recordopenstate.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-recordopenstate.md",
       "originated_in_version": "7"
     },
     {
@@ -1905,7 +1905,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-regionmonitorevents",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-regionmonitorevents.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-regionmonitorevents.md",
       "originated_in_version": "16"
     },
     {
@@ -1918,7 +1918,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-requestcount",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-requestcount.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-requestcount.md",
       "originated_in_version": "7"
     },
     {
@@ -1931,7 +1931,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-requestomitstate",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-requestomitstate.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-requestomitstate.md",
       "originated_in_version": "7"
     },
     {
@@ -1944,7 +1944,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-reverttransactiononerrorstate",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-reverttransactiononerrorstate.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-reverttransactiononerrorstate.md",
       "originated_in_version": "21.1.1"
     },
     {
@@ -1957,7 +1957,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-screendepth",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-screendepth.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-screendepth.md",
       "originated_in_version": "7"
     },
     {
@@ -1970,7 +1970,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-screenheight",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-screenheight.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-screenheight.md",
       "originated_in_version": "7"
     },
     {
@@ -1983,7 +1983,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-screenscalefactor",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-screenscalefactor.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-screenscalefactor.md",
       "originated_in_version": "12"
     },
     {
@@ -1996,7 +1996,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-screenwidth",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-screenwidth.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-screenwidth.md",
       "originated_in_version": "7"
     },
     {
@@ -2009,7 +2009,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-scriptanimationstate",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-scriptanimationstate.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-scriptanimationstate.md",
       "originated_in_version": "13"
     },
     {
@@ -2022,7 +2022,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-scriptname",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-scriptname.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-scriptname.md",
       "originated_in_version": "7"
     },
     {
@@ -2035,7 +2035,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-scriptparameter",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-scriptparameter.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-scriptparameter.md",
       "originated_in_version": "7"
     },
     {
@@ -2048,7 +2048,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-scriptresult",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-scriptresult.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-scriptresult.md",
       "originated_in_version": "7"
     },
     {
@@ -2061,7 +2061,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-sessionidentifier",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-sessionidentifier.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-sessionidentifier.md",
       "originated_in_version": "19"
     },
     {
@@ -2074,7 +2074,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-sortstate",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-sortstate.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-sortstate.md",
       "originated_in_version": "7"
     },
     {
@@ -2087,7 +2087,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-statusareastate",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-statusareastate.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-statusareastate.md",
       "originated_in_version": "7"
     },
     {
@@ -2100,7 +2100,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-systemappearance",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-systemappearance.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-systemappearance.md",
       "originated_in_version": "legacy"
     },
     {
@@ -2113,7 +2113,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-systemdrive",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-systemdrive.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-systemdrive.md",
       "originated_in_version": "7"
     },
     {
@@ -2126,7 +2126,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-systemipaddress",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-systemipaddress.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-systemipaddress.md",
       "originated_in_version": "7"
     },
     {
@@ -2139,7 +2139,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-systemlanguage",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-systemlanguage.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-systemlanguage.md",
       "originated_in_version": "7"
     },
     {
@@ -2152,7 +2152,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-systemlocaleelements",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-systemlocaleelements.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-systemlocaleelements.md",
       "originated_in_version": "8"
     },
     {
@@ -2165,7 +2165,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-systemnicaddress",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-systemnicaddress.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-systemnicaddress.md",
       "originated_in_version": "7"
     },
     {
@@ -2178,7 +2178,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-systemplatform",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-systemplatform.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-systemplatform.md",
       "originated_in_version": "7"
     },
     {
@@ -2191,7 +2191,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-systemstorageavailable",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-systemstorageavailable.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-systemstorageavailable.md",
       "originated_in_version": "21.1.1"
     },
     {
@@ -2204,7 +2204,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-systemversion",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-systemversion.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-systemversion.md",
       "originated_in_version": "7"
     },
     {
@@ -2217,7 +2217,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-temporarypath",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-temporarypath.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-temporarypath.md",
       "originated_in_version": "7"
     },
     {
@@ -2230,7 +2230,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-textrulervisible",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-textrulervisible.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-textrulervisible.md",
       "originated_in_version": "7"
     },
     {
@@ -2243,7 +2243,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-totalrecordcount",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-totalrecordcount.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-totalrecordcount.md",
       "originated_in_version": "7"
     },
     {
@@ -2256,7 +2256,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-touchkeyboardstate",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-touchkeyboardstate.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-touchkeyboardstate.md",
       "originated_in_version": "14"
     },
     {
@@ -2269,7 +2269,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-transactionopenstate",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-transactionopenstate.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-transactionopenstate.md",
       "originated_in_version": "19"
     },
     {
@@ -2282,7 +2282,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-triggercurrentpanel",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-triggercurrentpanel.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-triggercurrentpanel.md",
       "originated_in_version": "15"
     },
     {
@@ -2295,7 +2295,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-triggerexternalevent",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-triggerexternalevent.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-triggerexternalevent.md",
       "originated_in_version": "15"
     },
     {
@@ -2308,7 +2308,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-triggergestureinfo",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-triggergestureinfo.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-triggergestureinfo.md",
       "originated_in_version": "15"
     },
     {
@@ -2321,7 +2321,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-triggerkeystroke",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-triggerkeystroke.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-triggerkeystroke.md",
       "originated_in_version": "11"
     },
     {
@@ -2334,7 +2334,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-triggermodifierkeys",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-triggermodifierkeys.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-triggermodifierkeys.md",
       "originated_in_version": "11"
     },
     {
@@ -2347,7 +2347,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-triggertargetpanel",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-triggertargetpanel.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-triggertargetpanel.md",
       "originated_in_version": "15"
     },
     {
@@ -2360,7 +2360,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-uuid",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-uuid.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-uuid.md",
       "originated_in_version": "15"
     },
     {
@@ -2373,7 +2373,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-uuidnumber",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-uuidnumber.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-uuidnumber.md",
       "originated_in_version": "17"
     },
     {
@@ -2386,7 +2386,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-usesystemformatsstate",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-usesystemformatsstate.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-usesystemformatsstate.md",
       "originated_in_version": "8"
     },
     {
@@ -2399,7 +2399,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-usercount",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-usercount.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-usercount.md",
       "originated_in_version": "7"
     },
     {
@@ -2412,7 +2412,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-username",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-username.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-username.md",
       "originated_in_version": "7"
     },
     {
@@ -2425,7 +2425,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-windowcontentheight",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowcontentheight.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowcontentheight.md",
       "originated_in_version": "8"
     },
     {
@@ -2438,7 +2438,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-windowcontentwidth",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowcontentwidth.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowcontentwidth.md",
       "originated_in_version": "8"
     },
     {
@@ -2451,7 +2451,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-windowdesktopheight",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowdesktopheight.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowdesktopheight.md",
       "originated_in_version": "8"
     },
     {
@@ -2464,7 +2464,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-windowdesktopwidth",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowdesktopwidth.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowdesktopwidth.md",
       "originated_in_version": "8"
     },
     {
@@ -2477,7 +2477,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-windowheight",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowheight.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowheight.md",
       "originated_in_version": "7"
     },
     {
@@ -2490,7 +2490,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-windowleft",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowleft.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowleft.md",
       "originated_in_version": "7"
     },
     {
@@ -2503,7 +2503,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-windowmode",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowmode.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowmode.md",
       "originated_in_version": "7"
     },
     {
@@ -2516,7 +2516,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-windowname",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowname.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowname.md",
       "originated_in_version": "7"
     },
     {
@@ -2529,7 +2529,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-windoworientation",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-windoworientation.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windoworientation.md",
       "originated_in_version": "13"
     },
     {
@@ -2542,7 +2542,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-windowstyle",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowstyle.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowstyle.md",
       "originated_in_version": "16"
     },
     {
@@ -2555,7 +2555,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-windowtop",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowtop.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowtop.md",
       "originated_in_version": "7"
     },
     {
@@ -2568,7 +2568,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-windowvisible",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowvisible.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowvisible.md",
       "originated_in_version": "13"
     },
     {
@@ -2581,7 +2581,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-windowwidth",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowwidth.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowwidth.md",
       "originated_in_version": "7"
     },
     {
@@ -2594,7 +2594,7 @@
       "category": "Get functions",
       "category_url": "get-functions.html",
       "slug": "get-windowzoomlevel",
-      "doc_url": "https://help.claris.com/en/pro-help/content/get-windowzoomlevel.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowzoomlevel.md",
       "originated_in_version": "8"
     },
     {
@@ -2607,7 +2607,7 @@
       "category": "Mobile functions",
       "category_url": "mobile-functions.html",
       "slug": "getavplayerattribute",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getavplayerattribute.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getavplayerattribute.md",
       "originated_in_version": "15"
     },
     {
@@ -2620,7 +2620,7 @@
       "category": "Miscellaneous functions",
       "category_url": "miscellaneous-functions.html",
       "slug": "getaddoninfo",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getaddoninfo.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getaddoninfo.md",
       "originated_in_version": "19.3"
     },
     {
@@ -2633,7 +2633,7 @@
       "category": "Logical functions",
       "category_url": "logical-functions.html",
       "slug": "getasboolean",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getasboolean.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getasboolean.md",
       "originated_in_version": "12"
     },
     {
@@ -2646,7 +2646,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "getascss",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getascss.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getascss.md",
       "originated_in_version": "11"
     },
     {
@@ -2659,7 +2659,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "getasdate",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getasdate.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getasdate.md",
       "originated_in_version": "7"
     },
     {
@@ -2672,7 +2672,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "getasnumber",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getasnumber.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getasnumber.md",
       "originated_in_version": "7"
     },
     {
@@ -2685,7 +2685,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "getassvg",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getassvg.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getassvg.md",
       "originated_in_version": "11"
     },
     {
@@ -2698,7 +2698,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "getastext",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getastext.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getastext.md",
       "originated_in_version": "7"
     },
     {
@@ -2711,7 +2711,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "getastime",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getastime.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getastime.md",
       "originated_in_version": "7"
     },
     {
@@ -2724,7 +2724,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "getastimestamp",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getastimestamp.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getastimestamp.md",
       "originated_in_version": "7"
     },
     {
@@ -2737,7 +2737,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "getasurlencoded",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getasurlencoded.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getasurlencoded.md",
       "originated_in_version": "15"
     },
     {
@@ -2750,7 +2750,7 @@
       "category": "Miscellaneous functions",
       "category_url": "miscellaneous-functions.html",
       "slug": "getbasetablename",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getbasetablename.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getbasetablename.md",
       "originated_in_version": "20.1.1"
     },
     {
@@ -2764,7 +2764,7 @@
       "category": "Container functions",
       "category_url": "container-functions.html",
       "slug": "getcontainerattribute",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getcontainerattribute.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getcontainerattribute.md",
       "originated_in_version": "13"
     },
     {
@@ -2779,7 +2779,7 @@
       "category": "Artificial intelligence functions",
       "category_url": "artificial-intelligence-functions.html",
       "slug": "getembedding",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getembedding.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getembedding.md",
       "originated_in_version": "21.0.1"
     },
     {
@@ -2793,7 +2793,7 @@
       "category": "Artificial intelligence functions",
       "category_url": "artificial-intelligence-functions.html",
       "slug": "getembeddingasfile",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getembeddingasfile.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getembeddingasfile.md",
       "originated_in_version": "21.0.1"
     },
     {
@@ -2806,7 +2806,7 @@
       "category": "Artificial intelligence functions",
       "category_url": "artificial-intelligence-functions.html",
       "slug": "getembeddingastext",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getembeddingastext.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getembeddingastext.md",
       "originated_in_version": "21.0.1"
     },
     {
@@ -2819,7 +2819,7 @@
       "category": "Logical functions",
       "category_url": "logical-functions.html",
       "slug": "getfield",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getfield.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getfield.md",
       "originated_in_version": "8"
     },
     {
@@ -2832,7 +2832,7 @@
       "category": "Miscellaneous functions",
       "category_url": "miscellaneous-functions.html",
       "slug": "getfieldname",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getfieldname.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getfieldname.md",
       "originated_in_version": "10"
     },
     {
@@ -2845,7 +2845,7 @@
       "category": "Artificial intelligence functions",
       "category_url": "artificial-intelligence-functions.html",
       "slug": "getfieldsonlayout",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getfieldsonlayout.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getfieldsonlayout.md",
       "originated_in_version": "22.0.1"
     },
     {
@@ -2858,7 +2858,7 @@
       "category": "Container functions",
       "category_url": "container-functions.html",
       "slug": "getheight",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getheight.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getheight.md",
       "originated_in_version": "7"
     },
     {
@@ -2874,7 +2874,7 @@
       "category": "Miscellaneous functions",
       "category_url": "miscellaneous-functions.html",
       "slug": "getlayoutobjectattribute",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getlayoutobjectattribute.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getlayoutobjectattribute.md",
       "originated_in_version": "8"
     },
     {
@@ -2887,7 +2887,7 @@
       "category": "Miscellaneous functions",
       "category_url": "miscellaneous-functions.html",
       "slug": "getlayoutobjectownerinfo",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getlayoutobjectownerinfo.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getlayoutobjectownerinfo.md",
       "originated_in_version": "19"
     },
     {
@@ -2901,7 +2901,7 @@
       "category": "Container functions",
       "category_url": "container-functions.html",
       "slug": "getlivetext",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getlivetext.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getlivetext.md",
       "originated_in_version": "19"
     },
     {
@@ -2915,7 +2915,7 @@
       "category": "Container functions",
       "category_url": "container-functions.html",
       "slug": "getlivetextasjson",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getlivetextasjson.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getlivetextasjson.md",
       "originated_in_version": "21.0.1"
     },
     {
@@ -2928,7 +2928,7 @@
       "category": "Artificial intelligence functions",
       "category_url": "artificial-intelligence-functions.html",
       "slug": "getmodelattributes",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getmodelattributes.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getmodelattributes.md",
       "originated_in_version": "19.3"
     },
     {
@@ -2942,7 +2942,7 @@
       "category": "Design functions",
       "category_url": "design-functions.html",
       "slug": "getnextserialvalue",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getnextserialvalue.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getnextserialvalue.md",
       "originated_in_version": "13"
     },
     {
@@ -2956,7 +2956,7 @@
       "category": "Logical functions",
       "category_url": "logical-functions.html",
       "slug": "getnthrecord",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getnthrecord.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getnthrecord.md",
       "originated_in_version": "10"
     },
     {
@@ -2970,7 +2970,7 @@
       "category": "Artificial intelligence functions",
       "category_url": "artificial-intelligence-functions.html",
       "slug": "getragspaceinfo",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getragspaceinfo.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getragspaceinfo.md",
       "originated_in_version": "22.0.1"
     },
     {
@@ -2983,7 +2983,7 @@
       "category": "Miscellaneous functions",
       "category_url": "miscellaneous-functions.html",
       "slug": "getrecordidsfromfoundset",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getrecordidsfromfoundset.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getrecordidsfromfoundset.md",
       "originated_in_version": "22.0.1"
     },
     {
@@ -2997,7 +2997,7 @@
       "category": "Repeating functions",
       "category_url": "repeating-functions.html",
       "slug": "getrepetition",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getrepetition.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getrepetition.md",
       "originated_in_version": "8"
     },
     {
@@ -3012,7 +3012,7 @@
       "category": "Mobile functions",
       "category_url": "mobile-functions.html",
       "slug": "getsensor",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getsensor.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getsensor.md",
       "originated_in_version": "15"
     },
     {
@@ -3026,7 +3026,7 @@
       "category": "Logical functions",
       "category_url": "logical-functions.html",
       "slug": "getsummary",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getsummary.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getsummary.md",
       "originated_in_version": "9"
     },
     {
@@ -3040,7 +3040,7 @@
       "category": "Artificial intelligence functions",
       "category_url": "artificial-intelligence-functions.html",
       "slug": "gettableddl",
-      "doc_url": "https://help.claris.com/en/pro-help/content/gettableddl.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/gettableddl.md",
       "originated_in_version": "21.0.1"
     },
     {
@@ -3053,7 +3053,7 @@
       "category": "Container functions",
       "category_url": "container-functions.html",
       "slug": "gettextfrompdf",
-      "doc_url": "https://help.claris.com/en/pro-help/content/gettextfrompdf.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/gettextfrompdf.md",
       "originated_in_version": "22.0.1"
     },
     {
@@ -3068,7 +3068,7 @@
       "category": "Container functions",
       "category_url": "container-functions.html",
       "slug": "getthumbnail",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getthumbnail.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getthumbnail.md",
       "originated_in_version": "12"
     },
     {
@@ -3081,7 +3081,7 @@
       "category": "Artificial intelligence functions",
       "category_url": "artificial-intelligence-functions.html",
       "slug": "gettokencount",
-      "doc_url": "https://help.claris.com/en/pro-help/content/gettokencount.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/gettokencount.md",
       "originated_in_version": "21.0.1"
     },
     {
@@ -3095,7 +3095,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "getvalue",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getvalue.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getvalue.md",
       "originated_in_version": "15"
     },
     {
@@ -3108,7 +3108,7 @@
       "category": "Container functions",
       "category_url": "container-functions.html",
       "slug": "getwidth",
-      "doc_url": "https://help.claris.com/en/pro-help/content/getwidth.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getwidth.md",
       "originated_in_version": "7"
     },
     {
@@ -3122,7 +3122,7 @@
       "category": "Container functions",
       "category_url": "container-functions.html",
       "slug": "hexdecode",
-      "doc_url": "https://help.claris.com/en/pro-help/content/hexdecode.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/hexdecode.md",
       "originated_in_version": "16"
     },
     {
@@ -3135,7 +3135,7 @@
       "category": "Container functions",
       "category_url": "container-functions.html",
       "slug": "hexencode",
-      "doc_url": "https://help.claris.com/en/pro-help/content/hexencode.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/hexencode.md",
       "originated_in_version": "16"
     },
     {
@@ -3148,7 +3148,7 @@
       "category": "Japanese functions",
       "category_url": "japanese-functions.html",
       "slug": "hiragana",
-      "doc_url": "https://help.claris.com/en/pro-help/content/hiragana.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/hiragana.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3161,7 +3161,7 @@
       "category": "Time functions",
       "category_url": "time-functions.html",
       "slug": "hour",
-      "doc_url": "https://help.claris.com/en/pro-help/content/hour.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/hour.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3176,7 +3176,7 @@
       "category": "Logical functions",
       "category_url": "logical-functions.html",
       "slug": "if-function",
-      "doc_url": "https://help.claris.com/en/pro-help/content/if-function.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/if-function.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3189,7 +3189,7 @@
       "category": "Number functions",
       "category_url": "number-functions.html",
       "slug": "int",
-      "doc_url": "https://help.claris.com/en/pro-help/content/int.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/int.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3202,7 +3202,7 @@
       "category": "Logical functions",
       "category_url": "logical-functions.html",
       "slug": "isempty",
-      "doc_url": "https://help.claris.com/en/pro-help/content/isempty.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/isempty.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3215,7 +3215,7 @@
       "category": "Logical functions",
       "category_url": "logical-functions.html",
       "slug": "isvalid",
-      "doc_url": "https://help.claris.com/en/pro-help/content/isvalid.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/isvalid.md",
       "originated_in_version": "7"
     },
     {
@@ -3228,7 +3228,7 @@
       "category": "Logical functions",
       "category_url": "logical-functions.html",
       "slug": "isvalidexpression",
-      "doc_url": "https://help.claris.com/en/pro-help/content/isvalidexpression.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/isvalidexpression.md",
       "originated_in_version": "9"
     },
     {
@@ -3242,7 +3242,7 @@
       "category": "JSON functions",
       "category_url": "json-functions-category.html",
       "slug": "jsondeleteelement",
-      "doc_url": "https://help.claris.com/en/pro-help/content/jsondeleteelement.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/jsondeleteelement.md",
       "originated_in_version": "16"
     },
     {
@@ -3255,7 +3255,7 @@
       "category": "JSON functions",
       "category_url": "json-functions-category.html",
       "slug": "jsonformatelements",
-      "doc_url": "https://help.claris.com/en/pro-help/content/jsonformatelements.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/jsonformatelements.md",
       "originated_in_version": "16"
     },
     {
@@ -3269,7 +3269,7 @@
       "category": "JSON functions",
       "category_url": "json-functions-category.html",
       "slug": "jsongetelement",
-      "doc_url": "https://help.claris.com/en/pro-help/content/jsongetelement.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/jsongetelement.md",
       "originated_in_version": "16"
     },
     {
@@ -3283,7 +3283,7 @@
       "category": "JSON functions",
       "category_url": "json-functions-category.html",
       "slug": "jsongetelementtype",
-      "doc_url": "https://help.claris.com/en/pro-help/content/jsongetelementtype.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/jsongetelementtype.md",
       "originated_in_version": "16"
     },
     {
@@ -3297,7 +3297,7 @@
       "category": "JSON functions",
       "category_url": "json-functions-category.html",
       "slug": "jsonlistkeys",
-      "doc_url": "https://help.claris.com/en/pro-help/content/jsonlistkeys.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/jsonlistkeys.md",
       "originated_in_version": "16"
     },
     {
@@ -3311,7 +3311,7 @@
       "category": "JSON functions",
       "category_url": "json-functions-category.html",
       "slug": "jsonlistvalues",
-      "doc_url": "https://help.claris.com/en/pro-help/content/jsonlistvalues.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/jsonlistvalues.md",
       "originated_in_version": "16"
     },
     {
@@ -3326,7 +3326,7 @@
       "category": "JSON functions",
       "category_url": "json-functions-category.html",
       "slug": "jsonmakearray",
-      "doc_url": "https://help.claris.com/en/pro-help/content/jsonmakearray.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/jsonmakearray.md",
       "originated_in_version": "21.0.1"
     },
     {
@@ -3339,7 +3339,7 @@
       "category": "JSON functions",
       "category_url": "json-functions-category.html",
       "slug": "jsonparse",
-      "doc_url": "https://help.claris.com/en/pro-help/content/jsonparse.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/jsonparse.md",
       "originated_in_version": "22.0.1"
     },
     {
@@ -3352,7 +3352,7 @@
       "category": "JSON functions",
       "category_url": "json-functions-category.html",
       "slug": "jsonparsedstate",
-      "doc_url": "https://help.claris.com/en/pro-help/content/jsonparsedstate.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/jsonparsedstate.md",
       "originated_in_version": "22.0.1"
     },
     {
@@ -3368,7 +3368,7 @@
       "category": "JSON functions",
       "category_url": "json-functions-category.html",
       "slug": "jsonsetelement",
-      "doc_url": "https://help.claris.com/en/pro-help/content/jsonsetelement.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/jsonsetelement.md",
       "originated_in_version": "16"
     },
     {
@@ -3381,7 +3381,7 @@
       "category": "Japanese functions",
       "category_url": "japanese-functions.html",
       "slug": "kanahankaku",
-      "doc_url": "https://help.claris.com/en/pro-help/content/kanahankaku.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/kanahankaku.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3394,7 +3394,7 @@
       "category": "Japanese functions",
       "category_url": "japanese-functions.html",
       "slug": "kanazenkaku",
-      "doc_url": "https://help.claris.com/en/pro-help/content/kanazenkaku.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/kanazenkaku.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3407,7 +3407,7 @@
       "category": "Japanese functions",
       "category_url": "japanese-functions.html",
       "slug": "kanjinumeral",
-      "doc_url": "https://help.claris.com/en/pro-help/content/kanjinumeral.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/kanjinumeral.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3420,7 +3420,7 @@
       "category": "Japanese functions",
       "category_url": "japanese-functions.html",
       "slug": "katakana",
-      "doc_url": "https://help.claris.com/en/pro-help/content/katakana.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/katakana.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3433,7 +3433,7 @@
       "category": "Repeating functions",
       "category_url": "repeating-functions.html",
       "slug": "last",
-      "doc_url": "https://help.claris.com/en/pro-help/content/last.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/last.md",
       "originated_in_version": "7"
     },
     {
@@ -3446,7 +3446,7 @@
       "category": "Design functions",
       "category_url": "design-functions.html",
       "slug": "layoutids",
-      "doc_url": "https://help.claris.com/en/pro-help/content/layoutids.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/layoutids.md",
       "originated_in_version": "7"
     },
     {
@@ -3459,7 +3459,7 @@
       "category": "Design functions",
       "category_url": "design-functions.html",
       "slug": "layoutnames",
-      "doc_url": "https://help.claris.com/en/pro-help/content/layoutnames.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/layoutnames.md",
       "originated_in_version": "7"
     },
     {
@@ -3473,7 +3473,7 @@
       "category": "Design functions",
       "category_url": "design-functions.html",
       "slug": "layoutobjectnames",
-      "doc_url": "https://help.claris.com/en/pro-help/content/layoutobjectnames.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/layoutobjectnames.md",
       "originated_in_version": "12"
     },
     {
@@ -3483,7 +3483,7 @@
       "category": "Miscellaneous functions",
       "category_url": "miscellaneous-functions.html",
       "slug": "layoutobjectuuid",
-      "doc_url": "https://help.claris.com/en/pro-help/content/layoutobjectuuid.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/layoutobjectuuid.md",
       "originated_in_version": "19"
     },
     {
@@ -3497,7 +3497,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "left",
-      "doc_url": "https://help.claris.com/en/pro-help/content/left.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/left.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3511,7 +3511,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "leftvalues",
-      "doc_url": "https://help.claris.com/en/pro-help/content/leftvalues.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/leftvalues.md",
       "originated_in_version": "15"
     },
     {
@@ -3525,7 +3525,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "leftwords",
-      "doc_url": "https://help.claris.com/en/pro-help/content/leftwords.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/leftwords.md",
       "originated_in_version": "9"
     },
     {
@@ -3538,7 +3538,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "length",
-      "doc_url": "https://help.claris.com/en/pro-help/content/length.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/length.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3553,7 +3553,7 @@
       "category": "Logical functions",
       "category_url": "logical-functions.html",
       "slug": "let",
-      "doc_url": "https://help.claris.com/en/pro-help/content/let.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/let.md",
       "originated_in_version": "8"
     },
     {
@@ -3566,7 +3566,7 @@
       "category": "Number functions",
       "category_url": "number-functions.html",
       "slug": "lg",
-      "doc_url": "https://help.claris.com/en/pro-help/content/lg.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/lg.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3579,7 +3579,7 @@
       "category": "Aggregate functions",
       "category_url": "aggregate-functions.html",
       "slug": "list",
-      "doc_url": "https://help.claris.com/en/pro-help/content/list.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/list.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3592,7 +3592,7 @@
       "category": "Number functions",
       "category_url": "number-functions.html",
       "slug": "ln",
-      "doc_url": "https://help.claris.com/en/pro-help/content/ln.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/ln.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3606,7 +3606,7 @@
       "category": "Mobile functions",
       "category_url": "mobile-functions.html",
       "slug": "location",
-      "doc_url": "https://help.claris.com/en/pro-help/content/location.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/location.md",
       "originated_in_version": "15"
     },
     {
@@ -3620,7 +3620,7 @@
       "category": "Mobile functions",
       "category_url": "mobile-functions.html",
       "slug": "locationvalues",
-      "doc_url": "https://help.claris.com/en/pro-help/content/locationvalues.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/locationvalues.md",
       "originated_in_version": "19"
     },
     {
@@ -3633,7 +3633,7 @@
       "category": "Number functions",
       "category_url": "number-functions.html",
       "slug": "log",
-      "doc_url": "https://help.claris.com/en/pro-help/content/log.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/log.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3647,7 +3647,7 @@
       "category": "Logical functions",
       "category_url": "logical-functions.html",
       "slug": "lookup",
-      "doc_url": "https://help.claris.com/en/pro-help/content/lookup.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/lookup.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3661,7 +3661,7 @@
       "category": "Logical functions",
       "category_url": "logical-functions.html",
       "slug": "lookupnext",
-      "doc_url": "https://help.claris.com/en/pro-help/content/lookupnext.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/lookupnext.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3674,7 +3674,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "lower",
-      "doc_url": "https://help.claris.com/en/pro-help/content/lower.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/lower.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3687,7 +3687,7 @@
       "category": "Aggregate functions",
       "category_url": "aggregate-functions.html",
       "slug": "max",
-      "doc_url": "https://help.claris.com/en/pro-help/content/max.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/max.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3702,7 +3702,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "middle",
-      "doc_url": "https://help.claris.com/en/pro-help/content/middle.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/middle.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3717,7 +3717,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "middlevalues",
-      "doc_url": "https://help.claris.com/en/pro-help/content/middlevalues.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/middlevalues.md",
       "originated_in_version": "15"
     },
     {
@@ -3732,7 +3732,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "middlewords",
-      "doc_url": "https://help.claris.com/en/pro-help/content/middlewords.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/middlewords.md",
       "originated_in_version": "9"
     },
     {
@@ -3745,7 +3745,7 @@
       "category": "Aggregate functions",
       "category_url": "aggregate-functions.html",
       "slug": "min",
-      "doc_url": "https://help.claris.com/en/pro-help/content/min.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/min.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3758,7 +3758,7 @@
       "category": "Time functions",
       "category_url": "time-functions.html",
       "slug": "minute",
-      "doc_url": "https://help.claris.com/en/pro-help/content/minute.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/minute.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3772,7 +3772,7 @@
       "category": "Number functions",
       "category_url": "number-functions.html",
       "slug": "mod",
-      "doc_url": "https://help.claris.com/en/pro-help/content/mod.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/mod.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3785,7 +3785,7 @@
       "category": "Date functions",
       "category_url": "date-functions.html",
       "slug": "month",
-      "doc_url": "https://help.claris.com/en/pro-help/content/month.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/month.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3798,7 +3798,7 @@
       "category": "Date functions",
       "category_url": "date-functions.html",
       "slug": "monthname",
-      "doc_url": "https://help.claris.com/en/pro-help/content/monthname.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/monthname.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3811,7 +3811,7 @@
       "category": "Japanese functions",
       "category_url": "japanese-functions.html",
       "slug": "monthnamej",
-      "doc_url": "https://help.claris.com/en/pro-help/content/monthnamej.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/monthnamej.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3825,7 +3825,7 @@
       "category": "Financial functions",
       "category_url": "financial-functions.html",
       "slug": "npv",
-      "doc_url": "https://help.claris.com/en/pro-help/content/npv.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/npv.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3839,7 +3839,7 @@
       "category": "Artificial intelligence functions",
       "category_url": "artificial-intelligence-functions.html",
       "slug": "normalizeembedding",
-      "doc_url": "https://help.claris.com/en/pro-help/content/normalizeembedding.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/normalizeembedding.md",
       "originated_in_version": "22.0.1"
     },
     {
@@ -3854,7 +3854,7 @@
       "category": "Japanese functions",
       "category_url": "japanese-functions.html",
       "slug": "numtojtext",
-      "doc_url": "https://help.claris.com/en/pro-help/content/numtojtext.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/numtojtext.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3869,7 +3869,7 @@
       "category": "Financial functions",
       "category_url": "financial-functions.html",
       "slug": "pmt",
-      "doc_url": "https://help.claris.com/en/pro-help/content/pmt.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/pmt.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3884,7 +3884,7 @@
       "category": "Financial functions",
       "category_url": "financial-functions.html",
       "slug": "pv",
-      "doc_url": "https://help.claris.com/en/pro-help/content/pv.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/pv.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3898,7 +3898,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "patterncount",
-      "doc_url": "https://help.claris.com/en/pro-help/content/patterncount.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/patterncount.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3908,7 +3908,7 @@
       "category": "Trigonometric functions",
       "category_url": "trigonometric-functions.html",
       "slug": "pi",
-      "doc_url": "https://help.claris.com/en/pro-help/content/pi.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/pi.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3924,7 +3924,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "position",
-      "doc_url": "https://help.claris.com/en/pro-help/content/position.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/position.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3938,7 +3938,7 @@
       "category": "Artificial intelligence functions",
       "category_url": "artificial-intelligence-functions.html",
       "slug": "predictfrommodel",
-      "doc_url": "https://help.claris.com/en/pro-help/content/predictfrommodel.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/predictfrommodel.md",
       "originated_in_version": "22.0.1"
     },
     {
@@ -3951,7 +3951,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "proper",
-      "doc_url": "https://help.claris.com/en/pro-help/content/proper.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/proper.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3964,7 +3964,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "quote",
-      "doc_url": "https://help.claris.com/en/pro-help/content/quote.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/quote.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3979,7 +3979,7 @@
       "category": "Text formatting functions",
       "category_url": "text-formatting-functions.html",
       "slug": "rgb",
-      "doc_url": "https://help.claris.com/en/pro-help/content/rgb.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/rgb.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3992,7 +3992,7 @@
       "category": "Trigonometric functions",
       "category_url": "trigonometric-functions.html",
       "slug": "radians",
-      "doc_url": "https://help.claris.com/en/pro-help/content/radians.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/radians.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4002,7 +4002,7 @@
       "category": "Number functions",
       "category_url": "number-functions.html",
       "slug": "random",
-      "doc_url": "https://help.claris.com/en/pro-help/content/random.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/random.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4018,7 +4018,7 @@
       "category": "Mobile functions",
       "category_url": "mobile-functions.html",
       "slug": "rangebeacons",
-      "doc_url": "https://help.claris.com/en/pro-help/content/rangebeacons.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/rangebeacons.md",
       "originated_in_version": "19"
     },
     {
@@ -4031,7 +4031,7 @@
       "category": "Container functions",
       "category_url": "container-functions.html",
       "slug": "readqrcode",
-      "doc_url": "https://help.claris.com/en/pro-help/content/readqrcode.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/readqrcode.md",
       "originated_in_version": "19"
     },
     {
@@ -4045,7 +4045,7 @@
       "category": "Design functions",
       "category_url": "design-functions.html",
       "slug": "relationinfo",
-      "doc_url": "https://help.claris.com/en/pro-help/content/relationinfo.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/relationinfo.md",
       "originated_in_version": "7"
     },
     {
@@ -4061,7 +4061,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "replace",
-      "doc_url": "https://help.claris.com/en/pro-help/content/replace.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/replace.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4075,7 +4075,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "right",
-      "doc_url": "https://help.claris.com/en/pro-help/content/right.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/right.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4089,7 +4089,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "rightvalues",
-      "doc_url": "https://help.claris.com/en/pro-help/content/rightvalues.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/rightvalues.md",
       "originated_in_version": "15"
     },
     {
@@ -4103,7 +4103,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "rightwords",
-      "doc_url": "https://help.claris.com/en/pro-help/content/rightwords.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/rightwords.md",
       "originated_in_version": "9"
     },
     {
@@ -4116,7 +4116,7 @@
       "category": "Japanese functions",
       "category_url": "japanese-functions.html",
       "slug": "romanhankaku",
-      "doc_url": "https://help.claris.com/en/pro-help/content/romanhankaku.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/romanhankaku.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4129,7 +4129,7 @@
       "category": "Japanese functions",
       "category_url": "japanese-functions.html",
       "slug": "romanzenkaku",
-      "doc_url": "https://help.claris.com/en/pro-help/content/romanzenkaku.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/romanzenkaku.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4143,7 +4143,7 @@
       "category": "Number functions",
       "category_url": "number-functions.html",
       "slug": "round",
-      "doc_url": "https://help.claris.com/en/pro-help/content/round.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/round.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4156,7 +4156,7 @@
       "category": "Design functions",
       "category_url": "design-functions.html",
       "slug": "scriptids",
-      "doc_url": "https://help.claris.com/en/pro-help/content/scriptids.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/scriptids.md",
       "originated_in_version": "7"
     },
     {
@@ -4169,7 +4169,7 @@
       "category": "Design functions",
       "category_url": "design-functions.html",
       "slug": "scriptnames",
-      "doc_url": "https://help.claris.com/en/pro-help/content/scriptnames.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/scriptnames.md",
       "originated_in_version": "7"
     },
     {
@@ -4182,7 +4182,7 @@
       "category": "Time functions",
       "category_url": "time-functions.html",
       "slug": "seconds",
-      "doc_url": "https://help.claris.com/en/pro-help/content/seconds.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/seconds.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4192,7 +4192,7 @@
       "category": "Logical functions",
       "category_url": "logical-functions.html",
       "slug": "self",
-      "doc_url": "https://help.claris.com/en/pro-help/content/self.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/self.md",
       "originated_in_version": "8"
     },
     {
@@ -4206,7 +4206,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "serialincrement",
-      "doc_url": "https://help.claris.com/en/pro-help/content/serialincrement.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/serialincrement.md",
       "originated_in_version": "12"
     },
     {
@@ -4220,7 +4220,7 @@
       "category": "Number functions",
       "category_url": "number-functions.html",
       "slug": "setprecision",
-      "doc_url": "https://help.claris.com/en/pro-help/content/setprecision.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/setprecision.md",
       "originated_in_version": "9"
     },
     {
@@ -4234,7 +4234,7 @@
       "category": "Logical functions",
       "category_url": "logical-functions.html",
       "slug": "set-recursion",
-      "doc_url": "https://help.claris.com/en/pro-help/content/set-recursion.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/set-recursion.md",
       "originated_in_version": "8"
     },
     {
@@ -4247,7 +4247,7 @@
       "category": "Number functions",
       "category_url": "number-functions.html",
       "slug": "sign",
-      "doc_url": "https://help.claris.com/en/pro-help/content/sign.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/sign.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4260,7 +4260,7 @@
       "category": "Trigonometric functions",
       "category_url": "trigonometric-functions.html",
       "slug": "sin",
-      "doc_url": "https://help.claris.com/en/pro-help/content/sin.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/sin.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4275,7 +4275,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "sortvalues",
-      "doc_url": "https://help.claris.com/en/pro-help/content/sortvalues.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/sortvalues.md",
       "originated_in_version": "16"
     },
     {
@@ -4288,7 +4288,7 @@
       "category": "Number functions",
       "category_url": "number-functions.html",
       "slug": "sqrt",
-      "doc_url": "https://help.claris.com/en/pro-help/content/sqrt.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/sqrt.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4301,7 +4301,7 @@
       "category": "Aggregate functions",
       "category_url": "aggregate-functions.html",
       "slug": "stdev",
-      "doc_url": "https://help.claris.com/en/pro-help/content/stdev.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/stdev.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4314,7 +4314,7 @@
       "category": "Aggregate functions",
       "category_url": "aggregate-functions.html",
       "slug": "stdevp",
-      "doc_url": "https://help.claris.com/en/pro-help/content/stdevp.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/stdevp.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4329,7 +4329,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "substitute",
-      "doc_url": "https://help.claris.com/en/pro-help/content/substitute.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/substitute.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4343,7 +4343,7 @@
       "category": "Artificial intelligence functions",
       "category_url": "artificial-intelligence-functions.html",
       "slug": "subtractembeddings",
-      "doc_url": "https://help.claris.com/en/pro-help/content/subtractembeddings.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/subtractembeddings.md",
       "originated_in_version": "22.0.1"
     },
     {
@@ -4356,7 +4356,7 @@
       "category": "Aggregate functions",
       "category_url": "aggregate-functions.html",
       "slug": "sum",
-      "doc_url": "https://help.claris.com/en/pro-help/content/sum.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/sum.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4369,7 +4369,7 @@
       "category": "Design functions",
       "category_url": "design-functions.html",
       "slug": "tableids",
-      "doc_url": "https://help.claris.com/en/pro-help/content/tableids.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/tableids.md",
       "originated_in_version": "7"
     },
     {
@@ -4382,7 +4382,7 @@
       "category": "Design functions",
       "category_url": "design-functions.html",
       "slug": "tablenames",
-      "doc_url": "https://help.claris.com/en/pro-help/content/tablenames.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/tablenames.md",
       "originated_in_version": "7"
     },
     {
@@ -4395,7 +4395,7 @@
       "category": "Trigonometric functions",
       "category_url": "trigonometric-functions.html",
       "slug": "tan",
-      "doc_url": "https://help.claris.com/en/pro-help/content/tan.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/tan.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4411,7 +4411,7 @@
       "category": "Text formatting functions",
       "category_url": "text-formatting-functions.html",
       "slug": "textcolor",
-      "doc_url": "https://help.claris.com/en/pro-help/content/textcolor.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/textcolor.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4427,7 +4427,7 @@
       "category": "Text formatting functions",
       "category_url": "text-formatting-functions.html",
       "slug": "textcolorremove",
-      "doc_url": "https://help.claris.com/en/pro-help/content/textcolorremove.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/textcolorremove.md",
       "originated_in_version": "9"
     },
     {
@@ -4441,7 +4441,7 @@
       "category": "Container functions",
       "category_url": "container-functions.html",
       "slug": "textdecode",
-      "doc_url": "https://help.claris.com/en/pro-help/content/textdecode.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/textdecode.md",
       "originated_in_version": "16"
     },
     {
@@ -4456,7 +4456,7 @@
       "category": "Container functions",
       "category_url": "container-functions.html",
       "slug": "textencode",
-      "doc_url": "https://help.claris.com/en/pro-help/content/textencode.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/textencode.md",
       "originated_in_version": "16"
     },
     {
@@ -4470,7 +4470,7 @@
       "category": "Text formatting functions",
       "category_url": "text-formatting-functions.html",
       "slug": "textfont",
-      "doc_url": "https://help.claris.com/en/pro-help/content/textfont.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/textfont.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4484,7 +4484,7 @@
       "category": "Text formatting functions",
       "category_url": "text-formatting-functions.html",
       "slug": "textfontremove",
-      "doc_url": "https://help.claris.com/en/pro-help/content/textfontremove.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/textfontremove.md",
       "originated_in_version": "9"
     },
     {
@@ -4497,7 +4497,7 @@
       "category": "Text formatting functions",
       "category_url": "text-formatting-functions.html",
       "slug": "textformatremove",
-      "doc_url": "https://help.claris.com/en/pro-help/content/textformatremove.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/textformatremove.md",
       "originated_in_version": "12"
     },
     {
@@ -4511,7 +4511,7 @@
       "category": "Text formatting functions",
       "category_url": "text-formatting-functions.html",
       "slug": "textsize",
-      "doc_url": "https://help.claris.com/en/pro-help/content/textsize.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/textsize.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4525,7 +4525,7 @@
       "category": "Text formatting functions",
       "category_url": "text-formatting-functions.html",
       "slug": "textsizeremove",
-      "doc_url": "https://help.claris.com/en/pro-help/content/textsizeremove.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/textsizeremove.md",
       "originated_in_version": "9"
     },
     {
@@ -4539,7 +4539,7 @@
       "category": "Text formatting functions",
       "category_url": "text-formatting-functions.html",
       "slug": "textstyleadd",
-      "doc_url": "https://help.claris.com/en/pro-help/content/textstyleadd.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/textstyleadd.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4553,7 +4553,7 @@
       "category": "Text formatting functions",
       "category_url": "text-formatting-functions.html",
       "slug": "textstyleremove",
-      "doc_url": "https://help.claris.com/en/pro-help/content/textstyleremove.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/textstyleremove.md",
       "originated_in_version": "9"
     },
     {
@@ -4568,7 +4568,7 @@
       "category": "Time functions",
       "category_url": "time-functions.html",
       "slug": "time",
-      "doc_url": "https://help.claris.com/en/pro-help/content/time.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/time.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4582,7 +4582,7 @@
       "category": "Timestamp functions",
       "category_url": "timestamp-functions.html",
       "slug": "timestamp",
-      "doc_url": "https://help.claris.com/en/pro-help/content/timestamp.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/timestamp.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4595,7 +4595,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "trim",
-      "doc_url": "https://help.claris.com/en/pro-help/content/trim.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/trim.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4610,7 +4610,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "trimall",
-      "doc_url": "https://help.claris.com/en/pro-help/content/trimall.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/trimall.md",
       "originated_in_version": "9"
     },
     {
@@ -4624,7 +4624,7 @@
       "category": "Number functions",
       "category_url": "number-functions.html",
       "slug": "truncate",
-      "doc_url": "https://help.claris.com/en/pro-help/content/truncate.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/truncate.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4639,7 +4639,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "uniquevalues",
-      "doc_url": "https://help.claris.com/en/pro-help/content/uniquevalues.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/uniquevalues.md",
       "originated_in_version": "16"
     },
     {
@@ -4652,7 +4652,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "upper",
-      "doc_url": "https://help.claris.com/en/pro-help/content/upper.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/upper.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4665,7 +4665,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "valuecount",
-      "doc_url": "https://help.claris.com/en/pro-help/content/valuecount.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/valuecount.md",
       "originated_in_version": "15"
     },
     {
@@ -4678,7 +4678,7 @@
       "category": "Design functions",
       "category_url": "design-functions.html",
       "slug": "valuelistids",
-      "doc_url": "https://help.claris.com/en/pro-help/content/valuelistids.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/valuelistids.md",
       "originated_in_version": "7"
     },
     {
@@ -4692,7 +4692,7 @@
       "category": "Design functions",
       "category_url": "design-functions.html",
       "slug": "valuelistitems",
-      "doc_url": "https://help.claris.com/en/pro-help/content/valuelistitems.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/valuelistitems.md",
       "originated_in_version": "7"
     },
     {
@@ -4705,7 +4705,7 @@
       "category": "Design functions",
       "category_url": "design-functions.html",
       "slug": "valuelistnames",
-      "doc_url": "https://help.claris.com/en/pro-help/content/valuelistnames.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/valuelistnames.md",
       "originated_in_version": "7"
     },
     {
@@ -4718,7 +4718,7 @@
       "category": "Aggregate functions",
       "category_url": "aggregate-functions.html",
       "slug": "variance",
-      "doc_url": "https://help.claris.com/en/pro-help/content/variance.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/variance.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4731,7 +4731,7 @@
       "category": "Aggregate functions",
       "category_url": "aggregate-functions.html",
       "slug": "variancep",
-      "doc_url": "https://help.claris.com/en/pro-help/content/variancep.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/variancep.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4744,7 +4744,7 @@
       "category": "Container functions",
       "category_url": "container-functions.html",
       "slug": "verifycontainer",
-      "doc_url": "https://help.claris.com/en/pro-help/content/verifycontainer.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/verifycontainer.md",
       "originated_in_version": "18"
     },
     {
@@ -4757,7 +4757,7 @@
       "category": "Date functions",
       "category_url": "date-functions.html",
       "slug": "weekofyear",
-      "doc_url": "https://help.claris.com/en/pro-help/content/weekofyear.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/weekofyear.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4771,7 +4771,7 @@
       "category": "Date functions",
       "category_url": "date-functions.html",
       "slug": "weekofyearfiscal",
-      "doc_url": "https://help.claris.com/en/pro-help/content/weekofyearfiscal.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/weekofyearfiscal.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4787,7 +4787,7 @@
       "category": "Logical functions",
       "category_url": "logical-functions.html",
       "slug": "while",
-      "doc_url": "https://help.claris.com/en/pro-help/content/while.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/while.md",
       "originated_in_version": "18"
     },
     {
@@ -4797,7 +4797,7 @@
       "category": "Design functions",
       "category_url": "design-functions.html",
       "slug": "windownames",
-      "doc_url": "https://help.claris.com/en/pro-help/content/windownames.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/windownames.md",
       "originated_in_version": "7"
     },
     {
@@ -4810,7 +4810,7 @@
       "category": "Text functions",
       "category_url": "text-functions.html",
       "slug": "wordcount",
-      "doc_url": "https://help.claris.com/en/pro-help/content/wordcount.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/wordcount.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4823,7 +4823,7 @@
       "category": "Date functions",
       "category_url": "date-functions.html",
       "slug": "year",
-      "doc_url": "https://help.claris.com/en/pro-help/content/year.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/year.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4837,7 +4837,7 @@
       "category": "Japanese functions",
       "category_url": "japanese-functions.html",
       "slug": "yearname",
-      "doc_url": "https://help.claris.com/en/pro-help/content/yearname.html",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/yearname.md",
       "originated_in_version": "legacy"
     }
   ]

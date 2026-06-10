@@ -1,3 +1,58 @@
+## [1.9] — 2026-06
+
+### Fixed — accuracy corrections from skill review; FM 26 changed-function drift captured
+
+A review of v1.8 against the local catalogs and live Claris docs found five factual errors and
+two count inconsistencies. All are corrected in this release. No new functions or script steps —
+total counts remain **368 functions** and **165 script steps**.
+
+#### SKILL.md corrections:
+
+- **Frontmatter description:** function count corrected 376 → **368** (the 376 figure matched
+  nothing — README, CHANGELOG, and the catalog all said 368).
+- **JSONParsedState type mapping (Tips):** corrected to match Claris docs — positive return values
+  use the JSONSetElement type constants: 1 = string, 2 = number, 3 = object, 4 = array,
+  5 = boolean, 6 = null. (Previously listed as 1 = object, 2 = array, 3 = string, 4 = number,
+  contradicting the skill's own JSON examples file, which was already correct.)
+- **GetRecordIDsFromFoundSet (Tips):** result formats corrected to the five named constants
+  (ValueNumber, JSONString, JSONNumber, ValueNumberRanges, JSONStringRanges) and the FM 26
+  optional second parameter documented (see below).
+- **GetTextFromPDF (Tips):** FM 26 macOS scanned-PDF OCR support noted.
+- **Reference table counts:** JSON functions 12 → **10**; Container functions 25 → **24**
+  (both now match the catalog and example file headers).
+
+#### FM 26 changed-function drift (existing entries updated):
+
+The v1.8 rebuild added new FM 26 functions and steps but missed FM 26 changes to *existing*
+functions, per the FileMaker Pro Release Notes:
+
+| Function | FM 26 change |
+|---|---|
+| `GetRecordIDsFromFoundSet` | New optional second parameter — `GetRecordIDsFromFoundSet ( type {; tableOccurrenceName} )` — accepts a table occurrence or portal object name and returns IDs from the related/filtered set instead of the current found set |
+| `GetTextFromPDF` | macOS now supports scanned PDFs (no text layer) via built-in OCR; other platforms unchanged |
+
+Updated in `function-catalog.json` (format, parameters, purpose) and the relevant example files.
+
+#### Reference file corrections:
+
+- **`specialty-functions-examples.md`** — GetRecordIDsFromFoundSet entry was incomplete (documented
+  only types 0 and 1). Replaced with the full 0–4 type table including both Ranges variants,
+  empty-found-set return values, and the FM 26 optional parameter.
+- **`design-container-functions-examples.md`** — GetTextFromPDF entry updated with the FM 26
+  macOS scanned-PDF note.
+- **`script-steps-catalog.json`** — stale meta `last_updated` string corrected (claimed
+  "step count 157 → 167"; actual unique count is 165, as already stated in the v1.8 revised
+  changelog and SKILL.md).
+- **`function-catalog.json`** — meta `last_updated` refreshed for v1.9.
+
+#### Housekeeping:
+
+- `VERSION` bumped to 1.9; SKILL.md frontmatter `version` and self-check reference updated.
+- Product version references (e.g. "FM 22 (2025)", "FM 26 (2026)") deliberately unchanged —
+  only build-date headings reflect the current date, per established convention.
+
+---
+
 ## [1.8] — 2026-06 (revised)
 
 ### Changed — FM 26 functions and script steps added to local reference files; FM 26 special-case routing removed

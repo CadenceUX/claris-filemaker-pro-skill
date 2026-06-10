@@ -1,12 +1,12 @@
 ---
 name: claris-filemaker-pro
 metadata:
-  version: "1.8"
+  version: "1.9"
   last_known_fm_version: "26"
 description: >
   REFERENCE skill — FileMaker Pro script steps, calculation functions, and custom functions ONLY.
   Use for: syntax lookups, function parameters, usage examples, and live doc fetches across all
-  376 built-in functions (If, Case, Let, While, ExecuteSQL, JSON, AI/embedding, Persistent Data),
+  368 built-in functions (If, Case, Let, While, ExecuteSQL, JSON, AI/embedding, Persistent Data),
   all 165 script steps (including FM 26 PDF Files and Persistent Data categories), Data API (REST),
   SQL/ExecuteSQL, WebDirect, FileMaker Go, error codes, and custom function patterns. Not a platform
   administration guide. Out of scope: FileMaker Server admin, Claris Connect, Claris Studio,
@@ -16,7 +16,7 @@ description: >
   Claris docs are versioned and frequently updated.
 ---
 
-# Claris FileMaker Pro — Skill v1.8
+# Claris FileMaker Pro — Skill v1.9
 
 ## Overview
 
@@ -70,7 +70,7 @@ check once:
 
 1. Fetch `https://github.com/CadenceUX/claris-filemaker-pro-skill/raw/main/VERSION`
 2. Parse the returned string as the latest available version
-3. Compare with this skill's installed version (currently `"1.8"`)
+3. Compare with this skill's installed version (currently `"1.9"`)
 4. If latest > installed, prepend this notice to your first response:
 
    > ⚠️ **Skill update available**
@@ -242,9 +242,9 @@ on legacy versions" without detail.
 |---|---|
 | `function-catalog.json` | All 368 functions through FM 26 — format, parameters, purpose, category, category_url, slug, doc_url, originated_in_version. Master for call signatures. Includes FM 26 additions: BaseTableComment, FieldAnnotation, FieldDisplayNames (Design); Get(AccountPasswordDaysRemaining), Get(GuidedAccessState), Get(WindowUUID) (Get); GetPersistentData, ListPersistentDataIDs (Persistent Data). |
 | `script-steps-catalog.json` | All 165 script steps through FM 26, across 16 categories — syntax, purpose, notes, doc_url. Includes FM 26 additions: Insert Image Caption, Insert Image Captions in Found Set (AI category); Flush Web Viewer Cookies (Miscellaneous); Configure Persistent Data (new Persistent Data category); Create PDF, Open PDF, Append PDF, Close PDF, Cancel PDF, Print PDF + updated Save Records as PDF (new PDF Files category). Note: 2 pre-existing duplicates (Insert Embedding, Perform Semantic Find) were removed; net unique steps corrected from 157 to 165. |
-| `logical-json-ai-functions-examples.md` | **Logical** (20 functions: If, Case, Let, While, ExecuteSQL, ExecuteSQLe, Evaluate, GetField, GetNthRecord…) + **JSON** (12 functions: JSONGetElement, JSONSetElement, JSONListKeys, JSONMakeArray, JSONParse, JSONParsedState…) + **AI** (14 functions: GetEmbedding, CosineSimilarity, GetTokenCount, GetTableDDL, GetRAGSpaceInfo, PredictFromModel, AddEmbeddings, SubtractEmbeddings, NormalizeEmbedding, GetFieldsOnLayout…) |
+| `logical-json-ai-functions-examples.md` | **Logical** (20 functions: If, Case, Let, While, ExecuteSQL, ExecuteSQLe, Evaluate, GetField, GetNthRecord…) + **JSON** (10 functions: JSONGetElement, JSONSetElement, JSONListKeys, JSONMakeArray, JSONParse, JSONParsedState…) + **AI** (14 functions: GetEmbedding, CosineSimilarity, GetTokenCount, GetTableDDL, GetRAGSpaceInfo, PredictFromModel, AddEmbeddings, SubtractEmbeddings, NormalizeEmbedding, GetFieldsOnLayout…) |
 | `get-functions-examples.md` | All 138 Get() functions through FM 26, grouped by 12 categories: Date/Time, Account, File, Paths, Record, Layout/Window, Script/Trigger, Field, Sorting, Network, Device, Calculation. FM 26 additions: Get(AccountPasswordDaysRemaining) (Account); Get(GuidedAccessState) (Device); Get(WindowUUID) (Layout/Window). |
-| `design-container-functions-examples.md` | **Design** (26 functions through FM 26: FieldNames, FieldType, LayoutNames, TableNames, ValueListItems, ScriptNames, BaseTableIDs, BaseTableComment, FieldAnnotation, FieldDisplayNames…) + **Container** (25 functions: Base64Encode/Decode, CryptEncrypt/Decrypt, CryptDigest, GetContainerAttribute, GetLiveText, ReadQRCode, GetTextFromPDF…) |
+| `design-container-functions-examples.md` | **Design** (26 functions through FM 26: FieldNames, FieldType, LayoutNames, TableNames, ValueListItems, ScriptNames, BaseTableIDs, BaseTableComment, FieldAnnotation, FieldDisplayNames…) + **Container** (24 functions: Base64Encode/Decode, CryptEncrypt/Decrypt, CryptDigest, GetContainerAttribute, GetLiveText, ReadQRCode, GetTextFromPDF…) |
 | `text-functions-examples.md` | **Text** (39 functions: Left, Right, Middle, Position, Substitute, PatternCount, Trim, Filter…) + **Text Formatting** (10 functions: TextColor, TextSize, TextFont, TextStyleAdd…) |
 | `date-time-functions-examples.md` | **Date** (10 functions: Date, Day, Month, Year, DayOfWeek, DayName, MonthName, WeekOfYear…) + **Time & Timestamp** (5 functions: Hour, Minute, Seconds, Time, Timestamp) |
 | `numeric-functions-examples.md` | **Number** (18 functions: Round, Int, Mod, Abs, Ceiling, Floor, Random…) + **Financial** (4: FV, NPV, PMT, PV) + **Trigonometric** (9: Sin, Cos, Tan, Asin, Acos, Atan, Degrees, Radians, Pi) + **Repeating** (3: Extend, GetRepetition, Last) |
@@ -350,19 +350,26 @@ on legacy versions" without detail.
   Random Forest regression. Train on embedding vectors, then call `PredictFromModel` to get a
   predicted numeric value. Models persist in memory until Unload or session end.
 - **GetRecordIDsFromFoundSet** pairs with `Go to List of Records` to recreate a found set later —
-  useful for preserving found sets across script jumps or file switches. Returns IDs in 5 formats
-  (type 0 = ValueNumber list, 1 = JSONString, 2 = JSONNumber, 3/4 = range variants).
+  useful for preserving found sets across script jumps or file switches. The `type` parameter (0–4)
+  selects one of 5 result formats: ValueNumber, JSONString, JSONNumber, ValueNumberRanges,
+  JSONStringRanges — the two Ranges variants compress consecutive IDs into ranges to shrink the
+  result. **FM 26 change:** an optional second parameter accepts a table occurrence or portal
+  object name, returning IDs from the related/filtered set instead of the current found set —
+  `GetRecordIDsFromFoundSet ( type ; tableOccurrenceName )`.
 - **Go to List of Records** (FM 22.0.1) accepts a carriage-return value list, a JSON array of IDs
   as strings or numbers, or a JSON array of objects with `recordId` keys. Records not found are
   silently skipped; if none match, the found set is empty. Not supported in FileMaker WebDirect.
 - **JSONParse / JSONParsedState** (FM 22.0.1) — use `JSONParse` to cache a parsed JSON structure
   in memory by name, then pass the result to any JSON function in place of a raw JSON string.
   Dramatically improves performance when the same JSON is accessed many times in a script.
-  `JSONParsedState` returns: 0 = not parsed, -1 = parsed but invalid, positive number = parsed
-  type (1 = object, 2 = array, 3 = string, 4 = number, 5 = boolean, 6 = null).
+  `JSONParsedState` returns: 0 = not parsed, -1 = parsed but invalid, positive number = the JSON
+  type as defined by the JSONSetElement type constants (1 = string, 2 = number, 3 = object,
+  4 = array, 5 = boolean, 6 = null).
 - **GetTextFromPDF** (FM 22.0.1) — returns the text content of a PDF stored in a container field.
   Useful for feeding PDF content into RAG spaces (`Perform RAG Action`) or into AI prompts.
   Returns empty string if the container is not a PDF or has no extractable text layer.
+  **FM 26 change:** on macOS, scanned PDFs (no text layer) are now supported via built-in OCR —
+  on other platforms a scanned PDF still returns an empty string.
 - **Set Revert Transaction on Error** (FM 21.1.1) — when set to Off, errors inside a transaction
   block do not auto-revert; the script can inspect `Get(LastError)` and decide to commit or revert
   manually. Use `Get(RevertTransactionOnErrorState)` to query the current setting. Always reset to

@@ -5,7 +5,7 @@
 # FileMaker Design Functions — Syntax & Examples
 
 Source: https://help.claris.com/en/pro-help/content/design-functions.html  
-All 23 design functions with verified syntax, parameters, return types, and usage patterns.  
+All 26 design functions with verified syntax, parameters, return types, and usage patterns (23 through FM 22 + 3 new in FM 26: BaseTableComment, FieldAnnotation, FieldDisplayNames).  
 Last verified: 2026-06 against live Claris Help Centre.
 
 > **Note:** `LayoutTableNames` does not exist in current FileMaker releases. Use `TableNames` (table occurrences) or `BaseTableNames` (base tables) instead.
@@ -58,6 +58,30 @@ Count base tables:
 ```
 ValueCount ( BaseTableNames ( Get(FileName) ) )
 // → 12
+```
+
+---
+
+## BaseTableComment ( fileName ; baseTableName )
+*Introduced in FileMaker Pro 26 (2026).*  
+Returns the comment set on a **base table** in Manage Database. Pair with `GetTableDDL` and `FieldAnnotation` to build richer schema context for AI steps.  
+Parameters: `fileName` — file name string; `baseTableName` — base table name (not table occurrence name).  
+Returns: text
+
+```
+BaseTableComment ( Get(FileName) ; "Contacts" )
+// → "Primary contact record. Stores all customer and prospect data."
+```
+
+Build a schema summary for an AI prompt:
+```
+Let ( [
+  tables   = Substitute ( BaseTableNames ( Get(FileName) ) ; ¶ ; "," ) ;
+  comment  = BaseTableComment ( Get(FileName) ; "Contacts" ) ;
+  ddl      = GetTableDDL ( Get(FileName) ; "Contacts" )
+] ;
+  "Table: Contacts | " & comment & ¶ & ddl
+)
 ```
 
 ---
@@ -115,6 +139,52 @@ Used in `GetFieldsOnLayout` to supply `[LLM]`-tagged descriptions to AI models:
 // Field comment: "[LLM] Primary email address for the contact"
 FieldComment ( Get(FileName) ; "Contacts::Email" )
 // → "[LLM] Primary email address for the contact"
+```
+
+---
+
+## FieldAnnotation ( fileName ; layoutName ; fieldName )
+*Introduced in FileMaker Pro 26 (2026).*  
+Returns the DDL annotation string set in **Advanced Options for Field** (not the field comment from Manage Database — see `FieldComment` for that).  
+Parameters: `fileName` — file name string; `layoutName` — layout name; `fieldName` — fully qualified field name (`"Table::Field"`).  
+Returns: text
+
+```
+FieldAnnotation ( Get(FileName) ; Get(LayoutName) ; "Contacts::Email" )
+// → "contact_email — primary address; used by AI schema context"
+```
+
+Pair with `GetTableDDL` and `FieldDisplayNames` to build enriched AI prompts or schema documentation:
+```
+Let ( [
+  ddl        = GetTableDDL ( Get(FileName) ; "Contacts" ) ;
+  annotation = FieldAnnotation ( Get(FileName) ; Get(LayoutName) ; "Contacts::Email" ) ;
+  prompt     = "Schema: " & ddl & ¶ & "Email field annotation: " & annotation
+] ;
+  prompt
+)
+```
+
+---
+
+## FieldDisplayNames ( fileName ; layoutName ; fieldName )
+*Introduced in FileMaker Pro 26 (2026).*  
+Returns the custom **display names** set in Advanced Options for Field as a JSON object. Display names are alternate or localised labels for fields shown in layouts and reports.  
+Parameters: `fileName`; `layoutName`; `fieldName` — fully qualified (`"Table::Field"`).  
+Returns: JSON object text (keys are locale codes or custom name identifiers)
+
+```
+FieldDisplayNames ( Get(FileName) ; "Contacts" ; "Contacts::dob" )
+// → {"default":"Date of Birth","de":"Geburtsdatum","fr":"Date de naissance"}
+```
+
+Extract a specific locale's display name:
+```
+JSONGetElement (
+  FieldDisplayNames ( Get(FileName) ; Get(LayoutName) ; "Contacts::dob" ) ;
+  "default"
+)
+// → "Date of Birth"
 ```
 
 ---

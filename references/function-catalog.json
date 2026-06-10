@@ -3,8 +3,8 @@
     "description": "FileMaker calculation function catalog. Prototype signatures are canonical from the source repository. Category, slug, doc_url and purpose are sourced from the Claris Help Centre index.",
     "source_repo": "function-catalog.json (master for name/prototype)",
     "help_centre": "https://help.claris.com/markdown/en/pro-help/functions-reference.md",
-    "version": "22.0.5",
-    "last_updated": "2026-06",
+    "version": "26.0",
+    "last_updated": "2026-06 (v1.8 \u2014 added 8 FM 26 functions; total now 368)",
     "update_instructions": "Re-fetch source repo and compare against this file. Also re-fetch each category_page from help.claris.com to pick up new functions or updated slugs. For new functions, check the FileMaker Pro Release Notes at https://help.claris.com/en/pro-release-notes/content/ to determine the version introduced."
   },
   "functions": [
@@ -127,6 +127,20 @@
       "slug": "base64encoderfc",
       "doc_url": "https://help.claris.com/markdown/en/pro-help/base64encoderfc.md",
       "originated_in_version": "16"
+    },
+    {
+      "name": "BaseTableComment",
+      "format": "BaseTableComment ( fileName ; baseTableName )",
+      "parameters": [
+        "fileName",
+        "baseTableName"
+      ],
+      "purpose": "Returns the comment set on a base table in Manage Database",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "basetablecomment",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/basetablecomment.md",
+      "originated_in_version": "26"
     },
     {
       "name": "BaseTableIDs",
@@ -658,21 +672,6 @@
       "originated_in_version": "7"
     },
     {
-      "name": "FV",
-      "format": "FV ( payment ; interestRate ; periods )",
-      "parameters": [
-        "payment",
-        "interestRate",
-        "periods"
-      ],
-      "purpose": "Future value of an investment",
-      "category": "Financial functions",
-      "category_url": "financial-functions.html",
-      "slug": "fv",
-      "doc_url": "https://help.claris.com/markdown/en/pro-help/fv.md",
-      "originated_in_version": "legacy"
-    },
-    {
       "name": "Factorial",
       "format": "Factorial ( number {; numberOfFactors } )",
       "parameters": [
@@ -685,6 +684,21 @@
       "slug": "factorial",
       "doc_url": "https://help.claris.com/markdown/en/pro-help/factorial.md",
       "originated_in_version": "legacy"
+    },
+    {
+      "name": "FieldAnnotation",
+      "format": "FieldAnnotation ( fileName ; layoutName ; fieldName )",
+      "parameters": [
+        "fileName",
+        "layoutName",
+        "fieldName"
+      ],
+      "purpose": "Returns the DDL annotation string set in Advanced Options for Field",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "fieldannotation",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/fieldannotation.md",
+      "originated_in_version": "26"
     },
     {
       "name": "FieldBounds",
@@ -714,6 +728,21 @@
       "slug": "fieldcomment",
       "doc_url": "https://help.claris.com/markdown/en/pro-help/fieldcomment.md",
       "originated_in_version": "7"
+    },
+    {
+      "name": "FieldDisplayNames",
+      "format": "FieldDisplayNames ( fileName ; layoutName ; fieldName )",
+      "parameters": [
+        "fileName",
+        "layoutName",
+        "fieldName"
+      ],
+      "purpose": "Returns a field's custom display names as a JSON object (set in Advanced Options for Field)",
+      "category": "Design functions",
+      "category_url": "design-functions.html",
+      "slug": "fielddisplaynames",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/fielddisplaynames.md",
+      "originated_in_version": "26"
     },
     {
       "name": "FieldIDs",
@@ -843,6 +872,21 @@
       "originated_in_version": "legacy"
     },
     {
+      "name": "FV",
+      "format": "FV ( payment ; interestRate ; periods )",
+      "parameters": [
+        "payment",
+        "interestRate",
+        "periods"
+      ],
+      "purpose": "Future value of an investment",
+      "category": "Financial functions",
+      "category_url": "financial-functions.html",
+      "slug": "fv",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/fv.md",
+      "originated_in_version": "legacy"
+    },
+    {
       "name": "Get(AccountExtendedPrivileges)",
       "format": "Get ( AccountExtendedPrivileges )",
       "parameters": [
@@ -880,6 +924,19 @@
       "slug": "get-accountname",
       "doc_url": "https://help.claris.com/markdown/en/pro-help/get-accountname.md",
       "originated_in_version": "7"
+    },
+    {
+      "name": "Get(AccountPasswordDaysRemaining)",
+      "format": "Get ( AccountPasswordDaysRemaining )",
+      "parameters": [
+        "AccountPasswordDaysRemaining"
+      ],
+      "purpose": "Returns the number of days before the current account password must be changed; returns empty if no expiry is set",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-accountpassworddaysremaining",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-accountpassworddaysremaining.md",
+      "originated_in_version": "26"
     },
     {
       "name": "Get(AccountPrivilegeSetName)",
@@ -1233,6 +1290,19 @@
       "originated_in_version": "legacy"
     },
     {
+      "name": "Get(CurrentTimestamp)",
+      "format": "Get ( CurrentTimestamp )",
+      "parameters": [
+        "CurrentTimestamp"
+      ],
+      "purpose": "Returns current timestamp",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-currenttimestamp",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-currenttimestamp.md",
+      "originated_in_version": "legacy"
+    },
+    {
       "name": "Get(CurrentTimeUTCMicroseconds)",
       "format": "Get ( CurrentTimeUTCMicroseconds )",
       "parameters": [
@@ -1257,19 +1327,6 @@
       "slug": "get-currenttimeutcmilliseconds",
       "doc_url": "https://help.claris.com/markdown/en/pro-help/get-currenttimeutcmilliseconds.md",
       "originated_in_version": "16"
-    },
-    {
-      "name": "Get(CurrentTimestamp)",
-      "format": "Get ( CurrentTimestamp )",
-      "parameters": [
-        "CurrentTimestamp"
-      ],
-      "purpose": "Returns current timestamp",
-      "category": "Get functions",
-      "category_url": "get-functions.html",
-      "slug": "get-currenttimestamp",
-      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-currenttimestamp.md",
-      "originated_in_version": "legacy"
     },
     {
       "name": "Get(CustomMenuSetName)",
@@ -1439,6 +1496,19 @@
       "slug": "get-foundcount",
       "doc_url": "https://help.claris.com/markdown/en/pro-help/get-foundcount.md",
       "originated_in_version": "7"
+    },
+    {
+      "name": "Get(GuidedAccessState)",
+      "format": "Get ( GuidedAccessState )",
+      "parameters": [
+        "GuidedAccessState"
+      ],
+      "purpose": "FileMaker Go only \u2014 returns 1 if iOS Guided Access is currently active; use to detect kiosk/locked-screen mode",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-guidedaccessstate",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-guidedaccessstate.md",
+      "originated_in_version": "26"
     },
     {
       "name": "Get(HighContrastState)",
@@ -2351,45 +2421,6 @@
       "originated_in_version": "15"
     },
     {
-      "name": "Get(UUID)",
-      "format": "Get ( UUID )",
-      "parameters": [
-        "UUID"
-      ],
-      "purpose": "Returns UUID",
-      "category": "Get functions",
-      "category_url": "get-functions.html",
-      "slug": "get-uuid",
-      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-uuid.md",
-      "originated_in_version": "15"
-    },
-    {
-      "name": "Get(UUIDNumber)",
-      "format": "Get ( UUIDNumber )",
-      "parameters": [
-        "UUIDNumber"
-      ],
-      "purpose": "Returns UUID as number",
-      "category": "Get functions",
-      "category_url": "get-functions.html",
-      "slug": "get-uuidnumber",
-      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-uuidnumber.md",
-      "originated_in_version": "17"
-    },
-    {
-      "name": "Get(UseSystemFormatsState)",
-      "format": "Get ( UseSystemFormatsState )",
-      "parameters": [
-        "UseSystemFormatsState"
-      ],
-      "purpose": "Returns use system formats state",
-      "category": "Get functions",
-      "category_url": "get-functions.html",
-      "slug": "get-usesystemformatsstate",
-      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-usesystemformatsstate.md",
-      "originated_in_version": "8"
-    },
-    {
       "name": "Get(UserCount)",
       "format": "Get ( UserCount )",
       "parameters": [
@@ -2414,6 +2445,45 @@
       "slug": "get-username",
       "doc_url": "https://help.claris.com/markdown/en/pro-help/get-username.md",
       "originated_in_version": "7"
+    },
+    {
+      "name": "Get(UseSystemFormatsState)",
+      "format": "Get ( UseSystemFormatsState )",
+      "parameters": [
+        "UseSystemFormatsState"
+      ],
+      "purpose": "Returns use system formats state",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-usesystemformatsstate",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-usesystemformatsstate.md",
+      "originated_in_version": "8"
+    },
+    {
+      "name": "Get(UUID)",
+      "format": "Get ( UUID )",
+      "parameters": [
+        "UUID"
+      ],
+      "purpose": "Returns UUID",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-uuid",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-uuid.md",
+      "originated_in_version": "15"
+    },
+    {
+      "name": "Get(UUIDNumber)",
+      "format": "Get ( UUIDNumber )",
+      "parameters": [
+        "UUIDNumber"
+      ],
+      "purpose": "Returns UUID as number",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-uuidnumber",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-uuidnumber.md",
+      "originated_in_version": "17"
     },
     {
       "name": "Get(WindowContentHeight)",
@@ -2559,6 +2629,19 @@
       "originated_in_version": "7"
     },
     {
+      "name": "Get(WindowUUID)",
+      "format": "Get ( WindowUUID )",
+      "parameters": [
+        "WindowUUID"
+      ],
+      "purpose": "Returns a unique, stable UUID for the currently active window; useful for scripted window management",
+      "category": "Get functions",
+      "category_url": "get-functions.html",
+      "slug": "get-windowuuid",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowuuid.md",
+      "originated_in_version": "26"
+    },
+    {
       "name": "Get(WindowVisible)",
       "format": "Get ( WindowVisible )",
       "parameters": [
@@ -2596,19 +2679,6 @@
       "slug": "get-windowzoomlevel",
       "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowzoomlevel.md",
       "originated_in_version": "8"
-    },
-    {
-      "name": "GetAVPlayerAttribute",
-      "format": "GetAVPlayerAttribute ( attributeName )",
-      "parameters": [
-        "attributeName"
-      ],
-      "purpose": "Returns AV player attribute for container",
-      "category": "Mobile functions",
-      "category_url": "mobile-functions.html",
-      "slug": "getavplayerattribute",
-      "doc_url": "https://help.claris.com/markdown/en/pro-help/getavplayerattribute.md",
-      "originated_in_version": "15"
     },
     {
       "name": "GetAddonInfo",
@@ -2738,6 +2808,19 @@
       "category_url": "text-functions.html",
       "slug": "getasurlencoded",
       "doc_url": "https://help.claris.com/markdown/en/pro-help/getasurlencoded.md",
+      "originated_in_version": "15"
+    },
+    {
+      "name": "GetAVPlayerAttribute",
+      "format": "GetAVPlayerAttribute ( attributeName )",
+      "parameters": [
+        "attributeName"
+      ],
+      "purpose": "Returns AV player attribute for container",
+      "category": "Mobile functions",
+      "category_url": "mobile-functions.html",
+      "slug": "getavplayerattribute",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getavplayerattribute.md",
       "originated_in_version": "15"
     },
     {
@@ -2958,6 +3041,20 @@
       "slug": "getnthrecord",
       "doc_url": "https://help.claris.com/markdown/en/pro-help/getnthrecord.md",
       "originated_in_version": "10"
+    },
+    {
+      "name": "GetPersistentData",
+      "format": "GetPersistentData ( name ; instanceID )",
+      "parameters": [
+        "name",
+        "instanceID"
+      ],
+      "purpose": "Returns a value from the persistent data store by name and instance ID; store survives session end and file close",
+      "category": "Persistent data functions",
+      "category_url": "persistent-data-functions.html",
+      "slug": "getpersistentdata",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/getpersistentdata.md",
+      "originated_in_version": "26"
     },
     {
       "name": "GetRAGSpaceInfo",
@@ -3583,6 +3680,19 @@
       "originated_in_version": "legacy"
     },
     {
+      "name": "ListPersistentDataIDs",
+      "format": "ListPersistentDataIDs ( name )",
+      "parameters": [
+        "name"
+      ],
+      "purpose": "Returns a list of instance IDs for a named entry in the persistent data store; use to enumerate all instances before iterating",
+      "category": "Persistent data functions",
+      "category_url": "persistent-data-functions.html",
+      "slug": "listpersistentdataids",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/listpersistentdataids.md",
+      "originated_in_version": "26"
+    },
+    {
       "name": "Ln",
       "format": "Ln ( number )",
       "parameters": [
@@ -3815,20 +3925,6 @@
       "originated_in_version": "legacy"
     },
     {
-      "name": "NPV",
-      "format": "NPV ( payment ; interestRate )",
-      "parameters": [
-        "payment",
-        "interestRate"
-      ],
-      "purpose": "Net present value of unequal payments",
-      "category": "Financial functions",
-      "category_url": "financial-functions.html",
-      "slug": "npv",
-      "doc_url": "https://help.claris.com/markdown/en/pro-help/npv.md",
-      "originated_in_version": "legacy"
-    },
-    {
       "name": "NormalizeEmbedding",
       "format": "NormalizeEmbedding ( data { ; dimension } )",
       "parameters": [
@@ -3843,6 +3939,20 @@
       "originated_in_version": "22.0.1"
     },
     {
+      "name": "NPV",
+      "format": "NPV ( payment ; interestRate )",
+      "parameters": [
+        "payment",
+        "interestRate"
+      ],
+      "purpose": "Net present value of unequal payments",
+      "category": "Financial functions",
+      "category_url": "financial-functions.html",
+      "slug": "npv",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/npv.md",
+      "originated_in_version": "legacy"
+    },
+    {
       "name": "NumToJText",
       "format": "NumToJText ( number ; separator ; characterType )",
       "parameters": [
@@ -3855,36 +3965,6 @@
       "category_url": "japanese-functions.html",
       "slug": "numtojtext",
       "doc_url": "https://help.claris.com/markdown/en/pro-help/numtojtext.md",
-      "originated_in_version": "legacy"
-    },
-    {
-      "name": "PMT",
-      "format": "PMT ( principal ; interestRate ; term )",
-      "parameters": [
-        "principal",
-        "interestRate",
-        "term"
-      ],
-      "purpose": "Payment required for a loan",
-      "category": "Financial functions",
-      "category_url": "financial-functions.html",
-      "slug": "pmt",
-      "doc_url": "https://help.claris.com/markdown/en/pro-help/pmt.md",
-      "originated_in_version": "legacy"
-    },
-    {
-      "name": "PV",
-      "format": "PV ( payment ; interestRate ; periods )",
-      "parameters": [
-        "payment",
-        "interestRate",
-        "periods"
-      ],
-      "purpose": "Present value of equal payments",
-      "category": "Financial functions",
-      "category_url": "financial-functions.html",
-      "slug": "pv",
-      "doc_url": "https://help.claris.com/markdown/en/pro-help/pv.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3909,6 +3989,21 @@
       "category_url": "trigonometric-functions.html",
       "slug": "pi",
       "doc_url": "https://help.claris.com/markdown/en/pro-help/pi.md",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "PMT",
+      "format": "PMT ( principal ; interestRate ; term )",
+      "parameters": [
+        "principal",
+        "interestRate",
+        "term"
+      ],
+      "purpose": "Payment required for a loan",
+      "category": "Financial functions",
+      "category_url": "financial-functions.html",
+      "slug": "pmt",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/pmt.md",
       "originated_in_version": "legacy"
     },
     {
@@ -3955,6 +4050,21 @@
       "originated_in_version": "legacy"
     },
     {
+      "name": "PV",
+      "format": "PV ( payment ; interestRate ; periods )",
+      "parameters": [
+        "payment",
+        "interestRate",
+        "periods"
+      ],
+      "purpose": "Present value of equal payments",
+      "category": "Financial functions",
+      "category_url": "financial-functions.html",
+      "slug": "pv",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/pv.md",
+      "originated_in_version": "legacy"
+    },
+    {
       "name": "Quote",
       "format": "Quote ( text )",
       "parameters": [
@@ -3965,21 +4075,6 @@
       "category_url": "text-functions.html",
       "slug": "quote",
       "doc_url": "https://help.claris.com/markdown/en/pro-help/quote.md",
-      "originated_in_version": "legacy"
-    },
-    {
-      "name": "RGB",
-      "format": "RGB ( red ; green ; blue )",
-      "parameters": [
-        "red",
-        "green",
-        "blue"
-      ],
-      "purpose": "Returns an integer from red/green/blue values",
-      "category": "Text formatting functions",
-      "category_url": "text-formatting-functions.html",
-      "slug": "rgb",
-      "doc_url": "https://help.claris.com/markdown/en/pro-help/rgb.md",
       "originated_in_version": "legacy"
     },
     {
@@ -4062,6 +4157,21 @@
       "category_url": "text-functions.html",
       "slug": "replace",
       "doc_url": "https://help.claris.com/markdown/en/pro-help/replace.md",
+      "originated_in_version": "legacy"
+    },
+    {
+      "name": "RGB",
+      "format": "RGB ( red ; green ; blue )",
+      "parameters": [
+        "red",
+        "green",
+        "blue"
+      ],
+      "purpose": "Returns an integer from red/green/blue values",
+      "category": "Text formatting functions",
+      "category_url": "text-formatting-functions.html",
+      "slug": "rgb",
+      "doc_url": "https://help.claris.com/markdown/en/pro-help/rgb.md",
       "originated_in_version": "legacy"
     },
     {

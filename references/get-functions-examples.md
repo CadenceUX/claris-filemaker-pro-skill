@@ -1,7 +1,7 @@
 # FileMaker Get() Functions — Quick Reference
 
 Source: https://help.claris.com/en/pro-help/content/get-functions.html  
-All 135 Get() functions grouped by category with return type, typical use, and examples.  
+All 138 Get() functions grouped by category with return type, typical use, and examples (135 through FM 22 + 3 new in FM 26: Get(AccountPasswordDaysRemaining), Get(GuidedAccessState), Get(WindowUUID)).  
 Last verified: 2026-06 against live Claris Help Centre.
 
 **Overview:** Get() functions return environmental and contextual information — the current user, file, record, window, device, date/time, and system state. They take no arguments and are recalculated dynamically. All return text or number unless noted.
@@ -55,6 +55,7 @@ Right ( "0" & Day ( Get ( CurrentDate ) ) ; 2 )
 | `Get(AccountGroupName)` | text | External server group name (LDAP/Active Directory) |
 | `Get(AccountPrivilegeSetName)` | text | Name of the current privilege set |
 | `Get(AccountExtendedPrivileges)` | text | Return-delimited list of extended privilege keywords |
+| `Get(AccountPasswordDaysRemaining)` | number | **FM 26+** — Days before current password must change; empty if no expiry set |
 | `Get(CurrentPrivilegeSetName)` | text | Synonym for `AccountPrivilegeSetName` |
 | `Get(CurrentExtendedPrivileges)` | text | Synonym for `AccountExtendedPrivileges` |
 | `Get(UserName)` | text | OS-level username (not account name) |
@@ -226,6 +227,7 @@ Progress indicator:
 | `Get(WindowZoomLevel)` | number | Current zoom percentage |
 | `Get(WindowVisible)` | number | 1=visible, 0=hidden |
 | `Get(WindowOrientation)` | number | 0=portrait, 1=landscape (FileMaker Go only) |
+| `Get(WindowUUID)` | text | **FM 26+** — Unique stable UUID for the active window; useful for managing multiple windows of the same file |
 | `Get(ActiveLayoutObjectName)` | text | Name of the currently focused layout object |
 | `Get(StatusAreaState)` | number | 0=hidden, 1=visible, 2=locked |
 | `Get(MenubarState)` | number | 0=hidden, 1=locked, 2=normal |
@@ -387,6 +389,7 @@ Get ( UUID )
 | `Get(ScreenWidth)` | number | Screen width in points |
 | `Get(ScreenScaleFactor)` | number | Display scale factor (2.0 for Retina, 3.0 for Super Retina) |
 | `Get(HighContrastState)` | number | 1 if OS high contrast / accessibility mode is active |
+| `Get(GuidedAccessState)` | number | **FM 26+, FileMaker Go only** — 1 if iOS Guided Access is currently active; use to detect kiosk/locked-screen mode |
 | `Get(RegionMonitorEvents)` | text | JSON of pending region monitor events (Go only) |
 
 ```

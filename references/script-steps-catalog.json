@@ -3,7 +3,7 @@
     "description": "Canonical catalog of all FileMaker Pro script steps, organised by category. Use this for prototype/syntax lookups before fetching live docs. doc_url points to the authoritative Claris Help Centre page for each step.",
     "help_centre": "https://help.claris.com/markdown/en/pro-help/script-steps-reference.md",
     "version": "FileMaker Pro 26 / Claris 2026",
-    "last_updated": "2026-06 (v1.7 \u2014 added Go to List of Records to Found Sets, Set Revert Transaction on Error to Control; step count 155 \u2192 157)",
+    "last_updated": "2026-06 (v1.8 \u2014 added 10 FM 26 steps; new PDF Files and Persistent Data categories; Save Records as PDF moved to PDF Files; step count 157 \u2192 167)",
     "update_instructions": "Re-fetch https://help.claris.com/markdown/en/pro-help/script-steps-reference.md and compare category listings. Add new steps, update slugs, bump last_updated.",
     "note": "Syntax uses [] for required fields/options and {} for optional. Steps marked platform list restrictions (Pro, Server, Go, WebDirect, Cloud)."
   },
@@ -424,14 +424,6 @@
           "purpose": "Undoes or redoes the last user action",
           "slug": "undo-redo",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/undo-redo.md"
-        },
-        {
-          "name": "Insert Embedding",
-          "syntax": "Insert Embedding [ Account Name: name ; Embedding Model: model ; Source Field: field ; Target Field: field ]",
-          "purpose": "Generates an embedding vector for source field content and stores it in the target container field",
-          "slug": "insert-embedding",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-embedding.md",
-          "originated_in_version": "21.0.1"
         }
       ]
     },
@@ -558,13 +550,6 @@
           "doc_url": "https://help.claris.com/markdown/en/pro-help/save-records-as-excel.md"
         },
         {
-          "name": "Save Records as PDF",
-          "syntax": "Save Records as PDF [ No dialog ; Append ; Output file ; Current record / Records being browsed / Blank record ]",
-          "purpose": "Saves records or a blank layout to a PDF file",
-          "slug": "save-records-as-pdf",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/save-records-as-pdf.md"
-        },
-        {
           "name": "Save Records as Snapshot Link",
           "syntax": "Save Records as Snapshot Link [ No dialog ; Output file ]",
           "purpose": "Saves a snapshot link (.fmpsl) representing the current found set and sort order",
@@ -590,15 +575,6 @@
           "purpose": "Performs a Quick Find across all quick-find-enabled fields",
           "slug": "perform-quick-find",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-quick-find.md"
-        },
-        {
-          "name": "Perform Semantic Find",
-          "syntax": "Perform Semantic Find [ Table::EmbeddingField ; Query Embedding: value ; Top K: n ]",
-          "purpose": "Finds the top K records most semantically similar to a query embedding vector",
-          "slug": "perform-semantic-find",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-semantic-find.md",
-          "notes": "Query by: Embedding (vector) or Image (pass a container field or variable containing an image \u2014 the step generates the query embedding internally). Save result option: set a variable to receive a JSON array of objects with recordID and cosineSimilarity scores for each matched record. Normalised embedding vectors required for accurate results. Both query and stored embeddings must have identical dimensions.",
-          "originated_in_version": "21.0.1"
         },
         {
           "name": "Constrain Found Set",
@@ -1091,6 +1067,84 @@
           "notes": "Does not change Get(UserName). Only meaningful for hosted files \u2014 used to tag sessions for logging or tracking. Pairs with Get(SessionIdentifier) to retrieve the value in calculations or scripts.",
           "originated_in_version": "19.4.1",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/set-session-identifier.md"
+        },
+        {
+          "name": "Flush Web Viewer Cookies",
+          "syntax": "Flush Web Viewer Cookies",
+          "purpose": "Immediately clears all web viewer cookies across all open files in the current client",
+          "slug": "flush-web-viewer-cookies",
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/flush-web-viewer-cookies.md",
+          "notes": "Clears cookies from all web viewer objects in all open files for the current client. Takes effect immediately without requiring a web viewer reload. Useful for session logout workflows or testing authenticated web content.",
+          "originated_in_version": "26"
+        }
+      ]
+    },
+    {
+      "name": "PDF Files",
+      "category_page": "pdf-files-script-steps.html",
+      "steps": [
+        {
+          "name": "Create PDF",
+          "syntax": "Create PDF",
+          "purpose": "Creates a new empty PDF in memory; begins the scripted PDF workflow",
+          "slug": "create-pdf",
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/create-pdf.md",
+          "notes": "Starts the PDF Files workflow. Use Append PDF or Save Records as PDF (with Save to: open PDF option) to add pages, then Close PDF to save to a file path, container, or variable. Only one PDF can be open at a time.",
+          "originated_in_version": "26"
+        },
+        {
+          "name": "Open PDF",
+          "syntax": "Open PDF [ File Path: <path or variable> ]",
+          "purpose": "Opens an existing PDF for modification within the scripted PDF workflow",
+          "slug": "open-pdf",
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/open-pdf.md",
+          "notes": "Alternative to Create PDF when modifying an existing document. Accepts a file path or a container field/variable containing a PDF. Use Append PDF or Save Records as PDF (with Save to: open PDF) to add pages, then Close PDF to save.",
+          "originated_in_version": "26"
+        },
+        {
+          "name": "Append PDF",
+          "syntax": "Append PDF [ Source: <file path, container, or variable> ]",
+          "purpose": "Appends pages from an existing PDF to the currently open PDF in memory",
+          "slug": "append-pdf",
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/append-pdf.md",
+          "notes": "Requires an open PDF (via Create PDF or Open PDF). Source can be a file path, container field, or variable. Pages are appended in document order. Close PDF when finished to persist the result.",
+          "originated_in_version": "26"
+        },
+        {
+          "name": "Save Records as PDF",
+          "syntax": "Save Records as PDF [ No dialog ; Append ; Save to: File / Container / Variable / Open PDF ; Output file ; Current record / Records being browsed / Blank record ]",
+          "purpose": "Saves records or a blank layout to a PDF; in FM 26 moved to PDF Files category and gained Save to option (file path, container, variable, or append to an open PDF)",
+          "slug": "save-records-as-pdf",
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/save-records-as-pdf.md",
+          "notes": "FM 26: moved from Files category to PDF Files. New Save to option: File (original behaviour), Container field, Variable, or Open PDF (appends layout output to the currently open scripted PDF). Fetch live docs for the full Save to option matrix.",
+          "originated_in_version": "legacy"
+        },
+        {
+          "name": "Close PDF",
+          "syntax": "Close PDF [ Save to: File Path / Container / Variable ; Output: <field or path> ]",
+          "purpose": "Closes the open PDF and saves it to a file path, container field, or variable",
+          "slug": "close-pdf",
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/close-pdf.md",
+          "notes": "Ends the scripted PDF workflow and persists the result. Must follow Create PDF or Open PDF. If Close PDF is not called before a script ends, the in-memory PDF is discarded (same as Cancel PDF). Fetch live docs for output option detail.",
+          "originated_in_version": "26"
+        },
+        {
+          "name": "Cancel PDF",
+          "syntax": "Cancel PDF",
+          "purpose": "Closes the open PDF without saving, discarding all changes",
+          "slug": "cancel-pdf",
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/cancel-pdf.md",
+          "notes": "Discards the in-memory PDF without saving. Use in error-handling branches to clean up when the PDF workflow cannot complete. No output is produced.",
+          "originated_in_version": "26"
+        },
+        {
+          "name": "Print PDF",
+          "syntax": "Print PDF [ No dialog ; Source: <file path, container, or variable> ]",
+          "purpose": "Prints a PDF from a file path, container field, or variable without opening it for editing",
+          "slug": "print-pdf",
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/print-pdf.md",
+          "notes": "Standalone print step \u2014 does not require Create PDF or Open PDF. Source can be a file path, a container field holding a PDF, or a variable. The No dialog option suppresses the print dialog.",
+          "originated_in_version": "26"
         }
       ]
     },
@@ -1228,6 +1282,39 @@
           "doc_url": "https://help.claris.com/markdown/en/pro-help/set-ai-call-logging.md",
           "notes": "Verbose mode: logs embedding vectors, token counts, semantic find return count, and cosine similarity scores. Truncate Messages: shortens verbose output for large embedding vectors. Standard mode logs prompts and responses without embedding detail.",
           "originated_in_version": "21.0.1"
+        },
+        {
+          "name": "Insert Image Caption",
+          "syntax": "Insert Image Caption [ AI Account Name: <name> ; Image: <container field or variable> ; Target: <field or variable> ]",
+          "purpose": "Sends an image to a captioning AI model and inserts the returned caption into a target field or variable",
+          "slug": "insert-image-caption",
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-image-caption.md",
+          "notes": "Requires a configured AI account. Image source can be a container field or a variable containing image data. Caption is inserted into the target field or variable. Use Insert Image Captions in Found Set for batch processing.",
+          "originated_in_version": "26"
+        },
+        {
+          "name": "Insert Image Captions in Found Set",
+          "syntax": "Insert Image Captions in Found Set [ AI Account Name: <name> ; Image: <container field> ; Target: <field> ]",
+          "purpose": "Runs Insert Image Caption for every record in the current found set in sequence",
+          "slug": "insert-image-captions-in-found-set",
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-image-captions-in-found-set.md",
+          "notes": "Batch version of Insert Image Caption. Processes every record in the found set sequentially. Requires a configured AI account. Both the image source and target must be fields (not variables) since the step iterates records.",
+          "originated_in_version": "26"
+        }
+      ]
+    },
+    {
+      "name": "Persistent Data",
+      "category_page": "persistent-data-script-steps.html",
+      "steps": [
+        {
+          "name": "Configure Persistent Data",
+          "syntax": "Configure Persistent Data [ Name: <name> ; Instance ID: <id> ; Value: <value> ]",
+          "purpose": "Sets or deletes an entry in the persistent data store; store survives session end and file close",
+          "slug": "configure-persistent-data",
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/configure-persistent-data.md",
+          "notes": "Entries are keyed by a name and an instance ID, allowing multiple values under the same name. Delete an entry by passing empty or null as the Value. Use ListPersistentDataIDs() to enumerate instance IDs before iterating. Use GetPersistentData() to retrieve values. Fetch live docs for scope and platform restrictions.",
+          "originated_in_version": "26"
         }
       ]
     }

@@ -997,3 +997,77 @@ Set Field [ Log::LastObjectClicked ; LayoutObjectUUID ]
 // Store in JSON for later reference:
 JSONSetElement ( "{}" ; "clickedObject" ; LayoutObjectUUID ; JSONString )
 ```
+
+---
+
+# FileMaker Persistent Data Functions — Syntax & Examples (FM 26+)
+
+Source: https://help.claris.com/en/pro-help/content/persistent-data-functions.html  
+2 persistent data functions introduced in FileMaker Pro 26 (2026).  
+Last verified: 2026-06 against live Claris Help Centre.
+
+**Overview:** The persistent data store is a key-value store that survives session end and file close. Entries are keyed by a **name** and an **instance ID**, allowing multiple values under the same name. Use `Configure Persistent Data` (script step) to write/delete entries; use these functions to read them.
+
+---
+
+## GetPersistentData ( name ; instanceID )
+*Introduced in FileMaker Pro 26 (2026).*  
+Returns a value from the persistent data store by name and instance ID.  
+Parameters: `name` — text key; `instanceID` — text or number identifying the specific instance.  
+Returns: text (the stored value, or empty if not found)
+
+```
+GetPersistentData ( "lastRunDate" ; 1 )
+// → "2026-06-10"  (value stored for name="lastRunDate", instance=1)
+```
+
+Read multiple instances of the same key:
+```
+Let ( [
+  ids   = ListPersistentDataIDs ( "syncToken" ) ;
+  first = GetValue ( ids ; 1 ) ;
+  token = GetPersistentData ( "syncToken" ; first )
+] ;
+  token
+)
+```
+
+---
+
+## ListPersistentDataIDs ( name )
+*Introduced in FileMaker Pro 26 (2026).*  
+Returns a return-delimited list of all instance IDs stored under the specified name in the persistent data store.  
+Parameters: `name` — the key name to query.  
+Returns: text (return-delimited list of instance IDs; empty if no instances exist)
+
+```
+ListPersistentDataIDs ( "syncToken" )
+// → "1¶2¶3"  (three instances stored under "syncToken")
+```
+
+Enumerate all instances of a key and read each value:
+```
+Let ( [
+  ids   = ListPersistentDataIDs ( "cachedResult" ) ;
+  count = ValueCount ( ids )
+] ;
+  // Use in a script with a loop:
+  // Set Variable [ $i = 1 ]
+  // Loop
+  //   Set Variable [ $id = GetValue ( ids ; $i ) ]
+  //   Set Variable [ $val = GetPersistentData ( "cachedResult" ; $id ) ]
+  //   ... process $val ...
+  //   Set Variable [ $i = $i + 1 ]
+  //   Exit Loop If [ $i > $count ]
+  // End Loop
+  count & " instances found"
+)
+```
+
+Check whether any instance exists before reading:
+```
+If ( IsEmpty ( ListPersistentDataIDs ( "userPrefs" ) ) ;
+  "No preferences saved yet" ;
+  GetPersistentData ( "userPrefs" ; 1 )
+)
+```

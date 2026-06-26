@@ -1,9 +1,10 @@
 ---
-name: claris-filemaker-pro
+compatibility: Claude.ai, Claude Chat, Claude Code
 metadata:
-  version: "1.9"
+  version: "1.9.1"
   last_known_fm_version: "26"
-description: >
+name: claris-filemaker-pro
+description: |
   REFERENCE skill — FileMaker Pro script steps, calculation functions, and custom functions ONLY.
   Use for: syntax lookups, function parameters, usage examples, and live doc fetches across all
   368 built-in functions (If, Case, Let, While, ExecuteSQL, JSON, AI/embedding, Persistent Data),
@@ -16,7 +17,7 @@ description: >
   Claris docs are versioned and frequently updated.
 ---
 
-# Claris FileMaker Pro — Skill v1.9
+# Claris FileMaker Pro — Skill v1.9.1
 
 ## Overview
 
@@ -70,7 +71,7 @@ check once:
 
 1. Fetch `https://github.com/CadenceUX/claris-filemaker-pro-skill/raw/main/VERSION`
 2. Parse the returned string as the latest available version
-3. Compare with this skill's installed version (currently `"1.9"`)
+3. Compare with this skill's installed version (currently `"1.9.1"`)
 4. If latest > installed, prepend this notice to your first response:
 
    > ⚠️ **Skill update available**

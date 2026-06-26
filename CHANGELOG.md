@@ -1,4 +1,152 @@
-## [1.9] — 2026-06
+## [1.9.1] — 2026-06-26
+
+### Fixed — catalog parameter-list errors found during a live FileMaker session
+
+A live agentic session generating a reference script that exercises all 368 functions and
+165 script steps against a real `Functions.fmp12` file surfaced four genuine catalog/example
+defects (verified against live Claris docs and live FileMaker calculation evaluation). No new
+functions or script steps — total counts remain **368 functions** and **165 script steps**.
+
+- **`FieldAnnotation`** — `function-catalog.json` listed a bogus 3-parameter signature
+  `( fileName ; layoutName ; fieldName )`. The live Claris doc and its own "Originated in
+  version 26.0" note confirm the real signature is **`( fileName ; fieldName )`** — `layoutName`
+  doesn't exist as a parameter. Corrected `format` and `parameters` in the catalog; corrected
+  the matching section and both calculation examples in `design-container-functions-examples.md`.
+- **`FieldDisplayNames`** — same defect, same fix: catalog and examples corrected from the
+  bogus `( fileName ; layoutName ; fieldName )` to the real **`( fileName ; fieldName )`**.
+- **`TextColor`** — `function-catalog.json`'s `parameters` array was `["text", "RGB ( red",
+  "green", "blue )"]` — the nested `RGB(...)` call had been split across three bogus fragments
+  by whatever process generated the array, even though `format` was already correct. Corrected
+  to `["text", "color"]` (two logical parameters, second one a nested RGB() call).
+- **`TextColorRemove`** — identical `parameters`-array mis-split, identical fix.
+
+### Verified accurate — no catalog changes, usage notes added instead
+
+The same session also flagged five functions as "broken" that turned out to be **correct in the
+catalog** — the live FileMaker errors were caused by treating placeholder-style usage (bare
+literals, wrong data shape) as if it were valid input. Documented here so this doesn't get
+mis-diagnosed as a catalog bug again:
+
+| Function | What looked wrong | Why the catalog is actually right |
+|---|---|---|
+| `Evaluate` | `Evaluate ( "text" ; field )` returns nothing useful | First argument must itself be a *valid calculation string* (e.g. `"1+1"`), not arbitrary text — `"text"` alone isn't parseable as a calc |
+| `GetSummary` | `GetSummary ( field1 ; field2 )` silently fails | `summaryField` must be a real **Summary-type** field in the same table as the break field, sorted by it — a plain Text/Number field never works |
+| `Let` | Positional args like `Let ( 1 ; 1 ; "text" )` are invalid | `Let` uses `var = expression` **assignment** syntax inside the first clause (`Let ( x = 5 ; x*x )`), not positional parameters — the catalog's `parameters: ["var1","var2","calculation"]` names the *roles*, not literal positions |
+| `While` | Same positional-args mistake | Same root cause — `While ( [ init ] ; condition ; [ logic ] ; result )` needs real assignment/condition expressions, not bare literals |
+| `NPV` | `NPV ( 1 ; .05 )` fails with error 1214 | `payment` requires a **repeating field** containing the unequal payment series — FileMaker validates the type, so a plain number is rejected at the field-type level, not a calc syntax level |
+
+Also clarified for **all `Get()` functions**: the catalog's `parameters` array entry (e.g.
+`["AccountExtendedPrivileges"]`) is the literal constant name that's already embedded in `format`
+(`"Get ( AccountExtendedPrivileges )"`) — it is not a runtime argument to substitute a value into.
+Treating it as a positional parameter to fill in (the mistake made in this session) produces
+malformed calls like `Get(AccountExtendedPrivileges) ( 1 )`.
+
+### Fixed — full live audit of every function and script step against help.claris.com
+
+Following the `FieldAnnotation`/`FieldDisplayNames` parameter-count bugs found above, every one
+of the 368 functions and 165 script steps was re-checked against its live `doc_url` page (533
+pages fetched directly from help.claris.com and diffed programmatically against the catalog —
+not a sample). This is a data-accuracy pass only: no functions or script steps were added or
+removed, counts remain **368 functions** and **165 script steps**.
+
+**`function-catalog.json`:**
+- **176 `originated_in_version` values were wrong** — not just formatting (e.g. `"16"` vs
+  `"16.0"`, which are the same version and were left alone), but genuinely different version
+  numbers. Examples: `Get(AccountExtendedPrivileges)` was `"7"`, live docs say `"11.0"`;
+  `Base64Decode`/`Base64Encode` were `"12"`, live docs say `"13.0"`; `ConvertFromFileMakerPath`/
+  `ConvertToFileMakerPath` were `"12"`, live docs say `"19.0"`. Roughly half the catalog had this
+  defect — likely a systematic error from however `originated_in_version` was originally
+  populated, not isolated typos. All 176 corrected to match the live "Originated in version"
+  text, normalised to the catalog's existing convention (e.g. `"6.0 or earlier"` → `"legacy"`,
+  `"13.0"` → `"13"`, real patch versions like `"19.6.1"` kept as-is).
+- **`GetRecordIDsFromFoundSet`** — `format`/`parameters` had stale FM 26 parameter naming
+  (`tableOccurrenceName`) that didn't match the live doc's actual parameter name
+  (`tableOccurrenceOrPortal`). Corrected.
+
+**`script-steps-catalog.json`:**
+- **11 dead `doc_url` links** found and fixed. Three resolved to a real but differently-named
+  page (`If` → `if-script-step.md`, not `if.md`, since Claris uses separate `-function`/
+  `-script-step` suffixes to disambiguate the `If()` function from the `If` step; `Send DDE
+  Execute` → `send-dde-execute-windows.md`; `Speak` → `speak-os-x.md`). Eight steps (`Check
+  Spelling`, `Log Out`, `Manage Add-ons`, `Navigate to Object`, `Show/Hide Status Toolbar`, `Set
+  Window Animation`, `Show Alert`, `Show/Hide Script Editor`) have **no individual doc page** on
+  Claris's site as of this audit — their `doc_url` now points at the general script steps
+  reference instead of a 404, with a `doc_url_note` field flagging this so it's not mistaken for
+  an oversight later.
+- **17 steps had wrong or missing clauses** in `syntax`, found by checking each step's real
+  `Options` section on its live page:
+  - `Move/Resize Window`, `Close Window`, `Set Window Title` were all missing the **`Current file
+    only`** clause that's a real, documented option on each (this is the same clause this skill's
+    catalog should have always had — see the now-removed "not in scope" note in this changelog's
+    previous edit, which incorrectly attributed this to a third-party plugin bug rather than a
+    genuine gap in this catalog).
+  - `Set Window Title` also had the wrong clause name — `New Name` doesn't exist; the real option
+    is `New Title`.
+  - `Insert Picture`, `Insert PDF`, `Insert Audio/Video` all listed a `Storage:
+    Embedded/By Reference/Externally` enum that doesn't exist for any of these three steps — the
+    real (and only) option is a simple `Store only as a reference` toggle.
+  - The AI category had the most drift, likely because these are the newest steps (FM 22–26) and
+    were never checked against docs after initial authoring: `Insert Embedding`'s real option
+    names are `Input`/`Target` (catalog had `Source Field`/`Target Field`, and was missing
+    `Parameters`); `Insert Image Caption`/`Insert Image Captions in Found Set` use `Account Name`/
+    `Model`/`Input` (catalog had `AI Account Name`/`Image`); `Fine-Tune Model`'s real target
+    option is `Response Target`, not `Output Model`, and it was missing `Fine-Tune Parameters`;
+    `Generate Response from Model`'s real option is `Response`, not `Response Target`.
+  - `Trigger Claris Connect Flow` was the most wrong — catalog had `Flow Name`/`Parameters`/
+    `Response Target`, but the real options are `URL`/`JSON Data`/`AppID:APIKey for Webhooks`/
+    `Target`/`Flow`. Rewritten to match.
+  - `Perform Semantic Find` was rewritten in full — catalog had `Table::EmbeddingField ; Query
+    Embedding: value ; Top K: n`, none of which are real option names; the actual options are
+    `Query by`, `Record set`, `Target field`, `Return count`, `Cosine similarity condition`/
+    `value`, `Parameters`, `Save result`.
+  - `Open File` and `Import Records` were rewritten to use real option names (`Add FileMaker Data
+    Source`/`Add ODBC Data Source`; `Specify data source`/`Specify import order`) instead of
+    fabricated ones.
+  - `Go to Record/Request/Page` and `Go to Portal Row` were missing the documented `Exit after
+    last` option; added.
+- **Known gap at the time of writing the section above, fixed later in this same release** — see
+  "Script step `originated_in_version` added" below.
+
+**Example accuracy** (`date-time-`, `design-container-`, `logical-json-ai-`, `numeric-`,
+`specialty-`, and `text-functions-examples.md`):
+- Spot-checking earlier in this session's history found that most illustrative examples in these
+  files were synthetic — written when the skill was authored, not copied from Claris docs. All
+  six example files were systematically re-checked: of 256 function sections with worked
+  examples, **143 had their primary example replaced** with Claris's actual documented example
+  (verbatim where the live page uses a fenced code block; reconstructed into this skill's
+  established `expression` / `// → result` comment style where the live page instead uses inline
+  prose like `` `Round(123.456;2)` returns `123.46` ``). Secondary examples in each section —
+  "pair with X" combination patterns, alternate usage notes — were left untouched, since those
+  are this skill's own added value rather than claims about what Claris's docs say.
+  - 9 functions' live examples use complex prose or multi-table walkthroughs (`Lookup`,
+    `LookupNext`, `StDev`, `StDevP`, `Furigana`, `ConvertFromFileMakerPath`, `GetTokenCount`,
+    `JSONParsedState`, `FieldStyle`) that don't reduce cleanly to a single expression/result pair
+    — left as-is rather than risk a mangled auto-edit; flagged here for manual review if accuracy
+    on these specific functions matters for a future task.
+  - `Get()` functions are documented in this skill as summary tables, not per-function example
+    sections, so they were out of scope for this example pass (not because they're assumed
+    accurate — they simply have no example block to compare).
+
+### Added — script step `originated_in_version` field
+
+Functions have always carried `originated_in_version`; script steps never did, despite every
+live step page having an "Originated in version" section. Added the field to
+`script-steps-catalog.json` using the same live-fetched, same-session data as the audit above —
+no new network round trip, just a second pass over the already-cached pages.
+
+- **157 of 165 steps** now have a confirmed `originated_in_version`, sourced and normalised the
+  same way as the function fix above (`"6.0 or earlier"` → `"legacy"`, `"22.0"` → `"22"`, real
+  patch versions kept as-is, e.g. `"19.6.1"`, `"21.1.1"`).
+- **8 steps have no `originated_in_version`** because they have no individual doc page to source
+  it from (the same 8 flagged with a `doc_url_note` in the dead-link fix above): `Check Spelling`,
+  `Log Out`, `Manage Add-ons`, `Navigate to Object`, `Show/Hide Status Toolbar`, `Set Window
+  Animation`, `Show Alert`, `Show/Hide Script Editor`. Left absent rather than guessed.
+- Distribution sanity-checked: 103 steps are `legacy` (pre-FM7, as expected for core control/
+  navigation/editing steps), clustering at `22` (10 steps) and `26` (10 steps) for the FM 22 and
+  FM 26 AI/PDF/Persistent Data additions — consistent with where new step categories actually
+  landed in recent FileMaker releases.
+
+## [1.9] — 2026-06-11
 
 ### Fixed — accuracy corrections from skill review; FM 26 changed-function drift captured
 
@@ -53,7 +201,7 @@ Updated in `function-catalog.json` (format, parameters, purpose) and the relevan
 
 ---
 
-## [1.8] — 2026-06 (revised)
+## [1.8] — 2026-06-10 (revised)
 
 ### Changed — FM 26 functions and script steps added to local reference files; FM 26 special-case routing removed
 
@@ -132,7 +280,7 @@ duplicates and adding 10 FM 26 steps.
 
 ---
 
-## [1.8] — 2026-06
+## [1.8] — 2026-06-10
 
 ### Changed — FM 26 coverage section rewritten with confirmed additions
 
@@ -218,7 +366,7 @@ All notable changes to this skill are documented here.
 
 ---
 
-## [1.7] — 2026-06
+## [1.7] — 2026-06-10
 
 ### Added — 2 missing script steps added to script-steps-catalog.json
 
@@ -266,7 +414,7 @@ identified two steps that were missing from the local catalog.
 
 ---
 
-## [1.6] — 2026-06
+## [1.6] — 2026-06-10
 
 ### Changed
 
@@ -279,7 +427,7 @@ identified two steps that were missing from the local catalog.
 
 ---
 
-## [1.5] — 2026-06
+## [1.5] — 2026-06-08
 
 ### Fixed — script-steps-catalog.json catalogue integrity pass
 
@@ -368,7 +516,7 @@ Full audit of `quickrefs.md` error codes section against the live Claris Help Ce
 
 ---
 
-## [1.3] — 2026-05
+## [1.3] — 2026-06-08
 
 ### Added
 - **7 new Tips** in SKILL.md: Generate Response from Model (agentic tool use, DDL schema requirement),
@@ -410,7 +558,7 @@ Full audit of `quickrefs.md` error codes section against the live Claris Help Ce
 
 ---
 
-## [1.2] — 2026-05
+## [1.2] — 2026-06-07
 
 ### Changed (description update)
 - Clarified skill scope in frontmatter description: this is a **reference skill** (syntax, parameters, examples, live doc fetches) — not a platform administration guide
@@ -438,7 +586,7 @@ Full audit of `quickrefs.md` error codes section against the live Claris Help Ce
 
 ---
 
-## [1.1] — 2026-05
+## [1.1] — 2026-06-05
 
 ### Changed
 - `originated_in_version` audit and corrections across `function-catalog.json` — 28 functions corrected across 8 version buckets, verified against official Claris/FileMaker archived new-features pages (FM13–FM18) and community release roundups

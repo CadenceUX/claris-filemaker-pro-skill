@@ -16,16 +16,10 @@ Last verified: 2026-06 against live Claris Help Centre.
 Evaluates tests in order and returns the result paired with the first true test. Returns `defaultResult` (or empty) if no test is true.  
 Parameters: alternating test/result pairs; optional trailing `defaultResult` with no paired test.  
 Returns: any type (matches the result expressions)
-
 ```
-Case (
-  Score ≥ 90 ; "A" ;
-  Score ≥ 80 ; "B" ;
-  Score ≥ 70 ; "C" ;
-  "F"
-)
+Case ( Score >= 90 ; "Excellent" ; Score > 50 ; "Satisfactory" ; "Needs Improvement" )
+// → `Excellent` when the score is 90 or above, `Satisfactory` when the score is between 50 and 90, and `Needs Improvement` for any other score
 ```
-
 Multiple conditions in one test:
 ```
 Case (
@@ -35,7 +29,6 @@ Case (
   "Unknown"
 )
 ```
-
 Nested Case for complex routing (keep flat where possible):
 ```
 Case (
@@ -44,52 +37,50 @@ Case (
   "Other"
 )
 ```
-
 ---
 
 ## Choose ( test ; result0 {; result1 ; result2…} )
 Returns the result at position `test` (0-based). Returns empty if `test` is out of range or negative.  
 Parameters: `test` — integer index; `result0…resultN` — return values.  
 Returns: any type
-
 ```
-Choose ( DayOfWeek ( Get(CurrentDate) ) - 1 ;
-  "Sunday" ; "Monday" ; "Tuesday" ; "Wednesday" ;
-  "Thursday" ; "Friday" ; "Saturday"
-)
+Choose ( Rating ; "Not Applicable" ; "Good" ; "Fair" ; "Poor" )
 ```
-
 Map a status code to a label:
 ```
 Choose ( StatusCode ; "New" ; "Active" ; "On Hold" ; "Closed" )
 // StatusCode 0→New, 1→Active, 2→On Hold, 3→Closed
 ```
-
 ---
 
 ## Evaluate ( expression {; [field1 ; field2 ;…]} )
 Evaluates `expression` (a text string) as a FileMaker calculation at runtime. The optional field list tells FileMaker to recalculate when those fields change.  
 Parameters: `expression` — text containing a valid FileMaker calculation; optional field dependency list.  
 Returns: any type (result of the evaluated expression)
-
 ```
-Evaluate ( "Get ( CurrentDate )" )
-// → today's date, evaluated at runtime
-```
+Evaluate(TextField)
+// → `4 `when TextField contains 2 + 2
 
+Evaluate("textfield")
+// → `2 + 2` when textfield contains 2 + 2
+
+Evaluate(GetField("textfield"))
+// → `4` when textfield contains 2 + 2
+
+Evaluate(TextField;[Amount])
+// → `.80` when TextField contains .08 * Amount and the Amount field contains 10.00
+```
 Dynamic field reference:
 ```
 Evaluate ( "Table::" & $fieldName )
 // accesses a field whose name is in $fieldName at runtime
 ```
-
 Combine with Let for safe dynamic evaluation:
 ```
 Let ( expr = "Round ( " & Table::Rate & " * " & Table::Units & " ; 2 )" ;
   Evaluate ( expr )
 )
 ```
-
 ⚠️ Performance: avoid in auto-enter or unstored calcs on large tables — Evaluate recalculates every time any referenced field changes.
 
 ---
@@ -98,12 +89,10 @@ Let ( expr = "Round ( " & Table::Rate & " * " & Table::Units & " ; 2 )" ;
 Returns the FileMaker error code that would result from evaluating `expression`, or 0 if no error.  
 Parameters: `expression` — text (same as Evaluate).  
 Returns: number (error code)
-
 ```
-EvaluationError ( "Table::" & $fieldName )
-// → 0 if field exists, non-zero if it doesn't
+EvaluationError( GetField ( "total" ) + 1 )
+// → `102` (Field Missing) when the field total has been deleted or renamed
 ```
-
 Guard before using Evaluate:
 ```
 Let ( expr = "Table::" & $fieldName ;
@@ -113,18 +102,16 @@ Let ( expr = "Table::" & $fieldName ;
   )
 )
 ```
-
 ---
 
 ## ExecuteSQL ( sqlQuery ; fieldSeparator ; rowSeparator {; arguments…} )
 Runs a SQL SELECT statement against a table occurrence and returns results as text. Field and row separators define the output format.  
 Parameters: `sqlQuery` — SQL text; `fieldSeparator` — separator between fields (e.g. `","` or `¶`); `rowSeparator` — separator between rows; `arguments` — optional `?` parameter substitution values.  
 Returns: text (or `"?"` on error)
-
 ```
-ExecuteSQL ( "SELECT FirstName, LastName FROM Contacts WHERE Active = 1" ; "," ; "¶" )
+ExecuteSQL ( "SELECT Department FROM Employees WHERE EmpID = 1"; ""; "" )
+// → `Development` regardless of the current record, found set, or layout
 ```
-
 Parameterised query (prevents injection, handles data types correctly):
 ```
 ExecuteSQL (
@@ -133,12 +120,10 @@ ExecuteSQL (
   Customers::CustomerID ; "Open"
 )
 ```
-
 Aggregate:
 ```
 ExecuteSQL ( "SELECT SUM(Total) FROM Invoices WHERE CustomerID = ?" ; "" ; "" ; Customers::ID )
 ```
-
 ⚠️ Important notes:
 - Field names in SQL must match **base table** field names (not table occurrence names)
 - No relationship-driven finds — all data must be in the query
@@ -151,51 +136,43 @@ ExecuteSQL ( "SELECT SUM(Total) FROM Invoices WHERE CustomerID = ?" ; "" ; "" ; 
 ## ExecuteSQLe ( sqlQuery ; fieldSeparator ; rowSeparator {; arguments…} )
 Identical to `ExecuteSQL` but returns a descriptive error message string instead of `"?"` on failure.  
 Returns: text (results or error message)
-
 ```
-Let ( result = ExecuteSQLe ( "SELECT Name FROM Contacts WHERE ID = ?" ; "" ; "" ; $id ) ;
-  If ( Left ( result ; 5 ) = "ERROR" ;
-    "Query failed: " & result ;
-    result
-  )
-)
+ExecuteSQLe ( "SELECT Title FROM Employees WHERE EmpID = 1"; ""; "" )
 ```
-
 ---
 
 ## GetAsBoolean ( data )
 Returns 1 if `data` is non-zero/non-empty, 0 otherwise. Converts any data type to a boolean.  
 Returns: number (0 or 1)
-
 ```
-GetAsBoolean ( 0 )        // → 0
-GetAsBoolean ( 42 )       // → 1
-GetAsBoolean ( "" )       // → 0
-GetAsBoolean ( "false" )  // → 1  (any non-empty text is truthy)
-GetAsBoolean ( 0.00 )     // → 0
-```
+GetAsBoolean ( "" )
+// → 0
 
+GetAsBoolean ( "Some text here." )
+// → 0
+
+GetAsBoolean ( Container Field )
+// → `1` when the field named Container Field contains data, or returns `0` when Container Field is empty
+```
 Safe checkbox test:
 ```
 If ( GetAsBoolean ( Contacts::Newsletter ) ; "Subscribed" ; "Not subscribed" )
 ```
-
 ---
 
 ## GetField ( fieldName )
 Returns the contents of the field named by the text expression `fieldName`. Field name must be fully qualified: `"TableOccurrence::FieldName"`.  
 Returns: any type (field contents)
-
 ```
-GetField ( "Contacts::Email" )
-// Same as Contacts::Email, but the name is a string
+Go to Layout ["Invoices" (Invoices)]
+Sort Records [Restore; With dialog: Off]
+#Sort by the SortKey field
+Go to Record/Request/Page [First]
 ```
-
 Dynamic field access (combine with a variable):
 ```
 GetField ( "Contacts::" & $columnName )
 ```
-
 ⚠️ Unlike `Evaluate`, `GetField` accepts only a field reference — not a full expression.
 
 ---
@@ -204,12 +181,10 @@ GetField ( "Contacts::" & $columnName )
 Returns the value of `field` in record number `recordNumber` of the current found set.  
 Parameters: `field` — a field reference; `recordNumber` — integer position (1-based).  
 Returns: any type
-
 ```
-GetNthRecord ( Contacts::FullName ; 1 )
-// → name from the first record in the found set
+GetNthRecord(First Name;2)
+// → the contents of the First Name field for record 2 in the current table
 ```
-
 Loop through found set without navigating:
 ```
 Let ( [
@@ -222,70 +197,60 @@ Let ( [
   )
 )
 ```
-
 ---
 
 ## GetSummary ( summaryField ; breakField )
 Returns the value of a summary field for the current sort group. `breakField` must be the field the records are currently sorted by.  
 Parameters: `summaryField` — a summary field; `breakField` — the sort break field.  
 Returns: number/text (summary result for the current group)
-
 ```
-GetSummary ( Invoices::TotalSummary ; Invoices::CustomerID )
-// → sum of TotalSummary for the current CustomerID group (when sorted by CustomerID)
+GetSummary(Total Sales;Country)
+// → a summary of all records pertaining to the value in the Country field
 ```
-
 Sub-summary percentage:
 ```
 GetSummary ( Sales::GroupTotal ; Sales::Region ) / GetSummary ( Sales::GrandTotal ; Sales::Region ) * 100
 ```
-
 ---
 
 ## If ( test ; resultIfTrue {; resultIfFalse} )
 Returns `resultIfTrue` if `test` is non-zero/non-empty, otherwise `resultIfFalse` (or empty).  
 Parameters: `test` — boolean expression; `resultIfTrue`; optional `resultIfFalse`.  
 Returns: any type
-
 ```
-If ( Balance > 0 ; "Overdue" ; "Paid" )
+If ( Country = "USA" ; "US Tech Support" ; "International Tech Support" )
+// → `International Tech Support`, if the Country field contains France or Japan. Returns `US Tech Support` if the Country field contains USA
 ```
-
 Nested If (prefer `Case` for more than 2 branches):
 ```
 If ( Score ≥ 90 ; "Excellent" ; If ( Score ≥ 70 ; "Pass" ; "Fail" ) )
 ```
-
 Guard against division by zero:
 ```
 If ( Denominator ≠ 0 ; Numerator / Denominator ; 0 )
 ```
-
 ---
 
 ## IsEmpty ( field )
 Returns 1 if `field` is empty (null, zero-length text, or 0 for numbers depending on field type); 0 otherwise.  
 Returns: number (0 or 1)
-
 ```
-IsEmpty ( Contacts::Email )   // → 1 if no email entered
+IsEmpty ( OrderNum )
+// → `1` if the OrderNum field is empty
 ```
-
 Require field before saving:
 ```
 If ( IsEmpty ( Orders::CustomerID ) ; "Customer required" ; "OK" )
 ```
-
 ---
 
 ## IsValid ( field )
 Returns 0 if `field` contains an invalid value for its data type (e.g. text in a date field); 1 if valid or empty.  
 Returns: number (0 or 1)
-
 ```
-IsValid ( Contacts::BirthDate )  // → 0 if "not a date" was entered
+IsValid(Datefield)
+// → `0` if there is non-date data in Datefield, for example if text was imported into it
 ```
-
 Validate before calculation:
 ```
 If ( IsValid ( Events::StartDate ) and IsValid ( Events::EndDate ) ;
@@ -293,20 +258,16 @@ If ( IsValid ( Events::StartDate ) and IsValid ( Events::EndDate ) ;
   "Invalid dates"
 )
 ```
-
 ---
 
 ## IsValidExpression ( expression )
 Returns 1 if `expression` is a syntactically valid FileMaker calculation; 0 if not.  
 Parameters: `expression` — text.  
 Returns: number (0 or 1)
-
 ```
-IsValidExpression ( "1 + 1" )        // → 1
-IsValidExpression ( "1 + " )         // → 0 (incomplete expression)
-IsValidExpression ( "GetField ( " )  // → 0
+IsValidExpression(calculationField)
+// → 1` (true) if `calculationField` contains `total + 1.
 ```
-
 Validate user-entered formula before Evaluate:
 ```
 If ( IsValidExpression ( $userFormula ) ;
@@ -314,20 +275,19 @@ If ( IsValidExpression ( $userFormula ) ;
   "Invalid formula"
 )
 ```
-
 ---
 
 ## Let ( [var1 = expr1 ; var2 = expr2 ; …] ; result )
 Declares local variables within the calculation, then evaluates `result` using those variables. Variables only exist for the duration of the Let expression.  
 Parameters: variable assignment list (use `[]`); `result` expression.  
 Returns: any type (result of the final expression)
-
 ```
-Let ( tax = Price * TaxRate ;
-  Price + tax
-)
-```
+Let ( x = 5; x*x )
+// → 25
 
+Let ( [ x = 5; squared = x*x; cubed = squared*x ]; cubed )
+// → 125
+```
 Multiple variables (use square brackets for readability):
 ```
 Let ( [
@@ -338,7 +298,6 @@ Let ( [
   subtotal - discount + tax
 )
 ```
-
 Recursive Let (self-referencing via custom function — Let itself is not recursive):
 ```
 Let ( [
@@ -348,59 +307,58 @@ Let ( [
   Trim ( lastName )
 )
 ```
-
 ---
 
 ## Lookup ( sourceField {; failExpression} )
 Returns the value of `sourceField` from a related record via a relationship. If no related record is found, returns `failExpression` (or empty).  
 Parameters: `sourceField` — a field in a related table occurrence; `failExpression` — optional fallback value.  
 Returns: any type
-
 ```
 Lookup ( Products::Price ; 0 )
 // → Price from the related Products record, or 0 if none found
 ```
-
 ---
 
 ## LookupNext ( sourceField ; lower/higher )
 Returns the next lower or higher value from `sourceField` in the related table when no exact match exists.  
 Parameters: `sourceField` — related field; `lower` or `higher` keyword.  
 Returns: any type
-
 ```
 LookupNext ( PriceBreaks::Price ; lower )
 // → the price for the next lower quantity break when exact match not found
 ```
-
 ---
 
 ## Self
 Returns the current contents of the object that contains the calculation. Used in field validation, button scripts, and conditional formatting to refer to the field or object being evaluated without naming it explicitly.  
 Returns: any type (current object's value)
-
 ```
-// In a field validation calc for an Email field:
-If ( IsEmpty ( Self ) or PatternCount ( Self ; "@" ) > 0 ; 1 ; 0 )
-// → validates that the field is empty OR contains "@"
+self > 10
+// → `1` (True) when applied to a layout field object whose value is greater than 10
 ```
-
 ```
 // In a conditional format calc (highlight negative numbers):
 Self < 0
 ```
-
 ---
 
 ## SetRecursion ( expression ; maxIterations )
 Sets the maximum number of recursion iterations for a custom function or `While` expression. Default is 10,000; maximum is 10,000,000.  
 Parameters: `expression` — a recursive expression; `maxIterations` — integer.  
 Returns: any type (result of expression)
-
 ```
-SetRecursion ( MyRecursiveCustomFunction ( data ) ; 500000 )
+SetRecursion ( 
+    While (  
+        [ i = 0 ; out = "" ] ;
+        i ≤ 10 ;  
+        [ 
+            i = i + 1 ; 
+            out = out & $variable[ i ] & ¶ 
+        ] ;
+        out 
+    ) ; 
+5 )
 ```
-
 ---
 
 ## While ( [initialVars] ; condition ; [logicVars] ; result )
@@ -410,15 +368,19 @@ Returns: any type
 
 Sum values in a return-delimited list:
 ```
-While (
-  [list = "10¶20¶30¶40" ; i = 1 ; total = 0] ;
-  i ≤ ValueCount ( list ) ;
-  [total = total + GetValue ( list ; i ) ; i = i + 1] ;
-  total
+Let (
+    [
+        value = 5 ;
+        power = 3
+    ] ;
+    While (
+        [ result = value ; i = 1 ] ;
+        i < power ;
+        [ i = i + 1 ; result = result * value ] ;
+        result
+    )
 )
-// → 100
 ```
-
 Build a list of squares:
 ```
 While (
@@ -429,7 +391,6 @@ While (
 )
 // → "1¶4¶9¶16¶25"
 ```
-
 Find first value in list matching a condition:
 ```
 While (
@@ -439,7 +400,6 @@ While (
   found
 )
 ```
-
 ---
 
 ## Common patterns
@@ -448,14 +408,12 @@ While (
 ```
 Let ( d = Denominator ; If ( d = 0 ; 0 ; Numerator / d ) )
 ```
-
 **Safe JSON extraction with fallback:**
 ```
 Let ( val = JSONGetElement ( data ; "status" ) ;
   If ( IsEmpty ( val ) ; "unknown" ; val )
 )
 ```
-
 **Multi-step calculation with Let:**
 ```
 Let ( [
@@ -467,7 +425,6 @@ Let ( [
   subtotal + gst
 )
 ```
-
 **While for CSV parsing:**
 ```
 While (
@@ -481,7 +438,6 @@ While (
   result
 )
 ```
-
 ---
 
 # FileMaker JSON Functions — Syntax & Examples
@@ -509,32 +465,33 @@ Last verified: 2026-06 against live Claris Help Centre.
 Deletes an element from a JSON object or array by key name, index, or dot-notation path.  
 Parameters: `json` — JSON text; `keyOrIndex` — key name string, 0-based array index, or dot-notation path.  
 Returns: text (modified JSON)
-
 ```
-JSONDeleteElement ( "{\"a\":1,\"b\":2,\"c\":3}" ; "b" )
-// → {"a":1,"c":3}
+JSONDeleteElement ( "{ \"a\" : 11 , \"b\" : 12 , \"c\" : 13 }" ; "b" )
+// → {"a":11,"c":13}
 ```
-
 Delete by array index:
 ```
 JSONDeleteElement ( "[10,20,30,40]" ; 2 )
 // → [10,20,40]  (removes 30 at index 2)
 ```
-
 Delete nested key:
 ```
 JSONDeleteElement ( myJSON ; "address.city" )
 ```
-
 ---
 
 ## JSONFormatElements ( json )
 Formats JSON text with indentation and line breaks for human readability. Does not change the data — only whitespace.  
 Parameters: `json` — any valid JSON text.  
 Returns: text (pretty-printed JSON)
-
 ```
-JSONFormatElements ( "{\"name\":\"Alice\",\"age\":30}" )
+{
+    "a" : 
+    {
+        "id" : 12,
+        "lnk" : false
+    }
+}
 ```
 →
 ```json
@@ -543,63 +500,48 @@ JSONFormatElements ( "{\"name\":\"Alice\",\"age\":30}" )
 	"age" : 30
 }
 ```
-
 Use in a Show Custom Dialog for debugging:
 ```
 Show Custom Dialog [ JSONFormatElements ( $apiResponse ) ]
 ```
-
 ---
 
 ## JSONGetElement ( json ; keyOrIndex )
 Extracts a single value, object, or array from JSON by key, index, or dot-notation path. Returns empty if the key doesn't exist.  
 Parameters: `json` — JSON text; `keyOrIndex` — key name, 0-based index number, or dot-notation path.  
 Returns: text (the element value, unquoted if string)
-
 ```
-JSONGetElement ( "{\"name\":\"Alice\",\"age\":30}" ; "name" )
-// → Alice
-
-JSONGetElement ( "[10,20,30]" ; 1 )
-// → 20  (index 1)
+JSONGetElement ( "{ \"a\" : 11, \"b\" : 22, \"c\" : 33 }" ; "b" )
+// → `22` as a number
 ```
-
 Dot-notation path (nested):
 ```
 JSONGetElement ( data ; "address.city" )
 // → "Melbourne" from {"address":{"city":"Melbourne"}}
 ```
-
 Bracket notation for arrays inside objects:
 ```
 JSONGetElement ( data ; "items[0].name" )
 // → first item's name
 ```
-
 Extract a sub-object (returns as JSON string):
 ```
 JSONGetElement ( data ; "address" )
 // → {"city":"Melbourne","postcode":"3000"}
 ```
-
 ---
 
 ## JSONGetElementType ( json ; keyOrIndex )
 Returns the JSON data type of an element as a number constant.  
 Parameters: same as JSONGetElement.  
 Returns: number (1=String, 2=Number, 3=Object, 4=Array, 5=Boolean, 6=Null, 0=does not exist)
-
 ```
-JSONGetElementType ( "{\"active\":true}" ; "active" )
-// → 5  (JSONBoolean)
+(JSONGetElementType( "{ \"a\" : 11 }"; "" ) = JSONObject)
+// → `1` (true) as a number
 
-JSONGetElementType ( "{\"score\":42}" ; "score" )
-// → 2  (JSONNumber)
-
-JSONGetElementType ( "{\"name\":\"Alice\"}" ; "missing" )
-// → 0  (does not exist)
+(JSONGetElementType( "{ a : 11 }"; "" ) = JSONObject)
+// → `0` (false) as a number
 ```
-
 Type-safe extraction pattern:
 ```
 Let ( [
@@ -613,7 +555,6 @@ Let ( [
   )
 )
 ```
-
 ---
 
 ## JSONListKeys ( json ; keyOrIndex )
@@ -623,27 +564,23 @@ Returns: text (return-delimited list)
 
 Top-level keys of an object:
 ```
-JSONListKeys ( "{\"a\":1,\"b\":2,\"c\":3}" ; "" )
+JSONListKeys( "{ \"a\" : 11, \"b\" : 22, \"c\" : 33 }" ; "" )
 // → a¶b¶c
 ```
-
 Array indexes (returns 0, 1, 2…):
 ```
 JSONListKeys ( "[\"x\",\"y\",\"z\"]" ; "" )
 // → 0¶1¶2
 ```
-
 Keys of a nested object:
 ```
 JSONListKeys ( data ; "address" )
 // → city¶postcode¶state
 ```
-
 Count fields in a JSON object:
 ```
 ValueCount ( JSONListKeys ( $json ; "" ) )
 ```
-
 Iterate all keys with While:
 ```
 While (
@@ -658,7 +595,6 @@ While (
   Trim ( output )
 )
 ```
-
 ---
 
 ## JSONListValues ( json ; keyOrIndex )
@@ -668,16 +604,14 @@ Returns: text (return-delimited list of values)
 
 Object values:
 ```
-JSONListValues ( "{\"a\":1,\"b\":2,\"c\":3}" ; "" )
-// → 1¶2¶3
+JSONListValues( "{ \"a\" : 11, \"b\" : 22, \"c\" : 33 }" ; "" )
+// → 11¶22¶33
 ```
-
 Array values:
 ```
 JSONListValues ( "[\"Alice\",\"Bob\",\"Carol\"]" ; "" )
 // → Alice¶Bob¶Carol
 ```
-
 ---
 
 ## JSONMakeArray ( valueList ; separator ; type )
@@ -687,33 +621,27 @@ Returns: text (JSON array)
 
 From a return-delimited list:
 ```
-JSONMakeArray ( "Alice¶Bob¶Carol" ; ¶ ; JSONString )
-// → ["Alice","Bob","Carol"]
+[34,600,18,600,18]
 ```
-
 Number array from comma-delimited:
 ```
 JSONMakeArray ( "10,20,30" ; "," ; JSONNumber )
 // → [10,20,30]
 ```
-
 Build array from a field:
 ```
 JSONMakeArray ( Contacts::Tags ; "," ; JSONString )
 ```
-
 Used with GetTableDDL:
 ```
 GetTableDDL ( JSONMakeArray ( "Orders,Customers,Products" ; "," ; JSONString ) ; True )
 ```
-
 ---
 
 ## JSONParse ( json ; parseName )
 Parses and caches a JSON structure in memory under `parseName`. Subsequent calls using the same name avoid re-parsing — significant performance improvement for large JSON accessed many times.  
 Parameters: `json` — JSON text; `parseName` — text name for the cached parse.  
 Returns: number (0 = success, non-zero = error)
-
 ```
 Let ( parseResult = JSONParse ( $largeJSON ; "myData" ) ;
   If ( parseResult = 0 ;
@@ -722,7 +650,6 @@ Let ( parseResult = JSONParse ( $largeJSON ; "myData" ) ;
   )
 )
 ```
-
 Parse once, read many times in a loop:
 ```
 // Parse once
@@ -740,21 +667,18 @@ While (
   Trim ( out )
 )
 ```
-
 ---
 
 ## JSONParsedState ( parseName )
 Returns the current parse state of a named cached JSON structure.  
 Parameters: `parseName` — name used in a prior JSONParse call.  
 Returns: number (0 = not parsed, 1 = parsed and available, -1 = parse error)
-
 ```
 JSONParsedState ( "myData" )
 // → 1 if JSONParse("myData") succeeded and is still in cache
 // → 0 if not yet parsed or cache was cleared
 // → -1 if parse failed
 ```
-
 Guard pattern:
 ```
 If ( JSONParsedState ( "inventory" ) ≠ 1 ;
@@ -762,7 +686,6 @@ If ( JSONParsedState ( "inventory" ) ≠ 1 ;
 )
 // Now safe to use "inventory" in JSONGetElement
 ```
-
 ---
 
 ## JSONSetElement ( json ; keyOrIndex ; value ; type )
@@ -772,10 +695,9 @@ Returns: text (modified JSON)
 
 Set a key on a new object:
 ```
-JSONSetElement ( "{}" ; "name" ; "Alice" ; JSONString )
-// → {"name":"Alice"}
+JSONSetElement ( "{ \"a\" : 11 }" ; "b" ; 22.23 ; JSONNumber )
+// → {"a":11,"b":22.23}
 ```
-
 Set multiple keys at once:
 ```
 JSONSetElement ( "{}" ;
@@ -785,13 +707,11 @@ JSONSetElement ( "{}" ;
 )
 // → {"name":"Alice","age":30,"active":true}
 ```
-
 Nested key (creates intermediate objects):
 ```
 JSONSetElement ( "{}" ; "address.city" ; "Melbourne" ; JSONString )
 // → {"address":{"city":"Melbourne"}}
 ```
-
 Append to an array by using array length as index:
 ```
 Let ( [
@@ -802,7 +722,6 @@ Let ( [
 )
 // → [1,2,3,4]
 ```
-
 Build a JSON payload for Insert From URL:
 ```
 Let ( [
@@ -815,7 +734,6 @@ Let ( [
   payload
 )
 ```
-
 ---
 
 ## Common patterns
@@ -826,7 +744,6 @@ Let ( val = JSONGetElement ( $json ; "status" ) ;
   If ( IsEmpty ( val ) ; "unknown" ; val )
 )
 ```
-
 **Build request body for Insert From URL:**
 ```
 Set Variable [ $body ; Value:
@@ -842,7 +759,6 @@ Insert From URL [
   "-X POST -H \"Content-Type: application/json\" -d " & Quote ( $body )
 ]
 ```
-
 **Iterate a JSON array with While:**
 ```
 While (
@@ -860,7 +776,6 @@ While (
   names
 )
 ```
-
 **Parse API response defensively:**
 ```
 Let ( [
@@ -874,13 +789,11 @@ Let ( [
   )
 )
 ```
-
 **Convert FileMaker value list to JSON array for an API:**
 ```
 JSONMakeArray ( ValueListItems ( Get(FileName) ; "Status Values" ) ; ¶ ; JSONString )
 // → ["New","Active","On Hold","Closed"]
 ```
-
 ---
 
 # FileMaker AI Functions — Syntax & Examples
@@ -907,9 +820,9 @@ Returns: text or container (matches input format)
 
 Returns `"?"` if vectors have different dimensions or the result is a zero vector (can't normalise zero).  
 Both vectors must come from the same model.
-
 ```
 AddEmbeddings ( "[1, 2, 3]" ; "[4, 5, 6]" )
+// → `[0.40160966445124940405, 0.56225353023174917677, 0.722897396012249005]`. The addition is [1+4, 2+5, 3+6] = [5, 7, 9]. Then the function normalizes this vector and returns it as a JSON array because both inputs were text
 ```
 → `[0.40160966..., 0.56225353..., 0.72289739...]` (normalised sum [5,7,9])
 
@@ -918,14 +831,12 @@ Combine concepts for broader semantic search:
 Set Variable [ $Combined ; Value: AddEmbeddings ( Concepts::Smartphone_Embedding ; Concepts::Premium_Embedding ) ]
 # Use $Combined with Perform Semantic Find to find "premium smartphone" records
 ```
-
 King − Man + Woman ≈ Queen analogy:
 ```
 Set Variable [ $KingMinusMan ; Value: SubtractEmbeddings ( Concepts::King_Embedding ; Concepts::Man_Embedding ) ]
 Set Variable [ $QueenAnalogy ; Value: AddEmbeddings ( $KingMinusMan ; Concepts::Woman_Embedding ) ]
 CosineSimilarity ( $QueenAnalogy ; Concepts::Queen_Embedding )  // close to 1 if analogy holds
 ```
-
 ---
 
 ## ComputeModel ( modelName ; parameterName1 ; value1 )
@@ -938,20 +849,38 @@ Returns: text (JSON)
 *Supported: iOS, iPadOS, macOS only*
 
 Must first load model with `Configure Machine Learning Model` script step.
-
 ```
-ComputeModel ( "MobileNet" ; "image" ; myImageField )
+[
+    {
+        "classification" : "grand piano, grand",
+        "confidence" : 0.998073041439056
+    },
+    {
+        "classification" : "upright, upright piano",
+        "confidence" : 0.00192673446144909
+    },
+    {
+        "classification" : "pool table, billiard table, snooker table",
+        "confidence" : 8.34678601790984e-08
+    },
+    {
+        "classification" : "dining table, board",
+        "confidence" : 2.60599577472931e-08
+    },
+    {
+        "classification" : "puffer, pufferfish, blowfish, globefish",
+        "confidence" : 5.19516656696278e-18
+    }
+]
 ```
 → JSON array of classifications with confidence scores, e.g.:
 ```json
 [{"classification": "grand piano, grand", "confidence": 0.998}, ...]
 ```
-
 With confidence filter (returns top result even if nothing beats 1.0):
 ```
 ComputeModel ( "MobileNet" ; "image" ; myImageField ; "confidenceLowerLimit" ; 1.0 ; "returnAtLeastOne" ; 1 )
 ```
-
 ---
 
 ## CosineSimilarity ( v1 ; v2 )
@@ -959,9 +888,9 @@ Returns the semantic similarity between two embedding vectors as a number from -
 Parameters: `v1`, `v2` — text (JSON arrays) or container fields containing normalised embedding vectors from the **same** model with the same dimensions.  
 Returns: number  
 *Originated: 21.0*
-
 ```
-CosineSimilarity ( InputEmbedding ; StoredEmbedding )
+CosineSimilarity ( "[-0.043686170000000003333, 0.042094484000000001456, ... ]" ; "[-0.049242082999999998993, 0.040926795000000001923, ... ]" )
+// → `.90848158767415143622` for a particular model
 ```
 → e.g. `0.90848158767415143622` for highly similar texts
 
@@ -973,7 +902,6 @@ Set Variable [ $InputEmb ; Value: GetEmbedding ( "my-account" ; "text-embedding-
 Set Variable [ $NoteEmb  ; Value: GetEmbedding ( "my-account" ; "text-embedding-3-small" ; Meetings::Note ) ]
 Show Custom Dialog [ "Similarity:" ; CosineSimilarity ( $InputEmb ; $NoteEmb ) ]
 ```
-
 ---
 
 ## GetEmbedding ( account ; model ; input )
@@ -983,18 +911,17 @@ Returns: container
 *Originated: 21.0*
 
 Binary container format is more compact than text and improves downstream performance.
-
 ```
-Set Field [ Meetings::Note_Embedding ;
-  GetEmbedding ( "my-account" ; "text-embedding-3-small" ; Meetings::Note ) ]
-```
+Configure AI Account [ Account Name: "my-account" ; Model Provider: OpenAI ; API key: "sk-RZCtpWT..." ]
+Go to Layout [ "Meeting Details" (Meetings) ; Animation: None ]
 
+Set Field [ Meetings::Note_Embedding ; GetEmbedding ( "my-account" ; "text-embedding-3-small" ; "Claris" ) ]
+```
 Image embedding (FileMaker Server AI Model Server):
 ```
 Set Field [ Products::Image_Embedding ;
   GetEmbedding ( "my-account" ; "clip-vit-base-patch32" ; Products::ProductImage ) ]
 ```
-
 ---
 
 ## GetEmbeddingAsFile ( text { ; fileNameWithExtension } )
@@ -1002,12 +929,10 @@ Converts an embedding vector from **text (JSON array) format to binary container
 Parameters: `text` — JSON array of embedding values; `fileNameWithExtension` (optional) — filename for the container, e.g. `"embedding.fve"`.  
 Returns: container  
 *Originated: 21.0*
-
 ```
 Set Field [ Meetings::Note_Embedding ;
   GetEmbeddingAsFile ( Meetings::Note_Embedding_JSON ; "embedding_from_FileMaker.fve" ) ]
 ```
-
 ---
 
 ## GetEmbeddingAsText ( data )
@@ -1015,9 +940,9 @@ Converts an embedding vector from **binary container data to text (JSON array) f
 Parameters: `data` — container field or variable holding binary embedding data.  
 Returns: text (JSON array)  
 *Originated: 21.0*
-
 ```
-GetEmbeddingAsText ( Meetings::Note_Embedding )
+GetEmbeddingAsFile ( Meetings::Note_Embedding )
+// → `[-0.06650865,0.0034368848,0.051363964,...]` for the embedding vector in the Meetings::Note_Embedding container field
 ```
 → `[-0.06650865, 0.0034368848, 0.051363964, ...]`
 
@@ -1032,9 +957,8 @@ Returns: text (JSON)
 Excludes: fields outside the layout area, hidden fields with "Apply in Find mode", fields with Find Mode entry disabled, fields excluded from Quick Find, fields with no read access, and summary/global/container fields.
 
 If any field comment starts with `[LLM]`, only fields tagged `[LLM]` include a description (prefix stripped from output).
-
 ```
-GetFieldsOnLayout ( "Products" )
+JSONFormatElements ( GetFieldsOnLayout ( "Products" ) )
 ```
 → JSON object:
 ```json
@@ -1047,12 +971,10 @@ GetFieldsOnLayout ( "Products" )
   }
 }
 ```
-
 Current layout:
 ```
 GetFieldsOnLayout ( "" )
 ```
-
 Compare all layout fields vs find-accessible fields:
 ```
 Let ( [
@@ -1062,7 +984,6 @@ Let ( [
   "All fields:¶" & all & "¶Find-accessible:¶" & find
 )
 ```
-
 ---
 
 ## GetModelAttributes ( modelName )
@@ -1071,13 +992,12 @@ Parameters: `modelName` — text name of a model loaded via `Configure Machine L
 Returns: text (JSON)  
 *Originated: 19.3.1*  
 *Supported: iOS, iPadOS, macOS only*
-
 ```
 Configure Machine Learning Model [ Operation: Vision ; Name: "TestModel" ; From: Table::ModelContainerField ]
-Set Variable [ $attrs ; Value: JSONFormatElements ( GetModelAttributes ( "TestModel" ) ) ]
-Show Custom Dialog [ $attrs ]
+Set Variable [ $modelAttributes ; Value: 
+    JSONFormatElements ( GetModelAttributes ( "TestModel" ) ) ]
+Show Custom Dialog [ $modelAttributes ]
 ```
-
 Returned JSON includes: `APIVers`, `configuration` (computeUnits), `modelDescription` (classLabels, inputDescriptions, metadata, outputDescriptions), `modelName`.
 
 Check if a model's first input has a sizeRange key:
@@ -1090,7 +1010,6 @@ Let ( [
   If ( PatternCount ( keys ; "sizeRange" ) > 0 ; 1 ; 0 )
 )
 ```
-
 ---
 
 ## GetRAGSpaceInfo ( ragAccountName { ; spaceID } )
@@ -1103,7 +1022,18 @@ Returns error message `[RAG Space] error. Reason: RAG space {space_id} not found
 
 All spaces for an account:
 ```
-GetRAGSpaceInfo ( "customer-support-rag-account" )
+{
+  "rag_space_list": [
+    {
+      "space_id": "knowledge-base",
+      "model": "multi-qa-MiniLM-L6-cos-v1"
+    },
+    {
+      "space_id": "meeting-notes",
+      "model": "multi-qa-MiniLM-L6-cos-v1"
+    }
+  ]
+}
 ```
 → `{"rag_space_list": [{"space_id": "knowledge-base", "model": "multi-qa-MiniLM-L6-cos-v1"}, ...]}`
 
@@ -1122,7 +1052,6 @@ Else
   // proceed
 End If
 ```
-
 ---
 
 ## GetTableDDL ( tableOccurrenceNames ; ignoreError )
@@ -1130,9 +1059,32 @@ Returns table schema in DDL (SQL CREATE TABLE) format for the specified table oc
 Parameters: `tableOccurrenceNames` — JSON array of table occurrence name strings; `ignoreError` — `True` to return DDL for tables that succeed (skip errors), `False` to return `"?"` if any table causes an error (and log to AI call log).  
 Returns: text (DDL SQL)  
 *Originated: 21.0*
-
 ```
-GetTableDDL ( "[\"Invoices\", \"LineItems\", \"Customers\"]" ; True )
+CREATE TABLE "Meetings" (
+"Title" varchar(255),
+"Location" varchar(255),
+"Date" datetime,
+"Start Time" datetime,
+"End Time" datetime,
+"Duration" varchar(255),
+"Note" varchar(255),
+"PrimaryKey" varchar(255), /*Unique identifier of each record in this table*/
+"CreatedBy" varchar(255), /*Account name of the user who created each record*/
+"ModifiedBy" varchar(255), /*Account name of the user who last modified each record*/
+"CreationTimestamp" datetime, /*Date and time each record was created*/
+"ModificationTimestamp" datetime, /*Date and time each record was last modified*/
+"Note_Embedding" varbinary(4096),
+PRIMARY KEY (PrimaryKey)
+);
+
+CREATE TABLE "Topics" (
+"ForeignKey" varchar(255), /*Unique identifier of each record in the related table*/
+"PrimaryKey" varchar(255), /*Unique identifier of each record in this table*/
+"ModifiedBy" varchar(255), /*Account name of the user who last modified each record*/
+"ModificationTimestamp" datetime, /*Date and time each record was last modified*/
+PRIMARY KEY (PrimaryKey),
+FOREIGN KEY (ForeignKey) REFERENCES Meetings(PrimaryKey)
+);
 ```
 → SQL CREATE TABLE statements for each occurrence with field names, types, comments, and foreign key relationships.
 
@@ -1144,7 +1096,6 @@ If [ $DDL = "?" ]
   Show Custom Dialog [ "Schema error — check AI call log." ]
 End If
 ```
-
 ---
 
 ## GetTokenCount ( text )
@@ -1152,11 +1103,9 @@ Returns the approximate token count for `text`. Use for guidance only; actual co
 Parameters: `text` — any text expression or field.  
 Returns: number  
 *Originated: 21.0*
-
 ```
 GetTokenCount ( "Claris FileMaker" )  // → 4
 ```
-
 Pre-flight check before embedding:
 ```
 If [ GetTokenCount ( Meetings::Note ) > 1024 ]
@@ -1166,7 +1115,6 @@ Else
     Source Field: Meetings::Note ; Target Field: Meetings::Note_Embedding ]
 End If
 ```
-
 ---
 
 ## NormalizeEmbedding ( data { ; dimension } )
@@ -1180,6 +1128,7 @@ Returns: text or container (matches input format)
 Full normalisation:
 ```
 NormalizeEmbedding ( "[3, 4]" )
+// → `[0.5999999999999999778, 0.80000000000000004441]`, which for the purpose of illustration, is approximately `[0.6, 0.8]`. The original vector `[3, 4]` has a length of Sqrt(3^2 + 4^2) = 5. The normalized vector `[0.6, 0.8]` has a length of Sqrt(0.6^2 + 0.8^2) = 1
 ```
 → `[0.6, 0.8]` (magnitude scaled to 1: √(3²+4²)=5, so [3/5, 4/5])
 
@@ -1217,7 +1166,6 @@ Configure Regression Model [ Action: Load Model ; Model Name: "ReviewModel" ;
 Show Custom Dialog [ "Predicted Rating:" ; PredictFromModel ( "ReviewModel" ; $reviewEmbedding ) ]
 Configure Regression Model [ Action: Unload Model ; Model Name: "ReviewModel" ]
 ```
-
 ---
 
 ## SubtractEmbeddings ( v1 ; v2 )
@@ -1227,9 +1175,9 @@ Returns: text or container (matches input format)
 *Originated: 22.0*
 
 Returns `"?"` if vectors have different dimensions or the result is a zero vector (v1 and v2 are identical).
-
 ```
 SubtractEmbeddings ( "[1, 2, 3]" ; "[4, 5, 6]" )
+// → `[-0.57735026918962573106, -0.57735026918962573106, -0.57735026918962573106]`. The subtraction is [1-4, 2-5, 3-6] = [-3, -3, -3]. Then the function normalizes this vector and returns it as a JSON array because both inputs were text
 ```
 → `[-0.577..., -0.577..., -0.577...]` (normalised [-3,-3,-3])
 
@@ -1238,7 +1186,6 @@ Remove a concept from a search vector:
 SubtractEmbeddings ( Concepts::Winter_Embedding ; Concepts::Cold_Embedding )
 // → vector for "winter" with "cold" removed; useful for finding non-weather winter content
 ```
-
 ---
 
 ## Common patterns
@@ -1256,12 +1203,10 @@ Set Variable [ $QueryEmb ; Value: GetEmbedding ( "acct" ; "text-embedding-3-smal
 # 3. Perform Semantic Find (script step, not a function)
 Perform Semantic Find [ Table::Embedding ; Query Embedding: $QueryEmb ; Top K: 10 ]
 ```
-
 **Passing schema to a model for natural-language SQL:**
 ```
 Set Variable [ $Schema ; Value: GetTableDDL ( "[\"Orders\",\"Customers\"]" ; True ) ]
 # Include $Schema in your Perform SQL Query by Natural Language prompt
 ```
-
 **LLM-tagged field comments for GetFieldsOnLayout:**  
 In Manage Database, prefix field comments with `[LLM]` to control exactly which fields and descriptions are exposed to the model. Only tagged fields get descriptions; untagged fields appear with type only; the `[LLM]` prefix is stripped in output.

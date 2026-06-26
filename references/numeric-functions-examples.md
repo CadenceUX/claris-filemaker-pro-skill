@@ -194,21 +194,16 @@ Last verified: 2026-06 against live Claris Help Centre.
 Returns the **future value** of an investment with equal periodic payments at a constant interest rate. Useful for savings calculations — "how much will I have if I save $X/month for N months?"  
 Parameters: `payment` — fixed payment per period (positive); `interestRate` — rate per period as decimal; `periods` — number of periods.  
 Returns: number (positive = accumulated value)
-
 ```
-// Save $500/month for 10 years at 6% annual (0.5%/month):
-FV ( 500 ; 0.06/12 ; 120 )
-// → approx 81,939.67
+FV(50;.11/12;5 * 12)
+// → 3975.90398429...
 
-// Invest $1,000/year for 5 years at 4% annual:
-FV ( 1000 ; 0.04 ; 5 )
-// → approx 5,416.32
+FV(2000;.12;30) + 5000 * (.12 + 1) ^ 30
+// → 632464.97928640...
 
-// Zero interest — just totals payments:
-FV ( 200 ; 0 ; 12 )
-// → 2,400
+FV(500;.11/5;60)
+// → 61141.65130790...
 ```
-
 Real-world: project savings goal:
 ```
 Let ( [
@@ -219,25 +214,16 @@ Let ( [
   FV ( monthly ; rate ; months )
 )
 ```
-
 ---
 
 ## NPV ( payment ; interestRate )
 Returns the **net present value** of a series of **unequal** future cash flows, discounted at a constant rate. Unlike FV/PV (which assume equal payments), NPV accepts a **repeating field** or a list of values in `payment`.  
 Parameters: `payment` — a repeating field or list of cash flows (positive = inflow, negative = outflow); `interestRate` — discount rate per period as decimal.  
 Returns: number
-
 ```
-// Three-year project: costs $10,000 now (period 0 handled separately),
-// returns $4,000, $5,000, $6,000 in years 1–3 at 8% discount rate.
-// Set CashFlows (repeating) = 4000, 5000, 6000:
-NPV ( CashFlows ; 0.08 )
-// → approx 12,880.22
-// Subtract initial investment: 12,880.22 - 10,000 = $2,880.22 NPV
-
-// Negative NPV = project destroys value at this discount rate
+NPV(Loan;.05)
+// → `156.91277445...`, when the repeating field, Loan, contains -2000 (the initial payment), 600, 300, 500, 700, and 400. The result (156.91277445...) is the actual profit in today's dollars that will be realized from this transaction
 ```
-
 Note: FileMaker's NPV treats `payment` as a repeating field; each repetition is one period's cash flow. Period 0 (initial investment) is typically subtracted from the result manually.
 
 ---
@@ -246,20 +232,10 @@ Note: FileMaker's NPV treats `payment` as a repeating field; each repetition is 
 Returns the **payment amount** required per period to fully repay a loan of `principal` over `term` periods at `interestRate` per period. The result is negative (cash flowing out to repay the loan).  
 Parameters: `principal` — loan amount (positive); `interestRate` — rate per period as decimal; `term` — number of payment periods.  
 Returns: number (negative = payment you make)
-
 ```
-// Monthly payment on a $250,000 mortgage at 6.5% over 30 years:
-PMT ( 250000 ; 0.065/12 ; 360 )
-// → approx -1,580.17 (you pay ~$1,580/month)
-
-// Use Abs() to display as a positive amount:
-Abs ( PMT ( LoanAmount ; AnnualRate/12 ; TermYears * 12 ) )
-
-// Monthly car payment on $30,000 at 7.9% over 5 years:
-Abs ( PMT ( 30000 ; 0.079/12 ; 60 ) )
-// → approx 607.54
+PMT(21000;.069/12;48)
+// → the payment amount `$501.90`
 ```
-
 Total interest paid over the life of a loan:
 ```
 Let ( [
@@ -271,28 +247,16 @@ Let ( [
   monthly * n - p   // total paid minus principal = total interest
 )
 ```
-
 ---
 
 ## PV ( payment ; interestRate ; periods )
 Returns the **present value** of an investment that makes equal periodic payments — the lump sum today that is equivalent to receiving `payment` each period for `periods` periods, discounted at `interestRate`. Useful for valuing an annuity or calculating how much to invest now to receive a fixed income stream.  
 Parameters: `payment` — fixed payment received per period (positive); `interestRate` — rate per period as decimal; `periods` — number of periods.  
 Returns: number (negative = amount you must invest today; use Abs() for display)
-
 ```
-// What is a $1,000/month annuity for 20 years worth today at 5% annual?
-Abs ( PV ( 1000 ; 0.05/12 ; 240 ) )
-// → approx 151,525.08
-
-// Maximum loan you can afford if you can pay $2,000/month at 5.5% for 25 years:
-Abs ( PV ( 2000 ; 0.055/12 ; 300 ) )
-// → approx 322,217.85
-
-// Verify a PMT calculation (should recover the principal):
-Abs ( PV ( Abs(PMT(250000 ; 0.065/12 ; 360)) ; 0.065/12 ; 360 ) )
-// → 250,000
+PV(500;.05;5)
+// → 2164.73833531...
 ```
-
 Pension/retirement: how long will savings last?
 ```
 // If you have $500,000 and withdraw $3,000/month at 4% return,
@@ -301,11 +265,9 @@ Pension/retirement: how long will savings last?
 Abs ( PV ( 3000 ; 0.04/12 ; 240 ) )   // 20-year horizon
 // → approx 495,975 (just under $500k, so barely sustainable at 20 years)
 ```
-
 ---
 
 ## Combined example: Loan amortisation summary
-
 ```
 Let ( [
   principal   = 300000 ;
@@ -325,7 +287,6 @@ Let ( [
 //   Total paid: $664,973.61
 //   Total interest: $364,973.61
 ```
-
 ---
 
 # FileMaker Trigonometric Functions — Syntax & Examples
@@ -347,64 +308,44 @@ Radians ( 90 )                  // → π/2  (90°)
 Radians ( 45 )                  // → π/4  (45°)
 Radians ( 360 )                 // → 2π   (full circle)
 ```
-
 ---
 
 ## Pi
 A constant — returns the value of π (pi) to FileMaker's full numeric precision.  
 Parameters: none.  
 Returns: number
-
 ```
-Pi
-// → 3.14159265358979323846
-
-// Area of a circle (radius r):
-Pi * r * r
-
-// Circumference of a circle:
-2 * Pi * radius
-
-// Convert 270° to radians manually:
-270 * Pi / 180           // same as Radians(270)
+Pi * 15
+// → 47.124
 ```
-
 ---
 
 ## Degrees ( angleInRadians )
 Converts an angle from **radians to degrees**.  
 Parameters: `angleInRadians` — angle in radians.  
 Returns: number (degrees)
-
 ```
-Degrees ( Pi )                  // → 180
-Degrees ( Pi / 2 )              // → 90
-Degrees ( Pi / 4 )              // → 45
-Degrees ( 2 * Pi )              // → 360
-Degrees ( 1 )                   // → 57.2957795130823…
-```
+Degrees(Atan(1))
+// → 45
 
+Degrees(1.0472)
+// → 60.00014030...
+```
 Display an angle result in degrees:
 ```
 Degrees ( Atan ( opposite / adjacent ) )
 // → angle in degrees from an Atan result
 ```
-
 ---
 
 ## Radians ( angleInDegrees )
 Converts an angle from **degrees to radians**.  
 Parameters: `angleInDegrees` — angle in degrees.  
 Returns: number (radians)
-
 ```
-Radians ( 180 )                 // → 3.14159265358979…  (Pi)
-Radians ( 90 )                  // → 1.5707963267949…   (Pi/2)
-Radians ( 45 )                  // → 0.78539816339745…  (Pi/4)
-Radians ( 0 )                   // → 0
-Radians ( 360 )                 // → 6.28318530717959…  (2*Pi)
+Radians(45)
+// → .78539816...
 ```
-
 ---
 
 ## Sin ( angleInRadians )
@@ -412,15 +353,13 @@ Returns the **sine** of an angle (opposite/hypotenuse in a right triangle).
 Range of results: -1 to 1.  
 Parameters: `angleInRadians` — angle in radians.  
 Returns: number
-
 ```
-Sin ( Radians ( 0 ) )           // → 0
-Sin ( Radians ( 30 ) )          // → 0.5
-Sin ( Radians ( 90 ) )          // → 1
-Sin ( Radians ( 45 ) )          // → 0.70710678118655… (√2/2)
-Sin ( Pi )                      // → ~0 (floating-point near-zero)
-```
+Sin(Radians(60))
+// → .86602
 
+Sin(.610865)
+// → .57357624...
+```
 Vertical component of a vector (e.g. for layout positioning):
 ```
 Let ( [
@@ -430,7 +369,6 @@ Let ( [
   length * Sin ( angle )    // → vertical displacement
 )
 ```
-
 ---
 
 ## Cos ( angleInRadians )
@@ -438,20 +376,17 @@ Returns the **cosine** of an angle (adjacent/hypotenuse in a right triangle).
 Range of results: -1 to 1.  
 Parameters: `angleInRadians` — angle in radians.  
 Returns: number
-
 ```
-Cos ( Radians ( 0 ) )           // → 1
-Cos ( Radians ( 60 ) )          // → 0.5
-Cos ( Radians ( 90 ) )          // → ~0 (floating-point near-zero)
-Cos ( Radians ( 45 ) )          // → 0.70710678118655… (√2/2)
-Cos ( Pi )                      // → -1
-```
+Cos(1.047)
+// → .50017107...
 
+Cos(Radians(60))
+// → .5
+```
 Horizontal component of a vector:
 ```
 VectorLength * Cos ( Radians ( BearingDegrees ) )
 ```
-
 ---
 
 ## Tan ( angleInRadians )
@@ -459,21 +394,18 @@ Returns the **tangent** of an angle (opposite/adjacent in a right triangle; equi
 Undefined at ±90°, ±270°, etc. (returns a very large number near these angles).  
 Parameters: `angleInRadians` — angle in radians.  
 Returns: number
-
 ```
-Tan ( Radians ( 0 ) )           // → 0
-Tan ( Radians ( 45 ) )          // → 1
-Tan ( Radians ( 30 ) )          // → 0.57735026918963… (1/√3)
-Tan ( Radians ( 60 ) )          // → 1.73205080756888… (√3)
-// Tan(90°) is undefined — avoid
-```
+Tan(.13)
+// → .13073731...
 
+Tan(Radians(34))
+// → .6745085
+```
 Calculate height from distance and angle:
 ```
 // Surveying: height of a building given distance (d) and elevation angle (a):
 d * Tan ( Radians ( ElevationAngleDegrees ) )
 ```
-
 ---
 
 ## Acos ( number )
@@ -482,15 +414,16 @@ Domain: -1 to 1 (outside this range returns empty/error).
 Range of results: 0 to π (0° to 180°).  
 Parameters: `number` — a value between -1 and 1.  
 Returns: number (radians)
-
 ```
-Degrees ( Acos ( 1 ) )          // → 0°
-Degrees ( Acos ( 0 ) )          // → 90°
-Degrees ( Acos ( -1 ) )         // → 180°
-Degrees ( Acos ( 0.5 ) )        // → 60°
-Acos ( 0 )                      // → 1.5707963… (Pi/2)
-```
+Acos(-0.5)
+// → 2.0943951
 
+Acos(-0.5)*180/Pi
+// → 120
+
+Degrees(Acos(-0.5))
+// → 120
+```
 ---
 
 ## Asin ( number )
@@ -499,14 +432,13 @@ Domain: -1 to 1.
 Range of results: -π/2 to π/2 (-90° to 90°).  
 Parameters: `number` — a value between -1 and 1.  
 Returns: number (radians)
-
 ```
-Degrees ( Asin ( 0 ) )          // → 0°
-Degrees ( Asin ( 1 ) )          // → 90°
-Degrees ( Asin ( 0.5 ) )        // → 30°
-Degrees ( Asin ( -1 ) )         // → -90°
-```
+Asin(-0.5)
+// returns` -0.523598776`.
 
+Degrees(Asin(-0.5))
+// → -30
+```
 ---
 
 ## Atan ( number )
@@ -515,14 +447,13 @@ Domain: any real number.
 Range of results: -π/2 to π/2 (-90° to 90°).  
 Parameters: `number` — any real number.  
 Returns: number (radians)
-
 ```
-Degrees ( Atan ( 0 ) )          // → 0°
-Degrees ( Atan ( 1 ) )          // → 45°
-Degrees ( Atan ( -1 ) )         // → -45°
-Atan ( 1 ) * 4                  // → Pi  (classic Pi approximation: 4 * Atan(1))
-```
+Atan(1)
+// → .78539816...
 
+Degrees(Atan(1))
+// → 45
+```
 Bearing/heading from coordinate differences (2-argument atan, atan2):
 ```
 // FileMaker has no Atan2; simulate it:
@@ -541,7 +472,6 @@ Let ( [
   )
 )
 ```
-
 ---
 
 ## Practical examples
@@ -560,7 +490,6 @@ Let ( [
   Round ( R * c ; 2 )    // → distance in km
 )
 ```
-
 **X/Y coordinates on a circle (e.g. clock face or pie chart layout positions):**
 ```
 Let ( [
@@ -574,7 +503,6 @@ Let ( [
   & " y=" & Round( 300 + r * Sin(angleRad) ; 0 )
 )
 ```
-
 ---
 
 # FileMaker Repeating Functions — Syntax & Examples
@@ -594,66 +522,48 @@ Last verified: 2026-06 against live Claris Help Centre.
 // calc itself evaluates for repetition 1 by default unless used in a
 // repeating context or combined with GetRepetition().
 ```
-
 ---
 
 ## Extend ( non-repeatingField )
 Makes a non-repeating (single-value) field available as if it had as many repetitions as the repeating field it is being combined with in a calculation. Without `Extend`, using a non-repeating field in a repeating calculation only populates repetition 1; `Extend` propagates the value across all repetitions.  
 Parameters: `non-repeatingField` — any non-repeating field or expression.  
 Returns: a repeating value (same type as the input)
-
 ```
-// Field "Multiplier" is a non-repeating number field = 1.1
-// Field "BaseScores" is a repeating number field with 5 repetitions
-
-// WITHOUT Extend — only repetition 1 gets a result; others are empty:
-BaseScores * Multiplier
-// → rep 1: BaseScores[1] * 1.1, reps 2–5: empty
-
-// WITH Extend — all repetitions get the multiplier applied:
-BaseScores * Extend ( Multiplier )
-// → rep 1: BaseScores[1] * 1.1
-// → rep 2: BaseScores[2] * 1.1
-// ... etc.
+Extend(TaxRate) * Quantity * ItemPrice
+// → 1.197`, `.6606`, and `1.497` when `TaxRate` contains `.06`; the repeating field Quantity contains `1`, `3`, and `5`; and the repeating field ItemPrice contains `19.95`, `3.67`, and `4.99
 ```
-
 Apply a global tax rate across a repeating price field:
 ```
 // "UnitPrice" is repeating (5 reps), "TaxRate" is non-repeating
 UnitPrice * Extend ( 1 + TaxRate )
 ```
-
 Conditional across repetitions using a non-repeating flag:
 ```
 // Show 0 if record is cancelled, otherwise the repeating values:
 If ( Extend ( Status = "Cancelled" ) ; 0 ; Scores )
 ```
-
 ---
 
 ## GetRepetition ( repeatingField ; number )
 Returns the value of a specific repetition of a repeating field. This is the primary way to access individual repetitions in a calculation when you know the index at runtime (rather than design time).  
 Parameters: `repeatingField` — a repeating field; `number` — the repetition index (1-based).  
 Returns: same type as the field
-
 ```
-GetRepetition ( Scores ; 1 )       // → first repetition (same as Scores by itself)
-GetRepetition ( Scores ; 3 )       // → third repetition
-GetRepetition ( Scores ; Get(CalculationRepetitionNumber) )
-// → current repetition (useful inside repeating calcs)
-```
+GetRepetition ( ParcelBids ; 2 )
+// → 1200
 
+GetRepetition ( ParcelBids ; 5 )
+// → nothing
+```
 Dynamic access — access the repetition matching the current record count:
 ```
 GetRepetition ( MonthlyBudget ; Month ( Get(CurrentDate) ) )
 // → budget for the current month (1=Jan, 12=Dec)
 ```
-
 Sum selected repetitions:
 ```
 GetRepetition ( Values ; 1 ) + GetRepetition ( Values ; 2 ) + GetRepetition ( Values ; 3 )
 ```
-
 Find the index of the first non-blank repetition:
 ```
 Let ( [
@@ -669,7 +579,6 @@ Let ( [
   )
 )
 ```
-
 Build a ¶-delimited list from a repeating field (often needed to bridge to modern patterns):
 ```
 Let ( [
@@ -681,39 +590,27 @@ Let ( [
 )
 // List() ignores empty values — safe to call with all reps
 ```
-
 ---
 
 ## Last ( repeatingField )
 Returns the value of the **last non-blank repetition** in a repeating field. Useful for "current value" patterns where repetitions are used as a simple history log (earliest to latest, left to right).  
 Parameters: `repeatingField` — a repeating field.  
 Returns: same type as the field
-
 ```
-// "StatusHistory" repeating field with 10 reps:
-// [1]="Pending" [2]="In Review" [3]="Approved" [4]="" … [10]=""
-Last ( StatusHistory )
-// → "Approved"  (last non-blank)
-
-// "Payments" repeating field:
-// [1]=500 [2]=250 [3]=0 (zero is non-blank!) [4]=""
-Last ( Payments )
-// → 0  (zero is a valid non-blank value)
+Last(ParcelBids)
+// → `1500` if ParcelBids is a number field defined to repeat with ten values and contains the values 2500, 1200, and 1500
 ```
-
 Running-total pattern — use a repeating field as a simple log:
 ```
 // Each script run sets the next empty repetition.
 // Last() always gives the most recent entry.
 Last ( AuditLog )    // → most recent audit entry
 ```
-
 Check if all repetitions are filled (Last on a full field = last repetition):
 ```
 not IsEmpty ( GetRepetition ( Scores ; 10 ) )
 // True = all 10 repetitions are filled (or at least rep 10 is)
 ```
-
 ---
 
 ## Interaction patterns
@@ -738,7 +635,6 @@ Let ( [
 )
 // In practice, use a While() loop for arbitrary repetition counts
 ```
-
 Sum all non-blank repetitions using Aggregate functions:
 ```
 // Aggregate functions naturally work across repetitions:

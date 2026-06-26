@@ -40,7 +40,8 @@ Returns only the characters from *textToFilter* that appear in *filterText*, in 
 ## FilterValues ( textToFilter ; filterValues )
 Returns only the values (return-delimited) from *textToFilter* that appear in *filterValues*.  
 ```
-FilterValues ( "Apple¶Banana¶Cherry" ; "Banana¶Cherry¶Date" )
+FilterValues ( "Plaid¶Canvas¶Suitcase" ; "Plaid¶Canvas" )
+// → Plaid¶Canvas¶
 ```
 → `Banana¶Cherry`
 
@@ -313,9 +314,21 @@ Formula: `red × 65536 + green × 256 + blue`
 
 Combine with TextColor to display FirstName in orange and LastName in purple:
 ```
-TextColor ( FirstName ; RGB ( 255 ; 165 ; 0 ) ) & " " & TextColor ( LastName ; RGB ( 160 ; 32 ; 240 ) )
-```
+RGB(255;0;0)
+// → `16711680` representing red
 
+RGB(0;255;0)
+// → `65280` representing green
+
+RGB(0;0;255)
+// → `255` representing blue
+
+RGB(0;0;0)
+// → `0` representing black
+
+RGB(255;255;255)
+// → `16777215` representing white
+```
 ---
 
 ## TextColor ( text ; RGB ( red ; green ; blue ) )
@@ -362,9 +375,9 @@ Returns: text (plain, unformatted)
 
 Useful for normalising styled text before storage or comparison:
 ```
-Set Field [ Table::CleanText ; TextFormatRemove ( Table::StyledText ) ]
+TextFormatRemove ( "Plaid" )
+// → the word `Plaid` without any text formatting applied
 ```
-
 ---
 
 ## TextSize ( text ; fontSize )
@@ -403,9 +416,12 @@ Available style names (not case-sensitive, no spaces):
 
 Reset then re-style in one expression:
 ```
-TextStyleAdd ( TextStyleAdd ( FirstName ; Plain ) ; Italic )
-```
+TextStyleAdd ( "Plaid" ; Italic )
+// → the word `Plaid` in italics
 
+TextStyleAdd ( FirstName ; Bold+Underline )
+// → `Sophie` in bold, underlined text when the FirstName field contains Sophie
+```
 Use with `Let` for multiple style blocks:
 ```
 Let ( [
@@ -415,7 +431,6 @@ Let ( [
   TextStyleAdd ( titleField ; TitleStyle ) & "¶¶" & TextStyleAdd ( bodyField ; BodyStyle )
 )
 ```
-
 ---
 
 ## TextStyleRemove ( text ; styles )

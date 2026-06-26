@@ -24,12 +24,10 @@ Last verified: 2026-06 against live Claris Help Centre.
 Returns a return-delimited list of internal IDs for every **base table** (not table occurrence) defined in the file. Parallel to `BaseTableNames` — the Nth ID matches the Nth name.  
 Parameters: `fileName` — file name string (use `Get(FileName)` for the current file).  
 Returns: text
-
 ```
-BaseTableIDs ( Get(FileName) )
-// → "1¶2¶3¶…"  (internal base table IDs)
+BaseTableIDs ( "University Database" )
+// returns
 ```
-
 Pair with `BaseTableNames` to build an ID → name lookup:
 ```
 Let ( [
@@ -41,25 +39,21 @@ Let ( [
   GetValue ( ids ; idx )
 )
 ```
-
 ---
 
 ## BaseTableNames ( fileName )
 Returns a return-delimited list of all **base table** names in the file (not table occurrences — those are returned by `TableNames`).  
 Parameters: `fileName` — file name string.  
 Returns: text
-
 ```
-BaseTableNames ( Get(FileName) )
-// → "Contacts¶Invoices¶LineItems¶Products"
+BaseTableNames ( "University Database" )
+// → tables
 ```
-
 Count base tables:
 ```
 ValueCount ( BaseTableNames ( Get(FileName) ) )
 // → 12
 ```
-
 ---
 
 ## BaseTableComment ( fileName ; baseTableName )
@@ -67,12 +61,10 @@ ValueCount ( BaseTableNames ( Get(FileName) ) )
 Returns the comment set on a **base table** in Manage Database. Pair with `GetTableDDL` and `FieldAnnotation` to build richer schema context for AI steps.  
 Parameters: `fileName` — file name string; `baseTableName` — base table name (not table occurrence name).  
 Returns: text
-
 ```
-BaseTableComment ( Get(FileName) ; "Contacts" )
-// → "Primary contact record. Stores all customer and prospect data."
+BaseTableComment  ( "" ; "Contacts" )
+// → the comment for the Contacts base table in the current file, which is `Contacts at companies stored in the Customers table`
 ```
-
 Build a schema summary for an AI prompt:
 ```
 Let ( [
@@ -83,122 +75,103 @@ Let ( [
   "Table: Contacts | " & comment & ¶ & ddl
 )
 ```
-
 ---
 
 ## DatabaseNames
 Returns a return-delimited list of all open FileMaker files (databases) accessible from the current session.  
 Parameters: none.  
 Returns: text
-
 ```
-DatabaseNames
-// → MyApp¶Contacts¶SharedData
+FilterValues ( DatabaseNames ; "Customers" )
 ```
-
 Useful for cross-file scripts that need to verify a file is open before referencing it:
 ```
 If ( PatternCount ( DatabaseNames ; "SharedData" ) = 0 ;
   Open File [ "SharedData" ]
 )
 ```
-
 ---
 
 ## FieldBounds ( fileName ; layoutName ; fieldName )
 Returns the position and size of a field on a layout as a space-delimited string: `left top right bottom rotation`.  
 Parameters: `fileName` — file name (use `Get(FileName)` for current); `layoutName` — layout name; `fieldName` — fully qualified field name.  
 Returns: text (`"left top right bottom rotation"`)
-
 ```
-FieldBounds ( Get(FileName) ; "Contacts" ; "Contacts::Email" )
-// → "72 120 400 140 0"  (left=72, top=120, right=400, bottom=140, rotation=0)
+FieldBounds ( "Customers" ; "Layout #1" ; "Field" )
+// → `36 48 295 65 0` in the example below. Notice that all parameters are enclosed in quotation marks
 ```
-
 Extract individual components:
 ```
 Let ( bounds = FieldBounds ( Get(FileName) ; Get(LayoutName) ; "Contacts::Email" ) ;
   GetValue ( Substitute ( bounds ; " " ; ¶ ) ; 1 )   // → left position
 )
 ```
-
 ---
 
 ## FieldComment ( fileName ; fieldName )
 Returns the comment (description) stored on a field in Manage Database.  
 Parameters: `fileName`; `fieldName` — fully qualified (`"Table::Field"`).  
 Returns: text
-
 ```
-FieldComment ( Get(FileName) ; "Contacts::Email" )
-// → "Primary email address for correspondence"
+FieldComment ( "Customers" ; "Phone Number" )
+// → `"Customer's home telephone number"` if it was entered as a comment for the Phone Number field
 ```
-
 Used in `GetFieldsOnLayout` to supply `[LLM]`-tagged descriptions to AI models:
 ```
 // Field comment: "[LLM] Primary email address for the contact"
 FieldComment ( Get(FileName) ; "Contacts::Email" )
 // → "[LLM] Primary email address for the contact"
 ```
-
 ---
 
-## FieldAnnotation ( fileName ; layoutName ; fieldName )
+## FieldAnnotation ( fileName ; fieldName )
 *Introduced in FileMaker Pro 26 (2026).*  
 Returns the DDL annotation string set in **Advanced Options for Field** (not the field comment from Manage Database — see `FieldComment` for that).  
-Parameters: `fileName` — file name string; `layoutName` — layout name; `fieldName` — fully qualified field name (`"Table::Field"`).  
+Parameters: `fileName` — file name string (`""` for current file); `fieldName` — fully qualified field name (`"Table::Field"`).  
 Returns: text
-
 ```
-FieldAnnotation ( Get(FileName) ; Get(LayoutName) ; "Contacts::Email" )
-// → "contact_email — primary address; used by AI schema context"
+FieldAnnotation ( "" ; "Phone Number" )
+// → the annotation for the Phone Number field in the current table in the current file, which is `Customer's home telephone number`
 ```
-
 Pair with `GetTableDDL` and `FieldDisplayNames` to build enriched AI prompts or schema documentation:
 ```
 Let ( [
   ddl        = GetTableDDL ( Get(FileName) ; "Contacts" ) ;
-  annotation = FieldAnnotation ( Get(FileName) ; Get(LayoutName) ; "Contacts::Email" ) ;
+  annotation = FieldAnnotation ( "" ; "Contacts::Email" ) ;
   prompt     = "Schema: " & ddl & ¶ & "Email field annotation: " & annotation
 ] ;
   prompt
 )
 ```
-
 ---
 
-## FieldDisplayNames ( fileName ; layoutName ; fieldName )
+## FieldDisplayNames ( fileName ; fieldName )
 *Introduced in FileMaker Pro 26 (2026).*  
 Returns the custom **display names** set in Advanced Options for Field as a JSON object. Display names are alternate or localised labels for fields shown in layouts and reports.  
-Parameters: `fileName`; `layoutName`; `fieldName` — fully qualified (`"Table::Field"`).  
+Parameters: `fileName` — file name string (`""` for current file); `fieldName` — fully qualified (`"Table::Field"`).  
 Returns: JSON object text (keys are locale codes or custom name identifiers)
-
 ```
-FieldDisplayNames ( Get(FileName) ; "Contacts" ; "Contacts::dob" )
-// → {"default":"Date of Birth","de":"Geburtsdatum","fr":"Date de naissance"}
+FieldDisplayNames ( "" ; "Customers::FirstName" )
+// → the display names for the FirstName field in the Customers table in the current file. If the display names for the default and for Table View are set to `First Name` and `Given Name` respectively, the function returns:
 ```
-
 Extract a specific locale's display name:
 ```
 JSONGetElement (
-  FieldDisplayNames ( Get(FileName) ; Get(LayoutName) ; "Contacts::dob" ) ;
+  FieldDisplayNames ( "" ; "Contacts::dob" ) ;
   "default"
 )
 // → "Date of Birth"
 ```
-
 ---
 
 ## FieldIDs ( fileName ; layoutName )
 Returns a return-delimited list of field IDs for all fields on the specified layout.  
 Parameters: `fileName`; `layoutName` — use `""` for current layout.  
 Returns: text (return-delimited numbers)
-
 ```
-FieldIDs ( Get(FileName) ; "Contacts" )
-// → 1¶3¶7¶12¶...
+FieldIDs ( "Customers" ; "" )
+// → IDs of all unique fields in the default table of Customers
 ```
-
 Field IDs are stable across renames — use with `FieldNames` for change-resilient references.
 
 ---
@@ -207,20 +180,14 @@ Field IDs are stable across renames — use with `FieldNames` for change-resilie
 Returns a return-delimited list of field names. When passed a layout name, returns fields on that layout. When passed a table occurrence name, returns all fields in that table.  
 Parameters: `fileName`; `layoutNameOrTableName`.  
 Returns: text (return-delimited, fully qualified `"Table::Field"` names)
-
 ```
-FieldNames ( Get(FileName) ; "Contacts" )
-// → Contacts::ContactID¶Contacts::FirstName¶Contacts::LastName¶...
-
-FieldNames ( Get(FileName) ; "Contacts Layout" )
-// → only fields placed on that layout
+FieldNames ( "Customers" ; "" )
+// → a list of all the fields in the default table of the Customers database file
 ```
-
 Check if a field exists:
 ```
 PatternCount ( FieldNames ( Get(FileName) ; "Contacts" ) ; "Contacts::Email" ) > 0
 ```
-
 Dynamic field iteration with While:
 ```
 While (
@@ -238,19 +205,16 @@ While (
   Trim ( out )
 )
 ```
-
 ---
 
 ## FieldRepetitions ( fileName ; layoutName ; fieldName )
 Returns the number of repetitions displayed on a layout for a repeating field.  
 Parameters: `fileName`; `layoutName`; `fieldName` — fully qualified.  
 Returns: number
-
 ```
-FieldRepetitions ( Get(FileName) ; "Schedule" ; "Schedule::Slots" )
-// → 7  (7 repetitions shown on this layout)
+FieldRepetitions ( "Customers" ; "Data Entry" ; "Business Phone" )
+// → `3 vertical` if the Business Phone field is defined as a repeating field with five repetitions but is formatted to only show three repetitions in a vertical orientation on the Data Entry layout
 ```
-
 ---
 
 ## FieldStyle ( fileName ; layoutName ; fieldName )
@@ -267,49 +231,36 @@ Returns: number
 | 4 | Radio button set |
 | 5 | Drop-down calendar |
 | 6 | Scrolling list |
-
 ```
 FieldStyle ( Get(FileName) ; "Contacts" ; "Contacts::Status" )
 // → 2  (pop-up menu)
 ```
-
 ---
 
 ## FieldType ( fileName ; fieldName )
 Returns a text description of a field's data type and storage type.  
 Parameters: `fileName`; `fieldName` — fully qualified.  
 Returns: text (e.g. `"Normal, Text"`, `"Calculated, Number"`, `"Summary, Number"`, `"Global, Text"`)
-
 ```
-FieldType ( Get(FileName) ; "Contacts::Email" )
-// → "Normal, Text"
-
-FieldType ( Get(FileName) ; "Invoices::Total" )
-// → "Calculated, Number"
-
-FieldType ( Get(FileName) ; "Invoices::GrandTotal" )
-// → "Summary, Number"
+FieldType ( "Customers" ; "Phone Number" )
+// → `Standard Text Unindexed 3` when, in the Customers database file, the Phone Number field is defined as a text field that repeats a maximum of three times and the storage options are left unchanged. (Most fields are indexed when a find is performed in that field.)
 ```
-
 Check before writing:
 ```
 If ( Left ( FieldType ( Get(FileName) ; "Table::Field" ) ; 10 ) = "Calculated" ;
   "Read-only" ; "Writable"
 )
 ```
-
 ---
 
 ## GetNextSerialValue ( fileName ; fieldName )
 Returns the next serial value that will be assigned to a field when a new record is created.  
 Parameters: `fileName`; `fieldName` — fully qualified.  
 Returns: text (the serial value as a string, since serials can have prefixes)
-
 ```
-GetNextSerialValue ( Get(FileName) ; "Invoices::InvoiceNumber" )
-// → "INV-1042"
+GetNextSerialValue ( "Customers" ; "CustID" )
+// → the next serial number for the CustID field
 ```
-
 Useful for displaying "next invoice number" before creating the record.
 
 ---
@@ -318,24 +269,20 @@ Useful for displaying "next invoice number" before creating the record.
 Returns a return-delimited list of layout IDs for all layouts in the file.  
 Parameters: `fileName`.  
 Returns: text
-
 ```
-LayoutIDs ( Get(FileName) )
-// → 1¶2¶3¶...
+LayoutIDs ( "Customers" )
+// → a list of all the layout IDs in the Customers database file
 ```
-
 ---
 
 ## LayoutNames ( fileName )
 Returns a return-delimited list of all layout names in the file.  
 Parameters: `fileName`.  
 Returns: text
-
 ```
-LayoutNames ( Get(FileName) )
-// → Contacts¶Contacts List¶Invoice¶Invoice List¶...
+LayoutNames ( "Customers" )
+// → a list of all the layouts in the Customers database file
 ```
-
 Check if a layout exists before navigating to it:
 ```
 If ( PatternCount ( LayoutNames ( Get(FileName) ) ; "Archive" ) = 0 ;
@@ -343,31 +290,26 @@ If ( PatternCount ( LayoutNames ( Get(FileName) ) ; "Archive" ) = 0 ;
   Go to Layout [ "Archive" ]
 )
 ```
-
 Count layouts:
 ```
 ValueCount ( LayoutNames ( Get(FileName) ) )
 ```
-
 ---
 
 ## LayoutObjectNames ( fileName ; layoutName )
 Returns a return-delimited list of all named layout objects on the specified layout.  
 Parameters: `fileName`; `layoutName`.  
 Returns: text
-
 ```
-LayoutObjectNames ( Get(FileName) ; "Dashboard" )
-// → ChartPanel¶SummaryTable¶RefreshButton¶...
+LayoutObjectNames ("Customers";"Data Entry")
+// → a list of named objects in the Customers database file that appear on the Data Entry layout
 ```
-
 Check before using `Navigate to Object` or `Refresh Object`:
 ```
 If ( PatternCount ( LayoutObjectNames ( Get(FileName) ; Get(LayoutName) ) ; "myPanel" ) > 0 ;
   Navigate to Object [ Object Name: "myPanel" ]
 )
 ```
-
 ---
 
 ## LayoutTableNames ( fileName ) ⚠️ Does not exist
@@ -378,67 +320,57 @@ To find which table occurrence a layout uses, see `Get(LayoutTableName)` (a Get 
 // On the layout in question:
 Get ( LayoutTableName )   // → "Invoices"  (the table occurrence this layout is bound to)
 ```
-
 To list all table occurrences (what most "LayoutTableNames" callers actually want):
 ```
 TableNames ( Get(FileName) )
 // → "Contacts¶Invoices¶LineItems_Invoices¶…"
 ```
-
 ---
 
 ## RelationInfo ( fileName ; tableName )
 Returns a return-delimited list describing all relationships for the specified table occurrence.  
 Parameters: `fileName`; `tableName` — table occurrence name.  
 Returns: text (each line: `relatedTableOccurrence¶criteriaField¶relatedField`)
-
 ```
-RelationInfo ( Get(FileName) ; "Invoices" )
-// → LineItems¶Invoices::InvoiceID¶LineItems::InvoiceID¶...
+RelationInfo ( "Human Resources" ; "Employees" )
+// returns:
 ```
-
 ---
 
 ## ScriptIDs ( fileName )
 Returns a return-delimited list of script IDs for all scripts in the file.  
 Parameters: `fileName`.  
 Returns: text
-
 ```
-ScriptIDs ( Get(FileName) )
-// → 1¶2¶3¶...
+ScriptIDs ( "Customers" )
+// → a list of all the script IDs in the Customers database file
 ```
-
 ---
 
 ## ScriptNames ( fileName )
 Returns a return-delimited list of all script names in the file.  
 Parameters: `fileName`.  
 Returns: text
-
 ```
-ScriptNames ( Get(FileName) )
-// → OnOpen¶ProcessInvoices¶SyncContacts¶...
+ScriptNames ( "Customers" )
+// → a list of all the scripts in the Customers database file
 ```
-
 Check if a script exists before calling:
 ```
 If ( PatternCount ( ScriptNames ( Get(FileName) ) ; "SyncContacts" ) > 0 ;
   Perform Script [ "SyncContacts" ]
 )
 ```
-
 ---
 
 ## TableIDs ( fileName )
 Returns a return-delimited list of table IDs for all base tables in the file.  
 Parameters: `fileName`.  
 Returns: text
-
 ```
-TableIDs ( Get(FileName) )
+TableIDs ( "University Database" )
+// returns
 ```
-
 Table IDs are stable across renames — use as permanent references in tooling.
 
 ---
@@ -447,19 +379,16 @@ Table IDs are stable across renames — use as permanent references in tooling.
 Returns a return-delimited list of base table names (not table occurrences) in the file.  
 Parameters: `fileName`.  
 Returns: text
-
 ```
-TableNames ( Get(FileName) )
-// → Contacts¶Invoices¶LineItems¶Products¶...
+TableNames ( "University Database" )
+// → table occurrences
 ```
-
 Difference from `FieldNames` with a TO name: `TableNames` returns base table names; the relationship graph may have multiple TOs per base table.
 
 Check if a table exists:
 ```
 PatternCount ( TableNames ( Get(FileName) ) ; "Archive" ) > 0
 ```
-
 ---
 
 ## ValueListIDs ( fileName )
@@ -473,18 +402,15 @@ Returns: text
 Returns a return-delimited list of the items in the specified value list.  
 Parameters: `fileName`; `valueListName` — the name of the value list.  
 Returns: text
-
 ```
-ValueListItems ( Get(FileName) ; "Status Values" )
-// → New¶Active¶On Hold¶Closed
+ValueListItems ( "Customers" ; "Code" )
+// → a list of all the items in the Code value list in the Customers database file
 ```
-
 Convert to JSON array for API payload:
 ```
 JSONMakeArray ( ValueListItems ( Get(FileName) ; "Status Values" ) ; ¶ ; JSONString )
 // → ["New","Active","On Hold","Closed"]
 ```
-
 Validate a value against a value list:
 ```
 PatternCount (
@@ -492,38 +418,32 @@ PatternCount (
   ¶ & Self & ¶
 ) > 0
 ```
-
 ---
 
 ## ValueListNames ( fileName )
 Returns a return-delimited list of all value list names in the file.  
 Parameters: `fileName`.  
 Returns: text
-
 ```
-ValueListNames ( Get(FileName) )
-// → Status Values¶Product Categories¶Countries¶...
+ValueListNames ( "Customers" )
+// → a list of all the value list names in the Customers database file
 ```
-
 ---
 
 ## WindowNames {( fileName )}
 Returns a return-delimited list of names of all open windows. If `fileName` is omitted, returns windows for the current file.  
 Parameters: `fileName` — optional; omit for current file.  
 Returns: text
-
 ```
 WindowNames                    // all windows in current file
 WindowNames ( Get(FileName) ) // same, explicit
 WindowNames ( "SharedData" )  // windows in a different open file
 ```
-
 Check if a specific window is already open:
 ```
 PatternCount ( WindowNames ; "Invoice Detail" ) > 0
 // → 1 if the window exists, 0 if not
 ```
-
 Close all windows except the current one:
 ```
 // (In a script — iterate WindowNames and close each)
@@ -540,7 +460,6 @@ Loop
   Set Variable [ $i ; Value: $i + 1 ]
 End Loop
 ```
-
 ---
 
 ## Common patterns
@@ -562,7 +481,6 @@ While (
   Trim ( dict )
 )
 ```
-
 **Confirm file and layout exist before navigating (safe cross-file open):**
 ```
 If [ PatternCount ( DatabaseNames ; "SharedData" ) = 0 ]
@@ -573,7 +491,6 @@ If [ PatternCount ( LayoutNames ( "SharedData" ) ; "Reports" ) > 0 ]
   Go to Layout [ "Reports" (SharedData) ]
 End If
 ```
-
 **Dynamic field export — all fields on current layout:**
 ```
 While (
@@ -591,13 +508,11 @@ While (
   payload
 )
 ```
-
 **Get next serial without creating a record:**
 ```
 Set Variable [ $nextNum ; Value: GetNextSerialValue ( Get(FileName) ; "Invoices::InvoiceNumber" ) ]
 Show Custom Dialog [ "Next invoice will be: " & $nextNum ]
 ```
-
 ---
 
 # FileMaker Container Functions — Quick Reference
@@ -613,274 +528,233 @@ Last verified: 2026-06 against live Claris Help Centre.
 ## Base64Decode ( text {; fileNameWithExtension } )
 
 Returns container or text. Decodes a Base64-encoded string back to binary (container) or plain text. Supply `fileNameWithExtension` to store the result as a named container file.
-
 ```
-Base64Decode ( Base64Encode ( myContainer ) )   // round-trip: recovers original data
-
-// Store as a named PNG container:
-Base64Decode ( encodedText ; "logo.png" )
+Base64Decode(Products::Base64;"question.png")
+// → ![Help button]() when Products::Base64 is set to a string that begins with "iVBORw0KGgoAAAANSUhEUgAAAB8". The Base64 string in this example was shortened for readability
 ```
-
 ---
 
 ## Base64Encode ( data )
 
 Returns text. Encodes any data (text or container) as a Base64 string. Useful for REST API payloads and email attachments.
-
 ```
-Base64Encode ( Invoice::Signature )   // → "iVBORw0KGgoAAAANS…"
-Base64Encode ( "Hello" )              // → "SGVsbG8="
+Base64Encode(Products::Color)
+// → `QmxhY2s=` when Products::Color is set to "Black"
 ```
-
 ---
 
 ## Base64EncodeRFC ( RFCNumber ; data )
 
 Returns text. Like `Base64Encode` but lets you choose the RFC variant. Common values: `4648` (standard), `4648S` (URL-safe, no padding), `2045` (MIME, 76-char line breaks).
-
 ```
-Base64EncodeRFC ( 4648 ; myContainer )   // Standard Base64
-Base64EncodeRFC ( "4648S" ; myContainer ) // URL-safe, no padding
-Base64EncodeRFC ( 2045 ; myContainer )   // MIME-safe for email
+Base64EncodeRFC ( 4648 ; Products::Color )
+// → `QmxhY2s=` when Products::Color is set to "Black"
 ```
-
 ---
 
 ## CryptAuthCode ( data ; algorithm ; key )
 
 Returns container (binary HMAC). Generates a Hash-based Message Authentication Code for verifying data integrity. Algorithm options: `"SHA256"`, `"SHA384"`, `"SHA512"`, `"MD5"`, `"SHA1"`.
-
 ```
-CryptAuthCode ( payload ; "SHA256" ; secretKey )
-// → binary HMAC — encode for transmission:
-Base64Encode ( CryptAuthCode ( payload ; "SHA256" ; secretKey ) )
+Set Field [ Table::Results ; CryptAuthCode ( Table::Message ; "" ; Table::Key ) ]
 ```
-
 ---
 
 ## CryptDecrypt ( container ; key )
 
 Returns container. Decrypts container data previously encrypted with `CryptEncrypt`. Key must match.
-
 ```
-CryptDecrypt ( Secrets::EncryptedDoc ; encryptionKey )
+CryptDecrypt ( 
+    CryptEncrypt ( "This needs protection" ; "My secret password" ) ; 
+    "My secret password" 
+)
 ```
-
 ---
 
 ## CryptDecryptBase64 ( text ; key )
 
 Returns container. Decrypts Base64-encoded text previously produced by `CryptEncryptBase64`.
-
 ```
-CryptDecryptBase64 ( Secrets::EncryptedBase64 ; encryptionKey )
+CryptDecryptBase64 ( 
+    CryptEncryptBase64 ( "This needs protection" ; "My secret password" ) ; 
+    "My secret password" 
+)
 ```
-
 ---
 
 ## CryptDigest ( data ; algorithm )
 
 Returns container (binary hash). Computes a one-way cryptographic hash. Algorithm options: `"SHA256"`, `"SHA384"`, `"SHA512"`, `"MD5"`, `"SHA1"`.
-
 ```
-// SHA-256 fingerprint of a field, hex-encoded:
-HexEncode ( CryptDigest ( Document::Body ; "SHA256" ) )
+Set Field [ Table::Results ; CryptDigest ( Table::Message ; "" ) ]
 ```
-
 ---
 
 ## CryptEncrypt ( data ; key )
 
 Returns container. Encrypts data using AES-256-GCM. Store the key separately and securely.
-
 ```
-CryptEncrypt ( SensitiveData::SSN ; encryptionKey )
+CryptEncrypt ( "This needs protection" ; "My secret password" )
 ```
-
 ---
 
 ## CryptEncryptBase64 ( data ; key )
 
 Returns text (Base64). Encrypts data and Base64-encodes the result — convenient for storing encrypted text in a text field.
-
 ```
-CryptEncryptBase64 ( SensitiveData::CreditCard ; encryptionKey )
-// → Base64 string, safe to store in a text field
+CryptEncryptBase64 ( "This needs protection" ; "My secret password" )
 ```
-
 ---
 
 ## CryptGenerateSignature ( data ; algorithm ; privateRSAKey ; keyPassword )
 
 Returns container (binary signature). Signs data using an RSA private key. Algorithm: `"SHA256"`, `"SHA384"`, `"SHA512"`.
-
 ```
-CryptGenerateSignature ( payload ; "SHA256" ; rsaPrivateKeyContainer ; keyPassword )
+Base64EncodeRFC ( 4648 ; 
+    CryptGenerateSignature ( 
+        Table::TextToSign ; "SHA512" ; Table::PrivateRSAKey ; $Password 
+    )
+)
 ```
-
 ---
 
 ## CryptVerifySignature ( data ; algorithm ; publicRSAKey ; signature )
 
 Returns number. Verifies an RSA signature against the public key. Returns `1` if valid, `0` if not.
-
 ```
-If ( CryptVerifySignature ( payload ; "SHA256" ; rsaPublicKey ; signatureContainer ) = 1 ;
-  "Signature valid" ;
-  "INVALID — data may have been tampered with"
+CryptVerifySignature ( 
+    Table::SignedText ; "SHA512" ; Table::PublicRSAKey ;     
+    Base64Decode (         
+        Table::Signature ; "sig.data"     
+    ) 
 )
 ```
-
 ---
 
 ## GetContainerAttribute ( field ; attributeName )
 
 Returns text. Reads metadata from a container field. Common `attributeName` values: `"filename"`, `"filesize"`, `"width"`, `"height"`, `"content type"`, `"image EXIF"`.
-
 ```
-GetContainerAttribute ( Photos::Image ; "filename" )   // → "headshot.jpg"
-GetContainerAttribute ( Photos::Image ; "filesize" )   // → "204800"
-GetContainerAttribute ( Photos::Image ; "width" )      // → "1200"
-GetContainerAttribute ( Photos::Image ; "content type" ) // → "image/jpeg"
+GetContainerAttribute(Image;`"`all`"`)
+// returns:
 ```
-
 ---
 
 ## GetHeight ( field )
 
 Returns number (pixels). Returns the pixel height of the image stored in a container field. Returns `0` for non-image content.
-
 ```
-GetHeight ( Products::Photo )   // → 600
+GetHeight(product)
+// → 768
 ```
-
 ---
 
 ## GetLiveText ( container ; language )
 
 Returns text. Performs on-device OCR and returns recognised text from an image. Requires FileMaker Go or FileMaker Pro 19.4+. `language` is a BCP 47 tag e.g. `"en"`, `"ja"`, `"fr"`.
-
 ```
-GetLiveText ( CapturedImage ; "en" )
-// → "Invoice #1042¶Total: $450.00"
+Set Field [Invoices::InvoiceText ; GetLiveText ( Invoices::InvoiceContainer ; "en-US" )]
 ```
-
 ---
 
 ## GetLiveTextAsJSON ( container ; language )
 
 Returns text (JSON). Like `GetLiveText` but includes bounding-box coordinates for each recognised text region.
-
 ```
-Let ( json = GetLiveTextAsJSON ( CapturedImage ; "en" ) ;
-  JSONGetElement ( json ; "[0].text" )
-)
-// → first recognised text block
+Set Field [Invoices::InvoiceText ; GetLiveText ( Invoices::InvoiceContainer ; "en-US" )]
 ```
-
 ---
 
 ## GetTextFromPDF ( container )
 
 Returns text. Extracts embedded text from a PDF stored in a container. Through FM 22–25 it does not OCR scanned pages — the PDF must contain a text layer. **FM 26 change:** on macOS, scanned PDFs are now supported via built-in OCR; on other platforms a scanned PDF still returns an empty string.
-
 ```
-GetTextFromPDF ( Documents::Contract )
-// → full body text of the PDF
+Claris FileMaker Pro Help
+Reference>Functions reference>Container functions>GetTextFromPDF
+GetTextFromPDF
+Returns the text found in a PDF file in the specified container field.
+Format
+...
 ```
-
 Search for a clause:
 ```
 PatternCount ( GetTextFromPDF ( Documents::Contract ) ; "indemnification" ) > 0
 ```
-
 ---
 
 ## GetThumbnail ( field ; width ; height )
 
 Returns container. Generates a thumbnail of the container image scaled to fit within `width` × `height` pixels, preserving aspect ratio.
-
 ```
-GetThumbnail ( Products::Photo ; 100 ; 100 )   // → container with ≤100×100px image
+Set Field [ Invoices::ExportContainer ; GetThumbnail ( Invoices::Container ; 50 ; 50 ) ]
+Export Field Contents [ Invoices::ExportContainer ; Create folders: Off ]
 ```
-
 ---
 
 ## GetWidth ( field )
 
 Returns number (pixels). Returns the pixel width of the image stored in a container field. Returns `0` for non-image content.
-
 ```
-GetWidth ( Products::Photo )   // → 1200
+GetWidth(Product)
+// → 1024
 ```
-
 ---
 
 ## HexDecode ( data {; fileNameWithExtension } )
 
 Returns container or text. Decodes a hexadecimal-encoded string back to binary. Inverse of `HexEncode`.
-
 ```
-HexDecode ( HexEncode ( myContainer ) )   // round-trip
-HexDecode ( hexString ; "document.pdf" )  // restore as named PDF container
+HexDecode ( "46696C654D616B6572" )
+// → FileMaker
 ```
-
 ---
 
 ## HexEncode ( data )
 
 Returns text. Encodes any data as a lowercase hexadecimal string. Useful for hashing workflows and debugging binary data.
-
 ```
-HexEncode ( CryptDigest ( payload ; "SHA256" ) )
-// → "a591a6d40bf420404a011733cfb7b190d62c65bf0bcda32b57b277d9ad9f146e"
+HexEncode ( "FileMaker" )
+// → 46696C654D616B6572
 ```
-
 ---
 
 ## ReadQRCode ( container )
 
 Returns text. Decodes a QR code or barcode from an image in a container field. Returns the encoded text value.
-
 ```
-ReadQRCode ( ScannedBadge::Image )   // → "EMP-00423"
+Set Field [ Product::URL ; ReadQRCode ( Invoices::Container ) ]
+If [ Left ( Product::URL; 4 ) = "http" ]
+    Open URL [ With dialog: Off; Product::URL ]
+End If
 ```
-
 ---
 
 ## TextDecode ( container ; encoding )
 
 Returns text. Converts container data (raw bytes) to a text string using the specified encoding. Common encodings: `"UTF-8"`, `"UTF-16"`, `"ISO-8859-1"`, `"Shift-JIS"`.
-
 ```
-TextDecode ( importedFile ; "UTF-8" )    // read a UTF-8 text file from container
-TextDecode ( legacyFile ; "ISO-8859-1" ) // decode Latin-1 encoded file
+TextDecode ( table::container ; "windows-1252" )
+// → UTF-16LE-encoded text from the file in a container field that contains text with Windows character encoding
 ```
-
 ---
 
 ## TextEncode ( text ; encoding ; lineEndings )
 
 Returns container. Converts text to container data using the specified encoding and line-ending style. `lineEndings`: `"Windows"` (CRLF), `"Mac"` (CR), `"Unix"` (LF).
-
 ```
-TextEncode ( myText ; "UTF-8" ; "Unix" )    // → container for export or sending
-TextEncode ( myText ; "UTF-16" ; "Windows" ) // Windows UTF-16 text file
+TextEncode ( table::text ; "shift_jis" ; 1 )
 ```
-
 ---
 
 ## VerifyContainer ( field )
 
 Returns number. Checks the integrity of container data. Returns `1` if the data is intact, `0` if corrupted or missing.
-
 ```
 If ( VerifyContainer ( Documents::Attachment ) = 0 ;
   "⚠️ Container data is corrupted or missing" ;
   "OK"
 )
 ```
-
 ---
 
 ## Common patterns
@@ -893,7 +767,6 @@ CryptEncryptBase64 ( Contacts::SSN_raw ; $$encryptionKey )
 // Decrypt for display (custom function or script):
 CryptDecryptBase64 ( Contacts::EncryptedSSN ; $$encryptionKey )
 ```
-
 **HMAC verification for webhook payloads:**
 ```
 Let ( [
@@ -906,7 +779,6 @@ Let ( [
 )
 // → 1 if payload is authentic
 ```
-
 **Aspect-ratio-aware thumbnail:**
 ```
 Let ( [
@@ -918,7 +790,6 @@ Let ( [
   GetThumbnail ( Products::Photo ; w * scale ; h * scale )
 )
 ```
-
 **OCR → extract invoice number:**
 ```
 Let ( raw = GetLiveText ( Scan::Image ; "en" ) ;

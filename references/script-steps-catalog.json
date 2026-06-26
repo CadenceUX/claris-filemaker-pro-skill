@@ -3,7 +3,7 @@
     "description": "Canonical catalog of all FileMaker Pro script steps, organised by category. Use this for prototype/syntax lookups before fetching live docs. doc_url points to the authoritative Claris Help Centre page for each step.",
     "help_centre": "https://help.claris.com/markdown/en/pro-help/script-steps-reference.md",
     "version": "FileMaker Pro 26 / Claris 2026",
-    "last_updated": "2026-06 (v1.9 — corrected step count note: 165 unique steps after FM 26 additions and duplicate removal)",
+    "last_updated": "2026-06 (v1.9 \u2014 corrected step count note: 165 unique steps after FM 26 additions and duplicate removal)",
     "update_instructions": "Re-fetch https://help.claris.com/markdown/en/pro-help/script-steps-reference.md and compare category listings. Add new steps, update slugs, bump last_updated.",
     "note": "Syntax uses [] for required fields/options and {} for optional. Steps marked platform list restrictions (Pro, Server, Go, WebDirect, Cloud)."
   },
@@ -17,133 +17,152 @@
           "syntax": "Perform Script [ Specified: From list ; \"ScriptName\" ; Parameter: value ]",
           "purpose": "Runs a named script in the current or another file, optionally passing a parameter",
           "slug": "perform-script",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-script.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-script.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Perform Script on Server",
           "syntax": "Perform Script on Server [ Wait for completion: On/Off ; Specified: From list ; \"ScriptName\" ; Parameter: value ]",
           "purpose": "Runs a script on FileMaker Server (server-side scripting)",
           "slug": "perform-script-on-server",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-script-on-server.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-script-on-server.md",
+          "originated_in_version": "13"
         },
         {
           "name": "Pause/Resume Script",
           "syntax": "Pause/Resume Script [ Duration (seconds): value ]",
           "purpose": "Pauses the current script for user input or a fixed duration",
           "slug": "pause-resume-script",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/pause-resume-script.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/pause-resume-script.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Exit Script",
           "syntax": "Exit Script [ Script Result: value ]",
           "purpose": "Ends the current script and optionally sets a script result accessible via Get(ScriptResult)",
           "slug": "exit-script",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/exit-script.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/exit-script.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Halt Script",
           "syntax": "Halt Script",
           "purpose": "Stops all scripts in the call stack immediately",
           "slug": "halt-script",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/halt-script.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/halt-script.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "If",
           "syntax": "If [ condition ]",
           "purpose": "Begins a conditional block; executes enclosed steps only when condition is true",
           "slug": "if",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/if.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/if-script-step.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Else If",
           "syntax": "Else If [ condition ]",
           "purpose": "Additional condition branch within an If block",
           "slug": "else-if",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/else-if.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/else-if.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Else",
           "syntax": "Else",
           "purpose": "Default branch executed when no If/Else If condition is true",
           "slug": "else",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/else.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/else.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "End If",
           "syntax": "End If",
           "purpose": "Closes an If block",
           "slug": "end-if",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/end-if.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/end-if.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Loop",
           "syntax": "Loop",
           "purpose": "Begins a loop block that repeats until an Exit Loop If or Go to Record exits it",
           "slug": "loop",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/loop.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/loop.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Exit Loop If",
           "syntax": "Exit Loop If [ condition ]",
           "purpose": "Exits the enclosing Loop when condition is true",
           "slug": "exit-loop-if",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/exit-loop-if.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/exit-loop-if.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "End Loop",
           "syntax": "End Loop",
           "purpose": "Closes a Loop block and returns execution to the Loop step",
           "slug": "end-loop",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/end-loop.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/end-loop.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Allow User Abort",
           "syntax": "Allow User Abort [ On/Off ]",
           "purpose": "Controls whether users can stop the script with Escape/Cancel",
           "slug": "allow-user-abort",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/allow-user-abort.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/allow-user-abort.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Set Error Capture",
           "syntax": "Set Error Capture [ On/Off ]",
           "purpose": "When On, suppresses FileMaker error dialogs so scripts can handle errors programmatically",
           "slug": "set-error-capture",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/set-error-capture.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/set-error-capture.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Set Variable",
           "syntax": "Set Variable [ $name ; Value: expression ; Repetition: n ]",
           "purpose": "Creates or sets a local ($var) or global ($$var) variable",
           "slug": "set-variable",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/set-variable.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/set-variable.md",
+          "originated_in_version": "8"
         },
         {
           "name": "Install OnTimer Script",
           "syntax": "Install OnTimer Script [ Interval: seconds ; Specified: From list ; \"ScriptName\" ; Parameter: value ]",
           "purpose": "Installs a script that runs repeatedly on a timer interval",
           "slug": "install-ontimer-script",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/install-ontimer-script.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/install-ontimer-script.md",
+          "originated_in_version": "10"
         },
         {
           "name": "Open Transaction",
           "syntax": "Open Transaction",
           "purpose": "Begins a database transaction (changes committed or rolled back as a unit)",
           "slug": "open-transaction",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/open-transaction.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/open-transaction.md",
+          "originated_in_version": "19.6.1"
         },
         {
           "name": "Commit Transaction",
           "syntax": "Commit Transaction",
           "purpose": "Commits an open transaction, making all changes permanent",
           "slug": "commit-transaction",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/commit-transaction.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/commit-transaction.md",
+          "originated_in_version": "19.6.1"
         },
         {
           "name": "Revert Transaction",
           "syntax": "Revert Transaction",
           "purpose": "Rolls back an open transaction, discarding all changes since Open Transaction",
           "slug": "revert-transaction",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/revert-transaction.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/revert-transaction.md",
+          "originated_in_version": "19.6.1"
         },
         {
           "name": "Set Revert Transaction on Error",
@@ -151,7 +170,7 @@
           "syntax": "Set Revert Transaction on Error [On/Off]",
           "purpose": "Controls whether a transaction is automatically reverted when an error occurs within an Open Transaction / Commit Transaction block. Default is On (auto-revert on error).",
           "originated_in_version": "21.1.1",
-          "notes": "When set to Off, the script continues after an error inside a transaction block, allowing the script to handle errors itself before deciding to commit or revert. Use Get(RevertTransactionOnErrorState) to query the current setting. The setting is scoped to the current script — it does not propagate to subscripts. Reset to On before exiting scripts that set it to Off.",
+          "notes": "When set to Off, the script continues after an error inside a transaction block, allowing the script to handle errors itself before deciding to commit or revert. Use Get(RevertTransactionOnErrorState) to query the current setting. The setting is scoped to the current script \u2014 it does not propagate to subscripts. Reset to On before exiting scripts that set it to Off.",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/set-revert-transaction-on-error.md",
           "platforms": {
             "Pro": "Yes",
@@ -172,91 +191,104 @@
           "syntax": "Go to Layout [ \"LayoutName\" / layout number / original layout ]",
           "purpose": "Switches to the specified layout",
           "slug": "go-to-layout",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-layout.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-layout.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Go to Record/Request/Page",
-          "syntax": "Go to Record/Request/Page [ First / Last / Previous / Next / By Calculation: n ]",
+          "syntax": "Go to Record/Request/Page [ First / Last / Previous / Next / Exit after last / By Calculation: n ]",
           "purpose": "Navigates to a specific record in the current found set",
           "slug": "go-to-record-request-page",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-record-request-page.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-record-request-page.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Go to Related Record",
           "syntax": "Go to Related Record [ Show only related records ; From table: \"TableOccurrence\" ; Using layout: \"LayoutName\" ]",
           "purpose": "Goes to a related record via a relationship, optionally filtering to related records only",
           "slug": "go-to-related-record",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-related-record.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-related-record.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Go to Portal Row",
-          "syntax": "Go to Portal Row [ Select ; First / Last / Previous / Next / By Calculation: n ]",
+          "syntax": "Go to Portal Row [ Select ; First / Last / Previous / Next / Exit after last / By Calculation: n ]",
           "purpose": "Navigates to a specific row in a portal on the current layout",
           "slug": "go-to-portal-row",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-portal-row.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-portal-row.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Go to Field",
           "syntax": "Go to Field [ Select/perform ; Table::Field ]",
           "purpose": "Moves focus to the specified field",
           "slug": "go-to-field",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-field.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-field.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Go to Next Field",
           "syntax": "Go to Next Field",
           "purpose": "Moves focus to the next field in tab order",
           "slug": "go-to-next-field",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-next-field.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-next-field.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Go to Previous Field",
           "syntax": "Go to Previous Field",
           "purpose": "Moves focus to the previous field in tab order",
           "slug": "go-to-previous-field",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-previous-field.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-previous-field.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Enter Browse Mode",
           "syntax": "Enter Browse Mode [ Pause ]",
           "purpose": "Switches to Browse mode",
           "slug": "enter-browse-mode",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/enter-browse-mode.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/enter-browse-mode.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Enter Find Mode",
           "syntax": "Enter Find Mode [ Pause ; Restore ]",
           "purpose": "Switches to Find mode, optionally restoring saved find requests",
           "slug": "enter-find-mode",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/enter-find-mode.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/enter-find-mode.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Enter Preview Mode",
           "syntax": "Enter Preview Mode [ Pause ]",
           "purpose": "Switches to Preview mode",
           "slug": "enter-preview-mode",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/enter-preview-mode.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/enter-preview-mode.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Scroll Window",
           "syntax": "Scroll Window [ Home / End / Page Up / Page Down / To Selection ]",
           "purpose": "Scrolls the window to the specified position",
           "slug": "scroll-window",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/scroll-window.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/scroll-window.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Select Window",
           "syntax": "Select Window [ Name: \"WindowName\" ; Current File / Any File ]",
           "purpose": "Brings the specified window to the front",
           "slug": "select-window",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/select-window.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/select-window.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Navigate to Object",
           "syntax": "Navigate to Object [ Object Name: \"name\" ]",
           "purpose": "Moves focus to a named layout object",
           "slug": "navigate-to-object",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/navigate-to-object.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/script-steps-reference.md",
+          "doc_url_note": "No individual doc page on Claris's site as of this audit; points to the general script steps reference"
         }
       ]
     },
@@ -269,161 +301,184 @@
           "syntax": "Set Field [ Table::Field ; value ]",
           "purpose": "Sets the value of a field in the current record",
           "slug": "set-field",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/set-field.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/set-field.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Set Field By Name",
           "syntax": "Set Field By Name [ fieldName expression ; value ]",
           "purpose": "Sets a field whose name is determined at runtime by a calculation",
           "slug": "set-field-by-name",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/set-field-by-name.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/set-field-by-name.md",
+          "originated_in_version": "10"
         },
         {
           "name": "Set Next Serial Value",
           "syntax": "Set Next Serial Value [ Table::Field ; value ]",
           "purpose": "Sets the next auto-enter serial value for a field",
           "slug": "set-next-serial-value",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/set-next-serial-value.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/set-next-serial-value.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Insert Text",
           "syntax": "Insert Text [ Select ; Table::Field ; \"text\" ]",
           "purpose": "Inserts literal text into a field at the cursor position",
           "slug": "insert-text",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-text.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-text.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Insert Calculated Result",
           "syntax": "Insert Calculated Result [ Select ; Table::Field ; value ]",
           "purpose": "Inserts the result of a calculation into a field",
           "slug": "insert-calculated-result",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-calculated-result.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-calculated-result.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Insert From Index",
           "syntax": "Insert From Index [ Select ; Table::Field ]",
           "purpose": "Opens field index dialog so user can pick a value to insert",
           "slug": "insert-from-index",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-from-index.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-from-index.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Insert From Last Visited",
           "syntax": "Insert From Last Visited [ Select ; Table::Field ]",
           "purpose": "Inserts the value from the same field in the last visited record",
           "slug": "insert-from-last-visited",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-from-last-visited.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-from-last-visited.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Insert From URL",
           "syntax": "Insert From URL [ Select ; With dialog: On/Off ; Table::Field ; URL expression ; cURL options ]",
           "purpose": "Fetches URL content and inserts it into a field; supports cURL options for headers, auth, POST",
           "slug": "insert-from-url",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-from-url.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-from-url.md",
+          "originated_in_version": "12"
         },
         {
           "name": "Insert Current Date",
           "syntax": "Insert Current Date [ Select ; Table::Field ]",
           "purpose": "Inserts today's date into a field",
           "slug": "insert-current-date",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-current-date.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-current-date.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Insert Current Time",
           "syntax": "Insert Current Time [ Select ; Table::Field ]",
           "purpose": "Inserts the current time into a field",
           "slug": "insert-current-time",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-current-time.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-current-time.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Insert Current User Name",
           "syntax": "Insert Current User Name [ Select ; Table::Field ]",
           "purpose": "Inserts the current FileMaker account name into a field",
           "slug": "insert-current-user-name",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-current-user-name.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-current-user-name.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Insert File",
           "syntax": "Insert File [ Compress ; Storage: Embedded/By Reference/Externally ; Table::Field ; source ]",
           "purpose": "Inserts a file into a container field",
           "slug": "insert-file",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-file.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-file.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Insert Picture",
-          "syntax": "Insert Picture [ Compress ; Storage: Embedded/By Reference ; Table::Field ; source ]",
+          "syntax": "Insert Picture [ Store only as a reference ; Table::Field ; source ]",
           "purpose": "Inserts an image into a container field",
           "slug": "insert-picture",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-picture.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-picture.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Insert Audio/Video",
-          "syntax": "Insert Audio/Video [ Storage: Embedded/By Reference/Externally ; Table::Field ; source ]",
+          "syntax": "Insert Audio/Video [ Store only as reference ; Table::Field ; source ]",
           "purpose": "Inserts audio or video into a container field",
           "slug": "insert-audio-video",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-audio-video.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-audio-video.md",
+          "originated_in_version": "12"
         },
         {
           "name": "Insert PDF",
-          "syntax": "Insert PDF [ Storage: Embedded/By Reference/Externally ; Table::Field ; source ]",
+          "syntax": "Insert PDF [ Store only as reference ; Table::Field ; source ]",
           "purpose": "Inserts a PDF into a container field",
           "slug": "insert-pdf",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-pdf.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-pdf.md",
+          "originated_in_version": "12"
         },
         {
           "name": "Replace Field Contents",
           "syntax": "Replace Field Contents [ No dialog ; Table::Field ; Calculated result / Serial numbers / Values from index ]",
           "purpose": "Replaces values in a field across all records in the found set",
           "slug": "replace-field-contents",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/replace-field-contents.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/replace-field-contents.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Relookup Field Contents",
           "syntax": "Relookup Field Contents [ No dialog ; Table::Field ]",
           "purpose": "Forces a re-lookup of related field values for records in the found set",
           "slug": "relookup-field-contents",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/relookup-field-contents.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/relookup-field-contents.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Export Field Contents",
           "syntax": "Export Field Contents [ Table::Field ; output file path ; Automatically open ]",
           "purpose": "Exports the contents of a container or text field to a file",
           "slug": "export-field-contents",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/export-field-contents.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/export-field-contents.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Cut",
           "syntax": "Cut [ Select ; Table::Field ]",
           "purpose": "Cuts selected content from a field to the clipboard",
           "slug": "cut",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/cut.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/cut.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Copy",
           "syntax": "Copy [ Select ; Table::Field ]",
           "purpose": "Copies field content or selected text to the clipboard",
           "slug": "copy",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/copy.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/copy.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Paste",
           "syntax": "Paste [ Select ; No style ; Table::Field ]",
           "purpose": "Pastes clipboard content into a field",
           "slug": "paste",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/paste.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/paste.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Clear",
           "syntax": "Clear [ Select ; Table::Field ]",
           "purpose": "Clears the selected content or entire field contents",
           "slug": "clear",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/clear.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/clear.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Undo/Redo",
           "syntax": "Undo/Redo",
           "purpose": "Undoes or redoes the last user action",
           "slug": "undo-redo",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/undo-redo.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/undo-redo.md",
+          "originated_in_version": "legacy"
         }
       ]
     },
@@ -436,21 +491,24 @@
           "syntax": "Set Selection [ Table::Field ; Start Position: n ; End Position: n ]",
           "purpose": "Sets the text selection range within a field",
           "slug": "set-selection",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/set-selection.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/set-selection.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Select All",
           "syntax": "Select All",
           "purpose": "Selects all content in the current field",
           "slug": "select-all",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/select-all.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/select-all.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Set Use System Formats",
           "syntax": "Set Use System Formats [ On/Off ]",
           "purpose": "Controls whether the file uses system or file-defined date/time formats",
           "slug": "set-use-system-formats",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/set-use-system-formats.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/set-use-system-formats.md",
+          "originated_in_version": "legacy"
         }
       ]
     },
@@ -463,98 +521,112 @@
           "syntax": "New Record/Request",
           "purpose": "Creates a new blank record (Browse mode) or find request (Find mode)",
           "slug": "new-record-request",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/new-record-request.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/new-record-request.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Duplicate Record/Request",
           "syntax": "Duplicate Record/Request",
           "purpose": "Duplicates the current record or find request",
           "slug": "duplicate-record-request",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/duplicate-record-request.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/duplicate-record-request.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Delete Record/Request",
           "syntax": "Delete Record/Request [ No dialog ]",
           "purpose": "Deletes the current record or find request",
           "slug": "delete-record-request",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/delete-record-request.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/delete-record-request.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Delete All Records",
           "syntax": "Delete All Records [ No dialog ]",
           "purpose": "Deletes all records in the current found set",
           "slug": "delete-all-records",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/delete-all-records.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/delete-all-records.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Delete Portal Row",
           "syntax": "Delete Portal Row [ No dialog ]",
           "purpose": "Deletes the currently selected portal row (related record)",
           "slug": "delete-portal-row",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/delete-portal-row.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/delete-portal-row.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Commit Records/Requests",
           "syntax": "Commit Records/Requests [ No dialog ; Force commit ]",
           "purpose": "Commits (saves) changes to the current record without leaving the record",
           "slug": "commit-records-requests",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/commit-records-requests.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/commit-records-requests.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Revert Record/Request",
           "syntax": "Revert Record/Request [ No dialog ]",
           "purpose": "Reverts uncommitted changes to the current record",
           "slug": "revert-record-request",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/revert-record-request.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/revert-record-request.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Open Record/Request",
           "syntax": "Open Record/Request",
           "purpose": "Locks the current record for editing in a multi-user environment",
           "slug": "open-record-request",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/open-record-request.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/open-record-request.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Copy Record/Request",
           "syntax": "Copy Record/Request",
           "purpose": "Copies all field values of the current record to the clipboard as tab-delimited text",
           "slug": "copy-record-request",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/copy-record-request.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/copy-record-request.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Copy All Records/Requests",
           "syntax": "Copy All Records/Requests",
           "purpose": "Copies all records in the found set to the clipboard as tab-delimited text",
           "slug": "copy-all-records-requests",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/copy-all-records-requests.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/copy-all-records-requests.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Import Records",
-          "syntax": "Import Records [ No dialog ; Source file ; Target: Table ; Arrange by: matching names/order ]",
+          "syntax": "Import Records [ With dialog: On/Off ; Specify data source ; Specify import order ]",
           "purpose": "Imports records from an external file or data source into the current table",
           "slug": "import-records",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/import-records.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/import-records.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Export Records",
           "syntax": "Export Records [ No dialog ; Output file ; Fields in order ]",
           "purpose": "Exports records in the found set to a file in the specified format",
           "slug": "export-records",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/export-records.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/export-records.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Save Records as Excel",
           "syntax": "Save Records as Excel [ No dialog ; Output file ; Auto-size columns ; Records being browsed / Current record ]",
           "purpose": "Saves found records to an Excel (.xlsx) file",
           "slug": "save-records-as-excel",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/save-records-as-excel.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/save-records-as-excel.md",
+          "originated_in_version": "8"
         },
         {
           "name": "Save Records as Snapshot Link",
           "syntax": "Save Records as Snapshot Link [ No dialog ; Output file ]",
           "purpose": "Saves a snapshot link (.fmpsl) representing the current found set and sort order",
           "slug": "save-records-as-snapshot-link",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/save-records-as-snapshot-link.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/save-records-as-snapshot-link.md",
+          "originated_in_version": "11"
         }
       ]
     },
@@ -567,92 +639,104 @@
           "syntax": "Perform Find [ Restore ]",
           "purpose": "Executes the current find request(s), updating the found set",
           "slug": "perform-find",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-find.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-find.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Perform Quick Find",
           "syntax": "Perform Quick Find [ search text ]",
           "purpose": "Performs a Quick Find across all quick-find-enabled fields",
           "slug": "perform-quick-find",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-quick-find.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-quick-find.md",
+          "originated_in_version": "11"
         },
         {
           "name": "Constrain Found Set",
           "syntax": "Constrain Found Set [ Restore ]",
           "purpose": "Narrows the current found set using an additional find request",
           "slug": "constrain-found-set",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/constrain-found-set.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/constrain-found-set.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Extend Found Set",
           "syntax": "Extend Found Set [ Restore ]",
           "purpose": "Adds records matching a find request to the current found set",
           "slug": "extend-found-set",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/extend-found-set.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/extend-found-set.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Modify Last Find",
           "syntax": "Modify Last Find",
           "purpose": "Reopens the last find request for modification",
           "slug": "modify-last-find",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/modify-last-find.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/modify-last-find.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Show All Records",
           "syntax": "Show All Records",
           "purpose": "Finds all records in the current table",
           "slug": "show-all-records",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/show-all-records.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/show-all-records.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Show Omitted Only",
           "syntax": "Show Omitted Only",
           "purpose": "Swaps found set with omitted records",
           "slug": "show-omitted-only",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/show-omitted-only.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/show-omitted-only.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Omit Record",
           "syntax": "Omit Record",
           "purpose": "Removes the current record from the found set",
           "slug": "omit-record",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/omit-record.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/omit-record.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Omit Multiple Records",
           "syntax": "Omit Multiple Records [ No dialog ; n records ]",
           "purpose": "Removes n records starting from the current record from the found set",
           "slug": "omit-multiple-records",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/omit-multiple-records.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/omit-multiple-records.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Sort Records",
           "syntax": "Sort Records [ Restore ; No dialog ]",
           "purpose": "Sorts the found set by the saved or specified sort order",
           "slug": "sort-records",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/sort-records.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/sort-records.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Sort Records by Field",
           "syntax": "Sort Records by Field [ Ascending/Descending ; Table::Field ]",
           "purpose": "Sorts the found set by a single specified field",
           "slug": "sort-records-by-field",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/sort-records-by-field.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/sort-records-by-field.md",
+          "originated_in_version": "12"
         },
         {
           "name": "Unsort Records",
           "syntax": "Unsort Records",
           "purpose": "Returns records to creation order",
           "slug": "unsort-records",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/unsort-records.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/unsort-records.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Go to List of Records",
           "slug": "go-to-list-of-records",
           "syntax": "Go to List of Records [Layout; Record IDs]",
           "purpose": "Goes to a layout and returns the found set specified by a list of record IDs. Accepts a carriage-return-separated value list, a JSON array of record IDs as strings or numbers, or a JSON array of objects with recordId keys.",
-          "originated_in_version": "22.0.1",
-          "notes": "Use with GetRecordIDsFromFoundSet to preserve and restore found sets across script jumps or file switches. Layout option: specify a layout name (defaults to current layout). The Record IDs parameter accepts: (1) value list — one ID per line, (2) JSONArray of number or string IDs, (3) JSONArray of objects with 'recordId' key. Records not found are silently skipped. If none of the IDs match, the found set is empty. Not supported in FileMaker WebDirect.",
+          "originated_in_version": "22",
+          "notes": "Use with GetRecordIDsFromFoundSet to preserve and restore found sets across script jumps or file switches. Layout option: specify a layout name (defaults to current layout). The Record IDs parameter accepts: (1) value list \u2014 one ID per line, (2) JSONArray of number or string IDs, (3) JSONArray of objects with 'recordId' key. Records not found are silently skipped. If none of the IDs match, the found set is empty. Not supported in FileMaker WebDirect.",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-list-of-records.md",
           "platforms": {
             "Pro": "Yes",
@@ -673,91 +757,104 @@
           "syntax": "New Window [ Style: Document/Floating Document/Dialog ; Name: text ; Height: n ; Width: n ; Top: n ; Left: n ]",
           "purpose": "Opens a new window of the specified style",
           "slug": "new-window",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/new-window.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/new-window.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Close Window",
-          "syntax": "Close Window [ Current Window / Name: text ]",
+          "syntax": "Close Window [ Current Window / Name: text ; Current file only ]",
           "purpose": "Closes the current or named window",
           "slug": "close-window",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/close-window.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/close-window.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Move/Resize Window",
-          "syntax": "Move/Resize Window [ Current Window / Name: text ; Height: n ; Width: n ; Top: n ; Left: n ]",
+          "syntax": "Move/Resize Window [ Current Window / Name: text ; Current file only ; Height: n ; Width: n ; Top: n ; Left: n ]",
           "purpose": "Moves and/or resizes a window",
           "slug": "move-resize-window",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/move-resize-window.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/move-resize-window.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Arrange All Windows",
           "syntax": "Arrange All Windows [ Tile Horizontally / Tile Vertically / Cascade / Bring All to Front ]",
           "purpose": "Arranges all open windows",
           "slug": "arrange-all-windows",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/arrange-all-windows.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/arrange-all-windows.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Freeze Window",
           "syntax": "Freeze Window",
           "purpose": "Prevents screen redraws while a script runs, improving performance",
           "slug": "freeze-window",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/freeze-window.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/freeze-window.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Refresh Window",
           "syntax": "Refresh Window [ Flush cached join results ]",
           "purpose": "Forces a screen redraw; optionally flushes relationship cache",
           "slug": "refresh-window",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/refresh-window.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/refresh-window.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Refresh Object",
           "syntax": "Refresh Object [ Object Name: name ]",
           "purpose": "Refreshes a named layout object without refreshing the whole window",
           "slug": "refresh-object",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/refresh-object.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/refresh-object.md",
+          "originated_in_version": "13"
         },
         {
           "name": "Set Window Title",
-          "syntax": "Set Window Title [ Current Window / Name: text ; New Name: expression ]",
+          "syntax": "Set Window Title [ Current Window / Name: text ; Current file only ; New Title: expression ]",
           "purpose": "Sets the title of a window",
           "slug": "set-window-title",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/set-window-title.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/set-window-title.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Set Zoom Level",
           "syntax": "Set Zoom Level [ Lock ; n% ]",
           "purpose": "Sets the zoom level of the current window",
           "slug": "set-zoom-level",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/set-zoom-level.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/set-zoom-level.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Show/Hide Menubar",
           "syntax": "Show/Hide Menubar [ Lock ; Show/Hide ]",
           "purpose": "Shows or hides the menu bar",
           "slug": "show-hide-menubar",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/show-hide-menubar.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/show-hide-menubar.md",
+          "originated_in_version": "13"
         },
         {
           "name": "Show/Hide Text Ruler",
           "syntax": "Show/Hide Text Ruler [ Show/Hide ]",
           "purpose": "Shows or hides the text ruler",
           "slug": "show-hide-text-ruler",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/show-hide-text-ruler.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/show-hide-text-ruler.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Show/Hide Status Toolbar",
           "syntax": "Show/Hide Status Toolbar [ Lock ; Show/Hide ]",
           "purpose": "Shows or hides the status toolbar",
           "slug": "show-hide-status-toolbar",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/show-hide-status-toolbar.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/script-steps-reference.md",
+          "doc_url_note": "No individual doc page on Claris's site as of this audit; points to the general script steps reference"
         },
         {
           "name": "Set Window Animation",
           "syntax": "Set Window Animation [ On/Off ]",
           "purpose": "Enables or disables window transition animations",
           "slug": "set-window-animation",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/set-window-animation.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/script-steps-reference.md",
+          "doc_url_note": "No individual doc page on Claris's site as of this audit; points to the general script steps reference"
         }
       ]
     },
@@ -770,57 +867,64 @@
           "syntax": "Close File [ Specify: From list / Current File ]",
           "purpose": "Closes a file, committing any pending changes",
           "slug": "close-file",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/close-file.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/close-file.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Convert File",
           "syntax": "Convert File [ No dialog ; source file ]",
           "purpose": "Converts an older FileMaker or non-FileMaker file to current format",
           "slug": "convert-file",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/convert-file.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/convert-file.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "New File",
           "syntax": "New File",
           "purpose": "Creates a new FileMaker file",
           "slug": "new-file",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/new-file.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/new-file.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Open File",
-          "syntax": "Open File [ Open hidden ; Specify: From list / By name: expression ]",
+          "syntax": "Open File [ Open hidden ; Add FileMaker Data Source / Add ODBC Data Source ]",
           "purpose": "Opens a FileMaker file",
           "slug": "open-file",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/open-file.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/open-file.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Recover File",
           "syntax": "Recover File [ No dialog ; source file ]",
           "purpose": "Attempts to recover a damaged FileMaker file",
           "slug": "recover-file",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/recover-file.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/recover-file.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Save Records as JSONL",
           "purpose": "Saves records to a specified JSONL file; each line is a JSON object representing a record. Used to output record data for fine-tuning a model.",
           "syntax": "Save Records as JSONL [ No dialog ; File: <path> ; Fields: <field list> ]",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/save-records-as-jsonl.md",
-          "notes": "Format for fine-tuning On: requires three explicit prompts — System Prompt (optional), User Prompt, Assistant Prompt. Format for fine-tuning Off: Completion Field required; all other fields become user prompt content. Container fields are skipped (Off mode) or exported as filename string (On mode). Compatibility: not supported on FileMaker Go or WebDirect.",
-          "originated_in_version": "22.0.1"
+          "notes": "Format for fine-tuning On: requires three explicit prompts \u2014 System Prompt (optional), User Prompt, Assistant Prompt. Format for fine-tuning Off: Completion Field required; all other fields become user prompt content. Container fields are skipped (Off mode) or exported as filename string (On mode). Compatibility: not supported on FileMaker Go or WebDirect.",
+          "originated_in_version": "22"
         },
         {
           "name": "Save a Copy as",
           "syntax": "Save a Copy as [ No dialog ; output file ; Type: copy/compacted/self-contained ]",
           "purpose": "Saves a copy of the current file in the specified format",
           "slug": "save-a-copy-as",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/save-a-copy-as.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/save-a-copy-as.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Set Multi-User",
           "syntax": "Set Multi-User [ On - Hidden / On - Visible / Off ]",
           "purpose": "Controls network sharing of the current file",
           "slug": "set-multi-user",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/set-multi-user.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/set-multi-user.md",
+          "originated_in_version": "legacy"
         }
       ]
     },
@@ -833,49 +937,56 @@
           "syntax": "Add Account [ Account Name: name ; Password: pwd ; Privilege Set: name ; Expire password ]",
           "purpose": "Creates a new FileMaker account",
           "slug": "add-account",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/add-account.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/add-account.md",
+          "originated_in_version": "7"
         },
         {
           "name": "Delete Account",
           "syntax": "Delete Account [ Account Name: name ]",
           "purpose": "Deletes the specified FileMaker account",
           "slug": "delete-account",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/delete-account.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/delete-account.md",
+          "originated_in_version": "7"
         },
         {
           "name": "Reset Account Password",
           "syntax": "Reset Account Password [ Account Name: name ; New Password: pwd ; Expire password ]",
           "purpose": "Resets the password for a FileMaker account",
           "slug": "reset-account-password",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/reset-account-password.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/reset-account-password.md",
+          "originated_in_version": "7"
         },
         {
           "name": "Change Password",
           "syntax": "Change Password [ No dialog ; Old Password: pwd ; New Password: pwd ]",
           "purpose": "Allows the current user to change their own password",
           "slug": "change-password",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/change-password.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/change-password.md",
+          "originated_in_version": "7"
         },
         {
           "name": "Enable Account",
           "syntax": "Enable Account [ Account Name: name ; Enable: On/Off ]",
           "purpose": "Enables or disables the specified account",
           "slug": "enable-account",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/enable-account.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/enable-account.md",
+          "originated_in_version": "7"
         },
         {
           "name": "Re-Login",
           "syntax": "Re-Login [ No dialog ; Account Name: name ; Password: pwd ]",
           "purpose": "Re-authenticates the current user, switching privilege sets without reopening the file",
           "slug": "re-login",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/re-login.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/re-login.md",
+          "originated_in_version": "7"
         },
         {
           "name": "Log Out",
           "syntax": "Log Out",
           "purpose": "Logs the current user out and returns to the login dialog",
           "slug": "log-out",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/log-out.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/script-steps-reference.md",
+          "doc_url_note": "No individual doc page on Claris's site as of this audit; points to the general script steps reference"
         }
       ]
     },
@@ -888,7 +999,8 @@
           "syntax": "Check Spelling [ No dialog ; Check word / Check selection / Check record / Check all ]",
           "purpose": "Runs spell check on the specified scope",
           "slug": "check-spelling",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/check-spelling.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/script-steps-reference.md",
+          "doc_url_note": "No individual doc page on Claris's site as of this audit; points to the general script steps reference"
         }
       ]
     },
@@ -901,56 +1013,64 @@
           "syntax": "Open Manage Database",
           "purpose": "Opens the Manage Database dialog",
           "slug": "open-manage-database",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/open-manage-database.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/open-manage-database.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Open Manage Value Lists",
           "syntax": "Open Manage Value Lists",
           "purpose": "Opens the Manage Value Lists dialog",
           "slug": "open-manage-value-lists",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/open-manage-value-lists.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/open-manage-value-lists.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Open Manage Data Sources",
           "syntax": "Open Manage Data Sources",
           "purpose": "Opens the Manage External Data Sources dialog",
           "slug": "open-manage-data-sources",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/open-manage-data-sources.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/open-manage-data-sources.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Open Preferences",
           "syntax": "Open Preferences",
           "purpose": "Opens the FileMaker Pro Preferences dialog",
           "slug": "open-preferences",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/open-preferences.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/open-preferences.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Open File Options",
           "syntax": "Open File Options",
           "purpose": "Opens the File Options dialog for the current file",
           "slug": "open-file-options",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/open-file-options.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/open-file-options.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Open Sharing",
           "syntax": "Open Sharing",
           "purpose": "Opens the FileMaker Network Sharing dialog",
           "slug": "open-sharing",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/open-sharing.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/open-sharing.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Open Help",
           "syntax": "Open Help",
           "purpose": "Opens the FileMaker Help system",
           "slug": "open-help",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/open-help.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/open-help.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Open URL",
           "syntax": "Open URL [ No dialog ; URL expression ]",
           "purpose": "Opens a URL in the default web browser, or a filemaker:// URL to open a file",
           "slug": "open-url",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/open-url.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/open-url.md",
+          "originated_in_version": "legacy"
         }
       ]
     },
@@ -963,86 +1083,98 @@
           "syntax": "Show Custom Dialog [ Title: text ; Message: text ; Buttons ; Input fields ]",
           "purpose": "Displays a custom dialog with title, message, up to 3 buttons, and up to 3 input fields",
           "slug": "show-custom-dialog",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/show-custom-dialog.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/show-custom-dialog.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Show Alert",
           "syntax": "Show Alert [ Style: Stop/Warning/Note ; Title: text ; Message: text ]",
           "purpose": "Displays a simple alert dialog (non-configurable buttons, server-compatible)",
           "slug": "show-alert",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/show-alert.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/script-steps-reference.md",
+          "doc_url_note": "No individual doc page on Claris's site as of this audit; points to the general script steps reference"
         },
         {
           "name": "Beep",
           "syntax": "Beep",
           "purpose": "Plays the system alert sound",
           "slug": "beep",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/beep.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/beep.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Speak",
           "syntax": "Speak [ text ; Wait for speech completion ; Voice: name ]",
           "purpose": "Speaks text using the system text-to-speech engine (macOS only)",
           "slug": "speak",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/speak.md",
-          "platform": "macOS only"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/speak-os-x.md",
+          "platform": "macOS only",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Comment",
           "syntax": "Comment [ text ]",
           "purpose": "Non-executing annotation step for documenting scripts",
           "slug": "comment",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/comment.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/comment.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Flush Cache to Disk",
           "syntax": "Flush Cache to Disk",
           "purpose": "Forces the FileMaker cache to be written to disk immediately",
           "slug": "flush-cache-to-disk",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/flush-cache-to-disk.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/flush-cache-to-disk.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Exit Application",
           "syntax": "Exit Application",
           "purpose": "Closes all files and quits FileMaker Pro",
           "slug": "exit-application",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/exit-application.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/exit-application.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Show/Hide Script Editor",
           "syntax": "Show/Hide Script Editor",
           "purpose": "Shows or hides the Script Editor window",
           "slug": "show-hide-script-editor",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/show-hide-script-editor.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/script-steps-reference.md",
+          "doc_url_note": "No individual doc page on Claris's site as of this audit; points to the general script steps reference"
         },
         {
           "name": "Manage Add-ons",
           "syntax": "Manage Add-ons",
           "purpose": "Opens the Add-ons Manager",
           "slug": "manage-add-ons",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/manage-add-ons.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/script-steps-reference.md",
+          "doc_url_note": "No individual doc page on Claris's site as of this audit; points to the general script steps reference"
         },
         {
           "name": "Install Menu Set",
           "syntax": "Install Menu Set [ Specify: From list ; \"MenuSetName\" / Standard FileMaker Menus ]",
           "purpose": "Installs a custom menu set for the current window",
           "slug": "install-menu-set",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/install-menu-set.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/install-menu-set.md",
+          "originated_in_version": "8"
         },
         {
           "name": "Install Plug-In File",
           "syntax": "Install Plug-In File [ Table::ContainerField ]",
           "purpose": "Installs a plug-in from a container field",
           "slug": "install-plug-in-file",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/install-plug-in-file.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/install-plug-in-file.md",
+          "originated_in_version": "12"
         },
         {
           "name": "Send DDE Execute",
           "syntax": "Send DDE Execute [ Service Name: text ; Topic: text ; Commands: text ]",
           "purpose": "Sends a DDE command to another application (Windows only)",
           "slug": "send-dde-execute",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/send-dde-execute.md",
-          "platform": "Windows only"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/send-dde-execute-windows.md",
+          "platform": "Windows only",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Send Event",
@@ -1050,12 +1182,13 @@
           "purpose": "Sends an Apple Event to another application (macOS only)",
           "slug": "send-event",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/send-event.md",
-          "platform": "macOS only"
+          "platform": "macOS only",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Trigger Claris Connect Flow",
           "purpose": "Trigger a Claris Connect flow from a FileMaker script.",
-          "syntax": "Trigger Claris Connect Flow [ Flow Name: <name> ; Parameters: <JSON> ; Response Target: <field/variable> ]",
+          "syntax": "Trigger Claris Connect Flow [ URL: url ; JSON Data: json ; AppID:APIKey for Webhooks: text ; Target: field/variable ; Flow: flow ]",
           "notes": "Passes JSON parameters to a Claris Connect flow and optionally captures the response. Requires Claris Connect configured and the file hosted on FileMaker Server. Not available in FileMaker Go or WebDirect.",
           "originated_in_version": "20.1",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/trigger-claris-connect-flow.md"
@@ -1064,7 +1197,7 @@
           "name": "Set Session Identifier",
           "purpose": "Assign a custom identifier string to the current session for use with Get(SessionIdentifier).",
           "syntax": "Set Session Identifier [ Value: <text> ]",
-          "notes": "Does not change Get(UserName). Only meaningful for hosted files — used to tag sessions for logging or tracking. Pairs with Get(SessionIdentifier) to retrieve the value in calculations or scripts.",
+          "notes": "Does not change Get(UserName). Only meaningful for hosted files \u2014 used to tag sessions for logging or tracking. Pairs with Get(SessionIdentifier) to retrieve the value in calculations or scripts.",
           "originated_in_version": "19.4.1",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/set-session-identifier.md"
         },
@@ -1117,7 +1250,7 @@
           "slug": "save-records-as-pdf",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/save-records-as-pdf.md",
           "notes": "FM 26: moved from Files category to PDF Files. New Save to option: File (original behaviour), Container field, Variable, or Open PDF (appends layout output to the currently open scripted PDF). Fetch live docs for the full Save to option matrix.",
-          "originated_in_version": "legacy"
+          "originated_in_version": "8"
         },
         {
           "name": "Close PDF",
@@ -1143,7 +1276,7 @@
           "purpose": "Prints a PDF from a file path, container field, or variable without opening it for editing",
           "slug": "print-pdf",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/print-pdf.md",
-          "notes": "Standalone print step — does not require Create PDF or Open PDF. Source can be a file path, a container field holding a PDF, or a variable. The No dialog option suppresses the print dialog.",
+          "notes": "Standalone print step \u2014 does not require Create PDF or Open PDF. Source can be a file path, a container field holding a PDF, or a variable. The No dialog option suppresses the print dialog.",
           "originated_in_version": "26"
         }
       ]
@@ -1157,14 +1290,16 @@
           "syntax": "Print Setup [ No dialog ; Restore ]",
           "purpose": "Configures page/print settings",
           "slug": "print-setup",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/print-setup.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/print-setup.md",
+          "originated_in_version": "legacy"
         },
         {
           "name": "Print",
           "syntax": "Print [ No dialog ; Restore ; Current record / Records being browsed / Blank record showing fields ]",
           "purpose": "Prints the current found set or record",
           "slug": "print",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/print.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/print.md",
+          "originated_in_version": "legacy"
         }
       ]
     },
@@ -1177,14 +1312,16 @@
           "syntax": "Configure AI Account [ Account Name: name ; Model Provider: OpenAI/Anthropic/Custom ; API key: key ; Endpoint: url ]",
           "purpose": "Configures a named AI account for use with AI functions and script steps",
           "slug": "configure-ai-account",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/configure-ai-account.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/configure-ai-account.md",
+          "originated_in_version": "21"
         },
         {
           "name": "Configure Machine Learning Model",
           "syntax": "Configure Machine Learning Model [ Operation: Vision/Regression ; Name: name ; From: field ]",
           "purpose": "Loads a Core ML model for use with ComputeModel or PredictFromModel (macOS/iOS only)",
           "slug": "configure-machine-learning-model",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/configure-machine-learning-model.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/configure-machine-learning-model.md",
+          "originated_in_version": "19"
         },
         {
           "name": "Configure Prompt Template",
@@ -1192,7 +1329,7 @@
           "syntax": "Configure Prompt Template [ Account Name: <name> ; Template Name: <name> ; Template: <text> ]",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/configure-prompt-template.md",
           "notes": "Template Types: SQL Query, Find Request, RAG Prompt. Template constants: :schema: (DDL schema), :question: (user prompt), :context: (RAG context), :sql_query: (generated SQL), :sql_results: (query results), :date_format: (date format string). Template names are case-sensitive. Templates are session-scoped and cleared on file close.",
-          "originated_in_version": "22.0.1"
+          "originated_in_version": "22"
         },
         {
           "name": "Configure RAG Account",
@@ -1201,7 +1338,7 @@
           "slug": "configure-rag-account",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/configure-rag-account.md",
           "notes": "Endpoint URL must end with /. API Key obtained from FileMaker Server Admin Console. Verify SSL Certificates option behaves the same as Configure AI Account. Account is cleared on file close (session-scoped).",
-          "originated_in_version": "22.0.1"
+          "originated_in_version": "22"
         },
         {
           "name": "Configure Regression Model",
@@ -1210,30 +1347,31 @@
           "slug": "configure-regression-model",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/configure-regression-model.md",
           "notes": "Actions: Train (uses Random Forest algorithm), Save, Load, Unload. Train parameters: numTrees (default 10), maxDepth (10), minSamplesSplit (2), numFeatures (-1 = all), maxFeatures (1 = sqrt of features). Models remain in memory until Unload action or session end. Pairs with PredictFromModel function.",
-          "originated_in_version": "22.0.1"
+          "originated_in_version": "22"
         },
         {
           "name": "Fine-Tune Model",
           "purpose": "Fine-tune a model using a training data set.",
-          "syntax": "Fine-Tune Model [ Account Name: <name> ; Base Model: <model> ; Training Data: <field/variable> ; Output Model: <field/variable> ]",
+          "syntax": "Fine-Tune Model [ Account Name: name ; Base Model: model ; Training Data: Table/File ; Response Target: field/variable ; Fine-Tune Parameters: JSON ]",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/fine-tune-model.md",
-          "notes": "Training data source: Table or JSONL File. Uses LoRA (Low-Rank Adaptation) technique. ONLY supported on OpenAI or AI Model Server running on Apple silicon Mac — not available for other providers or Linux/Windows hosts. Fine-tune parameters: max_steps (1000), learning_rate (2e-4), lora_layers (4), batch_size (1), fine_tuned_model_name. AI Model Server prefixes model name with fm-mlx- (e.g. my-model → fm-mlx-my-model). Response Target returns job JSON with status 'queued' — training is asynchronous; monitor via Admin Console. Pairs with Save Records as JSONL for training data preparation.",
-          "originated_in_version": "22.0.1"
+          "notes": "Training data source: Table or JSONL File. Uses LoRA (Low-Rank Adaptation) technique. ONLY supported on OpenAI or AI Model Server running on Apple silicon Mac \u2014 not available for other providers or Linux/Windows hosts. Fine-tune parameters: max_steps (1000), learning_rate (2e-4), lora_layers (4), batch_size (1), fine_tuned_model_name. AI Model Server prefixes model name with fm-mlx- (e.g. my-model \u2192 fm-mlx-my-model). Response Target returns job JSON with status 'queued' \u2014 training is asynchronous; monitor via Admin Console. Pairs with Save Records as JSONL for training data preparation.",
+          "originated_in_version": "22"
         },
         {
           "name": "Generate Response from Model",
           "purpose": "Facilitate multistep agentic interaction between your custom app and AI models, supporting built-in and custom function tool calls.",
-          "syntax": "Generate Response from Model [ Account Name: <name> ; Model: <model> ; User Prompt: <text> ; Agentic mode: On/Off ; Messages: <variable> ; Save Message History To: <variable> ; Message History Count: <n> ; Instructions: <text> ; Tool Definitions: <JSON> ; Temperature: <value> ; Stream: On/Off ; Perform JavaScript in Web Viewer: <viewer> ; Response Target: <field/variable> ]",
+          "syntax": "Generate Response from Model [ Account Name: name ; Model: model ; User Prompt: text ; Agentic mode: On/Off ; Response: field/variable ; Instructions: text ; Messages: field/variable ]",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/generate-response-from-model.md",
           "notes": "Agentic mode On: enables full multi-round tool execution. Agentic mode Off: stops after first tool call and returns tool call JSON (useful for debugging). Built-in tool definitions: execute_sql (generates and runs SQL; append DDL schema to parameter description), retrieve_image (fetches image from container field via SQL ROWID). Custom function tools: name must exactly match FileMaker custom function name; parameters must be in same order and count, always typed as string. Stream On: incremental delivery; target field must be on current layout. Messages/Save Message History To/Message History Count: manage multi-turn conversation history. Temperature range varies by model provider. Error: 'No tool call exists for the prompt' when model doesn't call a tool. Error: 'Function not found' when custom function is missing. Full platform compatibility.",
-          "originated_in_version": "22.0.1"
+          "originated_in_version": "22"
         },
         {
           "name": "Insert Embedding",
-          "syntax": "Insert Embedding [ Account Name: name ; Embedding Model: model ; Source Field: field ; Target Field: field ]",
+          "syntax": "Insert Embedding [ Account Name: name ; Embedding Model: model ; Input: expression ; Parameters: JSON ; Target: field/variable ]",
           "purpose": "Generates an embedding vector and stores it in a container field",
           "slug": "insert-embedding",
-          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-embedding.md"
+          "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-embedding.md",
+          "originated_in_version": "21"
         },
         {
           "name": "Insert Embedding in Found Set",
@@ -1241,39 +1379,40 @@
           "syntax": "Insert Embedding in Found Set [ Account Name: <name> ; Embedding Model: <model> ; Input: <field> ; Target: <field> ]",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-embedding-in-found-set.md",
           "notes": "Parameters JSON keys: MaxRecPerCall (default 20, max 500), MaxRetryPerWorker (5), MaxWaitPerRetry (60000 ms, OpenAI only), TruncateTokenLimit (8185), TruncateEnabled (1), RetryOnError (0). RetryOnError overrides the Continue on error option.",
-          "originated_in_version": "21.0.1"
+          "originated_in_version": "21"
         },
         {
           "name": "Perform Find by Natural Language",
           "purpose": "Get a found set by sending a natural language prompt and layout fields to a model.",
           "syntax": "Perform Find by Natural Language [ Account Name: <name> ; Model: <model> ; Prompt: <text> ; Response Target: <field/variable> ]",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-find-by-natural-language.md",
-          "notes": "Get options: Found Set (updates current found set), Found Set as JSON (Data API format), Find Request as JSON (debug — inspect the find criteria without performing the find). Uses GetFieldsOnLayout to determine which fields are sent to the model. Supports context_prompt parameter key for date/time context. Cannot perform finds requiring aggregate functions (e.g. find the record with the highest value in a field). Returns error 401 when no records match.",
-          "originated_in_version": "22.0.1"
+          "notes": "Get options: Found Set (updates current found set), Found Set as JSON (Data API format), Find Request as JSON (debug \u2014 inspect the find criteria without performing the find). Uses GetFieldsOnLayout to determine which fields are sent to the model. Supports context_prompt parameter key for date/time context. Cannot perform finds requiring aggregate functions (e.g. find the record with the highest value in a field). Returns error 401 when no records match.",
+          "originated_in_version": "22"
         },
         {
           "name": "Perform RAG Action",
           "purpose": "Add or remove data in a RAG knowledge space, or send a prompt to a RAG space for context-aware AI responses.",
           "syntax": "Perform RAG Action [ RAG Account Name: <name> ; AI Account Name: <name> ; Action: Add Data / Send Prompt / Remove Data ; Input: <field/file/container/variable> ; Prompt Template Name: <name> ; Response Target: <field/variable> ]",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-rag-action.md",
-          "notes": "Add Data actions: From Text, From File, From File (Async), From Container, From Container (Async). Async is recommended for large PDFs. WebDirect ignores Input File path and opens Insert dialog instead. Send Prompt: uses both a RAG Account and an AI Account; supports context_prompt parameter key; optional Prompt Template Name. Remove Data: pass JSON with id array; irreversible — warn users to retain originals. PDF with encryption cannot be added. Adding a PDF with the same filename removes the existing entry.",
-          "originated_in_version": "22.0.1"
+          "notes": "Add Data actions: From Text, From File, From File (Async), From Container, From Container (Async). Async is recommended for large PDFs. WebDirect ignores Input File path and opens Insert dialog instead. Send Prompt: uses both a RAG Account and an AI Account; supports context_prompt parameter key; optional Prompt Template Name. Remove Data: pass JSON with id array; irreversible \u2014 warn users to retain originals. PDF with encryption cannot be added. Adding a PDF with the same filename removes the existing entry.",
+          "originated_in_version": "22"
         },
         {
           "name": "Perform SQL Query by Natural Language",
           "purpose": "Send a natural language prompt and database schema to a model, which generates and runs SQL queries to return a result.",
           "syntax": "Perform SQL Query by Natural Language [ Account Name: <name> ; Model: <model> ; Prompt: <text> ; Data Tables: <tables> ; Action: Query ; Response Target: <field/variable> ]",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-sql-query-by-natural-language.md",
-          "notes": "Action options: Query (run SQL and return data), Query for Data Only (suppress column headers), Get SQL (return all generated SQL without executing), Get First SQL Only (first SQL only — saves tokens), Get DDL (returns schema only, no model call). Data Tables: From list (select in dialog), By name (field/variable), By DDL (custom DDL for fine-grained schema control). Options: From list or By JSON data (dynamic configuration). Field comments in Manage Database dialog are sent to the model as schema context. Compatibility partial for Server, Cloud, Data API, Custom Web Publishing — Perform JavaScript in Web Viewer not supported server-side.",
-          "originated_in_version": "22.0.1"
+          "notes": "Action options: Query (run SQL and return data), Query for Data Only (suppress column headers), Get SQL (return all generated SQL without executing), Get First SQL Only (first SQL only \u2014 saves tokens), Get DDL (returns schema only, no model call). Data Tables: From list (select in dialog), By name (field/variable), By DDL (custom DDL for fine-grained schema control). Options: From list or By JSON data (dynamic configuration). Field comments in Manage Database dialog are sent to the model as schema context. Compatibility partial for Server, Cloud, Data API, Custom Web Publishing \u2014 Perform JavaScript in Web Viewer not supported server-side.",
+          "originated_in_version": "22"
         },
         {
           "name": "Perform Semantic Find",
-          "syntax": "Perform Semantic Find [ Table::EmbeddingField ; Query Embedding: value ; Top K: n ]",
+          "syntax": "Perform Semantic Find [ Query by: Natural language/Vector data/Image ; Record set: All records/Current found set ; Target field: field ; Return count: n ; Cosine similarity condition ; Cosine similarity value ; Parameters: JSON ; Save result ]",
           "purpose": "Finds the top K records most semantically similar to a query embedding vector",
           "slug": "perform-semantic-find",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-semantic-find.md",
-          "notes": "Query by: Embedding (vector) or Image (pass a container field or variable containing an image — the step generates the query embedding internally). Save result option: set a variable to receive a JSON array of objects with recordID and cosineSimilarity scores for each matched record. Normalised embedding vectors required for accurate results. Both query and stored embeddings must have identical dimensions."
+          "notes": "Query by: Embedding (vector) or Image (pass a container field or variable containing an image \u2014 the step generates the query embedding internally). Save result option: set a variable to receive a JSON array of objects with recordID and cosineSimilarity scores for each matched record. Normalised embedding vectors required for accurate results. Both query and stored embeddings must have identical dimensions.",
+          "originated_in_version": "21"
         },
         {
           "name": "Set AI Call Logging",
@@ -1281,11 +1420,11 @@
           "syntax": "Set AI Call Logging [ On/Off ; Mode: Standard/Verbose ; Truncate Messages: On/Off ]",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/set-ai-call-logging.md",
           "notes": "Verbose mode: logs embedding vectors, token counts, semantic find return count, and cosine similarity scores. Truncate Messages: shortens verbose output for large embedding vectors. Standard mode logs prompts and responses without embedding detail.",
-          "originated_in_version": "21.0.1"
+          "originated_in_version": "21"
         },
         {
           "name": "Insert Image Caption",
-          "syntax": "Insert Image Caption [ AI Account Name: <name> ; Image: <container field or variable> ; Target: <field or variable> ]",
+          "syntax": "Insert Image Caption [ Account Name: name ; Model: model ; Input: expression ; Target: field/variable ]",
           "purpose": "Sends an image to a captioning AI model and inserts the returned caption into a target field or variable",
           "slug": "insert-image-caption",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-image-caption.md",
@@ -1294,7 +1433,7 @@
         },
         {
           "name": "Insert Image Captions in Found Set",
-          "syntax": "Insert Image Captions in Found Set [ AI Account Name: <name> ; Image: <container field> ; Target: <field> ]",
+          "syntax": "Insert Image Captions in Found Set [ Account Name: name ; Model: model ; Source Field: field ; Target Field: field ; Replace target contents ; Continue on error ; Parameters: JSON ]",
           "purpose": "Runs Insert Image Caption for every record in the current found set in sequence",
           "slug": "insert-image-captions-in-found-set",
           "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-image-captions-in-found-set.md",

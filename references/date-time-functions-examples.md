@@ -4,7 +4,7 @@
 
 # FileMaker Date Functions — Syntax & Examples
 
-Source: https://help.claris.com/en/pro-help/content/date-functions-category.html  
+Source: https://help.claris.com/en/pro-help/content/date-functions.html  
 All 10 date functions with verified syntax, parameters, return types, and usage patterns.  
 Last verified: 2026-06 against live Claris Help Centre.
 
@@ -325,7 +325,7 @@ Date (
 
 # FileMaker Time & Timestamp Functions — Syntax & Examples
 
-Source: https://help.claris.com/en/pro-help/content/time-functions-category.html  
+Source: https://help.claris.com/en/pro-help/content/time-functions.html  
 All 4 time functions + 1 timestamp function with verified syntax, parameters, return types, and usage patterns.  
 Last verified: 2026-06 against live Claris Help Centre.
 

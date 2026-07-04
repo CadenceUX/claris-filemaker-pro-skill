@@ -1,3 +1,78 @@
+## [1.9.2] — 2026-07-03 (updated 2026-07-04, pre-release)
+
+### Fixed — script-steps-catalog.json was missing 50 real script steps; 8 entries were phantoms
+
+A full diff of the catalog against the live Claris Help sitemap (`llms-full.txt`) and per-page
+`topic_type: script-step-reference` checks found the catalog's "all 165 steps" claim badly wrong.
+Corrected in-place (no version bump — 1.9.2 has not shipped to GitHub yet):
+
+- **Added 50 steps missing from the catalog**, each verified against its live Claris page
+  (title, category, `Originated in version`): the entire Data File family (Open/Close/Create/
+  Read from/Write to Data File, Get/Set Data File Position, Get File Exists, Get File Size,
+  Delete File, Rename File), the Spelling steps (Check Selection/Record/Found Set, Correct Word,
+  Spelling Options, Select Dictionaries, Edit User Dictionary), nine Open Menu Item steps
+  (Open Hosts, Open Favorites, Open Find/Replace, Open Manage Containers/Layouts/Themes,
+  Open Script Workspace, Open Edit Saved Finds, Open Upload To Host), Send Mail,
+  Perform AppleScript (macOS), Perform Find/Replace, Perform JavaScript in Web Viewer,
+  Set Web Viewer, Set Error Logging, Set Layout Object Animation, Save a Copy as XML,
+  Save a Copy as Add-on Package, Truncate Table, Adjust Window, Close Popover, Refresh Portal,
+  Go to Object, Show/Hide Toolbars, View As, Insert from Device, Find Matching Records,
+  Allow Formatting Bar, Enable Touch Keyboard, and the three iOS Configure steps
+  (Local Notification, NFC Reading, Region Monitor Script). Category placement follows the
+  live Claris category pages, not guesswork.
+- **Removed 6 catalog entries that don't exist as FileMaker Pro script steps** (their doc_url
+  pointed at the generic reference page): Check Spelling, Log Out, Manage Add-ons,
+  Set Window Animation, Show Alert, Show/Hide Script Editor.
+- **Renamed 2 misnamed entries** to their real steps with real doc pages: Navigate to Object →
+  **Go to Object**; Show/Hide Status Toolbar → **Show/Hide Toolbars**.
+- **Step count corrected from 165 to 215** in SKILL.md (description + reference table), README,
+  and the catalog's own `meta` block.
+- **Second pass (same day): a full topic_type sweep of all 1,104 en/pro-help sitemap pages**
+  found 8 further steps the first pass's title-heuristic missed — AVPlayer Play, AVPlayer Set Options, AVPlayer Set Playback
+  State, Dial Phone (FileMaker Go), Execute FileMaker Data API, Execute SQL (legacy ODBC step),
+  Get Folder Path (formerly "Get Directory"), and Perform Script On Server with Callback. Also
+  fixed 3 stale `slug` fields (If → if-script-step, Speak → speak-os-x, Send DDE Execute →
+  send-dde-execute-windows; names aligned to Claris titles "Speak (macOS)" / "Send DDE Execute
+  (Windows)"). The catalog now matches the live doc set exactly: **215 steps ↔ 215
+  script-step-reference pages, zero drift in either direction.** The same sweep confirmed the
+  function catalog is complete: 368 functions vs 365 function-reference pages + 3 real function
+  pages Claris mistyped as "conceptual" (GetPersistentData, ListPersistentDataIDs,
+  Get(SystemStorageAvailable)) — no missing or phantom functions.
+
+### Fixed — version drift detection used a signal that never fires
+
+SKILL.md instructed comparing each fetched page's YAML frontmatter `version:` against
+`last_known_fm_version`. Verified 2026-07-04: live pages for FM-26-originated features
+(Configure Persistent Data, Create PDF, Get(WindowUUID)) still return `version: 22 /
+version_year: 2025` — the frontmatter tracks the documentation build, not the FileMaker release,
+so the documented check could never fire. The drift check now reads the page body's
+`## Originated in version` section instead; SKILL.md and README updated to match.
+
+### Changed — frontmatter conventions and metadata placement
+
+- `last_known_fm_version` moved out of SKILL.md frontmatter metadata (where it rendered as a
+  spurious card row) into both catalogs' `meta` blocks; body text updated to point there.
+- Added the standard `"Built and maintained"` metadata key and the standard attribution line to
+  the SKILL.md Licence section.
+- README attribution corrected to the standard line ("Cadence UX" two-word brand error fixed);
+  README example-file counts corrected (JSON 12→10, Container 25→24).
+- `Get(PreferencesPath)` doc_url corrected from the generic reference page to its real page
+  (`get-preferencespath.md`, verified live).
+
+### Fixed — dead Source links in date-time-functions-examples.md
+
+Both category-page citation links in `references/date-time-functions-examples.md` pointed to
+URLs that 404 on the live Claris Help Centre. `function-catalog.json`'s own `category_url`
+fields for these same categories were already correct — only the two `Source:` lines in the
+examples file had the stale `-category.html` naming.
+
+- **Date functions** — `Source:` corrected from `date-functions-category.html` (404) to
+  `date-functions.html` (verified live, "Date functions" page).
+- **Time functions** — `Source:` corrected from `time-functions-category.html` (404) to
+  `time-functions.html` (verified live, "Time functions" page).
+
+No function/step counts or catalog data changed — this is a documentation-link fix only.
+
 ## [1.9.1] — 2026-06-26
 
 ### Fixed — catalog parameter-list errors found during a live FileMaker session

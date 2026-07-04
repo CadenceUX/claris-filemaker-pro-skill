@@ -1,14 +1,14 @@
 ---
 compatibility: Claude.ai, Claude Chat, Claude Code
 metadata:
-  version: "1.9.1"
-  last_known_fm_version: "26"
+  "Built and maintained": "Darrin Southern from CadenceUX"
+  version: "1.9.2"
 name: claris-filemaker-pro
 description: |
   REFERENCE skill — FileMaker Pro script steps, calculation functions, and custom functions ONLY.
   Use for: syntax lookups, function parameters, usage examples, and live doc fetches across all
   368 built-in functions (If, Case, Let, While, ExecuteSQL, JSON, AI/embedding, Persistent Data),
-  all 165 script steps (including FM 26 PDF Files and Persistent Data categories), Data API (REST),
+  all 215 script steps (including FM 26 PDF Files and Persistent Data categories), Data API (REST),
   SQL/ExecuteSQL, WebDirect, FileMaker Go, error codes, and custom function patterns. Not a platform
   administration guide. Out of scope: FileMaker Server admin, Claris Connect, Claris Studio,
   ODBC/JDBC deep configuration. Trigger on any FileMaker function name — even inside code, a calc
@@ -17,7 +17,7 @@ description: |
   Claris docs are versioned and frequently updated.
 ---
 
-# Claris FileMaker Pro — Skill v1.9.1
+# Claris FileMaker Pro — Skill v1.9.2
 
 ## Overview
 
@@ -31,7 +31,8 @@ when deeper detail is needed, rather than relying on potentially stale training 
 
 For the latest FileMaker Pro release notes, see the [FileMaker Pro Release Notes](https://help.claris.com/markdown/en/pro-release-notes/index.md).
 
-The frontmatter field `last_known_fm_version` records the highest FileMaker version this skill's
+The `last_known_fm_version` value in each catalog's `meta` block (`function-catalog.json` and
+`script-steps-catalog.json`, currently `26`) records the highest FileMaker version this skill's
 local reference files were built against. It is updated with each skill rebuild — it is **not** a
 cap on which version you can answer questions about.
 
@@ -39,28 +40,32 @@ cap on which version you can answer questions about.
 
 ## Version drift detection
 
-**Every time a live help page is fetched, check for version drift using frontmatter.**
+**Every time a live help page is fetched, check for version drift using the page's
+`## Originated in version` section — not the YAML frontmatter.**
 
-Every `.md` help page returns structured YAML at the top:
+Every `.md` help page returns structured YAML at the top (`version:` / `version_year:`), but
+that field tracks the documentation build, **not** the FileMaker feature release — verified
+2026-07-04: pages for features that originated in FM 26 (Configure Persistent Data, Create PDF,
+Get(WindowUUID)) still return `version: 22 / version_year: 2025` in frontmatter. Comparing
+frontmatter against `last_known_fm_version` never fires and would mislabel current docs as old.
 
-```yaml
-version: 26
-version_year: 2026
-```
+The reliable per-page signal is the `## Originated in version` section in the page body — a bare
+version number (e.g. `26.0`) stating which FileMaker release introduced the function or step.
 
 When fetching any page:
 
-1. Parse `version:` from the frontmatter of the returned `.md` page.
-2. Compare with `last_known_fm_version` (currently `26`).
-3. If the page frontmatter `version` is higher than `last_known_fm_version`, **immediately flag it**:
+1. Read the `## Originated in version` value from the page body.
+2. Compare with `last_known_fm_version` in the local catalogs' `meta` block (currently `26`).
+3. If the page's originated version is higher than `last_known_fm_version`, **immediately flag it**:
 
-   > ⚠️ **Skill version drift detected** — this page references FM [X], but the local reference
-   > files in this skill were last built for FM 26 (2026). New functions, script steps, or behaviour
-   > changes introduced since FM 26 may not be reflected in local catalogs.
+   > ⚠️ **Skill version drift detected** — this page documents a feature originated in FM [X],
+   > but the local reference files in this skill were last built for FM 26 (2026). New functions,
+   > script steps, or behaviour changes introduced since FM 26 may not be reflected in local catalogs.
    > Consider running a skill rebuild to pick up new additions.
 
 4. Still answer the question using the fetched content — the flag is advisory, not a blocker.
-5. Do **not** flag versions that are ≤ `last_known_fm_version`.
+5. Do **not** flag versions that are ≤ `last_known_fm_version`, and don't use the YAML
+   frontmatter `version:` as a drift signal in either direction.
 
 ---
 
@@ -71,7 +76,7 @@ check once:
 
 1. Fetch `https://github.com/CadenceUX/claris-filemaker-pro-skill/raw/main/VERSION`
 2. Parse the returned string as the latest available version
-3. Compare with this skill's installed version (currently `"1.9.1"`)
+3. Compare with this skill's installed version (currently `"1.9.2"`)
 4. If latest > installed, prepend this notice to your first response:
 
    > ⚠️ **Skill update available**
@@ -242,7 +247,7 @@ on legacy versions" without detail.
 | File | Contains |
 |---|---|
 | `function-catalog.json` | All 368 functions through FM 26 — format, parameters, purpose, category, category_url, slug, doc_url, originated_in_version. Master for call signatures. Includes FM 26 additions: BaseTableComment, FieldAnnotation, FieldDisplayNames (Design); Get(AccountPasswordDaysRemaining), Get(GuidedAccessState), Get(WindowUUID) (Get); GetPersistentData, ListPersistentDataIDs (Persistent Data). |
-| `script-steps-catalog.json` | All 165 script steps through FM 26, across 16 categories — syntax, purpose, notes, doc_url. Includes FM 26 additions: Insert Image Caption, Insert Image Captions in Found Set (AI category); Flush Web Viewer Cookies (Miscellaneous); Configure Persistent Data (new Persistent Data category); Create PDF, Open PDF, Append PDF, Close PDF, Cancel PDF, Print PDF + updated Save Records as PDF (new PDF Files category). Note: 2 pre-existing duplicates (Insert Embedding, Perform Semantic Find) were removed; net unique steps corrected from 157 to 165. |
+| `script-steps-catalog.json` | All 215 script steps through FM 26, across 16 categories — syntax, purpose, notes, doc_url. Includes FM 26 additions: Insert Image Caption, Insert Image Captions in Found Set (AI category); Flush Web Viewer Cookies (Miscellaneous); Configure Persistent Data (new Persistent Data category); Create PDF, Open PDF, Append PDF, Close PDF, Cancel PDF, Print PDF + updated Save Records as PDF (new PDF Files category). Corrected 2026-07-04: 58 steps that were missing from earlier builds (the Data File family, most Spelling steps, nine Open Menu Item steps, the AVPlayer family, Send Mail, Execute FileMaker Data API, Perform AppleScript, Perform JavaScript in Web Viewer, Save a Copy as XML, Set Error Logging, Truncate Table, Perform Script On Server with Callback, and more) were added, verified against live Claris pages; 6 nonexistent step names were removed and 2 misnamed entries corrected (Go to Object, Show/Hide Toolbars). A full topic_type sweep of every en/pro-help page confirms the catalog matches the live doc set exactly. |
 | `logical-json-ai-functions-examples.md` | **Logical** (20 functions: If, Case, Let, While, ExecuteSQL, ExecuteSQLe, Evaluate, GetField, GetNthRecord…) + **JSON** (10 functions: JSONGetElement, JSONSetElement, JSONListKeys, JSONMakeArray, JSONParse, JSONParsedState…) + **AI** (14 functions: GetEmbedding, CosineSimilarity, GetTokenCount, GetTableDDL, GetRAGSpaceInfo, PredictFromModel, AddEmbeddings, SubtractEmbeddings, NormalizeEmbedding, GetFieldsOnLayout…) |
 | `get-functions-examples.md` | All 138 Get() functions through FM 26, grouped by 12 categories: Date/Time, Account, File, Paths, Record, Layout/Window, Script/Trigger, Field, Sorting, Network, Device, Calculation. FM 26 additions: Get(AccountPasswordDaysRemaining) (Account); Get(GuidedAccessState) (Device); Get(WindowUUID) (Layout/Window). |
 | `design-container-functions-examples.md` | **Design** (26 functions through FM 26: FieldNames, FieldType, LayoutNames, TableNames, ValueListItems, ScriptNames, BaseTableIDs, BaseTableComment, FieldAnnotation, FieldDisplayNames…) + **Container** (24 functions: Base64Encode/Decode, CryptEncrypt/Decrypt, CryptDigest, GetContainerAttribute, GetLiveText, ReadQRCode, GetTextFromPDF…) |
@@ -413,6 +418,8 @@ on legacy versions" without detail.
 ## Licence
 
 This skill is released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+
+Built and maintained by [Darrin Southern](https://www.linkedin.com/in/darrin-southern/) from [CadenceUX](https://cadenceux.com.au).
 
 ---
 

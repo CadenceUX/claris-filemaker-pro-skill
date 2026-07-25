@@ -641,13 +641,50 @@ Note: Use **table occurrence names** exactly as they appear in the Relationships
 ---
 
 ## Special FileMaker SQL objects
-| Object | SQL name |
-|--------|----------|
-| Record ID | `RECORDID` pseudo-column |
-| Modification count | `MODID` pseudo-column |
+
+FileMaker adds **system columns** to every row of every table. They are usable in `ExecuteSQL`
+as well as from ODBC/JDBC.
+
+| Object | SQL name | Equivalent function |
+|--------|----------|---------------------|
+| Record ID | `ROWID` | `Get(RecordID)` |
+| Modification count | `ROWMODID` | `Get(RecordModificationCount)` |
 
 ```sql
-SELECT RECORDID, Name FROM Contacts
+SELECT ROWID, ROWMODID FROM MyTable WHERE ROWMODID > 3
+```
+
+**Corrected 2026-07-25:** earlier versions of this file listed these as `RECORDID` and `MODID`.
+Those names appear nowhere in the Claris SQL reference and do not work — use `ROWID` and
+`ROWMODID`. Verified against
+`https://help.claris.com/markdown/en/sql-reference/filemaker-system-columns.md`.
+
+**FM 26 changes:** `ROWID` and `ROWMODID` may now be written double-quoted (`"ROWID"`), and both
+are available as named constants.
+
+See also FileMaker **system tables** —
+`https://help.claris.com/markdown/en/sql-reference/filemaker-system-tables.md`
+
+---
+
+## CREATE TABLE / ALTER TABLE (ODBC/JDBC and OData — not ExecuteSQL)
+
+`table_element_list` format:
+
+```
+field_name field_type [[repetitions]]
+[DEFAULT expr] [UNIQUE | NOT NULL | PRIMARY KEY | GLOBAL]
+[FOREIGN KEY REFERENCES table_name(column_name)]
+[EXTERNAL relative_path_string [SECURE | OPEN calc_path_string] [FEWER_FOLDERS]]
+```
+
+**FM 26 addition:** `FOREIGN KEY` syntax is supported in both `CREATE TABLE` and `ALTER TABLE`.
+
+Table and field names have a 100-character limit and must begin with an alphabetic character;
+otherwise enclose them in double quotes (quoted identifier).
+
+```sql
+CREATE TABLE "_EMPLOYEE" (ID INT PRIMARY KEY, "_FIRSTNAME" VARCHAR(20), "_LASTNAME" VARCHAR(20))
 ```
 
 ---
@@ -923,57 +960,6 @@ https://help.claris.com/en/claris-help-center/content/index.html
 
 ---
 
-## FileMaker Server Help
-**Guide slug:** `server-help`  
-**Index:** https://help.claris.com/en/server-help/content/index.html
-
-### Top-level pages (note: uses short relative slugs)
-| Topic | URL |
-|-------|-----|
-| About FileMaker Server | `.../about-server.html` |
-| New features | `.../about-whats-new.html` |
-| Testing FileMaker Server | `.../deploy-fm-server-test.html` |
-| Checking the status (dashboard) | `.../dashboard.html` |
-| Uninstall FileMaker Server | `.../deploy-uninstall.html` |
-| Starting Admin Console | `.../start-admin-console.html` |
-| Hosting databases | `.../hostdb.html` |
-| Hosting websites | `.../hostsite.html` |
-| Starting or stopping FMS components | `.../start-stop-fms.html` |
-| Administering databases | `.../admin-databases.html` |
-| Administering clients | `.../admin-clients.html` |
-| Understanding backup options | `.../config-backup-about.html` |
-| Scheduling database backups | `.../schedule-db-backup.html` |
-| Server information settings | `.../config-general-settings.html` |
-| Startup settings | `.../config-general-autostart.html` |
-| FileMaker client session timeouts | `.../config-client-timeouts.html` |
-| FileMaker HTTPS tunneling | `.../config-https-tunneling.html` |
-| Scripting maximum threads limit | `.../config-max-sase.html` |
-| Filter databases setting | `.../config-client-filter-databases.html` |
-| Database and backup folders | `.../config-dbserver-folders.html` |
-| Scheduling administrative tasks | `.../schedule-admin-tasks.html` |
-| Saving and loading schedules | `.../settings-save-load.html` |
-| Notifications settings | `.../config-notifications.html` |
-| Securing your data | `.../security.html` |
-| Monitoring FileMaker Server | `.../monitor-server.html` |
-| Web publishing settings | `.../config-web-publishing.html` |
-| PHP and XML web publishing settings | `.../config-webpub-php.html` |
-| FileMaker WebDirect settings | `.../config-webpub-webdirect.html` |
-| FileMaker Data API settings | `.../config-webpub-fmdapi.html` |
-| OData API settings | `.../config-webpub-fm-odata-api.html` |
-| Managing plug-ins | `.../plugins-manage.html` |
-| Using ODBC and JDBC with Server | `.../xdbc-about.html` |
-| Configuring AI services | `.../config-ai-services.html` |
-| License settings | `.../license-settings.html` |
-| Administrator settings | `.../administrator-settings.html` |
-| Restrict access | `.../restrict-access.html` |
-| Administrator roles | `.../administrator-roles.html` |
-| External authentication settings | `.../config-auth-settings.html` |
-| Troubleshooting | `.../trouble.html` |
-
-**Base URL for all:** `https://help.claris.com/en/server-help/content/`
-
----
-
 ## FileMaker Data API Guide
 **Guide slug:** `data-api-guide`  
 **Index:** https://help.claris.com/en/data-api-guide/content/index.html
@@ -1015,14 +1001,6 @@ https://help.claris.com/en/claris-help-center/content/index.html
 
 ---
 
-## FileMaker Admin API Guide
-**Guide slug:** `admin-api-guide`  
-**Index:** https://help.claris.com/en/admin-api-guide/content/index.html
-
-**Base URL:** `https://help.claris.com/en/admin-api-guide/content/`
-
----
-
 ## FileMaker OData API Guide
 **Guide slug:** `odata-guide`  
 **Index:** https://help.claris.com/en/odata-guide/content/index.html
@@ -1052,51 +1030,11 @@ https://help.claris.com/en/claris-help-center/content/index.html
 
 ---
 
-## FileMaker Security Guide
-**Guide slug:** `security-guide`  
-**Index:** https://help.claris.com/en/security-guide/content/index.html
-
-**Base URL:** `https://help.claris.com/en/security-guide/content/`
-
----
-
 ## FileMaker WebDirect Guide
 **Guide slug:** `webdirect-guide`  
 **Index:** https://help.claris.com/en/webdirect-guide/content/index.html
 
 **Base URL:** `https://help.claris.com/en/webdirect-guide/content/`
-
----
-
-## FileMaker Server Installation and Configuration Guide
-**Guide slug:** `server-installation-configuration-guide`  
-**Index:** https://help.claris.com/en/server-installation-configuration-guide/content/index.html
-
-**Base URL:** `https://help.claris.com/en/server-installation-configuration-guide/content/`
-
----
-
-## FileMaker Pro Installation Guide
-**Guide slug:** `pro-installation-guide`  
-**Index:** https://help.claris.com/en/pro-installation-guide/content/index.html
-
----
-
-## FileMaker Cloud Help
-**Guide slug:** `cloud-help`  
-**Index:** https://help.claris.com/en/cloud-help/content/index.html
-
----
-
-## FileMaker Cloud Getting Started Guide
-**Guide slug:** `cloud-getting-started-guide`  
-**Index:** https://help.claris.com/en/cloud-getting-started-guide/content/index.html
-
----
-
-## Claris Customer Console Help
-**Guide slug:** `customer-console-help`  
-**Index:** https://help.claris.com/en/customer-console-help/content/index.html
 
 ---
 
@@ -1115,47 +1053,6 @@ https://help.claris.com/en/claris-help-center/content/index.html
 ## FileMaker Go Development Guide
 **Guide slug:** `go-development-guide`  
 **Index:** https://help.claris.com/en/go-development-guide/content/index.html
-
----
-
-## iOS App SDK Guide
-**Guide slug:** `ios-app-sdk-guide`  
-**Index:** https://help.claris.com/en/ios-app-sdk-guide/content/index.html
-
----
-
-## Claris Connect Release Notes
-**Guide slug:** `connect-release-notes`  
-**Index:** https://help.claris.com/en/connect-release-notes/content/index.html
-
----
-
-## Claris Connect Help
-**Guide slug:** `connect-help`  
-**Index:** https://help.claris.com/en/connect-help/content/index.html
-
----
-
-## Claris Connect Reference
-**Guide slug:** `connect-reference`  
-**Index:** https://help.claris.com/en/connect-reference/content/index.html
-
----
-
-## Claris Studio Help
-**Guide slug:** `studio-help`  
-**Index:** https://help.claris.com/en/studio-help/content/index.html
-
-| Topic | URL |
-|-------|-----|
-| What's new | `.../whats-new.html` |
-| Index | `.../index.html` |
-
----
-
-## Claris MCP Help (AI Workspace)
-**Guide slug:** `claris-mcp-help`  
-**Index:** https://help.claris.com/en/claris-mcp-help/content/index.html
 
 ---
 
@@ -1183,39 +1080,9 @@ https://help.claris.com/en/claris-help-center/content/index.html
 
 ---
 
-## FileMaker Server Release Notes
-**Guide slug:** `server-release-notes`  
-**Index:** https://help.claris.com/en/server-release-notes/content/index.html
-
----
-
-## FileMaker Cloud Release Notes
-**Guide slug:** `cloud-release-notes`  
-**Index:** https://help.claris.com/en/cloud-release-notes/content/index.html
-
----
-
 ## FileMaker Pro SVG Grammar for Button Icons
 **Guide slug:** `pro-svg-grammar-for-button-icons`  
 **Index:** https://help.claris.com/en/pro-svg-grammar-for-button-icons/content/index.html
-
----
-
-## FileMaker Pro Network Install Setup Guide
-**Guide slug:** `pro-network-install-setup-guide`  
-**Index:** https://help.claris.com/en/pro-network-install-setup-guide/content/index.html
-
----
-
-## FileMaker Server Network Install Setup Guide
-**Guide slug:** `server-network-install-setup-guide`  
-**Index:** https://help.claris.com/en/server-network-install-setup-guide/content/index.html
-
----
-
-## Claris Connect for Apple School Manager User Guide
-**Guide slug:** `connect-apple-school-manager-guide`  
-**Index:** https://help.claris.com/en/connect-apple-school-manager-guide/content/index.html
 
 ---
 

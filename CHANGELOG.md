@@ -1,3 +1,106 @@
+## [2.0.0] — 2026-07-25
+
+Major release. The organising principle changes from **fetch-live-by-topic** to
+**answer-locally-unless-uncertain**, and every catalog entry was re-derived from source to make
+that safe. Breaking only in doctrine — the JSON schema is additive, and downstream consumers
+that read `functions[]` with `name` / `format` / `parameters` / `category` are unaffected
+(verified: identical output before and after).
+
+### Rebuilt from source
+
+All **1,104** `en/pro-help` pages were fetched and parsed deterministically (no model in the
+extraction path), then cross-checked. Every function signature, return type and
+originated-in version, and every script step's compatibility matrix, now comes from its own
+live Claris page rather than from accumulated edits.
+
+### Fixed — the catalog roster was wrong
+
+- **`Set Dictionary` was missing entirely.** A real script step since FM 19.6.1. Step count
+  corrected **215 → 216**.
+- **Root cause: `topic_type` is not a reliable roster signal.** Claris mislabels four reference
+  pages as `topic_type: conceptual` — `set-dictionary`, `getpersistentdata`,
+  `listpersistentdataids`, `get-systemstorageavailable`. The v1.9.2 "full topic_type sweep
+  confirms the catalog matches the live doc set exactly" claim was built on that signal and was
+  therefore wrong. The roster is now derived **structurally** (a step page has a
+  `## Compatibility` table; a function page has `## Format` and `## Data type returned`), and
+  both the SKILL.md and the bundled rebuild scripts document the trap.
+- **Six canonical step names corrected**: `Perform Script on Server` → `Perform Script On
+  Server`; `Insert From Index` / `Insert From Last Visited` / `Insert From URL` → `Insert
+  from …`; `Open Preferences` → **`Open Settings`** (Claris renamed the step; the slug remains
+  `open-preferences`); `Comment` → `# (Comment)`.
+- **`RECORDID` / `MODID` do not exist.** `quickrefs.md` documented these as the SQL
+  pseudo-columns for record ID and modification count. The real names are **`ROWID`** and
+  **`ROWMODID`** — SQL written from the old entry would fail. Verified against
+  `sql-reference/filemaker-system-columns.md`.
+- **`Go to List of Records` was described as "Not supported in FileMaker WebDirect".** It is
+  **Partial** there — and Partial on FileMaker Pro too.
+- **33 substantive `originated_in_version` corrections**, plus 174 `legacy` placeholders
+  replaced with the real release and 147 normalised to Claris's own form. Examples:
+  `Get(AccountPasswordDaysRemaining)` 26 → **26.0.1**; `Get(SessionIdentifier)` 19 → **19.4.1**;
+  `Get(TransactionOpenState)` 19 → **19.6.1**; `GetLayoutObjectAttribute` 8 → **8.5**;
+  `ReadQRCode` 19 → **19.5**. These drive the skill's automatic minimum-version advice, so wrong
+  values produced wrong guidance.
+- **11 script steps had no `slug`**; all 216 now carry slug and doc_url.
+- **Key collision resolved.** Two different keys named `platform` (a desktop-OS limit, e.g.
+  "macOS only") and `platforms` (a partial client matrix) meant different things on different
+  entries. Now `os_restriction` and `platform_exceptions` respectively.
+
+### Added — self-sufficiency
+
+- **`return_type` on all 368 functions**, from each page's `## Data type returned` section.
+  Return types are what models most often infer wrongly when chaining calculations.
+- **Full platform support for all 216 script steps across seven products** — Pro, Go, WebDirect,
+  Server, Cloud, DataAPI, CWP. Stored **delta-encoded**: `platform_exceptions` lists only
+  non-`Yes` products, so an absent key means supported everywhere. Costs ~7.6K tokens for the
+  complete matrix, and only on a file that loads on demand.
+- Documented semantics: `No` means the step is *skipped* and returns error 3 with no alert;
+  `Partial` means it runs with differences. Treating Partial as supported is a common failure.
+
+### Added — new reference files
+
+- **`field-types-catalog.json`** — the six data types and three field types, which options apply
+  to each, indexing and storage semantics, the eight summary types, container external storage,
+  and the FM 26 advanced field options (DDL annotation, custom display names). Scoped to
+  *capability*, not XML shape; defers the XML layer to `filemaker-field-xml` by name.
+- **`odata-api-reference.md`** — base URL, auth, all query options, CRUD, `$batch`, schema
+  modification, running scripts, and the documented unsupported-feature list.
+- **`webdirect-reference.md`** — measured step support (103 yes / 38 partial / 75 no), feature
+  limitations, connection limits, design guidance.
+- **`filemaker-go-reference.md`** — measured step support (154 / 20 / 42), Go-only steps,
+  behaviour differences, device capabilities.
+
+### Added — FM 26 coverage gaps
+
+- `about-persistent-data-store` linked as `concept_doc_url` from the persistent-data entries.
+- **Clarified that the persistent data store is not a field type or field storage option** — it
+  is a per-file, schema-resident named-value store whose *values* may be any of the six data
+  types. Stated in SKILL.md and in `field-types-catalog.json`.
+- `Get(PersistentID)` annotated (device identifier; unrelated to the persistent data store;
+  cookie-clearing and iOS-restore caveats).
+- Google Gemini noted as an FM 26 text-generation provider, flagged fetch-live.
+- SQL: `FOREIGN KEY` in `CREATE TABLE` / `ALTER TABLE`, and `ROWID` / `ROWMODID` as FM 26
+  double-quotable named constants.
+- `Export Field Contents` now supported in Server, Data API and OData contexts.
+
+### Changed — scope and doctrine
+
+- **Local-first fetch policy.** The old "always fetch live" table forced a network round-trip for
+  100% of platform-compatibility questions and for exact option behaviour — precisely the hot
+  path for generating scripts and fields. Replaced with a short uncertainty-based rule.
+- **Sitemap pruned to FileMaker Pro.** Removed 19 non-Pro guide sections (Server, Cloud,
+  Admin API, Security, Claris Connect, Claris Studio, Customer Console, iOS App SDK, installers,
+  network install guides). The skill's description always said these were out of scope; the
+  sitemap contradicted it.
+- **SKILL.md rewritten** — 429 → 295 lines, 7,787 → ~3,990 tokens (**49% smaller**) on the path
+  that loads every time the skill triggers. Per-feature notes moved into catalog `notes` fields
+  where they belong.
+
+### Added — maintainer tooling
+
+- `scripts/rebuild_harvest.py` and `scripts/rebuild_extract.py` with a `scripts/README.md`,
+  so coverage claims can be re-derived from source each release instead of inherited. Both
+  encode the `topic_type` and frontmatter-`version` traps.
+
 ## [1.9.2] — 2026-07-03 (updated 2026-07-04, pre-release)
 
 ### Fixed — script-steps-catalog.json was missing 50 real script steps; 8 entries were phantoms

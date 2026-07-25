@@ -6,7 +6,12 @@
   "version": "26.0",
   "last_updated": "2026-06 (v1.9 — GetRecordIDsFromFoundSet FM 26 optional second parameter; GetTextFromPDF FM 26 scanned-PDF note; total 368)",
   "update_instructions": "Re-fetch source repo and compare against this file. Also re-fetch each category_page from help.claris.com to pick up new functions or updated slugs. For new functions, check the FileMaker Pro Release Notes at https://help.claris.com/en/pro-release-notes/content/ to determine the version introduced.",
-  "last_known_fm_version": "26"
+  "last_known_fm_version": "26",
+  "verified_on": "2026-07-25",
+  "verification_method": "Every entry re-derived from its live help.claris.com markdown page (## Format, ## Data type returned, ## Originated in version). Roster determined structurally, not from topic_type — Claris mislabels getpersistentdata, listpersistentdataids and get-systemstorageavailable as topic_type: conceptual.",
+  "function_count": 368,
+  "return_type_source": "Claris '## Data type returned' section, all 368 pages",
+  "fm26_notes": "Google Gemini is supported as an AI model provider for text generation (FM 26). AI provider support changes frequently — always fetch the live page for the current provider list."
  },
  "functions": [
   {
@@ -20,7 +25,8 @@
    "category_url": "number-functions.html",
    "slug": "abs",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/abs.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number, time"
   },
   {
    "name": "Acos",
@@ -33,7 +39,8 @@
    "category_url": "trigonometric-functions.html",
    "slug": "acos",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/acos.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "9.0",
+   "return_type": "number"
   },
   {
    "name": "AddEmbeddings",
@@ -47,7 +54,8 @@
    "category_url": "artificial-intelligence-functions.html",
    "slug": "addembeddings",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/addembeddings.md",
-   "originated_in_version": "22.0.1"
+   "originated_in_version": "22.0",
+   "return_type": "text, container"
   },
   {
    "name": "Asin",
@@ -60,7 +68,8 @@
    "category_url": "trigonometric-functions.html",
    "slug": "asin",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/asin.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "9.0",
+   "return_type": "number"
   },
   {
    "name": "Atan",
@@ -73,7 +82,8 @@
    "category_url": "trigonometric-functions.html",
    "slug": "atan",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/atan.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Average",
@@ -86,7 +96,8 @@
    "category_url": "aggregate-functions.html",
    "slug": "average",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/average.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Base64Decode",
@@ -100,7 +111,8 @@
    "category_url": "container-functions.html",
    "slug": "base64decode",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/base64decode.md",
-   "originated_in_version": "13"
+   "originated_in_version": "13.0",
+   "return_type": "text, container"
   },
   {
    "name": "Base64Encode",
@@ -113,7 +125,8 @@
    "category_url": "container-functions.html",
    "slug": "base64encode",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/base64encode.md",
-   "originated_in_version": "13"
+   "originated_in_version": "13.0",
+   "return_type": "text"
   },
   {
    "name": "Base64EncodeRFC",
@@ -127,7 +140,8 @@
    "category_url": "container-functions.html",
    "slug": "base64encoderfc",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/base64encoderfc.md",
-   "originated_in_version": "16"
+   "originated_in_version": "16.0",
+   "return_type": "text"
   },
   {
    "name": "BaseTableComment",
@@ -141,7 +155,8 @@
    "category_url": "design-functions.html",
    "slug": "basetablecomment",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/basetablecomment.md",
-   "originated_in_version": "26"
+   "originated_in_version": "26.0",
+   "return_type": "text"
   },
   {
    "name": "BaseTableIDs",
@@ -154,7 +169,8 @@
    "category_url": "design-functions.html",
    "slug": "basetableids",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/basetableids.md",
-   "originated_in_version": "20.1.1"
+   "originated_in_version": "20.1",
+   "return_type": "text"
   },
   {
    "name": "BaseTableNames",
@@ -167,7 +183,8 @@
    "category_url": "design-functions.html",
    "slug": "basetablenames",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/basetablenames.md",
-   "originated_in_version": "20.1.1"
+   "originated_in_version": "20.1",
+   "return_type": "text"
   },
   {
    "name": "Case",
@@ -184,7 +201,8 @@
    "category_url": "logical-functions.html",
    "slug": "case",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/case.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text, number, date, time, timestamp, container"
   },
   {
    "name": "Ceiling",
@@ -197,7 +215,8 @@
    "category_url": "number-functions.html",
    "slug": "ceiling",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/ceiling.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "Char",
@@ -210,7 +229,8 @@
    "category_url": "text-functions.html",
    "slug": "char",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/char.md",
-   "originated_in_version": "10"
+   "originated_in_version": "10.0",
+   "return_type": "text"
   },
   {
    "name": "Choose",
@@ -226,7 +246,8 @@
    "category_url": "logical-functions.html",
    "slug": "choose",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/choose.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text, number, date, time, timestamp, container"
   },
   {
    "name": "Code",
@@ -239,7 +260,8 @@
    "category_url": "text-functions.html",
    "slug": "code",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/code.md",
-   "originated_in_version": "10"
+   "originated_in_version": "10.0",
+   "return_type": "number"
   },
   {
    "name": "Combination",
@@ -253,7 +275,8 @@
    "category_url": "number-functions.html",
    "slug": "combination",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/combination.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "ComputeModel",
@@ -268,7 +291,8 @@
    "category_url": "artificial-intelligence-functions.html",
    "slug": "compute-model",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/compute-model.md",
-   "originated_in_version": "19"
+   "originated_in_version": "19.0",
+   "return_type": "text"
   },
   {
    "name": "ConvertFromFileMakerPath",
@@ -282,7 +306,8 @@
    "category_url": "miscellaneous-functions.html",
    "slug": "convert-from-filemaker-path",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/convert-from-filemaker-path.md",
-   "originated_in_version": "19"
+   "originated_in_version": "19.0",
+   "return_type": "text"
   },
   {
    "name": "ConvertToFileMakerPath",
@@ -296,7 +321,8 @@
    "category_url": "miscellaneous-functions.html",
    "slug": "convert-to-filemaker-path",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/convert-to-filemaker-path.md",
-   "originated_in_version": "19"
+   "originated_in_version": "19.0",
+   "return_type": "text"
   },
   {
    "name": "Cos",
@@ -309,7 +335,8 @@
    "category_url": "trigonometric-functions.html",
    "slug": "cos",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/cos.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "CosineSimilarity",
@@ -323,7 +350,8 @@
    "category_url": "artificial-intelligence-functions.html",
    "slug": "cosinesimilarity",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/cosinesimilarity.md",
-   "originated_in_version": "21.0.1"
+   "originated_in_version": "21.0",
+   "return_type": "number"
   },
   {
    "name": "Count",
@@ -336,7 +364,8 @@
    "category_url": "aggregate-functions.html",
    "slug": "count",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/count.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "CryptAuthCode",
@@ -351,7 +380,8 @@
    "category_url": "container-functions.html",
    "slug": "cryptauthcode",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/cryptauthcode.md",
-   "originated_in_version": "16"
+   "originated_in_version": "16.0",
+   "return_type": "container"
   },
   {
    "name": "CryptDecrypt",
@@ -365,7 +395,8 @@
    "category_url": "container-functions.html",
    "slug": "cryptdecrypt",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/cryptdecrypt.md",
-   "originated_in_version": "16"
+   "originated_in_version": "16.0",
+   "return_type": "text, container"
   },
   {
    "name": "CryptDecryptBase64",
@@ -379,7 +410,8 @@
    "category_url": "container-functions.html",
    "slug": "cryptdecryptbase64",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/cryptdecryptbase64.md",
-   "originated_in_version": "16"
+   "originated_in_version": "16.0",
+   "return_type": "text, container"
   },
   {
    "name": "CryptDigest",
@@ -393,7 +425,8 @@
    "category_url": "container-functions.html",
    "slug": "cryptdigest",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/cryptdigest.md",
-   "originated_in_version": "16"
+   "originated_in_version": "16.0",
+   "return_type": "container"
   },
   {
    "name": "CryptEncrypt",
@@ -407,7 +440,8 @@
    "category_url": "container-functions.html",
    "slug": "cryptencrypt",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/cryptencrypt.md",
-   "originated_in_version": "16"
+   "originated_in_version": "16.0",
+   "return_type": "container"
   },
   {
    "name": "CryptEncryptBase64",
@@ -421,7 +455,8 @@
    "category_url": "container-functions.html",
    "slug": "cryptencryptbase64",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/cryptencryptbase64.md",
-   "originated_in_version": "16"
+   "originated_in_version": "16.0",
+   "return_type": "text"
   },
   {
    "name": "CryptGenerateSignature",
@@ -437,7 +472,8 @@
    "category_url": "container-functions.html",
    "slug": "cryptgeneratesignature",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/cryptgeneratesignature.md",
-   "originated_in_version": "18"
+   "originated_in_version": "18.0",
+   "return_type": "container"
   },
   {
    "name": "CryptVerifySignature",
@@ -453,7 +489,8 @@
    "category_url": "container-functions.html",
    "slug": "cryptverifysignature",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/cryptverifysignature.md",
-   "originated_in_version": "18"
+   "originated_in_version": "18.0",
+   "return_type": "number"
   },
   {
    "name": "DatabaseNames",
@@ -463,7 +500,8 @@
    "category_url": "design-functions.html",
    "slug": "databasenames",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/databasenames.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Date",
@@ -478,7 +516,8 @@
    "category_url": "date-functions.html",
    "slug": "date",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/date.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "date"
   },
   {
    "name": "Day",
@@ -491,7 +530,8 @@
    "category_url": "date-functions.html",
    "slug": "day",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/day.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "DayName",
@@ -504,7 +544,8 @@
    "category_url": "date-functions.html",
    "slug": "dayname",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/dayname.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "DayNameJ",
@@ -517,7 +558,8 @@
    "category_url": "japanese-functions.html",
    "slug": "daynamej",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/daynamej.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "DayOfWeek",
@@ -530,7 +572,8 @@
    "category_url": "date-functions.html",
    "slug": "dayofweek",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/dayofweek.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "DayOfYear",
@@ -543,7 +586,8 @@
    "category_url": "date-functions.html",
    "slug": "dayofyear",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/dayofyear.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Degrees",
@@ -556,7 +600,8 @@
    "category_url": "trigonometric-functions.html",
    "slug": "degrees",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/degrees.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Div",
@@ -570,7 +615,8 @@
    "category_url": "number-functions.html",
    "slug": "div",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/div.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "Evaluate",
@@ -585,7 +631,8 @@
    "category_url": "logical-functions.html",
    "slug": "evaluate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/evaluate.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "text, number, date, time, timestamp, container"
   },
   {
    "name": "EvaluationError",
@@ -598,7 +645,8 @@
    "category_url": "logical-functions.html",
    "slug": "evaluationerror",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/evaluationerror.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "Exact",
@@ -612,7 +660,8 @@
    "category_url": "text-functions.html",
    "slug": "exact",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/exact.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "ExecuteSQL",
@@ -628,7 +677,8 @@
    "category_url": "logical-functions.html",
    "slug": "executesql",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/executesql.md",
-   "originated_in_version": "12"
+   "originated_in_version": "12.0",
+   "return_type": "text"
   },
   {
    "name": "ExecuteSQLe",
@@ -644,7 +694,8 @@
    "category_url": "logical-functions.html",
    "slug": "executesqle",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/executesqle.md",
-   "originated_in_version": "21.1.1"
+   "originated_in_version": "21.1.1",
+   "return_type": "text"
   },
   {
    "name": "Exp",
@@ -657,7 +708,8 @@
    "category_url": "number-functions.html",
    "slug": "exp",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/exp.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Extend",
@@ -670,7 +722,8 @@
    "category_url": "repeating-functions.html",
    "slug": "extend",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/extend.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text, number, date, time, timestamp, container"
   },
   {
    "name": "Factorial",
@@ -684,7 +737,8 @@
    "category_url": "number-functions.html",
    "slug": "factorial",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/factorial.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "FieldAnnotation",
@@ -698,7 +752,8 @@
    "category_url": "design-functions.html",
    "slug": "fieldannotation",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/fieldannotation.md",
-   "originated_in_version": "26"
+   "originated_in_version": "26.0",
+   "return_type": "text"
   },
   {
    "name": "FieldBounds",
@@ -713,7 +768,8 @@
    "category_url": "design-functions.html",
    "slug": "fieldbounds",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/fieldbounds.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "FieldComment",
@@ -727,7 +783,8 @@
    "category_url": "design-functions.html",
    "slug": "fieldcomment",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/fieldcomment.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "text"
   },
   {
    "name": "FieldDisplayNames",
@@ -741,7 +798,8 @@
    "category_url": "design-functions.html",
    "slug": "fielddisplaynames",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/fielddisplaynames.md",
-   "originated_in_version": "26"
+   "originated_in_version": "26.0",
+   "return_type": "text"
   },
   {
    "name": "FieldIDs",
@@ -755,7 +813,8 @@
    "category_url": "design-functions.html",
    "slug": "fieldids",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/fieldids.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "FieldNames",
@@ -769,7 +828,8 @@
    "category_url": "design-functions.html",
    "slug": "fieldnames",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/fieldnames.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "FieldRepetitions",
@@ -784,7 +844,8 @@
    "category_url": "design-functions.html",
    "slug": "fieldrepetitions",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/fieldrepetitions.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "FieldStyle",
@@ -799,7 +860,8 @@
    "category_url": "design-functions.html",
    "slug": "fieldstyle",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/fieldstyle.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "FieldType",
@@ -813,7 +875,8 @@
    "category_url": "design-functions.html",
    "slug": "fieldtype",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/fieldtype.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Filter",
@@ -827,7 +890,8 @@
    "category_url": "text-functions.html",
    "slug": "filter",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/filter.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "7.0",
+   "return_type": "text"
   },
   {
    "name": "FilterValues",
@@ -841,7 +905,8 @@
    "category_url": "text-functions.html",
    "slug": "filtervalues",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/filtervalues.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "text"
   },
   {
    "name": "Floor",
@@ -854,7 +919,8 @@
    "category_url": "number-functions.html",
    "slug": "floor",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/floor.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "Furigana",
@@ -868,7 +934,8 @@
    "category_url": "japanese-functions.html",
    "slug": "furigana",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/furigana.md",
-   "originated_in_version": "14"
+   "originated_in_version": "14.0",
+   "return_type": "text"
   },
   {
    "name": "FV",
@@ -883,7 +950,8 @@
    "category_url": "financial-functions.html",
    "slug": "fv",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/fv.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(AccountExtendedPrivileges)",
@@ -896,7 +964,8 @@
    "category_url": "get-functions.html",
    "slug": "get-accountextendedprivileges",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-accountextendedprivileges.md",
-   "originated_in_version": "11"
+   "originated_in_version": "11.0",
+   "return_type": "text"
   },
   {
    "name": "Get(AccountGroupName)",
@@ -909,7 +978,8 @@
    "category_url": "get-functions.html",
    "slug": "get-accountgroupname",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-accountgroupname.md",
-   "originated_in_version": "16"
+   "originated_in_version": "16.0",
+   "return_type": "text"
   },
   {
    "name": "Get(AccountName)",
@@ -922,7 +992,8 @@
    "category_url": "get-functions.html",
    "slug": "get-accountname",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-accountname.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "text"
   },
   {
    "name": "Get(AccountPasswordDaysRemaining)",
@@ -935,7 +1006,8 @@
    "category_url": "get-functions.html",
    "slug": "get-accountpassworddaysremaining",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-accountpassworddaysremaining.md",
-   "originated_in_version": "26"
+   "originated_in_version": "26.0.1",
+   "return_type": "number"
   },
   {
    "name": "Get(AccountPrivilegeSetName)",
@@ -948,7 +1020,8 @@
    "category_url": "get-functions.html",
    "slug": "get-accountprivilegesetname",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-accountprivilegesetname.md",
-   "originated_in_version": "11"
+   "originated_in_version": "11.0",
+   "return_type": "text"
   },
   {
    "name": "Get(AccountType)",
@@ -961,7 +1034,8 @@
    "category_url": "get-functions.html",
    "slug": "get-accounttype",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-accounttype.md",
-   "originated_in_version": "18"
+   "originated_in_version": "18.0",
+   "return_type": "text"
   },
   {
    "name": "Get(ActiveFieldContents)",
@@ -974,7 +1048,8 @@
    "category_url": "get-functions.html",
    "slug": "get-activefieldcontents",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-activefieldcontents.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text, number, date, time, timestamp, container"
   },
   {
    "name": "Get(ActiveFieldName)",
@@ -987,7 +1062,8 @@
    "category_url": "get-functions.html",
    "slug": "get-activefieldname",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-activefieldname.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Get(ActiveFieldTableName)",
@@ -1000,7 +1076,8 @@
    "category_url": "get-functions.html",
    "slug": "get-activefieldtablename",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-activefieldtablename.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "text"
   },
   {
    "name": "Get(ActiveLayoutObjectName)",
@@ -1013,7 +1090,8 @@
    "category_url": "get-functions.html",
    "slug": "get-activelayoutobjectname",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-activelayoutobjectname.md",
-   "originated_in_version": "8.5"
+   "originated_in_version": "8.5",
+   "return_type": "text"
   },
   {
    "name": "Get(ActiveModifierKeys)",
@@ -1026,7 +1104,8 @@
    "category_url": "get-functions.html",
    "slug": "get-activemodifierkeys",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-activemodifierkeys.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(ActivePortalRowNumber)",
@@ -1039,7 +1118,8 @@
    "category_url": "get-functions.html",
    "slug": "get-activeportalrownumber",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-activeportalrownumber.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(ActiveRecordNumber)",
@@ -1052,7 +1132,8 @@
    "category_url": "get-functions.html",
    "slug": "get-activerecordnumber",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-activerecordnumber.md",
-   "originated_in_version": "17"
+   "originated_in_version": "17.0",
+   "return_type": "number"
   },
   {
    "name": "Get(ActiveRepetitionNumber)",
@@ -1065,7 +1146,8 @@
    "category_url": "get-functions.html",
    "slug": "get-activerepetitionnumber",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-activerepetitionnumber.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(ActiveSelectionSize)",
@@ -1078,7 +1160,8 @@
    "category_url": "get-functions.html",
    "slug": "get-activeselectionsize",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-activeselectionsize.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "Get(ActiveSelectionStart)",
@@ -1091,7 +1174,8 @@
    "category_url": "get-functions.html",
    "slug": "get-activeselectionstart",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-activeselectionstart.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "Get(AllowAbortState)",
@@ -1104,7 +1188,8 @@
    "category_url": "get-functions.html",
    "slug": "get-allowabortstate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-allowabortstate.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "Get(AllowFormattingBarState)",
@@ -1117,7 +1202,8 @@
    "category_url": "get-functions.html",
    "slug": "get-allowformattingbarstate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-allowformattingbarstate.md",
-   "originated_in_version": "8"
+   "originated_in_version": "8.0",
+   "return_type": "number"
   },
   {
    "name": "Get(ApplicationArchitecture)",
@@ -1130,7 +1216,8 @@
    "category_url": "get-functions.html",
    "slug": "get-applicationarchitecture",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-applicationarchitecture.md",
-   "originated_in_version": "14"
+   "originated_in_version": "14.0",
+   "return_type": "text"
   },
   {
    "name": "Get(ApplicationLanguage)",
@@ -1143,7 +1230,8 @@
    "category_url": "get-functions.html",
    "slug": "get-applicationlanguage",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-applicationlanguage.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "text"
   },
   {
    "name": "Get(ApplicationVersion)",
@@ -1156,7 +1244,8 @@
    "category_url": "get-functions.html",
    "slug": "get-applicationversion",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-applicationversion.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Get(CacheFileName)",
@@ -1169,7 +1258,8 @@
    "category_url": "get-functions.html",
    "slug": "get-cachefilename",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-cachefilename.md",
-   "originated_in_version": "20.1.1"
+   "originated_in_version": "20.1",
+   "return_type": "text"
   },
   {
    "name": "Get(CacheFilePath)",
@@ -1182,7 +1272,8 @@
    "category_url": "get-functions.html",
    "slug": "get-cachefilepath",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-cachefilepath.md",
-   "originated_in_version": "20.1.1"
+   "originated_in_version": "20.1",
+   "return_type": "text"
   },
   {
    "name": "Get(CalculationRepetitionNumber)",
@@ -1195,7 +1286,8 @@
    "category_url": "get-functions.html",
    "slug": "get-calculationrepetitionnumber",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-calculationrepetitionnumber.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "Get(ConnectionAttributes)",
@@ -1208,7 +1300,8 @@
    "category_url": "get-functions.html",
    "slug": "get-connectionattributes",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-connectionattributes.md",
-   "originated_in_version": "13"
+   "originated_in_version": "13.0",
+   "return_type": "text"
   },
   {
    "name": "Get(ConnectionState)",
@@ -1221,7 +1314,8 @@
    "category_url": "get-functions.html",
    "slug": "get-connectionstate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-connectionstate.md",
-   "originated_in_version": "12"
+   "originated_in_version": "12.0",
+   "return_type": "number"
   },
   {
    "name": "Get(CurrentDate)",
@@ -1234,7 +1328,8 @@
    "category_url": "get-functions.html",
    "slug": "get-currentdate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-currentdate.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "date"
   },
   {
    "name": "Get(CurrentExtendedPrivileges)",
@@ -1247,7 +1342,8 @@
    "category_url": "get-functions.html",
    "slug": "get-currentextendedprivileges",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-currentextendedprivileges.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Get(CurrentHostTimestamp)",
@@ -1260,7 +1356,8 @@
    "category_url": "get-functions.html",
    "slug": "get-currenthosttimestamp",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-currenthosttimestamp.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "timestamp"
   },
   {
    "name": "Get(CurrentPrivilegeSetName)",
@@ -1273,7 +1370,8 @@
    "category_url": "get-functions.html",
    "slug": "get-currentprivilegesetname",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-currentprivilegesetname.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Get(CurrentTime)",
@@ -1286,7 +1384,8 @@
    "category_url": "get-functions.html",
    "slug": "get-currenttime",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-currenttime.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "time"
   },
   {
    "name": "Get(CurrentTimestamp)",
@@ -1299,7 +1398,8 @@
    "category_url": "get-functions.html",
    "slug": "get-currenttimestamp",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-currenttimestamp.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "7.0",
+   "return_type": "timestamp"
   },
   {
    "name": "Get(CurrentTimeUTCMicroseconds)",
@@ -1312,7 +1412,8 @@
    "category_url": "get-functions.html",
    "slug": "get-currenttimeutcmicroseconds",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-currenttimeutcmicroseconds.md",
-   "originated_in_version": "19.6"
+   "originated_in_version": "19.6",
+   "return_type": "number, time"
   },
   {
    "name": "Get(CurrentTimeUTCMilliseconds)",
@@ -1325,7 +1426,8 @@
    "category_url": "get-functions.html",
    "slug": "get-currenttimeutcmilliseconds",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-currenttimeutcmilliseconds.md",
-   "originated_in_version": "13"
+   "originated_in_version": "13.0",
+   "return_type": "number, time"
   },
   {
    "name": "Get(CustomMenuSetName)",
@@ -1338,7 +1440,8 @@
    "category_url": "get-functions.html",
    "slug": "get-custommenusetname",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-custommenusetname.md",
-   "originated_in_version": "8"
+   "originated_in_version": "8.0",
+   "return_type": "text"
   },
   {
    "name": "Get(DesktopPath)",
@@ -1351,7 +1454,8 @@
    "category_url": "get-functions.html",
    "slug": "get-desktoppath",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-desktoppath.md",
-   "originated_in_version": "8"
+   "originated_in_version": "8.0",
+   "return_type": "text"
   },
   {
    "name": "Get(Device)",
@@ -1364,7 +1468,8 @@
    "category_url": "get-functions.html",
    "slug": "get-device",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-device.md",
-   "originated_in_version": "13"
+   "originated_in_version": "13.0",
+   "return_type": "number"
   },
   {
    "name": "Get(DocumentsPath)",
@@ -1377,7 +1482,8 @@
    "category_url": "get-functions.html",
    "slug": "get-documentspath",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-documentspath.md",
-   "originated_in_version": "8"
+   "originated_in_version": "8.0",
+   "return_type": "text"
   },
   {
    "name": "Get(DocumentsPathListing)",
@@ -1390,7 +1496,8 @@
    "category_url": "get-functions.html",
    "slug": "get-documentspathlisting",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-documentspathlisting.md",
-   "originated_in_version": "10"
+   "originated_in_version": "10.0",
+   "return_type": "text"
   },
   {
    "name": "Get(EncryptionState)",
@@ -1403,7 +1510,8 @@
    "category_url": "get-functions.html",
    "slug": "get-encryptionstate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-encryptionstate.md",
-   "originated_in_version": "13"
+   "originated_in_version": "13.0",
+   "return_type": "text"
   },
   {
    "name": "Get(ErrorCaptureState)",
@@ -1416,7 +1524,8 @@
    "category_url": "get-functions.html",
    "slug": "get-errorcapturestate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-errorcapturestate.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "Get(FileLocaleElements)",
@@ -1429,7 +1538,8 @@
    "category_url": "get-functions.html",
    "slug": "get-filelocaleelements",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-filelocaleelements.md",
-   "originated_in_version": "19.1.2"
+   "originated_in_version": "19.1.2",
+   "return_type": "text"
   },
   {
    "name": "Get(FileMakerPath)",
@@ -1442,7 +1552,8 @@
    "category_url": "get-functions.html",
    "slug": "get-filemakerpath",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-filemakerpath.md",
-   "originated_in_version": "8"
+   "originated_in_version": "8.0",
+   "return_type": "text"
   },
   {
    "name": "Get(FileName)",
@@ -1455,7 +1566,8 @@
    "category_url": "get-functions.html",
    "slug": "get-filename",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-filename.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Get(FilePath)",
@@ -1468,7 +1580,8 @@
    "category_url": "get-functions.html",
    "slug": "get-filepath",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-filepath.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Get(FileSize)",
@@ -1481,7 +1594,8 @@
    "category_url": "get-functions.html",
    "slug": "get-filesize",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-filesize.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(FoundCount)",
@@ -1494,7 +1608,8 @@
    "category_url": "get-functions.html",
    "slug": "get-foundcount",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-foundcount.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(GuidedAccessState)",
@@ -1507,7 +1622,8 @@
    "category_url": "get-functions.html",
    "slug": "get-guidedaccessstate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-guidedaccessstate.md",
-   "originated_in_version": "26"
+   "originated_in_version": "26.0",
+   "return_type": "number"
   },
   {
    "name": "Get(HighContrastState)",
@@ -1520,7 +1636,8 @@
    "category_url": "get-functions.html",
    "slug": "get-highcontraststate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-highcontraststate.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(HostApplicationVersion)",
@@ -1533,7 +1650,8 @@
    "category_url": "get-functions.html",
    "slug": "get-hostapplicationversion",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-hostapplicationversion.md",
-   "originated_in_version": "9"
+   "originated_in_version": "9.0",
+   "return_type": "text"
   },
   {
    "name": "Get(HostIPAddress)",
@@ -1546,7 +1664,8 @@
    "category_url": "get-functions.html",
    "slug": "get-hostipaddress",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-hostipaddress.md",
-   "originated_in_version": "8"
+   "originated_in_version": "8.0",
+   "return_type": "text"
   },
   {
    "name": "Get(HostName)",
@@ -1559,7 +1678,8 @@
    "category_url": "get-functions.html",
    "slug": "get-hostname",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-hostname.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Get(InstalledFMPlugins)",
@@ -1572,7 +1692,8 @@
    "category_url": "get-functions.html",
    "slug": "get-installedfmplugins",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-installedfmplugins.md",
-   "originated_in_version": "12"
+   "originated_in_version": "12.0",
+   "return_type": "text"
   },
   {
    "name": "Get(InstalledFMPluginsAsJSON)",
@@ -1585,7 +1706,8 @@
    "category_url": "get-functions.html",
    "slug": "get-installedfmpluginsasjson",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-installedfmpluginsasjson.md",
-   "originated_in_version": "19.2.2"
+   "originated_in_version": "19.2.2",
+   "return_type": "text"
   },
   {
    "name": "Get(LastError)",
@@ -1598,7 +1720,8 @@
    "category_url": "get-functions.html",
    "slug": "get-lasterror",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-lasterror.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(LastErrorDetail)",
@@ -1611,7 +1734,8 @@
    "category_url": "get-functions.html",
    "slug": "get-lasterrordetail",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-lasterrordetail.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Get(LastErrorLocation)",
@@ -1624,7 +1748,8 @@
    "category_url": "get-functions.html",
    "slug": "get-lasterrorlocation",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-lasterrorlocation.md",
-   "originated_in_version": "19.6.1"
+   "originated_in_version": "19.6.1",
+   "return_type": "text"
   },
   {
    "name": "Get(LastMessageChoice)",
@@ -1637,7 +1762,8 @@
    "category_url": "get-functions.html",
    "slug": "get-lastmessagechoice",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-lastmessagechoice.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(LastStepTokensUsed)",
@@ -1650,7 +1776,8 @@
    "category_url": "get-functions.html",
    "slug": "get-laststeptokensused",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-laststeptokensused.md",
-   "originated_in_version": "21.0.1"
+   "originated_in_version": "21.0",
+   "return_type": "text"
   },
   {
    "name": "Get(LayoutAccess)",
@@ -1663,7 +1790,8 @@
    "category_url": "get-functions.html",
    "slug": "get-layoutaccess",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-layoutaccess.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(LayoutCount)",
@@ -1676,7 +1804,8 @@
    "category_url": "get-functions.html",
    "slug": "get-layoutcount",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-layoutcount.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(LayoutName)",
@@ -1689,7 +1818,8 @@
    "category_url": "get-functions.html",
    "slug": "get-layoutname",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-layoutname.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Get(LayoutNumber)",
@@ -1702,7 +1832,8 @@
    "category_url": "get-functions.html",
    "slug": "get-layoutnumber",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-layoutnumber.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(LayoutTableName)",
@@ -1715,7 +1846,8 @@
    "category_url": "get-functions.html",
    "slug": "get-layouttablename",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-layouttablename.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "text"
   },
   {
    "name": "Get(LayoutViewState)",
@@ -1728,7 +1860,8 @@
    "category_url": "get-functions.html",
    "slug": "get-layoutviewstate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-layoutviewstate.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(MenubarState)",
@@ -1741,7 +1874,8 @@
    "category_url": "get-functions.html",
    "slug": "get-menubarstate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-menubarstate.md",
-   "originated_in_version": "14"
+   "originated_in_version": "14.0",
+   "return_type": "number"
   },
   {
    "name": "Get(ModifiedFields)",
@@ -1754,7 +1888,8 @@
    "category_url": "get-functions.html",
    "slug": "get-modifiedfields",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-modifiedfields.md",
-   "originated_in_version": "13"
+   "originated_in_version": "13.0",
+   "return_type": "text"
   },
   {
    "name": "Get(MultiUserState)",
@@ -1767,7 +1902,8 @@
    "category_url": "get-functions.html",
    "slug": "get-multiuserstate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-multiuserstate.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(NetworkProtocol)",
@@ -1780,7 +1916,8 @@
    "category_url": "get-functions.html",
    "slug": "get-networkprotocol",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-networkprotocol.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Get(NetworkType)",
@@ -1793,7 +1930,8 @@
    "category_url": "get-functions.html",
    "slug": "get-networktype",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-networktype.md",
-   "originated_in_version": "13"
+   "originated_in_version": "13.0",
+   "return_type": "number"
   },
   {
    "name": "Get(OpenDataFileInfo)",
@@ -1806,7 +1944,8 @@
    "category_url": "get-functions.html",
    "slug": "get-opendatafileinfo",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-opendatafileinfo.md",
-   "originated_in_version": "18"
+   "originated_in_version": "18.0",
+   "return_type": "text"
   },
   {
    "name": "Get(PageCount)",
@@ -1819,7 +1958,8 @@
    "category_url": "get-functions.html",
    "slug": "get-pagecount",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-pagecount.md",
-   "originated_in_version": "19"
+   "originated_in_version": "19.0",
+   "return_type": "number"
   },
   {
    "name": "Get(PageNumber)",
@@ -1832,7 +1972,8 @@
    "category_url": "get-functions.html",
    "slug": "get-pagenumber",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-pagenumber.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(PersistentID)",
@@ -1845,7 +1986,9 @@
    "category_url": "get-functions.html",
    "slug": "get-persistentid",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-persistentid.md",
-   "originated_in_version": "12"
+   "originated_in_version": "12.0",
+   "return_type": "text",
+   "notes": "Returns a unique, unchanging 32-digit hexadecimal identifier for the computer or device running FileMaker Pro, Go, Server, Cloud, or the current WebDirect session. Clearing browser cookies during a WebDirect session changes the value. Restoring an iOS backup to a DIFFERENT device changes it; restoring to the same device does not. Unrelated to the FM 26 persistent data store despite the similar name."
   },
   {
    "name": "Get(PreferencesPath)",
@@ -1858,7 +2001,8 @@
    "category_url": "get-functions.html",
    "slug": "get-preferencespath",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-preferencespath.md",
-   "originated_in_version": "8"
+   "originated_in_version": "8.0",
+   "return_type": "text"
   },
   {
    "name": "Get(PrinterName)",
@@ -1871,7 +2015,8 @@
    "category_url": "get-functions.html",
    "slug": "get-printername",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-printername.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Get(QuickFindText)",
@@ -1884,7 +2029,8 @@
    "category_url": "get-functions.html",
    "slug": "get-quickfindtext",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-quickfindtext.md",
-   "originated_in_version": "11"
+   "originated_in_version": "11.0",
+   "return_type": "text"
   },
   {
    "name": "Get(RecordAccess)",
@@ -1897,7 +2043,8 @@
    "category_url": "get-functions.html",
    "slug": "get-recordaccess",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-recordaccess.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(RecordID)",
@@ -1910,7 +2057,8 @@
    "category_url": "get-functions.html",
    "slug": "get-recordid",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-recordid.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(RecordModificationCount)",
@@ -1923,7 +2071,8 @@
    "category_url": "get-functions.html",
    "slug": "get-recordmodificationcount",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-recordmodificationcount.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(RecordNumber)",
@@ -1936,7 +2085,8 @@
    "category_url": "get-functions.html",
    "slug": "get-recordnumber",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-recordnumber.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(RecordOpenCount)",
@@ -1949,7 +2099,8 @@
    "category_url": "get-functions.html",
    "slug": "get-recordopencount",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-recordopencount.md",
-   "originated_in_version": "8"
+   "originated_in_version": "8.0",
+   "return_type": "number"
   },
   {
    "name": "Get(RecordOpenState)",
@@ -1962,7 +2113,8 @@
    "category_url": "get-functions.html",
    "slug": "get-recordopenstate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-recordopenstate.md",
-   "originated_in_version": "8"
+   "originated_in_version": "8.0",
+   "return_type": "number"
   },
   {
    "name": "Get(RegionMonitorEvents)",
@@ -1975,7 +2127,8 @@
    "category_url": "get-functions.html",
    "slug": "get-regionmonitorevents",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-regionmonitorevents.md",
-   "originated_in_version": "16"
+   "originated_in_version": "16.0",
+   "return_type": "text"
   },
   {
    "name": "Get(RequestCount)",
@@ -1988,7 +2141,8 @@
    "category_url": "get-functions.html",
    "slug": "get-requestcount",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-requestcount.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(RequestOmitState)",
@@ -2001,7 +2155,8 @@
    "category_url": "get-functions.html",
    "slug": "get-requestomitstate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-requestomitstate.md",
-   "originated_in_version": "8"
+   "originated_in_version": "8.0",
+   "return_type": "number"
   },
   {
    "name": "Get(RevertTransactionOnErrorState)",
@@ -2014,7 +2169,8 @@
    "category_url": "get-functions.html",
    "slug": "get-reverttransactiononerrorstate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-reverttransactiononerrorstate.md",
-   "originated_in_version": "21.1.1"
+   "originated_in_version": "21.1.1",
+   "return_type": "number"
   },
   {
    "name": "Get(ScreenDepth)",
@@ -2027,7 +2183,8 @@
    "category_url": "get-functions.html",
    "slug": "get-screendepth",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-screendepth.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(ScreenHeight)",
@@ -2040,7 +2197,8 @@
    "category_url": "get-functions.html",
    "slug": "get-screenheight",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-screenheight.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(ScreenScaleFactor)",
@@ -2053,7 +2211,8 @@
    "category_url": "get-functions.html",
    "slug": "get-screenscalefactor",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-screenscalefactor.md",
-   "originated_in_version": "13.0.2"
+   "originated_in_version": "13.0.2",
+   "return_type": "number"
   },
   {
    "name": "Get(ScreenWidth)",
@@ -2066,7 +2225,8 @@
    "category_url": "get-functions.html",
    "slug": "get-screenwidth",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-screenwidth.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(ScriptAnimationState)",
@@ -2079,7 +2239,8 @@
    "category_url": "get-functions.html",
    "slug": "get-scriptanimationstate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-scriptanimationstate.md",
-   "originated_in_version": "13"
+   "originated_in_version": "13.0",
+   "return_type": "number"
   },
   {
    "name": "Get(ScriptName)",
@@ -2092,7 +2253,8 @@
    "category_url": "get-functions.html",
    "slug": "get-scriptname",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-scriptname.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Get(ScriptParameter)",
@@ -2105,7 +2267,8 @@
    "category_url": "get-functions.html",
    "slug": "get-scriptparameter",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-scriptparameter.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "text, number, date, time, timestamp, container"
   },
   {
    "name": "Get(ScriptResult)",
@@ -2118,7 +2281,8 @@
    "category_url": "get-functions.html",
    "slug": "get-scriptresult",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-scriptresult.md",
-   "originated_in_version": "8"
+   "originated_in_version": "8.0",
+   "return_type": "text, number, date, time, timestamp, container"
   },
   {
    "name": "Get(SessionIdentifier)",
@@ -2131,7 +2295,8 @@
    "category_url": "get-functions.html",
    "slug": "get-sessionidentifier",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-sessionidentifier.md",
-   "originated_in_version": "19"
+   "originated_in_version": "19.4.1",
+   "return_type": "text"
   },
   {
    "name": "Get(SortState)",
@@ -2144,7 +2309,8 @@
    "category_url": "get-functions.html",
    "slug": "get-sortstate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-sortstate.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(StatusAreaState)",
@@ -2157,7 +2323,8 @@
    "category_url": "get-functions.html",
    "slug": "get-statusareastate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-statusareastate.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(SystemAppearance)",
@@ -2170,7 +2337,8 @@
    "category_url": "get-functions.html",
    "slug": "get-systemappearance",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-systemappearance.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Get(SystemDrive)",
@@ -2183,7 +2351,8 @@
    "category_url": "get-functions.html",
    "slug": "get-systemdrive",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-systemdrive.md",
-   "originated_in_version": "8"
+   "originated_in_version": "8.0",
+   "return_type": "text"
   },
   {
    "name": "Get(SystemIPAddress)",
@@ -2196,7 +2365,8 @@
    "category_url": "get-functions.html",
    "slug": "get-systemipaddress",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-systemipaddress.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "text"
   },
   {
    "name": "Get(SystemLanguage)",
@@ -2209,7 +2379,8 @@
    "category_url": "get-functions.html",
    "slug": "get-systemlanguage",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-systemlanguage.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Get(SystemLocaleElements)",
@@ -2222,7 +2393,8 @@
    "category_url": "get-functions.html",
    "slug": "get-systemlocaleelements",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-systemlocaleelements.md",
-   "originated_in_version": "19.1.2"
+   "originated_in_version": "19.1.2",
+   "return_type": "text"
   },
   {
    "name": "Get(SystemNICAddress)",
@@ -2235,7 +2407,8 @@
    "category_url": "get-functions.html",
    "slug": "get-systemnicaddress",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-systemnicaddress.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "text"
   },
   {
    "name": "Get(SystemPlatform)",
@@ -2248,7 +2421,8 @@
    "category_url": "get-functions.html",
    "slug": "get-systemplatform",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-systemplatform.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(SystemStorageAvailable)",
@@ -2261,7 +2435,8 @@
    "category_url": "get-functions.html",
    "slug": "get-systemstorageavailable",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-systemstorageavailable.md",
-   "originated_in_version": "21.1.1"
+   "originated_in_version": "21.1.1",
+   "return_type": "number"
   },
   {
    "name": "Get(SystemVersion)",
@@ -2274,7 +2449,8 @@
    "category_url": "get-functions.html",
    "slug": "get-systemversion",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-systemversion.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Get(TemporaryPath)",
@@ -2287,7 +2463,8 @@
    "category_url": "get-functions.html",
    "slug": "get-temporarypath",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-temporarypath.md",
-   "originated_in_version": "9"
+   "originated_in_version": "9.0",
+   "return_type": "text"
   },
   {
    "name": "Get(TextRulerVisible)",
@@ -2300,7 +2477,8 @@
    "category_url": "get-functions.html",
    "slug": "get-textrulervisible",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-textrulervisible.md",
-   "originated_in_version": "8"
+   "originated_in_version": "8.0",
+   "return_type": "number"
   },
   {
    "name": "Get(TotalRecordCount)",
@@ -2313,7 +2491,8 @@
    "category_url": "get-functions.html",
    "slug": "get-totalrecordcount",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-totalrecordcount.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(TouchKeyboardState)",
@@ -2326,7 +2505,8 @@
    "category_url": "get-functions.html",
    "slug": "get-touchkeyboardstate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-touchkeyboardstate.md",
-   "originated_in_version": "14"
+   "originated_in_version": "14.0",
+   "return_type": "number"
   },
   {
    "name": "Get(TransactionOpenState)",
@@ -2339,7 +2519,8 @@
    "category_url": "get-functions.html",
    "slug": "get-transactionopenstate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-transactionopenstate.md",
-   "originated_in_version": "19"
+   "originated_in_version": "19.6.1",
+   "return_type": "number"
   },
   {
    "name": "Get(TriggerCurrentPanel)",
@@ -2352,7 +2533,8 @@
    "category_url": "get-functions.html",
    "slug": "get-triggercurrentpanel",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-triggercurrentpanel.md",
-   "originated_in_version": "12"
+   "originated_in_version": "12.0",
+   "return_type": "text"
   },
   {
    "name": "Get(TriggerExternalEvent)",
@@ -2365,7 +2547,8 @@
    "category_url": "get-functions.html",
    "slug": "get-triggerexternalevent",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-triggerexternalevent.md",
-   "originated_in_version": "14"
+   "originated_in_version": "14.0",
+   "return_type": "number"
   },
   {
    "name": "Get(TriggerGestureInfo)",
@@ -2378,7 +2561,8 @@
    "category_url": "get-functions.html",
    "slug": "get-triggergestureinfo",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-triggergestureinfo.md",
-   "originated_in_version": "13"
+   "originated_in_version": "13.0",
+   "return_type": "text"
   },
   {
    "name": "Get(TriggerKeystroke)",
@@ -2391,7 +2575,8 @@
    "category_url": "get-functions.html",
    "slug": "get-triggerkeystroke",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-triggerkeystroke.md",
-   "originated_in_version": "10"
+   "originated_in_version": "10.0",
+   "return_type": "text"
   },
   {
    "name": "Get(TriggerModifierKeys)",
@@ -2404,7 +2589,8 @@
    "category_url": "get-functions.html",
    "slug": "get-triggermodifierkeys",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-triggermodifierkeys.md",
-   "originated_in_version": "10"
+   "originated_in_version": "10.0",
+   "return_type": "number"
   },
   {
    "name": "Get(TriggerTargetPanel)",
@@ -2417,7 +2603,8 @@
    "category_url": "get-functions.html",
    "slug": "get-triggertargetpanel",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-triggertargetpanel.md",
-   "originated_in_version": "12"
+   "originated_in_version": "12.0",
+   "return_type": "text"
   },
   {
    "name": "Get(UserCount)",
@@ -2430,7 +2617,8 @@
    "category_url": "get-functions.html",
    "slug": "get-usercount",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-usercount.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(UserName)",
@@ -2443,7 +2631,8 @@
    "category_url": "get-functions.html",
    "slug": "get-username",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-username.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Get(UseSystemFormatsState)",
@@ -2456,7 +2645,8 @@
    "category_url": "get-functions.html",
    "slug": "get-usesystemformatsstate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-usesystemformatsstate.md",
-   "originated_in_version": "8"
+   "originated_in_version": "8.0",
+   "return_type": "number"
   },
   {
    "name": "Get(UUID)",
@@ -2469,7 +2659,8 @@
    "category_url": "get-functions.html",
    "slug": "get-uuid",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-uuid.md",
-   "originated_in_version": "12"
+   "originated_in_version": "12.0",
+   "return_type": "text"
   },
   {
    "name": "Get(UUIDNumber)",
@@ -2482,7 +2673,8 @@
    "category_url": "get-functions.html",
    "slug": "get-uuidnumber",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-uuidnumber.md",
-   "originated_in_version": "17"
+   "originated_in_version": "17.0",
+   "return_type": "number"
   },
   {
    "name": "Get(WindowContentHeight)",
@@ -2495,7 +2687,8 @@
    "category_url": "get-functions.html",
    "slug": "get-windowcontentheight",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowcontentheight.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "Get(WindowContentWidth)",
@@ -2508,7 +2701,8 @@
    "category_url": "get-functions.html",
    "slug": "get-windowcontentwidth",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowcontentwidth.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "Get(WindowDesktopHeight)",
@@ -2521,7 +2715,8 @@
    "category_url": "get-functions.html",
    "slug": "get-windowdesktopheight",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowdesktopheight.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "Get(WindowDesktopWidth)",
@@ -2534,7 +2729,8 @@
    "category_url": "get-functions.html",
    "slug": "get-windowdesktopwidth",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowdesktopwidth.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "Get(WindowHeight)",
@@ -2547,7 +2743,8 @@
    "category_url": "get-functions.html",
    "slug": "get-windowheight",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowheight.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "Get(WindowLeft)",
@@ -2560,7 +2757,8 @@
    "category_url": "get-functions.html",
    "slug": "get-windowleft",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowleft.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "Get(WindowMode)",
@@ -2573,7 +2771,8 @@
    "category_url": "get-functions.html",
    "slug": "get-windowmode",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowmode.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Get(WindowName)",
@@ -2586,7 +2785,8 @@
    "category_url": "get-functions.html",
    "slug": "get-windowname",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowname.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "text"
   },
   {
    "name": "Get(WindowOrientation)",
@@ -2599,7 +2799,8 @@
    "category_url": "get-functions.html",
    "slug": "get-windoworientation",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windoworientation.md",
-   "originated_in_version": "13"
+   "originated_in_version": "13.0",
+   "return_type": "number"
   },
   {
    "name": "Get(WindowStyle)",
@@ -2612,7 +2813,8 @@
    "category_url": "get-functions.html",
    "slug": "get-windowstyle",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowstyle.md",
-   "originated_in_version": "12"
+   "originated_in_version": "12.0",
+   "return_type": "number"
   },
   {
    "name": "Get(WindowTop)",
@@ -2625,7 +2827,8 @@
    "category_url": "get-functions.html",
    "slug": "get-windowtop",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowtop.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "Get(WindowUUID)",
@@ -2638,7 +2841,8 @@
    "category_url": "get-functions.html",
    "slug": "get-windowuuid",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowuuid.md",
-   "originated_in_version": "26"
+   "originated_in_version": "26.0",
+   "return_type": "text"
   },
   {
    "name": "Get(WindowVisible)",
@@ -2651,7 +2855,8 @@
    "category_url": "get-functions.html",
    "slug": "get-windowvisible",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowvisible.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "Get(WindowWidth)",
@@ -2664,7 +2869,8 @@
    "category_url": "get-functions.html",
    "slug": "get-windowwidth",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowwidth.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "Get(WindowZoomLevel)",
@@ -2677,7 +2883,8 @@
    "category_url": "get-functions.html",
    "slug": "get-windowzoomlevel",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-windowzoomlevel.md",
-   "originated_in_version": "8"
+   "originated_in_version": "8.0",
+   "return_type": "text"
   },
   {
    "name": "GetAddonInfo",
@@ -2690,7 +2897,8 @@
    "category_url": "miscellaneous-functions.html",
    "slug": "getaddoninfo",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getaddoninfo.md",
-   "originated_in_version": "19.2.2"
+   "originated_in_version": "19.2.2",
+   "return_type": "text"
   },
   {
    "name": "GetAsBoolean",
@@ -2703,7 +2911,8 @@
    "category_url": "logical-functions.html",
    "slug": "getasboolean",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getasboolean.md",
-   "originated_in_version": "8"
+   "originated_in_version": "8.0",
+   "return_type": "number"
   },
   {
    "name": "GetAsCSS",
@@ -2716,7 +2925,8 @@
    "category_url": "text-functions.html",
    "slug": "getascss",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getascss.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "text"
   },
   {
    "name": "GetAsDate",
@@ -2729,7 +2939,8 @@
    "category_url": "text-functions.html",
    "slug": "getasdate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getasdate.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "date"
   },
   {
    "name": "GetAsNumber",
@@ -2742,7 +2953,8 @@
    "category_url": "text-functions.html",
    "slug": "getasnumber",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getasnumber.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "GetAsSVG",
@@ -2755,7 +2967,8 @@
    "category_url": "text-functions.html",
    "slug": "getassvg",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getassvg.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "text"
   },
   {
    "name": "GetAsText",
@@ -2768,7 +2981,8 @@
    "category_url": "text-functions.html",
    "slug": "getastext",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getastext.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "GetAsTime",
@@ -2781,7 +2995,8 @@
    "category_url": "text-functions.html",
    "slug": "getastime",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getastime.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "time"
   },
   {
    "name": "GetAsTimestamp",
@@ -2794,7 +3009,8 @@
    "category_url": "text-functions.html",
    "slug": "getastimestamp",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getastimestamp.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "timestamp"
   },
   {
    "name": "GetAsURLEncoded",
@@ -2807,7 +3023,8 @@
    "category_url": "text-functions.html",
    "slug": "getasurlencoded",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getasurlencoded.md",
-   "originated_in_version": "8.5"
+   "originated_in_version": "8.5",
+   "return_type": "text"
   },
   {
    "name": "GetAVPlayerAttribute",
@@ -2820,7 +3037,8 @@
    "category_url": "mobile-functions.html",
    "slug": "getavplayerattribute",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getavplayerattribute.md",
-   "originated_in_version": "14"
+   "originated_in_version": "14.0",
+   "return_type": "text, number"
   },
   {
    "name": "GetBaseTableName",
@@ -2833,7 +3051,8 @@
    "category_url": "miscellaneous-functions.html",
    "slug": "getbasetablename",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getbasetablename.md",
-   "originated_in_version": "20.1.1"
+   "originated_in_version": "20.1",
+   "return_type": "text"
   },
   {
    "name": "GetContainerAttribute",
@@ -2847,7 +3066,8 @@
    "category_url": "container-functions.html",
    "slug": "getcontainerattribute",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getcontainerattribute.md",
-   "originated_in_version": "13"
+   "originated_in_version": "13.0",
+   "return_type": "text, number, date, time, timestamp, container"
   },
   {
    "name": "GetEmbedding",
@@ -2862,7 +3082,8 @@
    "category_url": "artificial-intelligence-functions.html",
    "slug": "getembedding",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getembedding.md",
-   "originated_in_version": "21.0.1"
+   "originated_in_version": "21.0",
+   "return_type": "container"
   },
   {
    "name": "GetEmbeddingAsFile",
@@ -2876,7 +3097,8 @@
    "category_url": "artificial-intelligence-functions.html",
    "slug": "getembeddingasfile",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getembeddingasfile.md",
-   "originated_in_version": "21.0.1"
+   "originated_in_version": "21.0",
+   "return_type": "container"
   },
   {
    "name": "GetEmbeddingAsText",
@@ -2889,7 +3111,8 @@
    "category_url": "artificial-intelligence-functions.html",
    "slug": "getembeddingastext",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getembeddingastext.md",
-   "originated_in_version": "21.0.1"
+   "originated_in_version": "21.0",
+   "return_type": "text"
   },
   {
    "name": "GetField",
@@ -2902,7 +3125,8 @@
    "category_url": "logical-functions.html",
    "slug": "getfield",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getfield.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text, number, date, time, timestamp, container"
   },
   {
    "name": "GetFieldName",
@@ -2915,7 +3139,8 @@
    "category_url": "miscellaneous-functions.html",
    "slug": "getfieldname",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getfieldname.md",
-   "originated_in_version": "10"
+   "originated_in_version": "10.0",
+   "return_type": "text"
   },
   {
    "name": "GetFieldsOnLayout",
@@ -2928,7 +3153,8 @@
    "category_url": "artificial-intelligence-functions.html",
    "slug": "getfieldsonlayout",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getfieldsonlayout.md",
-   "originated_in_version": "22.0.1"
+   "originated_in_version": "22.0",
+   "return_type": "text"
   },
   {
    "name": "GetHeight",
@@ -2941,7 +3167,8 @@
    "category_url": "container-functions.html",
    "slug": "getheight",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getheight.md",
-   "originated_in_version": "12"
+   "originated_in_version": "12.0",
+   "return_type": "number"
   },
   {
    "name": "GetLayoutObjectAttribute",
@@ -2957,7 +3184,8 @@
    "category_url": "miscellaneous-functions.html",
    "slug": "getlayoutobjectattribute",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getlayoutobjectattribute.md",
-   "originated_in_version": "8"
+   "originated_in_version": "8.5",
+   "return_type": "text"
   },
   {
    "name": "GetLayoutObjectOwnerInfo",
@@ -2970,7 +3198,8 @@
    "category_url": "miscellaneous-functions.html",
    "slug": "getlayoutobjectownerinfo",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getlayoutobjectownerinfo.md",
-   "originated_in_version": "19"
+   "originated_in_version": "19.2.2",
+   "return_type": "text"
   },
   {
    "name": "GetLiveText",
@@ -2984,7 +3213,8 @@
    "category_url": "container-functions.html",
    "slug": "getlivetext",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getlivetext.md",
-   "originated_in_version": "19"
+   "originated_in_version": "19.5.1",
+   "return_type": "text"
   },
   {
    "name": "GetLiveTextAsJSON",
@@ -2998,7 +3228,8 @@
    "category_url": "container-functions.html",
    "slug": "getlivetextasjson",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getlivetextasjson.md",
-   "originated_in_version": "21.0.1"
+   "originated_in_version": "21.0",
+   "return_type": "text"
   },
   {
    "name": "GetModelAttributes",
@@ -3011,7 +3242,8 @@
    "category_url": "artificial-intelligence-functions.html",
    "slug": "getmodelattributes",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getmodelattributes.md",
-   "originated_in_version": "19.3"
+   "originated_in_version": "19.3.1",
+   "return_type": "text"
   },
   {
    "name": "GetNextSerialValue",
@@ -3025,7 +3257,8 @@
    "category_url": "design-functions.html",
    "slug": "getnextserialvalue",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getnextserialvalue.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "GetNthRecord",
@@ -3039,7 +3272,8 @@
    "category_url": "logical-functions.html",
    "slug": "getnthrecord",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getnthrecord.md",
-   "originated_in_version": "8"
+   "originated_in_version": "8.0",
+   "return_type": "text, number, date, time, timestamp, container"
   },
   {
    "name": "GetPersistentData",
@@ -3053,7 +3287,9 @@
    "category_url": "persistent-data-functions.html",
    "slug": "getpersistentdata",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getpersistentdata.md",
-   "originated_in_version": "26"
+   "originated_in_version": "26.0",
+   "return_type": "text, number, date, time, timestamp, container",
+   "concept_doc_url": "https://help.claris.com/markdown/en/pro-help/about-persistent-data-store.md"
   },
   {
    "name": "GetRAGSpaceInfo",
@@ -3067,7 +3303,8 @@
    "category_url": "artificial-intelligence-functions.html",
    "slug": "getragspaceinfo",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getragspaceinfo.md",
-   "originated_in_version": "22.0.1"
+   "originated_in_version": "22.0",
+   "return_type": "text"
   },
   {
    "name": "GetRecordIDsFromFoundSet",
@@ -3081,7 +3318,8 @@
    "category_url": "miscellaneous-functions.html",
    "slug": "getrecordidsfromfoundset",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getrecordidsfromfoundset.md",
-   "originated_in_version": "22.0.1"
+   "originated_in_version": "22.0",
+   "return_type": "text"
   },
   {
    "name": "GetRepetition",
@@ -3095,7 +3333,8 @@
    "category_url": "repeating-functions.html",
    "slug": "getrepetition",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getrepetition.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text, number, date, time, timestamp, container"
   },
   {
    "name": "GetSensor",
@@ -3110,7 +3349,8 @@
    "category_url": "mobile-functions.html",
    "slug": "getsensor",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getsensor.md",
-   "originated_in_version": "17"
+   "originated_in_version": "17.0",
+   "return_type": "text, number"
   },
   {
    "name": "GetSummary",
@@ -3124,7 +3364,8 @@
    "category_url": "logical-functions.html",
    "slug": "getsummary",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getsummary.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number, date, time, timestamp"
   },
   {
    "name": "GetTableDDL",
@@ -3138,7 +3379,8 @@
    "category_url": "artificial-intelligence-functions.html",
    "slug": "gettableddl",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/gettableddl.md",
-   "originated_in_version": "21.0.1"
+   "originated_in_version": "21.0",
+   "return_type": "text"
   },
   {
    "name": "GetTextFromPDF",
@@ -3151,7 +3393,8 @@
    "category_url": "container-functions.html",
    "slug": "gettextfrompdf",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/gettextfrompdf.md",
-   "originated_in_version": "22.0.1"
+   "originated_in_version": "22.0",
+   "return_type": "text"
   },
   {
    "name": "GetThumbnail",
@@ -3166,7 +3409,8 @@
    "category_url": "container-functions.html",
    "slug": "getthumbnail",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getthumbnail.md",
-   "originated_in_version": "12"
+   "originated_in_version": "12.0",
+   "return_type": "container"
   },
   {
    "name": "GetTokenCount",
@@ -3179,7 +3423,8 @@
    "category_url": "artificial-intelligence-functions.html",
    "slug": "gettokencount",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/gettokencount.md",
-   "originated_in_version": "21.0.1"
+   "originated_in_version": "21.0",
+   "return_type": "number"
   },
   {
    "name": "GetValue",
@@ -3193,7 +3438,8 @@
    "category_url": "text-functions.html",
    "slug": "getvalue",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getvalue.md",
-   "originated_in_version": "8"
+   "originated_in_version": "8.0",
+   "return_type": "text"
   },
   {
    "name": "GetWidth",
@@ -3206,7 +3452,8 @@
    "category_url": "container-functions.html",
    "slug": "getwidth",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getwidth.md",
-   "originated_in_version": "12"
+   "originated_in_version": "12.0",
+   "return_type": "number"
   },
   {
    "name": "HexDecode",
@@ -3220,7 +3467,8 @@
    "category_url": "container-functions.html",
    "slug": "hexdecode",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/hexdecode.md",
-   "originated_in_version": "16"
+   "originated_in_version": "16.0",
+   "return_type": "text, container"
   },
   {
    "name": "HexEncode",
@@ -3233,7 +3481,8 @@
    "category_url": "container-functions.html",
    "slug": "hexencode",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/hexencode.md",
-   "originated_in_version": "16"
+   "originated_in_version": "16.0",
+   "return_type": "text"
   },
   {
    "name": "Hiragana",
@@ -3246,7 +3495,8 @@
    "category_url": "japanese-functions.html",
    "slug": "hiragana",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/hiragana.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Hour",
@@ -3259,7 +3509,8 @@
    "category_url": "time-functions.html",
    "slug": "hour",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/hour.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "If",
@@ -3274,7 +3525,8 @@
    "category_url": "logical-functions.html",
    "slug": "if-function",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/if-function.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text, number, date, time, timestamp, container"
   },
   {
    "name": "Int",
@@ -3287,7 +3539,8 @@
    "category_url": "number-functions.html",
    "slug": "int",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/int.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "IsEmpty",
@@ -3300,7 +3553,8 @@
    "category_url": "logical-functions.html",
    "slug": "isempty",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/isempty.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "IsValid",
@@ -3313,7 +3567,8 @@
    "category_url": "logical-functions.html",
    "slug": "isvalid",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/isvalid.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "IsValidExpression",
@@ -3326,7 +3581,8 @@
    "category_url": "logical-functions.html",
    "slug": "isvalidexpression",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/isvalidexpression.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "JSONDeleteElement",
@@ -3340,7 +3596,8 @@
    "category_url": "json-functions-category.html",
    "slug": "jsondeleteelement",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/jsondeleteelement.md",
-   "originated_in_version": "16"
+   "originated_in_version": "16.0",
+   "return_type": "text"
   },
   {
    "name": "JSONFormatElements",
@@ -3353,7 +3610,8 @@
    "category_url": "json-functions-category.html",
    "slug": "jsonformatelements",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/jsonformatelements.md",
-   "originated_in_version": "16"
+   "originated_in_version": "16.0",
+   "return_type": "text"
   },
   {
    "name": "JSONGetElement",
@@ -3367,7 +3625,8 @@
    "category_url": "json-functions-category.html",
    "slug": "jsongetelement",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/jsongetelement.md",
-   "originated_in_version": "16"
+   "originated_in_version": "16.0",
+   "return_type": "text, number"
   },
   {
    "name": "JSONGetElementType",
@@ -3381,7 +3640,8 @@
    "category_url": "json-functions-category.html",
    "slug": "jsongetelementtype",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/jsongetelementtype.md",
-   "originated_in_version": "19.5.1"
+   "originated_in_version": "19.5.1",
+   "return_type": "text, number"
   },
   {
    "name": "JSONListKeys",
@@ -3395,7 +3655,8 @@
    "category_url": "json-functions-category.html",
    "slug": "jsonlistkeys",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/jsonlistkeys.md",
-   "originated_in_version": "16"
+   "originated_in_version": "16.0",
+   "return_type": "text"
   },
   {
    "name": "JSONListValues",
@@ -3409,7 +3670,8 @@
    "category_url": "json-functions-category.html",
    "slug": "jsonlistvalues",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/jsonlistvalues.md",
-   "originated_in_version": "16"
+   "originated_in_version": "16.0",
+   "return_type": "text"
   },
   {
    "name": "JSONMakeArray",
@@ -3424,7 +3686,8 @@
    "category_url": "json-functions-category.html",
    "slug": "jsonmakearray",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/jsonmakearray.md",
-   "originated_in_version": "21.0.1"
+   "originated_in_version": "21.0",
+   "return_type": "text"
   },
   {
    "name": "JSONParse",
@@ -3437,7 +3700,8 @@
    "category_url": "json-functions-category.html",
    "slug": "jsonparse",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/jsonparse.md",
-   "originated_in_version": "22.0.1"
+   "originated_in_version": "22.0",
+   "return_type": "text"
   },
   {
    "name": "JSONParsedState",
@@ -3450,7 +3714,8 @@
    "category_url": "json-functions-category.html",
    "slug": "jsonparsedstate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/jsonparsedstate.md",
-   "originated_in_version": "22.0.1"
+   "originated_in_version": "22.0",
+   "return_type": "number"
   },
   {
    "name": "JSONSetElement",
@@ -3466,7 +3731,8 @@
    "category_url": "json-functions-category.html",
    "slug": "jsonsetelement",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/jsonsetelement.md",
-   "originated_in_version": "16"
+   "originated_in_version": "16.0",
+   "return_type": "text"
   },
   {
    "name": "KanaHankaku",
@@ -3479,7 +3745,8 @@
    "category_url": "japanese-functions.html",
    "slug": "kanahankaku",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/kanahankaku.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "KanaZenkaku",
@@ -3492,7 +3759,8 @@
    "category_url": "japanese-functions.html",
    "slug": "kanazenkaku",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/kanazenkaku.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "KanjiNumeral",
@@ -3505,7 +3773,8 @@
    "category_url": "japanese-functions.html",
    "slug": "kanjinumeral",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/kanjinumeral.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Katakana",
@@ -3518,7 +3787,8 @@
    "category_url": "japanese-functions.html",
    "slug": "katakana",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/katakana.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Last",
@@ -3531,7 +3801,8 @@
    "category_url": "repeating-functions.html",
    "slug": "last",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/last.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text, number, date, time, timestamp, container"
   },
   {
    "name": "LayoutIDs",
@@ -3544,7 +3815,8 @@
    "category_url": "design-functions.html",
    "slug": "layoutids",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/layoutids.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "LayoutNames",
@@ -3557,7 +3829,8 @@
    "category_url": "design-functions.html",
    "slug": "layoutnames",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/layoutnames.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "LayoutObjectNames",
@@ -3571,7 +3844,8 @@
    "category_url": "design-functions.html",
    "slug": "layoutobjectnames",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/layoutobjectnames.md",
-   "originated_in_version": "8.5"
+   "originated_in_version": "8.5",
+   "return_type": "text"
   },
   {
    "name": "LayoutObjectUUID",
@@ -3581,7 +3855,8 @@
    "category_url": "miscellaneous-functions.html",
    "slug": "layoutobjectuuid",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/layoutobjectuuid.md",
-   "originated_in_version": "19"
+   "originated_in_version": "19.2.2",
+   "return_type": "text"
   },
   {
    "name": "Left",
@@ -3595,7 +3870,8 @@
    "category_url": "text-functions.html",
    "slug": "left",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/left.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "LeftValues",
@@ -3609,7 +3885,8 @@
    "category_url": "text-functions.html",
    "slug": "leftvalues",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/leftvalues.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "text"
   },
   {
    "name": "LeftWords",
@@ -3623,7 +3900,8 @@
    "category_url": "text-functions.html",
    "slug": "leftwords",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/leftwords.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Length",
@@ -3636,7 +3914,8 @@
    "category_url": "text-functions.html",
    "slug": "length",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/length.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Let",
@@ -3651,7 +3930,8 @@
    "category_url": "logical-functions.html",
    "slug": "let",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/let.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "text, number, date, time, timestamp, container"
   },
   {
    "name": "Lg",
@@ -3664,7 +3944,8 @@
    "category_url": "number-functions.html",
    "slug": "lg",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/lg.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "List",
@@ -3677,7 +3958,8 @@
    "category_url": "aggregate-functions.html",
    "slug": "list",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/list.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "8.5",
+   "return_type": "text"
   },
   {
    "name": "ListPersistentDataIDs",
@@ -3690,7 +3972,9 @@
    "category_url": "persistent-data-functions.html",
    "slug": "listpersistentdataids",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/listpersistentdataids.md",
-   "originated_in_version": "26"
+   "originated_in_version": "26.0",
+   "return_type": "text",
+   "concept_doc_url": "https://help.claris.com/markdown/en/pro-help/about-persistent-data-store.md"
   },
   {
    "name": "Ln",
@@ -3703,7 +3987,8 @@
    "category_url": "number-functions.html",
    "slug": "ln",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/ln.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Location",
@@ -3717,7 +4002,8 @@
    "category_url": "mobile-functions.html",
    "slug": "location",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/location.md",
-   "originated_in_version": "12"
+   "originated_in_version": "12.0",
+   "return_type": "text"
   },
   {
    "name": "LocationValues",
@@ -3731,7 +4017,8 @@
    "category_url": "mobile-functions.html",
    "slug": "locationvalues",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/locationvalues.md",
-   "originated_in_version": "12"
+   "originated_in_version": "12.0",
+   "return_type": "text"
   },
   {
    "name": "Log",
@@ -3744,7 +4031,8 @@
    "category_url": "number-functions.html",
    "slug": "log",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/log.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Lookup",
@@ -3758,7 +4046,8 @@
    "category_url": "logical-functions.html",
    "slug": "lookup",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/lookup.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "7.0",
+   "return_type": "text, number, date, time, timestamp, container"
   },
   {
    "name": "LookupNext",
@@ -3772,7 +4061,8 @@
    "category_url": "logical-functions.html",
    "slug": "lookupnext",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/lookupnext.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "7.0",
+   "return_type": "text, number, date, time, timestamp, container"
   },
   {
    "name": "Lower",
@@ -3785,7 +4075,8 @@
    "category_url": "text-functions.html",
    "slug": "lower",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/lower.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Max",
@@ -3798,7 +4089,8 @@
    "category_url": "aggregate-functions.html",
    "slug": "max",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/max.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text, number, date, time, timestamp"
   },
   {
    "name": "Middle",
@@ -3813,7 +4105,8 @@
    "category_url": "text-functions.html",
    "slug": "middle",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/middle.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "MiddleValues",
@@ -3828,7 +4121,8 @@
    "category_url": "text-functions.html",
    "slug": "middlevalues",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/middlevalues.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "text"
   },
   {
    "name": "MiddleWords",
@@ -3843,7 +4137,8 @@
    "category_url": "text-functions.html",
    "slug": "middlewords",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/middlewords.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Min",
@@ -3856,7 +4151,8 @@
    "category_url": "aggregate-functions.html",
    "slug": "min",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/min.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text, number, date, time, timestamp"
   },
   {
    "name": "Minute",
@@ -3869,7 +4165,8 @@
    "category_url": "time-functions.html",
    "slug": "minute",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/minute.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Mod",
@@ -3883,7 +4180,8 @@
    "category_url": "number-functions.html",
    "slug": "mod",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/mod.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Month",
@@ -3896,7 +4194,8 @@
    "category_url": "date-functions.html",
    "slug": "month",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/month.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "MonthName",
@@ -3909,7 +4208,8 @@
    "category_url": "date-functions.html",
    "slug": "monthname",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/monthname.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "MonthNameJ",
@@ -3922,7 +4222,8 @@
    "category_url": "japanese-functions.html",
    "slug": "monthnamej",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/monthnamej.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "NormalizeEmbedding",
@@ -3936,7 +4237,8 @@
    "category_url": "artificial-intelligence-functions.html",
    "slug": "normalizeembedding",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/normalizeembedding.md",
-   "originated_in_version": "22.0.1"
+   "originated_in_version": "22.0",
+   "return_type": "text, container"
   },
   {
    "name": "NPV",
@@ -3950,7 +4252,8 @@
    "category_url": "financial-functions.html",
    "slug": "npv",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/npv.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "NumToJText",
@@ -3965,7 +4268,8 @@
    "category_url": "japanese-functions.html",
    "slug": "numtojtext",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/numtojtext.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "PatternCount",
@@ -3979,7 +4283,8 @@
    "category_url": "text-functions.html",
    "slug": "patterncount",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/patterncount.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Pi",
@@ -3989,7 +4294,8 @@
    "category_url": "trigonometric-functions.html",
    "slug": "pi",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/pi.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "PMT",
@@ -4004,7 +4310,8 @@
    "category_url": "financial-functions.html",
    "slug": "pmt",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/pmt.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Position",
@@ -4020,7 +4327,8 @@
    "category_url": "text-functions.html",
    "slug": "position",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/position.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "PredictFromModel",
@@ -4034,7 +4342,8 @@
    "category_url": "artificial-intelligence-functions.html",
    "slug": "predictfrommodel",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/predictfrommodel.md",
-   "originated_in_version": "22.0.1"
+   "originated_in_version": "22.0",
+   "return_type": "number"
   },
   {
    "name": "Proper",
@@ -4047,7 +4356,8 @@
    "category_url": "text-functions.html",
    "slug": "proper",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/proper.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "PV",
@@ -4062,7 +4372,8 @@
    "category_url": "financial-functions.html",
    "slug": "pv",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/pv.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Quote",
@@ -4075,7 +4386,8 @@
    "category_url": "text-functions.html",
    "slug": "quote",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/quote.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "7.0",
+   "return_type": "text"
   },
   {
    "name": "Radians",
@@ -4088,7 +4400,8 @@
    "category_url": "trigonometric-functions.html",
    "slug": "radians",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/radians.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Random",
@@ -4098,7 +4411,8 @@
    "category_url": "number-functions.html",
    "slug": "random",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/random.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "RangeBeacons",
@@ -4114,7 +4428,8 @@
    "category_url": "mobile-functions.html",
    "slug": "rangebeacons",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/rangebeacons.md",
-   "originated_in_version": "15"
+   "originated_in_version": "15.0",
+   "return_type": "text"
   },
   {
    "name": "ReadQRCode",
@@ -4127,7 +4442,8 @@
    "category_url": "container-functions.html",
    "slug": "readqrcode",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/readqrcode.md",
-   "originated_in_version": "19"
+   "originated_in_version": "19.5",
+   "return_type": "text"
   },
   {
    "name": "RelationInfo",
@@ -4141,7 +4457,8 @@
    "category_url": "design-functions.html",
    "slug": "relationinfo",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/relationinfo.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Replace",
@@ -4157,7 +4474,8 @@
    "category_url": "text-functions.html",
    "slug": "replace",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/replace.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "RGB",
@@ -4172,7 +4490,8 @@
    "category_url": "text-formatting-functions.html",
    "slug": "rgb",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/rgb.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "Right",
@@ -4186,7 +4505,8 @@
    "category_url": "text-functions.html",
    "slug": "right",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/right.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "RightValues",
@@ -4200,7 +4520,8 @@
    "category_url": "text-functions.html",
    "slug": "rightvalues",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/rightvalues.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "text"
   },
   {
    "name": "RightWords",
@@ -4214,7 +4535,8 @@
    "category_url": "text-functions.html",
    "slug": "rightwords",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/rightwords.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "RomanHankaku",
@@ -4227,7 +4549,8 @@
    "category_url": "japanese-functions.html",
    "slug": "romanhankaku",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/romanhankaku.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "RomanZenkaku",
@@ -4240,7 +4563,8 @@
    "category_url": "japanese-functions.html",
    "slug": "romanzenkaku",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/romanzenkaku.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Round",
@@ -4254,7 +4578,8 @@
    "category_url": "number-functions.html",
    "slug": "round",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/round.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "ScriptIDs",
@@ -4267,7 +4592,8 @@
    "category_url": "design-functions.html",
    "slug": "scriptids",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/scriptids.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "ScriptNames",
@@ -4280,7 +4606,8 @@
    "category_url": "design-functions.html",
    "slug": "scriptnames",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/scriptnames.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Seconds",
@@ -4293,7 +4620,8 @@
    "category_url": "time-functions.html",
    "slug": "seconds",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/seconds.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Self",
@@ -4303,7 +4631,8 @@
    "category_url": "logical-functions.html",
    "slug": "self",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/self.md",
-   "originated_in_version": "9"
+   "originated_in_version": "9.0",
+   "return_type": "text, number, date, time, timestamp"
   },
   {
    "name": "SerialIncrement",
@@ -4317,7 +4646,8 @@
    "category_url": "text-functions.html",
    "slug": "serialincrement",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/serialincrement.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "text"
   },
   {
    "name": "SetPrecision",
@@ -4331,7 +4661,8 @@
    "category_url": "number-functions.html",
    "slug": "setprecision",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/setprecision.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "SetRecursion",
@@ -4345,7 +4676,8 @@
    "category_url": "logical-functions.html",
    "slug": "set-recursion",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/set-recursion.md",
-   "originated_in_version": "18"
+   "originated_in_version": "18.0",
+   "return_type": "text, number, date, time, timestamp, container"
   },
   {
    "name": "Sign",
@@ -4358,7 +4690,8 @@
    "category_url": "number-functions.html",
    "slug": "sign",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/sign.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Sin",
@@ -4371,7 +4704,8 @@
    "category_url": "trigonometric-functions.html",
    "slug": "sin",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/sin.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "SortValues",
@@ -4386,7 +4720,8 @@
    "category_url": "text-functions.html",
    "slug": "sortvalues",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/sortvalues.md",
-   "originated_in_version": "16"
+   "originated_in_version": "16.0",
+   "return_type": "text"
   },
   {
    "name": "Sqrt",
@@ -4399,7 +4734,8 @@
    "category_url": "number-functions.html",
    "slug": "sqrt",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/sqrt.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "StDev",
@@ -4412,7 +4748,8 @@
    "category_url": "aggregate-functions.html",
    "slug": "stdev",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/stdev.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "StDevP",
@@ -4425,7 +4762,8 @@
    "category_url": "aggregate-functions.html",
    "slug": "stdevp",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/stdevp.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Substitute",
@@ -4440,7 +4778,8 @@
    "category_url": "text-functions.html",
    "slug": "substitute",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/substitute.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "SubtractEmbeddings",
@@ -4454,7 +4793,8 @@
    "category_url": "artificial-intelligence-functions.html",
    "slug": "subtractembeddings",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/subtractembeddings.md",
-   "originated_in_version": "22.0.1"
+   "originated_in_version": "22.0",
+   "return_type": "text, container"
   },
   {
    "name": "Sum",
@@ -4467,7 +4807,8 @@
    "category_url": "aggregate-functions.html",
    "slug": "sum",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/sum.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "TableIDs",
@@ -4480,7 +4821,8 @@
    "category_url": "design-functions.html",
    "slug": "tableids",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/tableids.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "TableNames",
@@ -4493,7 +4835,8 @@
    "category_url": "design-functions.html",
    "slug": "tablenames",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/tablenames.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Tan",
@@ -4506,7 +4849,8 @@
    "category_url": "trigonometric-functions.html",
    "slug": "tan",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/tan.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "TextColor",
@@ -4520,7 +4864,8 @@
    "category_url": "text-formatting-functions.html",
    "slug": "textcolor",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/textcolor.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "7.0",
+   "return_type": "text"
   },
   {
    "name": "TextColorRemove",
@@ -4534,7 +4879,8 @@
    "category_url": "text-formatting-functions.html",
    "slug": "textcolorremove",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/textcolorremove.md",
-   "originated_in_version": "8"
+   "originated_in_version": "8.0",
+   "return_type": "text"
   },
   {
    "name": "TextDecode",
@@ -4548,7 +4894,8 @@
    "category_url": "container-functions.html",
    "slug": "textdecode",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/textdecode.md",
-   "originated_in_version": "16"
+   "originated_in_version": "16.0",
+   "return_type": "text"
   },
   {
    "name": "TextEncode",
@@ -4563,7 +4910,8 @@
    "category_url": "container-functions.html",
    "slug": "textencode",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/textencode.md",
-   "originated_in_version": "16"
+   "originated_in_version": "16.0",
+   "return_type": "container"
   },
   {
    "name": "TextFont",
@@ -4577,7 +4925,8 @@
    "category_url": "text-formatting-functions.html",
    "slug": "textfont",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/textfont.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "7.0",
+   "return_type": "text"
   },
   {
    "name": "TextFontRemove",
@@ -4591,7 +4940,8 @@
    "category_url": "text-formatting-functions.html",
    "slug": "textfontremove",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/textfontremove.md",
-   "originated_in_version": "8"
+   "originated_in_version": "8.0",
+   "return_type": "text"
   },
   {
    "name": "TextFormatRemove",
@@ -4604,7 +4954,8 @@
    "category_url": "text-formatting-functions.html",
    "slug": "textformatremove",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/textformatremove.md",
-   "originated_in_version": "8"
+   "originated_in_version": "8.0",
+   "return_type": "text"
   },
   {
    "name": "TextSize",
@@ -4618,7 +4969,8 @@
    "category_url": "text-formatting-functions.html",
    "slug": "textsize",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/textsize.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "7.0",
+   "return_type": "text, number"
   },
   {
    "name": "TextSizeRemove",
@@ -4632,7 +4984,8 @@
    "category_url": "text-formatting-functions.html",
    "slug": "textsizeremove",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/textsizeremove.md",
-   "originated_in_version": "8"
+   "originated_in_version": "8.0",
+   "return_type": "text"
   },
   {
    "name": "TextStyleAdd",
@@ -4646,7 +4999,8 @@
    "category_url": "text-formatting-functions.html",
    "slug": "textstyleadd",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/textstyleadd.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "7.0",
+   "return_type": "text"
   },
   {
    "name": "TextStyleRemove",
@@ -4660,7 +5014,8 @@
    "category_url": "text-formatting-functions.html",
    "slug": "textstyleremove",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/textstyleremove.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "text"
   },
   {
    "name": "Time",
@@ -4675,7 +5030,8 @@
    "category_url": "time-functions.html",
    "slug": "time",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/time.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "time"
   },
   {
    "name": "Timestamp",
@@ -4689,7 +5045,8 @@
    "category_url": "timestamp-functions.html",
    "slug": "timestamp",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/timestamp.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "7.0",
+   "return_type": "timestamp"
   },
   {
    "name": "Trim",
@@ -4702,7 +5059,8 @@
    "category_url": "text-functions.html",
    "slug": "trim",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/trim.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "TrimAll",
@@ -4717,7 +5075,8 @@
    "category_url": "text-functions.html",
    "slug": "trimall",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/trimall.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Truncate",
@@ -4731,7 +5090,8 @@
    "category_url": "number-functions.html",
    "slug": "truncate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/truncate.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "UniqueValues",
@@ -4746,7 +5106,8 @@
    "category_url": "text-functions.html",
    "slug": "uniquevalues",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/uniquevalues.md",
-   "originated_in_version": "16"
+   "originated_in_version": "16.0",
+   "return_type": "text"
   },
   {
    "name": "Upper",
@@ -4759,7 +5120,8 @@
    "category_url": "text-functions.html",
    "slug": "upper",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/upper.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "ValueCount",
@@ -4772,7 +5134,8 @@
    "category_url": "text-functions.html",
    "slug": "valuecount",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/valuecount.md",
-   "originated_in_version": "7"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "ValueListIDs",
@@ -4785,7 +5148,8 @@
    "category_url": "design-functions.html",
    "slug": "valuelistids",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/valuelistids.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "ValueListItems",
@@ -4799,7 +5163,8 @@
    "category_url": "design-functions.html",
    "slug": "valuelistitems",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/valuelistitems.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "ValueListNames",
@@ -4812,7 +5177,8 @@
    "category_url": "design-functions.html",
    "slug": "valuelistnames",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/valuelistnames.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "Variance",
@@ -4825,7 +5191,8 @@
    "category_url": "aggregate-functions.html",
    "slug": "variance",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/variance.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "VarianceP",
@@ -4838,7 +5205,8 @@
    "category_url": "aggregate-functions.html",
    "slug": "variancep",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/variancep.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "7.0",
+   "return_type": "number"
   },
   {
    "name": "VerifyContainer",
@@ -4851,7 +5219,8 @@
    "category_url": "container-functions.html",
    "slug": "verifycontainer",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/verifycontainer.md",
-   "originated_in_version": "12"
+   "originated_in_version": "12.0",
+   "return_type": "text"
   },
   {
    "name": "WeekOfYear",
@@ -4864,7 +5233,8 @@
    "category_url": "date-functions.html",
    "slug": "weekofyear",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/weekofyear.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "WeekOfYearFiscal",
@@ -4878,7 +5248,8 @@
    "category_url": "date-functions.html",
    "slug": "weekofyearfiscal",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/weekofyearfiscal.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "While",
@@ -4894,7 +5265,8 @@
    "category_url": "logical-functions.html",
    "slug": "while",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/while.md",
-   "originated_in_version": "18"
+   "originated_in_version": "18.0",
+   "return_type": "text, number, date, time, timestamp, container"
   },
   {
    "name": "WindowNames",
@@ -4904,7 +5276,8 @@
    "category_url": "design-functions.html",
    "slug": "windownames",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/windownames.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   },
   {
    "name": "WordCount",
@@ -4917,7 +5290,8 @@
    "category_url": "text-functions.html",
    "slug": "wordcount",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/wordcount.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "Year",
@@ -4930,7 +5304,8 @@
    "category_url": "date-functions.html",
    "slug": "year",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/year.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "number"
   },
   {
    "name": "YearName",
@@ -4944,7 +5319,8 @@
    "category_url": "japanese-functions.html",
    "slug": "yearname",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/yearname.md",
-   "originated_in_version": "legacy"
+   "originated_in_version": "6.0 or earlier",
+   "return_type": "text"
   }
  ]
 }

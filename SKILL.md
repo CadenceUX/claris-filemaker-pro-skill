@@ -2,416 +2,283 @@
 compatibility: Claude.ai, Claude Chat, Claude Code
 metadata:
   "Built and maintained": "Darrin Southern from CadenceUX"
-  version: "1.9.2"
+  version: "2.0.0"
 name: claris-filemaker-pro
 description: |
-  REFERENCE skill — FileMaker Pro script steps, calculation functions, and custom functions ONLY.
-  Use for: syntax lookups, function parameters, usage examples, and live doc fetches across all
-  368 built-in functions (If, Case, Let, While, ExecuteSQL, JSON, AI/embedding, Persistent Data),
-  all 215 script steps (including FM 26 PDF Files and Persistent Data categories), Data API (REST),
-  SQL/ExecuteSQL, WebDirect, FileMaker Go, error codes, and custom function patterns. Not a platform
+  REFERENCE skill — FileMaker Pro script steps, calculation functions, and field types. Use for:
+  syntax lookups, function parameters and return types, per-step platform support across
+  FileMaker Pro, Go, WebDirect, Server, Cloud, Data API and Custom Web Publishing, field type
+  capabilities, usage examples, and live doc fetches. Covers all 368 built-in functions (If,
+  Case, Let, While, ExecuteSQL, JSON, AI/embedding, Persistent Data), all 216 script steps
+  (including the FM 26 PDF Files and Persistent Data categories), plus the Data API, OData,
+  WebDirect, FileMaker Go, SQL/ExecuteSQL, error codes, and custom functions. Not a platform
   administration guide. Out of scope: FileMaker Server admin, Claris Connect, Claris Studio,
-  ODBC/JDBC deep configuration. Trigger on any FileMaker function name — even inside code, a calc
-  field, or a script. Always check local reference files first for format, doc_url, and
-  originated_in_version before fetching live docs. Prefer live doc fetches over training data —
-  Claris docs are versioned and frequently updated.
+  ODBC/JDBC configuration. Trigger on any FileMaker function or script step name — even inside
+  code, a calc field, or a script. Local reference files are verified against source and are
+  authoritative; fetch live docs when the topic is volatile or the user signals recency.
 ---
 
-# Claris FileMaker Pro — Skill v1.9.2
+# Claris FileMaker Pro — Skill v2.0.0
 
-## Overview
+## What this skill is
 
-This is a **reference-only** skill covering FileMaker Pro **script steps**, **calculation functions**,
-and **custom functions**. It is not a general FileMaker Pro assistant and does not cover platform
-administration, server configuration, or Claris Connect workflows.
+A **reference skill for FileMaker Pro** — script steps, calculation functions, field types, and
+the client platforms a solution runs on. It is deliberately scoped to FileMaker Pro rather than
+the wider Claris platform, and it goes deep on that one surface: verified call signatures and
+return types, per-step platform support, worked usage examples, error codes, and the API
+surfaces a Pro developer actually reaches for.
 
-The Claris Help Centre at **https://help.claris.com** is the authoritative documentation source.
-This skill instructs Claude to use local reference files first, then fetch live documentation
-when deeper detail is needed, rather than relying on potentially stale training data.
+It is **not** a minimal name-and-signature vocabulary list, and **not** a link index that defers
+every real answer to a web fetch. The local reference files carry verified content and are
+designed to answer most questions without a network round-trip. It does not cover FileMaker
+Server administration, Claris Connect, Claris Studio, or deep ODBC/JDBC configuration.
 
-For the latest FileMaker Pro release notes, see the [FileMaker Pro Release Notes](https://help.claris.com/markdown/en/pro-release-notes/index.md).
+The Claris Help Centre at **https://help.claris.com** remains the authoritative upstream source.
+Every local file records how and when it was verified against it.
 
-The `last_known_fm_version` value in each catalog's `meta` block (`function-catalog.json` and
-`script-steps-catalog.json`, currently `26`) records the highest FileMaker version this skill's
-local reference files were built against. It is updated with each skill rebuild — it is **not** a
-cap on which version you can answer questions about.
+---
+
+## Local-first: when to answer locally, when to fetch
+
+**Default: answer from the local reference files.** They were re-derived from the live Claris
+documentation on **2026-07-25** — every function signature, return type, and originated-in
+version, and every script step's full seven-product compatibility matrix. Treat them as correct.
+
+This matters for generation speed and accuracy: composing a script, or a set of field
+definitions, should not require a network fetch per step.
+
+**Fetch live only when one of these is true:**
+
+| Trigger to fetch | Why |
+|---|---|
+| The topic is AI / embedding / RAG / model providers | Provider lists and options change between point releases |
+| `originated_in_version` is higher than the catalog's `last_known_fm_version` | The entry post-dates the last verification |
+| The user says "latest", "current", "has this changed", or names a version | Explicit recency signal |
+| You need a full worked request/response body, or an exhaustive option matrix | Catalogs carry signatures and support, not every option permutation |
+| Version drift was already detected this session | Local files are behind |
+| The local entry is absent, or you are unsure it is complete | Uncertainty is itself the trigger |
+
+**Do not fetch** merely because a function is old, because the question mentions a platform, or
+out of habit. Per-step platform support is local, verified and complete — use it.
+
+If a live page contradicts a local file, the live page wins; say so explicitly in your answer.
 
 ---
 
 ## Version drift detection
 
-**Every time a live help page is fetched, check for version drift using the page's
-`## Originated in version` section — not the YAML frontmatter.**
+**When you do fetch a page, check `## Originated in version` in the page body — not the YAML
+frontmatter.**
 
-Every `.md` help page returns structured YAML at the top (`version:` / `version_year:`), but
-that field tracks the documentation build, **not** the FileMaker feature release — verified
-2026-07-04: pages for features that originated in FM 26 (Configure Persistent Data, Create PDF,
-Get(WindowUUID)) still return `version: 22 / version_year: 2025` in frontmatter. Comparing
-frontmatter against `last_known_fm_version` never fires and would mislabel current docs as old.
+Every `.md` help page returns YAML with `version:` / `version_year:`, but that tracks the
+documentation build, not the feature release — verified 2026-07-04: FM 26 features still return
+`version: 22 / version_year: 2025`. Comparing frontmatter against `last_known_fm_version` never
+fires, and mislabels current docs as old.
 
-The reliable per-page signal is the `## Originated in version` section in the page body — a bare
-version number (e.g. `26.0`) stating which FileMaker release introduced the function or step.
-
-When fetching any page:
-
-1. Read the `## Originated in version` value from the page body.
-2. Compare with `last_known_fm_version` in the local catalogs' `meta` block (currently `26`).
-3. If the page's originated version is higher than `last_known_fm_version`, **immediately flag it**:
+1. Read `## Originated in version` from the page body.
+2. Compare with `last_known_fm_version` in the catalog `meta` block (currently `26`).
+3. If higher, flag it:
 
    > ⚠️ **Skill version drift detected** — this page documents a feature originated in FM [X],
-   > but the local reference files in this skill were last built for FM 26 (2026). New functions,
-   > script steps, or behaviour changes introduced since FM 26 may not be reflected in local catalogs.
-   > Consider running a skill rebuild to pick up new additions.
+   > but this skill's local reference files were last verified for FM 26. New functions, script
+   > steps, or behaviour changes since then may not be reflected locally.
 
-4. Still answer the question using the fetched content — the flag is advisory, not a blocker.
-5. Do **not** flag versions that are ≤ `last_known_fm_version`, and don't use the YAML
-   frontmatter `version:` as a drift signal in either direction.
+4. Still answer from the fetched content — the flag is advisory.
+5. Don't flag versions ≤ `last_known_fm_version`.
+
+### `topic_type` is not a reliable roster signal
+
+When rebuilding catalogs, derive the roster **structurally** — a script step page has a
+`## Compatibility` table; a function page has `## Format` and `## Data type returned`. Claris
+mislabels at least four pages as `topic_type: conceptual` (`set-dictionary`,
+`getpersistentdata`, `listpersistentdataids`, `get-systemstorageavailable`). A `topic_type`
+sweep alone undercounts, and previously caused a real script step to be missed entirely.
 
 ---
 
 ## Version self-check
 
-At the start of each session — on the first FileMaker question in the conversation — run this
-check once:
+At the start of each session, on the first FileMaker question, run once:
 
 1. Fetch `https://github.com/CadenceUX/claris-filemaker-pro-skill/raw/main/VERSION`
-2. Parse the returned string as the latest available version
-3. Compare with this skill's installed version (currently `"1.9.2"`)
-4. If latest > installed, prepend this notice to your first response:
+2. Compare with this skill's installed version (currently `"2.0.0"`)
+3. If latest > installed, prepend:
 
    > ⚠️ **Skill update available**
    > This skill is v[installed]. v[latest] is available at
    > https://github.com/CadenceUX/claris-filemaker-pro-skill/releases
-   > Update your local skill files to get the latest FM coverage.
 
-5. Do not repeat the notice again in the same session.
-6. If the fetch fails or returns an unexpected value, skip silently — do not surface the error.
+4. Don't repeat in the same session. If the fetch fails, skip silently.
 
 ---
 
-## Mandatory trigger: FileMaker functions and script steps
+## Mandatory trigger: FileMaker functions, script steps, and fields
 
-**Any request that involves a FileMaker calculation function OR script step — by name, by category,
-or by describing what a calculation or script should do — MUST use this skill.**
+**Any request involving a FileMaker calculation function, script step, or field definition — by
+name, by category, or by describing what it should do — must use this skill.**
 
-Examples that are mandatory triggers:
-- "How does `While` work?" -> check `logical-json-ai-functions-examples.md`, then `function-catalog.json`
-- "Write me a Let() calculation that..." -> look up format in catalog, compose from examples
-- "What's the difference between `ExecuteSQL` and `ExecuteSQLe`?" -> logical-json-ai-functions-examples.md
-- "Fix this calc: `Case ( Status = \"Open\" ; ...`" -> identify functions, look each up
-- "Which function returns the current record ID?" -> search catalog by purpose/category
-- "How do I loop through records in a script?" -> script-steps-catalog.json (Loop, Exit Loop If)
-- "Get the error code after a find" -> quickrefs.md (error codes section)
-- "Sum all related line items" -> specialty-functions-examples.md (aggregate section)
-- "Add 30 days to a date" -> date-time-functions-examples.md
-- "List all field names on a layout" -> design-container-functions-examples.md (FieldNames)
-- "Encode a container to Base64" -> design-container-functions-examples.md (container section)
-- "Extract a value from a JSON response" -> logical-json-ai-functions-examples.md (JSON section)
-- "Parse and reuse JSON multiple times" -> logical-json-ai-functions-examples.md (JSONParse section)
-- "What time is it in seconds?" -> date-time-functions-examples.md (time section)
-- "Calculate a loan payment" -> numeric-functions-examples.md (financial section)
-- "Get the sine of 45 degrees" -> numeric-functions-examples.md (trig section)
-- "Convert katakana to hiragana" -> specialty-functions-examples.md (Japanese section)
-- "Get GPS coordinates on FileMaker Go" -> specialty-functions-examples.md (mobile section)
-- "Access the 3rd repetition of a field" -> numeric-functions-examples.md (repeating section)
-- "Get a named layout object's width" -> specialty-functions-examples.md (miscellaneous section)
-- Any code block containing function names or script step names
-- "Predict a value from a trained model" → `logical-json-ai-functions-examples.md` (PredictFromModel)
-- "Get IDs from found set" → `specialty-functions-examples.md` (GetRecordIDsFromFoundSet)
-- "Restore a found set I saved earlier" → `script-steps-catalog.json` (Go to List of Records)
-- "Fine-tune a model from my data" → `script-steps-catalog.json` (Fine-Tune Model)
-- "Combine two embedding vectors" → `logical-json-ai-functions-examples.md` (AddEmbeddings)
-- "Set up a RAG account" → `script-steps-catalog.json` (Configure RAG Account)
-- "Control transaction revert on error" → `script-steps-catalog.json` (Set Revert Transaction on Error)
-- "Get text out of a PDF in a container" → `design-container-functions-examples.md` (GetTextFromPDF)
-- "Caption this image with AI" → `script-steps-catalog.json` (AI category — Insert Image Caption)
-- "Caption all images in found set" → `script-steps-catalog.json` (AI category — Insert Image Captions in Found Set)
-- "Clear web viewer cookies" → `script-steps-catalog.json` (Miscellaneous — Flush Web Viewer Cookies)
-- "Save persistent data / app variable" → `script-steps-catalog.json` (Persistent Data — Configure Persistent Data); `specialty-functions-examples.md` (GetPersistentData, ListPersistentDataIDs)
-- "Create / build / merge a PDF in script" → `script-steps-catalog.json` (PDF Files category)
-- "Print a PDF from a container" → `script-steps-catalog.json` (PDF Files — Print PDF)
-- "Get the annotation on a field" → `design-container-functions-examples.md` (FieldAnnotation)
-- "Get display names for a field" → `design-container-functions-examples.md` (FieldDisplayNames)
-- "Get base table comment" → `design-container-functions-examples.md` (BaseTableComment)
-- "Is Guided Access on?" → `get-functions-examples.md` (Get(GuidedAccessState), Device section)
-- "Password expiry / days remaining" → `get-functions-examples.md` (Get(AccountPasswordDaysRemaining), Account section)
-- "Get the window UUID" → `get-functions-examples.md` (Get(WindowUUID), Layout & Window section)
-
-**Workflow for function questions:**
-1. Check the relevant reference file (see table below) for syntax, parameters, and usage patterns
-2. Open `references/function-catalog.json` for the exact format and `doc_url`
-3. Use `doc_url` to `web_fetch` the live help page for authoritative parameter detail if needed
-4. Answer with the format inline and cite the doc URL
-
-**Workflow for script step questions:**
-1. Check `references/script-steps-catalog.json` for syntax and `doc_url`
-2. Fetch the live `doc_url` page if detailed option behaviour is needed
-3. Answer with the syntax inline
-
----
-
-## Step-by-step workflow (general)
-
-1. **Identify the guide** — from `quickrefs.md` (sitemap section) as a fast-path shortcut, or from
-   `https://help.claris.com/llms-full.txt` for any URL that is unknown or needs confirming.
-2. **For function questions** — check the relevant example file first, then `function-catalog.json`
-   for format + doc_url, then fetch the live page for examples and edge cases.
-3. **For script step questions** — check `script-steps-catalog.json` first, then fetch live page.
-4. **Fetch the index** (if unsure which page) — `web_fetch` the guide's `index.md` to read
-   the full table of contents from the sidebar, then identify the specific page(s).
-5. **Fetch the specific page(s)** — `web_fetch` each relevant page. For technical topics, fetch
-   2–4 pages if they are clearly related.
-6. **Answer from the fetched content** — synthesise an accurate, direct answer. Include the
-   doc URL(s) as a reference.
-
----
-
-## URL patterns
-
-All Claris Help pages are available as clean Markdown at this pattern:
-
-```
-https://help.claris.com/markdown/en/{guide-slug}/{page-slug}.md
-```
-
-Guide index pages:
-```
-https://help.claris.com/markdown/en/{guide-slug}/index.md
-```
-
-The `.md` endpoints return native Markdown — no `html_extraction_method` needed in `web_fetch`.
-
----
-
-## Live sitemap
-
-When a page URL is unknown, a guide slug needs confirming, a page is not found at its expected
-path, or version drift is suspected:
-
-- **`https://help.claris.com/llms-full.txt`** — canonical live sitemap; complete per-page
-  enumeration across all 12 locales (~18,988 pages). Fetch this to scan for new guides or
-  confirm any URL.
-- **`https://help.claris.com/llms.txt`** — curated product landing page index; faster for
-  finding a guide's root URL when you don't need the full page list.
-
-The sitemap section in `quickrefs.md` is a fast-path shortcut for known common pages — useful
-for quick lookups but not authoritative. When in doubt, fetch `llms-full.txt`.
-
----
-
-## Local vs live — decision rules
-
-### Use local data
-
-| Situation | Source |
+| Ask | Go to |
 |---|---|
-| Function syntax and call format | `function-catalog.json` is authoritative |
-| `originated_in_version` lookups | Local catalog only |
-| Common error codes (quick lookup) | `quickrefs.md` sufficient |
-| Script step name and basic syntax | `script-steps-catalog.json` |
+| "How does `While` work?" | `logical-json-ai-functions-examples.md` |
+| "Write a `Let()` calculation that…" | catalog for format, examples for pattern |
+| "`ExecuteSQL` vs `ExecuteSQLe`?" | `logical-json-ai-functions-examples.md` |
+| "Which function returns the current record ID?" | `function-catalog.json` (search by purpose) |
+| "What data type does this function return?" | `function-catalog.json` → `return_type` |
+| "Does this step work in WebDirect / Go / the Data API?" | `script-steps-catalog.json` → `platform_exceptions` |
+| "How do I loop through records?" | `script-steps-catalog.json` |
+| "Get the error code after a find" | `quickrefs.md` |
+| "What field type should I use for…?" | `field-types-catalog.json` |
+| "Which options apply to a summary field?" | `field-types-catalog.json` |
+| "Can I index a container field?" | `field-types-catalog.json` |
+| "How do I query FileMaker over OData?" | `odata-api-reference.md` |
+| "Why doesn't my script work in the browser?" | `webdirect-reference.md` |
+| "What's different on iPad?" | `filemaker-go-reference.md` |
+| "Save persistent data / an app variable" | `script-steps-catalog.json` (Persistent Data), `specialty-functions-examples.md` |
+| "Create / merge / print a PDF in a script" | `script-steps-catalog.json` (PDF Files) |
+| Any code block containing function or step names | identify each, look each up |
 
-### Always fetch live
+**Workflow:** check the relevant example file → confirm format, `return_type` and
+`platform_exceptions` in the catalog → answer with the signature inline and cite the doc URL.
+Fetch live only per the rules above.
 
-| Situation | Reason |
+---
+
+## Reference files — all 14
+
+| File | Contains |
 |---|---|
-| `originated_in_version` is FM 19.3 or later | Docs may have been updated post-release |
-| Any AI/ML function or script step, any version | Rapidly evolving — local files lag |
-| Platform compatibility (Go, WebDirect, Server, Data API) | Restrictions change between point releases |
-| User mentions "latest", "current", a specific version, or "has this changed" | Explicit recency signal |
-| Version drift detected in this session | Local files are behind |
-| Exact parameter behaviour, option names, or restrictions | Claris updates docs within a version without bumping the version number — local files capture a point in time only |
+| `function-catalog.json` | All **368** functions through FM 26 — format, parameters, **return_type**, purpose, category, slug, doc_url, originated_in_version. Master for call signatures and return types. |
+| `script-steps-catalog.json` | All **216** script steps through FM 26 across 16 categories — syntax, purpose, notes, doc_url, originated_in_version, and **`platform_exceptions`** (delta-encoded seven-product support). |
+| `field-types-catalog.json` | The six data types and three field types, which options apply to each, indexing and storage semantics, the eight summary types, container external storage, and FM 26 advanced field options (DDL annotation, custom display names). |
+| `odata-api-reference.md` | OData base URL, auth, query options, CRUD, batch, schema modification, running scripts, and the documented unsupported-feature list. |
+| `webdirect-reference.md` | Measured script step support, feature limitations, connection limits, design guidance. |
+| `filemaker-go-reference.md` | Measured script step support, Go-only steps, behaviour differences, device capabilities. |
+| `logical-json-ai-functions-examples.md` | **Logical** + **JSON** + **AI/embedding** functions with worked examples. |
+| `get-functions-examples.md` | All Get() functions grouped by 12 categories. |
+| `design-container-functions-examples.md` | **Design** + **Container** functions. |
+| `text-functions-examples.md` | **Text** + **Text Formatting** functions. |
+| `date-time-functions-examples.md` | **Date** + **Time/Timestamp** functions. |
+| `numeric-functions-examples.md` | **Number**, **Financial**, **Trigonometric**, **Repeating**. |
+| `specialty-functions-examples.md` | **Aggregate**, **Japanese**, **Mobile/Go**, **Miscellaneous**, **Persistent Data**. |
+| `quickrefs.md` | **Error codes**, **ExecuteSQL** syntax and system columns, **Data API** REST reference, and a FileMaker-Pro-scoped sitemap. |
+
+---
+
+## Platform support — how to read it
+
+`script-steps-catalog.json` carries verified support for all 216 steps across seven products:
+**Pro, Go, WebDirect, Server, Cloud, DataAPI, CWP**.
+
+Support is **delta-encoded**: `platform_exceptions` lists only the products where a step is *not*
+fully supported. **If `platform_exceptions` is absent, the step is supported everywhere.**
+
+| Value | Meaning |
+|---|---|
+| *(absent)* | Yes — fully supported on all seven |
+| `"No"` | The step is **skipped** and returns error **3** ("Command is unavailable"). No alert, the script continues. Check `Get(LastError)`. |
+| `"Partial"` | The step runs but one or more features differ. Read the step's Notes on its doc page. |
+
+Measured totals across 216 steps — Pro 204 yes / 6 partial / 6 no · Go 154/20/42 ·
+WebDirect 103/38/75 · Server 108/29/79 · Cloud 106/27/83 · DataAPI 91/26/99 · CWP 99/26/91.
+
+**Treating "Partial" as supported is a common and costly mistake.** Several very common steps
+are Partial rather than Yes, including `Go to Layout`, `Go to Portal Row`,
+`Go to List of Records`, `Execute SQL` and `Export Records` in various contexts.
+
+`os_restriction` is separate and orthogonal — a desktop-OS limit (macOS only / Windows only).
+
+Calculation **functions do not carry a Compatibility table** in Claris documentation, so
+per-function platform support is not available as structured data. Where it matters, read the
+function's own page notes, or detect at runtime with `Get(ApplicationVersion)`. Error **1225**
+("Function referred to is not supported in this context") is the runtime signal.
 
 ---
 
 ## Automatic version notes
 
-When answering a function or script step question, read `originated_in_version` from the catalog
-and inject the appropriate version note automatically — do not ask the user which version they are on.
+Read `originated_in_version` from the catalog and inject a version note automatically — don't
+ask the user which version they're on. Versions are stored in Claris's own precise form
+(`6.0 or earlier`, `19.6.1`, `22.0`, `26.0.1`).
 
-| `originated_in_version` | Note to inject |
+| Originated | Note to inject |
 |---|---|
-| FM 19.3 – FM 20 | "Requires FM 19.3+. If you're on an earlier version, [describe fallback if one exists]." |
-| FM 21.0.1 | "AI/embedding feature — requires FM 21 or later." |
-| FM 21.1.1 | "Requires FM 21.1.1 or later (FileMaker Pro 2024 update, November 2024)." |
-| FM 22.0.1 | "Introduced in FM 22 (2025) — not available in earlier versions." |
-| FM 26 | "Introduced in FM 26 (2026) — not available in earlier versions." |
-| FM 18 or earlier | No version note unless the user asks |
+| 19.3 – 20.x | "Requires FM 19.3+ — describe a fallback if one exists." |
+| 21.x | "AI/embedding feature — requires FM 21 or later." |
+| 22.x | "Introduced in FM 22 (2025)." |
+| 26.x | "Introduced in FM 26 (2026) — not available in earlier versions." |
+| 18.x or earlier | No note unless asked |
 
-FM 19 is the practical floor for version-awareness — anything older noted as "may not be available
-on legacy versions" without detail.
+FM 19 is the practical floor; anything older is noted only as "may not be available on legacy
+versions".
 
 ---
 
-## Reference files — all 10
+## Fetching strategy — which file first
 
-| File | Contains |
+| Topic | Check first |
 |---|---|
-| `function-catalog.json` | All 368 functions through FM 26 — format, parameters, purpose, category, category_url, slug, doc_url, originated_in_version. Master for call signatures. Includes FM 26 additions: BaseTableComment, FieldAnnotation, FieldDisplayNames (Design); Get(AccountPasswordDaysRemaining), Get(GuidedAccessState), Get(WindowUUID) (Get); GetPersistentData, ListPersistentDataIDs (Persistent Data). |
-| `script-steps-catalog.json` | All 215 script steps through FM 26, across 16 categories — syntax, purpose, notes, doc_url. Includes FM 26 additions: Insert Image Caption, Insert Image Captions in Found Set (AI category); Flush Web Viewer Cookies (Miscellaneous); Configure Persistent Data (new Persistent Data category); Create PDF, Open PDF, Append PDF, Close PDF, Cancel PDF, Print PDF + updated Save Records as PDF (new PDF Files category). Corrected 2026-07-04: 58 steps that were missing from earlier builds (the Data File family, most Spelling steps, nine Open Menu Item steps, the AVPlayer family, Send Mail, Execute FileMaker Data API, Perform AppleScript, Perform JavaScript in Web Viewer, Save a Copy as XML, Set Error Logging, Truncate Table, Perform Script On Server with Callback, and more) were added, verified against live Claris pages; 6 nonexistent step names were removed and 2 misnamed entries corrected (Go to Object, Show/Hide Toolbars). A full topic_type sweep of every en/pro-help page confirms the catalog matches the live doc set exactly. |
-| `logical-json-ai-functions-examples.md` | **Logical** (20 functions: If, Case, Let, While, ExecuteSQL, ExecuteSQLe, Evaluate, GetField, GetNthRecord…) + **JSON** (10 functions: JSONGetElement, JSONSetElement, JSONListKeys, JSONMakeArray, JSONParse, JSONParsedState…) + **AI** (14 functions: GetEmbedding, CosineSimilarity, GetTokenCount, GetTableDDL, GetRAGSpaceInfo, PredictFromModel, AddEmbeddings, SubtractEmbeddings, NormalizeEmbedding, GetFieldsOnLayout…) |
-| `get-functions-examples.md` | All 138 Get() functions through FM 26, grouped by 12 categories: Date/Time, Account, File, Paths, Record, Layout/Window, Script/Trigger, Field, Sorting, Network, Device, Calculation. FM 26 additions: Get(AccountPasswordDaysRemaining) (Account); Get(GuidedAccessState) (Device); Get(WindowUUID) (Layout/Window). |
-| `design-container-functions-examples.md` | **Design** (26 functions through FM 26: FieldNames, FieldType, LayoutNames, TableNames, ValueListItems, ScriptNames, BaseTableIDs, BaseTableComment, FieldAnnotation, FieldDisplayNames…) + **Container** (24 functions: Base64Encode/Decode, CryptEncrypt/Decrypt, CryptDigest, GetContainerAttribute, GetLiveText, ReadQRCode, GetTextFromPDF…) |
-| `text-functions-examples.md` | **Text** (39 functions: Left, Right, Middle, Position, Substitute, PatternCount, Trim, Filter…) + **Text Formatting** (10 functions: TextColor, TextSize, TextFont, TextStyleAdd…) |
-| `date-time-functions-examples.md` | **Date** (10 functions: Date, Day, Month, Year, DayOfWeek, DayName, MonthName, WeekOfYear…) + **Time & Timestamp** (5 functions: Hour, Minute, Seconds, Time, Timestamp) |
-| `numeric-functions-examples.md` | **Number** (18 functions: Round, Int, Mod, Abs, Ceiling, Floor, Random…) + **Financial** (4: FV, NPV, PMT, PV) + **Trigonometric** (9: Sin, Cos, Tan, Asin, Acos, Atan, Degrees, Radians, Pi) + **Repeating** (3: Extend, GetRepetition, Last) |
-| `specialty-functions-examples.md` | **Aggregate** (10: Sum, Count, Average, List, Max, Min, StDev…) + **Japanese** (12: Hiragana, Katakana, NumToJText, Furigana, YearName…) + **Mobile/Go** (5: Location, LocationValues, GetSensor, GetAVPlayerAttribute, RangeBeacons) + **Miscellaneous** (9: GetLayoutObjectAttribute, GetFieldName, ConvertFromFileMakerPath, LayoutObjectUUID, GetRecordIDsFromFoundSet…) + **Persistent Data** (2 FM 26 functions: GetPersistentData, ListPersistentDataIDs) |
-| `quickrefs.md` | **Error codes** (0-899 + 1630-1631, AI/ML errors 870-892 verified against live docs 2026-06) + **ExecuteSQL** syntax, clauses, data types, date literals + **Data API** REST endpoints, auth, CRUD, find, portal data + **Sitemap** of common Claris Help guides (fast-path shortcut — use llms-full.txt for authoritative lookups) |
+| Logical / Case / Let / While / ExecuteSQL / JSON / AI | `logical-json-ai-functions-examples.md` |
+| Get() functions | `get-functions-examples.md` |
+| Design / Container / Base64 / Crypt / OCR / PDF text | `design-container-functions-examples.md` |
+| Text / Substitute / formatting | `text-functions-examples.md` |
+| Date / Time / Timestamp | `date-time-functions-examples.md` |
+| Number / Financial / Trigonometric / Repeating | `numeric-functions-examples.md` |
+| Aggregate / Japanese / Mobile / Persistent Data | `specialty-functions-examples.md` |
+| Any function's signature or return type | `function-catalog.json` |
+| Any script step | `script-steps-catalog.json` |
+| Step support on a client or host | `script-steps-catalog.json` → `platform_exceptions` |
+| Field types, storage, indexing, validation, summary types | `field-types-catalog.json` |
+| OData | `odata-api-reference.md` |
+| WebDirect | `webdirect-reference.md` |
+| FileMaker Go | `filemaker-go-reference.md` |
+| Data API / REST | `quickrefs.md` |
+| Error codes | `quickrefs.md` |
+| ExecuteSQL syntax, `ROWID` / `ROWMODID` | `quickrefs.md` |
+| Finding a help page URL | `quickrefs.md` sitemap, else `https://help.claris.com/llms-full.txt` |
 
 ---
 
-## Fetching strategy — which file to check first
+## Related skills
 
-| Topic | Check first | Then |
-|---|---|---|
-| Logical / Case / Let / While / ExecuteSQL | `logical-json-ai-functions-examples.md` | `function-catalog.json` → live doc |
-| JSON functions | `logical-json-ai-functions-examples.md` | `function-catalog.json` → live doc |
-| JSONParse / JSONParsedState (performance caching) | `logical-json-ai-functions-examples.md` | `function-catalog.json` → live doc |
-| AI / embedding functions | `logical-json-ai-functions-examples.md` | `function-catalog.json` → live doc |
-| Get() functions | `get-functions-examples.md` | `function-catalog.json` → live doc |
-| Get(AccountPasswordDaysRemaining) | `get-functions-examples.md` (Account section) | `function-catalog.json` → live doc |
-| Get(GuidedAccessState) | `get-functions-examples.md` (Device section) | `function-catalog.json` → live doc |
-| Get(WindowUUID) | `get-functions-examples.md` (Layout/Window section) | `function-catalog.json` → live doc |
-| Design / FieldNames / LayoutNames | `design-container-functions-examples.md` | `function-catalog.json` → live doc |
-| FieldAnnotation / FieldDisplayNames / BaseTableComment | `design-container-functions-examples.md` | `function-catalog.json` → live doc |
-| Container / Base64 / Crypt / OCR | `design-container-functions-examples.md` | `function-catalog.json` → live doc |
-| GetTextFromPDF | `design-container-functions-examples.md` | `function-catalog.json` → live doc |
-| Text / Substitute / PatternCount | `text-functions-examples.md` | `function-catalog.json` → live doc |
-| Text formatting / TextColor | `text-functions-examples.md` | `function-catalog.json` → live doc |
-| Date functions | `date-time-functions-examples.md` | `function-catalog.json` → live doc |
-| Time / Timestamp | `date-time-functions-examples.md` | `function-catalog.json` → live doc |
-| Number / Round / Mod / Random | `numeric-functions-examples.md` | `function-catalog.json` → live doc |
-| Financial / PMT / NPV | `numeric-functions-examples.md` | `function-catalog.json` → live doc |
-| Trigonometric / Sin / Cos / GPS | `numeric-functions-examples.md` | `function-catalog.json` → live doc |
-| Repeating fields | `numeric-functions-examples.md` | `function-catalog.json` → live doc |
-| Aggregate / Sum / Count / List | `specialty-functions-examples.md` | `function-catalog.json` → live doc |
-| Japanese text functions | `specialty-functions-examples.md` | `function-catalog.json` → live doc |
-| FileMaker Go / mobile | `specialty-functions-examples.md` | `function-catalog.json` → live doc |
-| Miscellaneous / GetLayoutObjectAttribute | `specialty-functions-examples.md` | `function-catalog.json` → live doc |
-| GetPersistentData / ListPersistentDataIDs | `specialty-functions-examples.md` (Persistent Data section) | `function-catalog.json` → live doc |
-| AI regression / PredictFromModel | `logical-json-ai-functions-examples.md` | `function-catalog.json` → live doc |
-| Miscellaneous / GetRecordIDsFromFoundSet | `specialty-functions-examples.md` | `function-catalog.json` → live doc |
-| Script steps | `script-steps-catalog.json` | live doc_url |
-| Go to List of Records | `script-steps-catalog.json` (Found Sets) | live doc_url |
-| Set Revert Transaction on Error | `script-steps-catalog.json` (Control) | live doc_url |
-| Insert Image Caption / in Found Set | `script-steps-catalog.json` (AI category) | live doc_url |
-| Flush Web Viewer Cookies | `script-steps-catalog.json` (Miscellaneous) | live doc_url |
-| Configure Persistent Data | `script-steps-catalog.json` (Persistent Data) | live doc_url |
-| PDF Files steps (Create/Open/Append/Close/Cancel/Print PDF) | `script-steps-catalog.json` (PDF Files category) | live doc_url |
-| Save Records as PDF (FM 26 Save to option) | `script-steps-catalog.json` (PDF Files category) | live doc_url |
-| Error codes | `quickrefs.md` | fetch `https://help.claris.com/markdown/en/pro-help/error-codes.md` for obscure codes |
-| ExecuteSQL syntax | `quickrefs.md` | live sql-reference guide |
-| Data API / REST | `quickrefs.md` | live data-api-guide |
-| Finding a help page URL | `quickrefs.md` (fast-path) | `https://help.claris.com/llms-full.txt` for authoritative lookup |
+For **paste-ready field definition XML** — the `fmxmlsnippet` / `FMObjectList` envelope, the
+auto-enter, validation and storage element structure, and the paste-handler rules that cause
+silent failures — use the **`filemaker-field-xml`** skill. That skill is authoritative for the
+XML layer; `field-types-catalog.json` here covers the capability layer (what a field type can
+*do*) and deliberately does not duplicate the XML shape.
+
+Name that skill exactly when you depend on it. Generic phrasing such as "a dedicated FileMaker
+field XML reference" gets substituted for a different same-domain source under context pressure.
 
 ---
 
 ## Tips
 
-- The sidebar on any help page lists the **complete navigation tree** for that guide — very useful
-  for discovering related pages.
-- `function-catalog.json` is the master for function formats; example files are the master for usage patterns.
-- For script step option details (platform support on Go, WebDirect, Server) always fetch the live
-  doc_url — platform restrictions are not fully captured in the catalog.
-- AI/embedding functions are in `logical-json-ai-functions-examples.md`; AI script steps are in
-  `script-steps-catalog.json` (AI category through FM 26: 16 steps including Generate Response from
-  Model, Configure AI Account, Perform SQL Query by Natural Language, Perform Find by Natural Language,
-  Insert Embedding, Insert Image Caption, Insert Image Captions in Found Set, etc. — fetch live for
-  all AI steps as they evolve rapidly).
-- **Error codes:** The AI/ML error range (870–892) in `quickrefs.md` is verified against live docs (2026-06). The general error tables (0–899, 1630–1631) are a good quick reference but descriptions may drift — always fetch `https://help.claris.com/markdown/en/pro-help/error-codes.md` for authoritative descriptions of any unfamiliar code.
-- **Sub-version doc drift:** Claris updates documentation pages between FM version releases — adding
-  notes, correcting parameters, documenting edge cases — without changing the `version` field in
-  frontmatter. For any question where exact parameter behaviour or option names matter, always fetch
-  the live `.md` page even if local data appears sufficient. The live page is always authoritative
-  over local reference files.
-- **Mobile functions** (Location, GetSensor, RangeBeacons, GetAVPlayerAttribute, LocationValues) only
-  work in FileMaker Go. Always advise checking platform with `Get(ApplicationVersion)` before use.
-- **Japanese functions** require Japanese language support in FileMaker. `Furigana()` relies on the
-  Japanese IME and may produce different results based on context.
-- **Trig functions** all work in radians — use `Degrees()` and `Radians()` to convert. The Haversine
-  GPS distance formula in `numeric-functions-examples.md` is a ready-to-use real-world example.
-- **Financial functions** require `interestRate` per period, not annual — divide annual rate by
-  payment frequency (12 for monthly). `PMT()` returns a negative number; use `Abs()` for display.
-- **Generate Response from Model** is the most powerful AI step in FM 22+. In agentic mode, always
-  append the DDL schema (from `GetTableDDL`) to the `execute_sql` tool parameter description so the
-  model knows the schema. Custom function tool definitions must match the function name and parameter
-  order exactly, with all parameters typed as `"string"`.
-- **Fine-Tune Model** is restricted to OpenAI or AI Model Server on Apple silicon Mac — not
-  available for other providers, Linux hosts, or Windows hosts. Response Target receives a job JSON
-  with `status: "queued"` — training is asynchronous; monitor via Admin Console.
-- **GetFieldsOnLayout** uses `[LLM]` prefix filtering: if any field comment starts with `[LLM]`,
-  only those fields are sent to the AI model in `Perform Find by Natural Language`. Use this to
-  control which fields the model can query on a per-layout basis.
-- **GetEmbedding** returns binary **container** data, not text. Binary is smaller and faster than
-  the text form returned by `Insert Embedding` into a text field. Use `GetEmbeddingAsText` only
-  when a human-readable JSON array is required.
-- **GetTableDDL** has an `ignoreError` boolean parameter — when true, partial DDL is returned even
-  if some table occurrences fail to resolve, rather than aborting with an error.
-- **GetModelAttributes** and **ComputeModel** are macOS/iOS only (Core ML). Always check platform
-  before using these. ComputeModel vision variant exposes `confidenceLowerLimit` and `returnAtLeastOne`
-  parameters not shown in the catalog stub — fetch the live doc for full option detail.
-- **NormalizeEmbedding** is usually unnecessary — most embedding models already output unit-length
-  vectors. Use it when working with non-standard models or when doing dimension reduction via the
-  optional `dimension` parameter (trims dimensions before normalising).
-- **PredictFromModel** and `Configure Regression Model` form a paired on-device ML workflow using
-  Random Forest regression. Train on embedding vectors, then call `PredictFromModel` to get a
-  predicted numeric value. Models persist in memory until Unload or session end.
-- **GetRecordIDsFromFoundSet** pairs with `Go to List of Records` to recreate a found set later —
-  useful for preserving found sets across script jumps or file switches. The `type` parameter (0–4)
-  selects one of 5 result formats: ValueNumber, JSONString, JSONNumber, ValueNumberRanges,
-  JSONStringRanges — the two Ranges variants compress consecutive IDs into ranges to shrink the
-  result. **FM 26 change:** an optional second parameter accepts a table occurrence or portal
-  object name, returning IDs from the related/filtered set instead of the current found set —
-  `GetRecordIDsFromFoundSet ( type ; tableOccurrenceName )`.
-- **Go to List of Records** (FM 22.0.1) accepts a carriage-return value list, a JSON array of IDs
-  as strings or numbers, or a JSON array of objects with `recordId` keys. Records not found are
-  silently skipped; if none match, the found set is empty. Not supported in FileMaker WebDirect.
-- **JSONParse / JSONParsedState** (FM 22.0.1) — use `JSONParse` to cache a parsed JSON structure
-  in memory by name, then pass the result to any JSON function in place of a raw JSON string.
-  Dramatically improves performance when the same JSON is accessed many times in a script.
-  `JSONParsedState` returns: 0 = not parsed, -1 = parsed but invalid, positive number = the JSON
-  type as defined by the JSONSetElement type constants (1 = string, 2 = number, 3 = object,
-  4 = array, 5 = boolean, 6 = null).
-- **GetTextFromPDF** (FM 22.0.1) — returns the text content of a PDF stored in a container field.
-  Useful for feeding PDF content into RAG spaces (`Perform RAG Action`) or into AI prompts.
-  Returns empty string if the container is not a PDF or has no extractable text layer.
-  **FM 26 change:** on macOS, scanned PDFs (no text layer) are now supported via built-in OCR —
-  on other platforms a scanned PDF still returns an empty string.
-- **Set Revert Transaction on Error** (FM 21.1.1) — when set to Off, errors inside a transaction
-  block do not auto-revert; the script can inspect `Get(LastError)` and decide to commit or revert
-  manually. Use `Get(RevertTransactionOnErrorState)` to query the current setting. Always reset to
-  On before exiting a script that set it to Off.
-- **RAG workflow** requires three steps in sequence: `Configure RAG Account` → `Configure AI Account`
-  → `Perform RAG Action (Send Prompt)`. The RAG account handles the knowledge store; the AI account
-  handles response generation.
-- **Insert Image Caption** (FM 26) — sends an image (container field or variable) to a captioning
-  model; inserts the returned caption into a target field or variable. `Insert Image Captions in
-  Found Set` is the batch version — runs the step on every record in the current found set in sequence.
-  Both steps require a configured AI account. Always fetch live docs for model and parameter detail.
-- **PDF Files category** (FM 26 — new category) — the scripted PDF workflow: `Create PDF` (blank in
-  memory) or `Open PDF` (existing file) → `Append PDF` pages or `Save Records as PDF` (with Save to:
-  open PDF option) → `Close PDF` (saves to path/variable/container) or `Cancel PDF` (discards). `Print
-  PDF` prints a PDF from a container field, file path, or variable without opening it for editing.
-  `Save Records as PDF` has been moved into this category and now accepts a **Save to** option: file
-  path, container, variable, or append to the currently open PDF. Always fetch live docs for the full
-  option matrix — the category is entirely new in FM 26.
-- **Configure Persistent Data / GetPersistentData / ListPersistentDataIDs** (FM 26) — the persistent
-  data store survives session end and file close. Entries are keyed by a **name** and an **instance ID**
-  (allowing multiple values under the same name). Delete an entry by passing empty or null to
-  `Configure Persistent Data`. Use `ListPersistentDataIDs` to enumerate all instance IDs for a named
-  key before iterating. Fetch live docs for scope and platform restrictions.
-- **FieldAnnotation** (FM 26) — returns the DDL annotation string set in Advanced Options for Field.
-  Pair with `GetTableDDL` to build enriched AI prompts or schema documentation workflows.
-- **FieldDisplayNames** (FM 26) — returns a field's custom display names as a JSON object (set in
-  Advanced Options for Field). Useful for UI layers that need alternate or localised field labels.
-- **BaseTableComment** (FM 26) — returns the comment set on a base table in Manage Database. Pair
-  with `GetTableDDL` and `FieldAnnotation` to build richer schema context for AI steps.
-- **Get(GuidedAccessState)** (FM 26, FileMaker Go only) — returns 1 if iOS Guided Access is currently
-  active. Use to detect kiosk/locked-screen mode and adapt UI behaviour accordingly.
-- **Get(AccountPasswordDaysRemaining)** (FM 26) — returns the number of days before the current
-  account's password must be changed. Returns empty if no expiry is set. Use to show proactive warning
-  dialogs in startup scripts.
-- **Get(WindowUUID)** (FM 26) — returns a unique, stable UUID for the currently active window.
-  Useful for scripted window management when multiple windows of the same file are open.
+- `function-catalog.json` is the master for signatures and return types; the example files are
+  the master for usage patterns. Per-entry `notes` carry behaviour detail.
+- **Mobile functions** (`Location`, `LocationValues`, `GetSensor`, `RangeBeacons`,
+  `GetAVPlayerAttribute`) work only in FileMaker Go — branch on `Get(ApplicationVersion)`.
+- **Japanese functions** require Japanese language support; `Furigana()` depends on the IME and
+  is context-sensitive.
+- **Trig functions** work in radians — convert with `Degrees()` / `Radians()`.
+- **Financial functions** take the rate *per period*, not annual. `PMT()` returns a negative
+  number; wrap in `Abs()` for display.
+- **AI/RAG workflow** requires three steps in order: `Configure RAG Account` →
+  `Configure AI Account` → `Perform RAG Action`. Always fetch live for AI options — provider
+  support (including Google Gemini, added in FM 26) and parameters change between point releases.
+- **`Generate Response from Model`** — in agentic mode, append the DDL schema from
+  `GetTableDDL` to the `execute_sql` tool parameter description. Custom function tool definitions
+  must match the function name and parameter order exactly, all parameters typed `"string"`.
+- **Field annotations narrow DDL.** When *any* field in a table is annotated, only annotated
+  fields appear in that table's generated DDL. Read with `FieldAnnotation()`.
+- **The persistent data store is not a field storage type.** It is a per-file, schema-resident
+  named-value store (Name + optional Instance ID), separate from record data, holding a value of
+  any of the six data types. Write with `Configure Persistent Data`; read with
+  `GetPersistentData` / `ListPersistentDataIDs`. Unrelated to `Get(PersistentID)`, which returns
+  a device identifier.
+- **`ROWID` / `ROWMODID`** are the FileMaker SQL system columns (equivalent to `Get(RecordID)`
+  and `Get(RecordModificationCount)`). They are not named `RECORDID` / `MODID`.
+- **Sub-version doc drift:** Claris updates pages between releases without bumping the version
+  field. Where an exhaustive option matrix matters, fetch the live page.
 
 ---
 

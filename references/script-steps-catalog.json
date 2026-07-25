@@ -6,8 +6,12 @@
   "last_updated": "2026-07-04 (v1.9.2 content correction, second pass — full sweep of all 1,104 en/pro-help pages by topic_type confirmed 215 script-step pages; catalog now matches exactly. 215 unique steps.)",
   "update_instructions": "Re-fetch https://help.claris.com/markdown/en/pro-help/script-steps-reference.md and compare category listings. Add new steps, update slugs, bump last_updated.",
   "note": "Syntax uses [] for required fields/options and {} for optional. Steps marked platform list restrictions (Pro, Server, Go, WebDirect, Cloud).",
-  "step_count": 215,
-  "last_known_fm_version": "26"
+  "step_count": 216,
+  "last_known_fm_version": "26",
+  "verified_on": "2026-07-25",
+  "platform_encoding": "Delta-encoded. `platform_exceptions` lists ONLY products where the step is not fully supported, keyed Pro/Go/WebDirect/Server/Cloud/DataAPI/CWP with values No or Partial. ABSENT platform_exceptions means Yes on all seven. 'No' = step is skipped and returns error 3 (Command is unavailable); 'Partial' = performed but one or more features differ (see the step's Notes).",
+  "os_restriction_note": "`os_restriction` is a desktop-OS limit (macOS only / Windows only) and is orthogonal to `platform_exceptions`, which is the client/host matrix.",
+  "verification_method": "Every entry re-derived from its live help.claris.com markdown page (## Compatibility, ## Originated in version). Roster determined structurally: set-dictionary is a real script step that Claris mislabels as topic_type: conceptual, so a topic_type sweep alone undercounts by one."
  },
  "categories": [
   {
@@ -20,15 +24,15 @@
      "purpose": "Runs a named script in the current or another file, optionally passing a parameter",
      "slug": "perform-script",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-script.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
-     "name": "Perform Script on Server",
+     "name": "Perform Script On Server",
      "syntax": "Perform Script on Server [ Wait for completion: On/Off ; Specified: From list ; \"ScriptName\" ; Parameter: value ]",
      "purpose": "Runs a script on FileMaker Server (server-side scripting)",
      "slug": "perform-script-on-server",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-script-on-server.md",
-     "originated_in_version": "13"
+     "originated_in_version": "13.0"
     },
     {
      "name": "Pause/Resume Script",
@@ -36,7 +40,7 @@
      "purpose": "Pauses the current script for user input or a fixed duration",
      "slug": "pause-resume-script",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/pause-resume-script.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Exit Script",
@@ -44,7 +48,7 @@
      "purpose": "Ends the current script and optionally sets a script result accessible via Get(ScriptResult)",
      "slug": "exit-script",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/exit-script.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Halt Script",
@@ -52,7 +56,7 @@
      "purpose": "Stops all scripts in the call stack immediately",
      "slug": "halt-script",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/halt-script.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "If",
@@ -60,7 +64,7 @@
      "purpose": "Begins a conditional block; executes enclosed steps only when condition is true",
      "slug": "if-script-step",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/if-script-step.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Else If",
@@ -68,7 +72,7 @@
      "purpose": "Additional condition branch within an If block",
      "slug": "else-if",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/else-if.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Else",
@@ -76,7 +80,7 @@
      "purpose": "Default branch executed when no If/Else If condition is true",
      "slug": "else",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/else.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "End If",
@@ -84,7 +88,7 @@
      "purpose": "Closes an If block",
      "slug": "end-if",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/end-if.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Loop",
@@ -92,7 +96,7 @@
      "purpose": "Begins a loop block that repeats until an Exit Loop If or Go to Record exits it",
      "slug": "loop",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/loop.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Exit Loop If",
@@ -100,7 +104,7 @@
      "purpose": "Exits the enclosing Loop when condition is true",
      "slug": "exit-loop-if",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/exit-loop-if.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "End Loop",
@@ -108,7 +112,7 @@
      "purpose": "Closes a Loop block and returns execution to the Loop step",
      "slug": "end-loop",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/end-loop.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Allow User Abort",
@@ -116,7 +120,13 @@
      "purpose": "Controls whether users can stop the script with Escape/Cancel",
      "slug": "allow-user-abort",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/allow-user-abort.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "Partial",
+      "CWP": "Partial"
+     }
     },
     {
      "name": "Set Error Capture",
@@ -124,7 +134,13 @@
      "purpose": "When On, suppresses FileMaker error dialogs so scripts can handle errors programmatically",
      "slug": "set-error-capture",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/set-error-capture.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "Partial",
+      "CWP": "Partial"
+     }
     },
     {
      "name": "Set Variable",
@@ -132,7 +148,7 @@
      "purpose": "Creates or sets a local ($var) or global ($$var) variable",
      "slug": "set-variable",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/set-variable.md",
-     "originated_in_version": "8"
+     "originated_in_version": "8.0"
     },
     {
      "name": "Install OnTimer Script",
@@ -140,7 +156,13 @@
      "purpose": "Installs a script that runs repeatedly on a timer interval",
      "slug": "install-ontimer-script",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/install-ontimer-script.md",
-     "originated_in_version": "10"
+     "originated_in_version": "10.0",
+     "platform_exceptions": {
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Open Transaction",
@@ -173,14 +195,7 @@
      "purpose": "Controls whether a transaction is automatically reverted when an error occurs within an Open Transaction / Commit Transaction block. Default is On (auto-revert on error).",
      "originated_in_version": "21.1.1",
      "notes": "When set to Off, the script continues after an error inside a transaction block, allowing the script to handle errors itself before deciding to commit or revert. Use Get(RevertTransactionOnErrorState) to query the current setting. The setting is scoped to the current script — it does not propagate to subscripts. Reset to On before exiting scripts that set it to Off.",
-     "doc_url": "https://help.claris.com/markdown/en/pro-help/set-revert-transaction-on-error.md",
-     "platforms": {
-      "Pro": "Yes",
-      "Server": "Yes",
-      "Go": "Yes",
-      "WebDirect": "Yes",
-      "Cloud": "Yes"
-     }
+     "doc_url": "https://help.claris.com/markdown/en/pro-help/set-revert-transaction-on-error.md"
     },
     {
      "name": "Configure Local Notification",
@@ -188,8 +203,15 @@
      "purpose": "Use this script step to display a notification alert after an optional delay.",
      "slug": "configure-local-notification",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/configure-local-notification.md",
-     "originated_in_version": "17",
-     "notes": "FileMaker Go (iOS/iPadOS) only — queues a local notification on the device."
+     "originated_in_version": "17.0",
+     "notes": "FileMaker Go (iOS/iPadOS) only — queues a local notification on the device.",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Configure NFC Reading",
@@ -197,8 +219,16 @@
      "purpose": "Use this script step to scan or stop scanning for NFC tags, which are programmed with a small amount of data.",
      "slug": "configure-nfc",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/configure-nfc.md",
-     "originated_in_version": "19",
-     "notes": "FileMaker Go only — reads NFC tags; the specified script receives tag data as its parameter."
+     "originated_in_version": "19.0",
+     "notes": "FileMaker Go only — reads NFC tags; the specified script receives tag data as its parameter.",
+     "platform_exceptions": {
+      "Pro": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Configure Region Monitor Script",
@@ -206,8 +236,16 @@
      "purpose": "Use this script step to run a specified script when an iOS or iPadOS device enters or exits a region.",
      "slug": "configure-region-monitor-script",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/configure-region-monitor-script.md",
-     "originated_in_version": "16",
-     "notes": "FileMaker Go only — runs a script when the device enters/exits an iBeacon or geofence region."
+     "originated_in_version": "16.0",
+     "notes": "FileMaker Go only — runs a script when the device enters/exits an iBeacon or geofence region.",
+     "platform_exceptions": {
+      "Pro": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Set Error Logging",
@@ -215,8 +253,12 @@
      "purpose": "After this script step is performed, the log file is created when the first script error is caused by any script in the current file.",
      "slug": "set-error-logging",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/set-error-logging.md",
-     "originated_in_version": "18",
-     "notes": "Logs script errors to ScriptErrors.log in the user's Documents folder (FileMaker Pro/Go); server-side logging locations are set by the server. Logging stays on for all scripts in the file until turned Off or the file closes."
+     "originated_in_version": "18.0",
+     "notes": "Logs script errors to ScriptErrors.log in the user's Documents folder (FileMaker Pro/Go); server-side logging locations are set by the server. Logging stays on for all scripts in the file until turned Off or the file closes.",
+     "platform_exceptions": {
+      "Cloud": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Set Layout Object Animation",
@@ -224,7 +266,7 @@
      "purpose": "Enabling animations increases the time required for a script to run.",
      "slug": "set-layout-object-animation",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/set-layout-object-animation.md",
-     "originated_in_version": "13"
+     "originated_in_version": "13.0"
     },
     {
      "name": "Perform Script On Server with Callback",
@@ -233,7 +275,13 @@
      "slug": "perform-script-on-server-callback",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-script-on-server-callback.md",
      "originated_in_version": "20.1",
-     "notes": "Requires the file to be hosted on FileMaker Server or FileMaker Cloud (errors otherwise). The callback script runs in the client once the server script finishes."
+     "notes": "Requires the file to be hosted on FileMaker Server or FileMaker Cloud (errors otherwise). The callback script runs in the client once the server script finishes.",
+     "platform_exceptions": {
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     }
    ]
   },
@@ -247,7 +295,15 @@
      "purpose": "Switches to the specified layout",
      "slug": "go-to-layout",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-layout.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Pro": "Partial",
+      "WebDirect": "Partial",
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "Partial",
+      "CWP": "Partial"
+     }
     },
     {
      "name": "Go to Record/Request/Page",
@@ -255,7 +311,13 @@
      "purpose": "Navigates to a specific record in the current found set",
      "slug": "go-to-record-request-page",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-record-request-page.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "Partial",
+      "CWP": "Partial"
+     }
     },
     {
      "name": "Go to Related Record",
@@ -263,7 +325,15 @@
      "purpose": "Goes to a related record via a relationship, optionally filtering to related records only",
      "slug": "go-to-related-record",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-related-record.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Pro": "Partial",
+      "WebDirect": "Partial",
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "Partial",
+      "CWP": "Partial"
+     }
     },
     {
      "name": "Go to Portal Row",
@@ -271,7 +341,14 @@
      "purpose": "Navigates to a specific row in a portal on the current layout",
      "slug": "go-to-portal-row",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-portal-row.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "WebDirect": "Partial",
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "Partial",
+      "CWP": "Partial"
+     }
     },
     {
      "name": "Go to Field",
@@ -279,7 +356,7 @@
      "purpose": "Moves focus to the specified field",
      "slug": "go-to-field",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-field.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Go to Next Field",
@@ -287,7 +364,7 @@
      "purpose": "Moves focus to the next field in tab order",
      "slug": "go-to-next-field",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-next-field.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Go to Previous Field",
@@ -295,7 +372,7 @@
      "purpose": "Moves focus to the previous field in tab order",
      "slug": "go-to-previous-field",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-previous-field.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Enter Browse Mode",
@@ -303,7 +380,13 @@
      "purpose": "Switches to Browse mode",
      "slug": "enter-browse-mode",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/enter-browse-mode.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "Partial",
+      "CWP": "Partial"
+     }
     },
     {
      "name": "Enter Find Mode",
@@ -311,7 +394,13 @@
      "purpose": "Switches to Find mode, optionally restoring saved find requests",
      "slug": "enter-find-mode",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/enter-find-mode.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "Partial",
+      "CWP": "Partial"
+     }
     },
     {
      "name": "Enter Preview Mode",
@@ -319,7 +408,15 @@
      "purpose": "Switches to Preview mode",
      "slug": "enter-preview-mode",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/enter-preview-mode.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Scroll Window",
@@ -327,7 +424,14 @@
      "purpose": "Scrolls the window to the specified position",
      "slug": "scroll-window",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/scroll-window.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Select Window",
@@ -335,7 +439,10 @@
      "purpose": "Brings the specified window to the front",
      "slug": "select-window",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/select-window.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "WebDirect": "Partial"
+     }
     },
     {
      "name": "Close Popover",
@@ -343,7 +450,13 @@
      "purpose": "Closes an open popover in the target window.",
      "slug": "close-popover",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/close-popover.md",
-     "originated_in_version": "13"
+     "originated_in_version": "13.0",
+     "platform_exceptions": {
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Go to Object",
@@ -366,7 +479,7 @@
      "purpose": "Sets the value of a field in the current record",
      "slug": "set-field",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/set-field.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Set Field By Name",
@@ -374,7 +487,7 @@
      "purpose": "Sets a field whose name is determined at runtime by a calculation",
      "slug": "set-field-by-name",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/set-field-by-name.md",
-     "originated_in_version": "10"
+     "originated_in_version": "10.0"
     },
     {
      "name": "Set Next Serial Value",
@@ -382,7 +495,7 @@
      "purpose": "Sets the next auto-enter serial value for a field",
      "slug": "set-next-serial-value",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/set-next-serial-value.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Insert Text",
@@ -390,7 +503,7 @@
      "purpose": "Inserts literal text into a field at the cursor position",
      "slug": "insert-text",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-text.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Insert Calculated Result",
@@ -398,31 +511,39 @@
      "purpose": "Inserts the result of a calculation into a field",
      "slug": "insert-calculated-result",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-calculated-result.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
-     "name": "Insert From Index",
+     "name": "Insert from Index",
      "syntax": "Insert From Index [ Select ; Table::Field ]",
      "purpose": "Opens field index dialog so user can pick a value to insert",
      "slug": "insert-from-index",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-from-index.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
-     "name": "Insert From Last Visited",
+     "name": "Insert from Last Visited",
      "syntax": "Insert From Last Visited [ Select ; Table::Field ]",
      "purpose": "Inserts the value from the same field in the last visited record",
      "slug": "insert-from-last-visited",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-from-last-visited.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
-     "name": "Insert From URL",
+     "name": "Insert from URL",
      "syntax": "Insert From URL [ Select ; With dialog: On/Off ; Table::Field ; URL expression ; cURL options ]",
      "purpose": "Fetches URL content and inserts it into a field; supports cURL options for headers, auth, POST",
      "slug": "insert-from-url",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-from-url.md",
-     "originated_in_version": "12"
+     "originated_in_version": "12.0"
     },
     {
      "name": "Insert Current Date",
@@ -430,7 +551,7 @@
      "purpose": "Inserts today's date into a field",
      "slug": "insert-current-date",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-current-date.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Insert Current Time",
@@ -438,7 +559,7 @@
      "purpose": "Inserts the current time into a field",
      "slug": "insert-current-time",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-current-time.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Insert Current User Name",
@@ -446,7 +567,7 @@
      "purpose": "Inserts the current FileMaker account name into a field",
      "slug": "insert-current-user-name",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-current-user-name.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Insert File",
@@ -454,7 +575,15 @@
      "purpose": "Inserts a file into a container field",
      "slug": "insert-file",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-file.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "Partial",
+      "WebDirect": "Partial",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Insert Picture",
@@ -462,7 +591,14 @@
      "purpose": "Inserts an image into a container field",
      "slug": "insert-picture",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-picture.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "WebDirect": "Partial",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Insert Audio/Video",
@@ -470,7 +606,14 @@
      "purpose": "Inserts audio or video into a container field",
      "slug": "insert-audio-video",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-audio-video.md",
-     "originated_in_version": "12"
+     "originated_in_version": "12.0",
+     "platform_exceptions": {
+      "WebDirect": "Partial",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Insert PDF",
@@ -478,7 +621,14 @@
      "purpose": "Inserts a PDF into a container field",
      "slug": "insert-pdf",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-pdf.md",
-     "originated_in_version": "12"
+     "originated_in_version": "12.0",
+     "platform_exceptions": {
+      "WebDirect": "Partial",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Replace Field Contents",
@@ -486,7 +636,15 @@
      "purpose": "Replaces values in a field across all records in the found set",
      "slug": "replace-field-contents",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/replace-field-contents.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "Partial",
+      "WebDirect": "Partial",
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "Partial",
+      "CWP": "Partial"
+     }
     },
     {
      "name": "Relookup Field Contents",
@@ -494,7 +652,13 @@
      "purpose": "Forces a re-lookup of related field values for records in the found set",
      "slug": "relookup-field-contents",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/relookup-field-contents.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "Partial",
+      "CWP": "Partial"
+     }
     },
     {
      "name": "Export Field Contents",
@@ -502,7 +666,15 @@
      "purpose": "Exports the contents of a container or text field to a file",
      "slug": "export-field-contents",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/export-field-contents.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "Partial",
+      "WebDirect": "Partial",
+      "Cloud": "No",
+      "DataAPI": "Partial",
+      "CWP": "No"
+     },
+     "notes": "FM 26: now supported in FileMaker Server, Data API and OData contexts."
     },
     {
      "name": "Cut",
@@ -510,7 +682,10 @@
      "purpose": "Cuts selected content from a field to the clipboard",
      "slug": "cut",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/cut.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "WebDirect": "Partial"
+     }
     },
     {
      "name": "Copy",
@@ -518,7 +693,10 @@
      "purpose": "Copies field content or selected text to the clipboard",
      "slug": "copy",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/copy.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "WebDirect": "Partial"
+     }
     },
     {
      "name": "Paste",
@@ -526,7 +704,10 @@
      "purpose": "Pastes clipboard content into a field",
      "slug": "paste",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/paste.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "WebDirect": "Partial"
+     }
     },
     {
      "name": "Clear",
@@ -534,7 +715,10 @@
      "purpose": "Clears the selected content or entire field contents",
      "slug": "clear",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/clear.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "WebDirect": "Partial"
+     }
     },
     {
      "name": "Undo/Redo",
@@ -542,7 +726,7 @@
      "purpose": "Undoes or redoes the last user action",
      "slug": "undo-redo",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/undo-redo.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Perform Find/Replace",
@@ -550,7 +734,15 @@
      "purpose": "If Perform Find/Replace doesn't find data that matches the find term, it doesn't return an error.",
      "slug": "perform-find-replace",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-find-replace.md",
-     "originated_in_version": "6"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     }
    ]
   },
@@ -564,7 +756,11 @@
      "purpose": "Sets the text selection range within a field",
      "slug": "set-selection",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/set-selection.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "Partial",
+      "WebDirect": "Partial"
+     }
     },
     {
      "name": "Select All",
@@ -572,7 +768,10 @@
      "purpose": "Selects all content in the current field",
      "slug": "select-all",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/select-all.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "Partial"
+     }
     },
     {
      "name": "Set Use System Formats",
@@ -580,7 +779,14 @@
      "purpose": "Controls whether the file uses system or file-defined date/time formats",
      "slug": "set-use-system-formats",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/set-use-system-formats.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Insert from Device",
@@ -588,8 +794,16 @@
      "purpose": "This script step enters content into a container field from a music library, photo library, camera, video camera, microphone, or signature; or enters content into a container field or text field from a barcode source.",
      "slug": "insert-from-device",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-from-device.md",
-     "originated_in_version": "13",
-     "notes": "FileMaker Go only (Bar Code also supported in FileMaker Pro via camera-less sources). Target must be a container field, or a text field for barcodes."
+     "originated_in_version": "13.0",
+     "notes": "FileMaker Go only (Bar Code also supported in FileMaker Pro via camera-less sources). Target must be a container field, or a text field for barcodes.",
+     "platform_exceptions": {
+      "Pro": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     }
    ]
   },
@@ -603,7 +817,7 @@
      "purpose": "Creates a new blank record (Browse mode) or find request (Find mode)",
      "slug": "new-record-request",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/new-record-request.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Duplicate Record/Request",
@@ -611,7 +825,7 @@
      "purpose": "Duplicates the current record or find request",
      "slug": "duplicate-record-request",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/duplicate-record-request.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Delete Record/Request",
@@ -619,7 +833,13 @@
      "purpose": "Deletes the current record or find request",
      "slug": "delete-record-request",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/delete-record-request.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "Partial",
+      "CWP": "Partial"
+     }
     },
     {
      "name": "Delete All Records",
@@ -627,7 +847,13 @@
      "purpose": "Deletes all records in the current found set",
      "slug": "delete-all-records",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/delete-all-records.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "Partial",
+      "CWP": "Partial"
+     }
     },
     {
      "name": "Delete Portal Row",
@@ -635,7 +861,14 @@
      "purpose": "Deletes the currently selected portal row (related record)",
      "slug": "delete-portal-row",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/delete-portal-row.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "WebDirect": "Partial",
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "Partial",
+      "CWP": "Partial"
+     }
     },
     {
      "name": "Commit Records/Requests",
@@ -643,7 +876,13 @@
      "purpose": "Commits (saves) changes to the current record without leaving the record",
      "slug": "commit-records-requests",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/commit-records-requests.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "Partial",
+      "CWP": "Partial"
+     }
     },
     {
      "name": "Revert Record/Request",
@@ -651,7 +890,13 @@
      "purpose": "Reverts uncommitted changes to the current record",
      "slug": "revert-record-request",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/revert-record-request.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "Partial",
+      "CWP": "Partial"
+     }
     },
     {
      "name": "Open Record/Request",
@@ -659,7 +904,7 @@
      "purpose": "Locks the current record for editing in a multi-user environment",
      "slug": "open-record-request",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/open-record-request.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Copy Record/Request",
@@ -667,7 +912,12 @@
      "purpose": "Copies all field values of the current record to the clipboard as tab-delimited text",
      "slug": "copy-record-request",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/copy-record-request.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Copy All Records/Requests",
@@ -675,7 +925,12 @@
      "purpose": "Copies all records in the found set to the clipboard as tab-delimited text",
      "slug": "copy-all-records-requests",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/copy-all-records-requests.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Import Records",
@@ -683,7 +938,15 @@
      "purpose": "Imports records from an external file or data source into the current table",
      "slug": "import-records",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/import-records.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "Partial",
+      "WebDirect": "Partial",
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Export Records",
@@ -691,7 +954,15 @@
      "purpose": "Exports records in the found set to a file in the specified format",
      "slug": "export-records",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/export-records.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "Partial",
+      "WebDirect": "Partial",
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Save Records as Excel",
@@ -699,7 +970,15 @@
      "purpose": "Saves found records to an Excel (.xlsx) file",
      "slug": "save-records-as-excel",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/save-records-as-excel.md",
-     "originated_in_version": "8"
+     "originated_in_version": "8.0",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Save Records as Snapshot Link",
@@ -707,7 +986,13 @@
      "purpose": "Saves a snapshot link (.fmpsl) representing the current found set and sort order",
      "slug": "save-records-as-snapshot-link",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/save-records-as-snapshot-link.md",
-     "originated_in_version": "11"
+     "originated_in_version": "11.0",
+     "platform_exceptions": {
+      "Go": "Partial",
+      "WebDirect": "Partial",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Truncate Table",
@@ -715,8 +1000,14 @@
      "purpose": "> Important You cannot undo deleting all records.",
      "slug": "truncate-table",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/truncate-table.md",
-     "originated_in_version": "15",
-     "notes": "Deletes ALL records in the specified table (regardless of found set) in a single fast operation. Cannot be undone; does not trigger record-level script triggers."
+     "originated_in_version": "15.0",
+     "notes": "Deletes ALL records in the specified table (regardless of found set) in a single fast operation. Cannot be undone; does not trigger record-level script triggers.",
+     "platform_exceptions": {
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "Partial",
+      "CWP": "Partial"
+     }
     }
    ]
   },
@@ -730,7 +1021,7 @@
      "purpose": "Executes the current find request(s), updating the found set",
      "slug": "perform-find",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-find.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Perform Quick Find",
@@ -738,7 +1029,7 @@
      "purpose": "Performs a Quick Find across all quick-find-enabled fields",
      "slug": "perform-quick-find",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-quick-find.md",
-     "originated_in_version": "11"
+     "originated_in_version": "11.0"
     },
     {
      "name": "Constrain Found Set",
@@ -746,7 +1037,7 @@
      "purpose": "Narrows the current found set using an additional find request",
      "slug": "constrain-found-set",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/constrain-found-set.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Extend Found Set",
@@ -754,7 +1045,7 @@
      "purpose": "Adds records matching a find request to the current found set",
      "slug": "extend-found-set",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/extend-found-set.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Modify Last Find",
@@ -762,7 +1053,7 @@
      "purpose": "Reopens the last find request for modification",
      "slug": "modify-last-find",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/modify-last-find.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Show All Records",
@@ -770,7 +1061,7 @@
      "purpose": "Finds all records in the current table",
      "slug": "show-all-records",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/show-all-records.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Show Omitted Only",
@@ -778,7 +1069,7 @@
      "purpose": "Swaps found set with omitted records",
      "slug": "show-omitted-only",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/show-omitted-only.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Omit Record",
@@ -786,7 +1077,7 @@
      "purpose": "Removes the current record from the found set",
      "slug": "omit-record",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/omit-record.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Omit Multiple Records",
@@ -794,7 +1085,13 @@
      "purpose": "Removes n records starting from the current record from the found set",
      "slug": "omit-multiple-records",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/omit-multiple-records.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "Partial",
+      "CWP": "Partial"
+     }
     },
     {
      "name": "Sort Records",
@@ -802,7 +1099,13 @@
      "purpose": "Sorts the found set by the saved or specified sort order",
      "slug": "sort-records",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/sort-records.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "Partial",
+      "CWP": "Partial"
+     }
     },
     {
      "name": "Sort Records by Field",
@@ -810,7 +1113,7 @@
      "purpose": "Sorts the found set by a single specified field",
      "slug": "sort-records-by-field",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/sort-records-by-field.md",
-     "originated_in_version": "12"
+     "originated_in_version": "12.0"
     },
     {
      "name": "Unsort Records",
@@ -818,22 +1121,23 @@
      "purpose": "Returns records to creation order",
      "slug": "unsort-records",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/unsort-records.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Go to List of Records",
      "slug": "go-to-list-of-records",
      "syntax": "Go to List of Records [Layout; Record IDs]",
      "purpose": "Goes to a layout and returns the found set specified by a list of record IDs. Accepts a carriage-return-separated value list, a JSON array of record IDs as strings or numbers, or a JSON array of objects with recordId keys.",
-     "originated_in_version": "22",
+     "originated_in_version": "22.0",
      "notes": "Use with GetRecordIDsFromFoundSet to preserve and restore found sets across script jumps or file switches. Layout option: specify a layout name (defaults to current layout). The Record IDs parameter accepts: (1) value list — one ID per line, (2) JSONArray of number or string IDs, (3) JSONArray of objects with 'recordId' key. Records not found are silently skipped. If none of the IDs match, the found set is empty. Not supported in FileMaker WebDirect.",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-list-of-records.md",
-     "platforms": {
-      "Pro": "Yes",
-      "Server": "Yes",
-      "Go": "Yes",
-      "WebDirect": "No",
-      "Cloud": "Yes"
+     "platform_exceptions": {
+      "Pro": "Partial",
+      "WebDirect": "Partial",
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "Partial",
+      "CWP": "Partial"
      }
     },
     {
@@ -842,7 +1146,7 @@
      "purpose": "Finds records based on the context of a specified field, letting you create scripts that behave similarly to using the shortcut menu in Table View.",
      "slug": "find-matching-records",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/find-matching-records.md",
-     "originated_in_version": "12"
+     "originated_in_version": "12.0"
     }
    ]
   },
@@ -856,7 +1160,12 @@
      "purpose": "Opens a new window of the specified style",
      "slug": "new-window",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/new-window.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "Partial",
+      "WebDirect": "Partial",
+      "CWP": "Partial"
+     }
     },
     {
      "name": "Close Window",
@@ -864,7 +1173,7 @@
      "purpose": "Closes the current or named window",
      "slug": "close-window",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/close-window.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Move/Resize Window",
@@ -872,7 +1181,15 @@
      "purpose": "Moves and/or resizes a window",
      "slug": "move-resize-window",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/move-resize-window.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "Partial",
+      "WebDirect": "Partial",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Arrange All Windows",
@@ -880,7 +1197,15 @@
      "purpose": "Arranges all open windows",
      "slug": "arrange-all-windows",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/arrange-all-windows.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Freeze Window",
@@ -888,7 +1213,13 @@
      "purpose": "Prevents screen redraws while a script runs, improving performance",
      "slug": "freeze-window",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/freeze-window.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Refresh Window",
@@ -896,7 +1227,7 @@
      "purpose": "Forces a screen redraw; optionally flushes relationship cache",
      "slug": "refresh-window",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/refresh-window.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Refresh Object",
@@ -904,7 +1235,13 @@
      "purpose": "Refreshes a named layout object without refreshing the whole window",
      "slug": "refresh-object",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/refresh-object.md",
-     "originated_in_version": "13"
+     "originated_in_version": "13.0",
+     "platform_exceptions": {
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Set Window Title",
@@ -912,7 +1249,7 @@
      "purpose": "Sets the title of a window",
      "slug": "set-window-title",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/set-window-title.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Set Zoom Level",
@@ -920,7 +1257,15 @@
      "purpose": "Sets the zoom level of the current window",
      "slug": "set-zoom-level",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/set-zoom-level.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "Partial",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Show/Hide Menubar",
@@ -928,7 +1273,15 @@
      "purpose": "Shows or hides the menu bar",
      "slug": "show-hide-menubar",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/show-hide-menubar.md",
-     "originated_in_version": "13"
+     "originated_in_version": "13.0",
+     "platform_exceptions": {
+      "Pro": "Partial",
+      "WebDirect": "Partial",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Show/Hide Text Ruler",
@@ -936,7 +1289,15 @@
      "purpose": "Shows or hides the text ruler",
      "slug": "show-hide-text-ruler",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/show-hide-text-ruler.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Adjust Window",
@@ -944,7 +1305,15 @@
      "purpose": "Adjust Window acts on the active window of the current script's file.",
      "slug": "adjust-window",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/adjust-window.md",
-     "originated_in_version": "6"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "Partial",
+      "WebDirect": "Partial",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Show/Hide Toolbars",
@@ -952,8 +1321,12 @@
      "purpose": "Shows, hides, or toggles the status toolbar (FileMaker Pro) or toolbar (FileMaker Go), optionally locking its state.",
      "slug": "show-hide-toolbars",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/show-hide-toolbars.md",
-     "originated_in_version": "6",
-     "notes": "Current name of the step formerly listed as \"Show/Hide Status Toolbar\" — controls the status toolbar (Pro) and toolbar (Go)."
+     "originated_in_version": "6.0 or earlier",
+     "notes": "Current name of the step formerly listed as \"Show/Hide Status Toolbar\" — controls the status toolbar (Pro) and toolbar (Go).",
+     "platform_exceptions": {
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "View As",
@@ -961,7 +1334,10 @@
      "purpose": "Switches the current layout between Form, List, and Table view, or cycles to the next view.",
      "slug": "view-as",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/view-as.md",
-     "originated_in_version": "6"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "WebDirect": "Partial"
+     }
     }
    ]
   },
@@ -975,7 +1351,14 @@
      "purpose": "Closes a file, committing any pending changes",
      "slug": "close-file",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/close-file.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Convert File",
@@ -983,7 +1366,15 @@
      "purpose": "Converts an older FileMaker or non-FileMaker file to current format",
      "slug": "convert-file",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/convert-file.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "New File",
@@ -991,7 +1382,15 @@
      "purpose": "Creates a new FileMaker file",
      "slug": "new-file",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/new-file.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Open File",
@@ -999,7 +1398,14 @@
      "purpose": "Opens a FileMaker file",
      "slug": "open-file",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/open-file.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Recover File",
@@ -1007,7 +1413,15 @@
      "purpose": "Attempts to recover a damaged FileMaker file",
      "slug": "recover-file",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/recover-file.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Save Records as JSONL",
@@ -1015,7 +1429,12 @@
      "syntax": "Save Records as JSONL [ No dialog ; File: <path> ; Fields: <field list> ]",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/save-records-as-jsonl.md",
      "notes": "Format for fine-tuning On: requires three explicit prompts — System Prompt (optional), User Prompt, Assistant Prompt. Format for fine-tuning Off: Completion Field required; all other fields become user prompt content. Container fields are skipped (Off mode) or exported as filename string (On mode). Compatibility: not supported on FileMaker Go or WebDirect.",
-     "originated_in_version": "22"
+     "originated_in_version": "22.0",
+     "slug": "save-records-as-jsonl",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No"
+     }
     },
     {
      "name": "Save a Copy as",
@@ -1023,7 +1442,15 @@
      "purpose": "Saves a copy of the current file in the specified format",
      "slug": "save-a-copy-as",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/save-a-copy-as.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "Partial",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Set Multi-User",
@@ -1031,7 +1458,15 @@
      "purpose": "Controls network sharing of the current file",
      "slug": "set-multi-user",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/set-multi-user.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Close Data File",
@@ -1039,7 +1474,11 @@
      "purpose": "Use this script step to close an open data file.",
      "slug": "close-data-file",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/close-data-file.md",
-     "originated_in_version": "18"
+     "originated_in_version": "18.0",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "DataAPI": "No"
+     }
     },
     {
      "name": "Create Data File",
@@ -1047,7 +1486,11 @@
      "purpose": "Creates an empty data file at the specified path, ready to be opened and written to.",
      "slug": "create-data-file",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/create-data-file.md",
-     "originated_in_version": "18"
+     "originated_in_version": "18.0",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "DataAPI": "No"
+     }
     },
     {
      "name": "Delete File",
@@ -1055,7 +1498,11 @@
      "purpose": "Deletes the file at the specified path.",
      "slug": "delete-file",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/delete-file.md",
-     "originated_in_version": "18"
+     "originated_in_version": "18.0",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "DataAPI": "No"
+     }
     },
     {
      "name": "Get Data File Position",
@@ -1063,7 +1510,11 @@
      "purpose": "When a data file is first opened, the read-write position is 0.",
      "slug": "get-data-file-position",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-data-file-position.md",
-     "originated_in_version": "18"
+     "originated_in_version": "18.0",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "DataAPI": "No"
+     }
     },
     {
      "name": "Get File Exists",
@@ -1071,7 +1522,11 @@
      "purpose": "Returns 1 into the target field or variable if the specified file exists, otherwise 0.",
      "slug": "get-file-exists",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-file-exists.md",
-     "originated_in_version": "18"
+     "originated_in_version": "18.0",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "DataAPI": "No"
+     }
     },
     {
      "name": "Get File Size",
@@ -1079,7 +1534,11 @@
      "purpose": "Returns the size in bytes of the specified file into the target field or variable.",
      "slug": "get-file-size",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-file-size.md",
-     "originated_in_version": "18"
+     "originated_in_version": "18.0",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "DataAPI": "No"
+     }
     },
     {
      "name": "Open Data File",
@@ -1087,8 +1546,12 @@
      "purpose": "After the file is opened, you can use the file ID in other script steps such as Get Data File Position, Read from Data File, Set Data File Position, and Write to Data File.",
      "slug": "open-data-file",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/open-data-file.md",
-     "originated_in_version": "18",
-     "notes": "Returns a numeric file ID into Target for use by Read from/Write to Data File and related steps. A maximum of 25 data files can be open simultaneously."
+     "originated_in_version": "18.0",
+     "notes": "Returns a numeric file ID into Target for use by Read from/Write to Data File and related steps. A maximum of 25 data files can be open simultaneously.",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "DataAPI": "No"
+     }
     },
     {
      "name": "Read from Data File",
@@ -1096,7 +1559,11 @@
      "purpose": "This script step reads data specified by Amount starting at the current read-write position, or it reads the entire file if Amount is not specified.",
      "slug": "read-from-data-file",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/read-from-data-file.md",
-     "originated_in_version": "18"
+     "originated_in_version": "18.0",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "DataAPI": "No"
+     }
     },
     {
      "name": "Rename File",
@@ -1104,7 +1571,11 @@
      "purpose": "Renames the file at the specified path.",
      "slug": "rename-file",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/rename-file.md",
-     "originated_in_version": "18"
+     "originated_in_version": "18.0",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "DataAPI": "No"
+     }
     },
     {
      "name": "Save a Copy as XML",
@@ -1112,8 +1583,14 @@
      "purpose": "This script step is similar to choosing Tools > Save a Copy as XML.",
      "slug": "save-a-copy-as-xml",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/save-a-copy-as-xml.md",
-     "originated_in_version": "18",
-     "notes": "Saves the entire file's design (schema, layouts, scripts) as XML for analysis tools — same output as Tools menu, Save a Copy as XML."
+     "originated_in_version": "18.0",
+     "notes": "Saves the entire file's design (schema, layouts, scripts) as XML for analysis tools — same output as Tools menu, Save a Copy as XML.",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Set Data File Position",
@@ -1121,7 +1598,11 @@
      "purpose": "The read-write position is the number of bytes from the beginning of the file at which to start reading or writing data.",
      "slug": "set-data-file-position",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/set-data-file-position.md",
-     "originated_in_version": "18"
+     "originated_in_version": "18.0",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "DataAPI": "No"
+     }
     },
     {
      "name": "Write to Data File",
@@ -1129,7 +1610,11 @@
      "purpose": "Data at the read-write position in a file is overwritten by the data from Data source.",
      "slug": "write-to-data-file",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/write-to-data-file.md",
-     "originated_in_version": "18"
+     "originated_in_version": "18.0",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "DataAPI": "No"
+     }
     }
    ]
   },
@@ -1143,7 +1628,7 @@
      "purpose": "Creates a new FileMaker account",
      "slug": "add-account",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/add-account.md",
-     "originated_in_version": "7"
+     "originated_in_version": "7.0"
     },
     {
      "name": "Delete Account",
@@ -1151,7 +1636,7 @@
      "purpose": "Deletes the specified FileMaker account",
      "slug": "delete-account",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/delete-account.md",
-     "originated_in_version": "7"
+     "originated_in_version": "7.0"
     },
     {
      "name": "Reset Account Password",
@@ -1159,7 +1644,7 @@
      "purpose": "Resets the password for a FileMaker account",
      "slug": "reset-account-password",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/reset-account-password.md",
-     "originated_in_version": "7"
+     "originated_in_version": "7.0"
     },
     {
      "name": "Change Password",
@@ -1167,7 +1652,13 @@
      "purpose": "Allows the current user to change their own password",
      "slug": "change-password",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/change-password.md",
-     "originated_in_version": "7"
+     "originated_in_version": "7.0",
+     "platform_exceptions": {
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "Partial",
+      "CWP": "Partial"
+     }
     },
     {
      "name": "Enable Account",
@@ -1175,7 +1666,7 @@
      "purpose": "Enables or disables the specified account",
      "slug": "enable-account",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/enable-account.md",
-     "originated_in_version": "7"
+     "originated_in_version": "7.0"
     },
     {
      "name": "Re-Login",
@@ -1183,7 +1674,14 @@
      "purpose": "Re-authenticates the current user, switching privilege sets without reopening the file",
      "slug": "re-login",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/re-login.md",
-     "originated_in_version": "7"
+     "originated_in_version": "7.0",
+     "platform_exceptions": {
+      "WebDirect": "Partial",
+      "Server": "Partial",
+      "Cloud": "No",
+      "DataAPI": "Partial",
+      "CWP": "Partial"
+     }
     }
    ]
   },
@@ -1197,7 +1695,15 @@
      "purpose": "Checks the spelling of text in all fields in every record in the current found set.",
      "slug": "check-found-set",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/check-found-set.md",
-     "originated_in_version": "6"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Check Record",
@@ -1205,7 +1711,15 @@
      "purpose": "Checks the spelling of text in all fields in the current record.",
      "slug": "check-record",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/check-record.md",
-     "originated_in_version": "6"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Check Selection",
@@ -1213,7 +1727,15 @@
      "purpose": "Displays the Spelling dialog box unless the field is empty.",
      "slug": "check-selection",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/check-selection.md",
-     "originated_in_version": "6"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "Partial",
+      "CWP": "Partial"
+     }
     },
     {
      "name": "Correct Word",
@@ -1221,7 +1743,15 @@
      "purpose": "This script step is the same as choosing Edit menu> Spelling > Correct Word.",
      "slug": "correct-word",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/correct-word.md",
-     "originated_in_version": "6"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Edit User Dictionary",
@@ -1229,7 +1759,15 @@
      "purpose": "This script step is the same as choosing Edit menu > Spelling > Edit User Dictionary.",
      "slug": "edit-user-dictionary",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/edit-user-dictionary.md",
-     "originated_in_version": "6"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Select Dictionaries",
@@ -1237,7 +1775,32 @@
      "purpose": "This script step is the same as choosing Edit menu > Spelling > Select Dictionaries.",
      "slug": "select-dictionaries",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/select-dictionaries.md",
-     "originated_in_version": "6"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
+    },
+    {
+     "name": "Set Dictionary",
+     "syntax": "Set Dictionary [ Spelling Language: <language> ; User Dictionary: <path> ]",
+     "purpose": "Changes the main spelling dictionary and the user spelling dictionary",
+     "slug": "set-dictionary",
+     "doc_url": "https://help.claris.com/markdown/en/pro-help/set-dictionary.md",
+     "originated_in_version": "19.6.1",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     },
+     "notes": "Spelling Language sets the main dictionary language. Specify User Dictionary sets a file path for the user dictionary; an invalid path returns an error. FileMaker Pro only."
     },
     {
      "name": "Spelling Options",
@@ -1245,7 +1808,15 @@
      "purpose": "This script step is the same as choosing File menu > File Options > Spelling tab.",
      "slug": "spelling-options",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/spelling-options.md",
-     "originated_in_version": "6"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     }
    ]
   },
@@ -1259,7 +1830,15 @@
      "purpose": "Opens the Manage Database dialog",
      "slug": "open-manage-database",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/open-manage-database.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Open Manage Value Lists",
@@ -1267,7 +1846,15 @@
      "purpose": "Opens the Manage Value Lists dialog",
      "slug": "open-manage-value-lists",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/open-manage-value-lists.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Open Manage Data Sources",
@@ -1275,15 +1862,30 @@
      "purpose": "Opens the Manage External Data Sources dialog",
      "slug": "open-manage-data-sources",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/open-manage-data-sources.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
-     "name": "Open Preferences",
+     "name": "Open Settings",
      "syntax": "Open Preferences",
      "purpose": "Opens the FileMaker Pro Preferences dialog",
      "slug": "open-preferences",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/open-preferences.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Open File Options",
@@ -1291,7 +1893,15 @@
      "purpose": "Opens the File Options dialog for the current file",
      "slug": "open-file-options",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/open-file-options.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Open Sharing",
@@ -1299,7 +1909,15 @@
      "purpose": "Opens the FileMaker Network Sharing dialog",
      "slug": "open-sharing",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/open-sharing.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "Partial",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Open Help",
@@ -1307,7 +1925,14 @@
      "purpose": "Opens the FileMaker Help system",
      "slug": "open-help",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/open-help.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Open URL",
@@ -1315,7 +1940,14 @@
      "purpose": "Opens a URL in the default web browser, or a filemaker:// URL to open a file",
      "slug": "open-url",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/open-url.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "WebDirect": "Partial",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Open Edit Saved Finds",
@@ -1323,7 +1955,15 @@
      "purpose": "Use this script step to open the Edit Saved Finds dialog box for users if you have restricted their access to FileMaker Pro menus.",
      "slug": "open-edit-saved-finds",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/open-edit-saved-finds.md",
-     "originated_in_version": "10"
+     "originated_in_version": "10.0",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Open Favorites",
@@ -1331,7 +1971,15 @@
      "purpose": "This script step is the same as choosing File menu > Favorites > Show Favorites.",
      "slug": "open-my-apps",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/open-my-apps.md",
-     "originated_in_version": "16"
+     "originated_in_version": "16.0",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Open Find/Replace",
@@ -1339,7 +1987,15 @@
      "purpose": "This script step is the same as choosing Edit menu > Find/Replace > Find/Replace.",
      "slug": "open-find-replace",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/open-find-replace.md",
-     "originated_in_version": "7"
+     "originated_in_version": "7.0",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Open Hosts",
@@ -1347,7 +2003,14 @@
      "purpose": "The Hosts dialog box allows you to select and open a shared FileMaker Pro file over a network connection.",
      "slug": "open-hosts",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/open-hosts.md",
-     "originated_in_version": "6"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Open Manage Containers",
@@ -1355,7 +2018,15 @@
      "purpose": "This script step opens the Manage Containers dialog box, where the user can manage thumbnail settings and external locations for container content.",
      "slug": "open-manage-containers",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/open-manage-containers.md",
-     "originated_in_version": "12"
+     "originated_in_version": "12.0",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Open Manage Layouts",
@@ -1363,7 +2034,15 @@
      "purpose": "This script step is the same as choosing File menu > Manage > Layouts, or choosing Manage Layouts from the Layout pop-up menu.",
      "slug": "open-manage-layouts",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/open-manage-layouts.md",
-     "originated_in_version": "11"
+     "originated_in_version": "11.0",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Open Manage Themes",
@@ -1371,7 +2050,15 @@
      "purpose": "This script step is the same as choosing File menu > Manage > Themes.",
      "slug": "open-manage-themes",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/open-manage-themes.md",
-     "originated_in_version": "13"
+     "originated_in_version": "13.0",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Open Script Workspace",
@@ -1379,7 +2066,15 @@
      "purpose": "This script step is the same as choosing Scripts menu > Script Workspace, or File menu > Manage > Scripts.",
      "slug": "open-script-workspace",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/open-script-workspace.md",
-     "originated_in_version": "6"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Open Upload To Host",
@@ -1387,7 +2082,15 @@
      "purpose": "This script step is the same as choosing File menu > Sharing > Upload to Host.",
      "slug": "upload-to-server",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/upload-to-server.md",
-     "originated_in_version": "13"
+     "originated_in_version": "13.0",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     }
    ]
   },
@@ -1401,7 +2104,14 @@
      "purpose": "Displays a custom dialog with title, message, up to 3 buttons, and up to 3 input fields",
      "slug": "show-custom-dialog",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/show-custom-dialog.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "Partial",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Beep",
@@ -1409,7 +2119,14 @@
      "purpose": "Plays the system alert sound",
      "slug": "beep",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/beep.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Speak (macOS)",
@@ -1417,16 +2134,24 @@
      "purpose": "Speaks text using the system text-to-speech engine (macOS only)",
      "slug": "speak-os-x",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/speak-os-x.md",
-     "platform": "macOS only",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "os_restriction": "macOS only",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
-     "name": "Comment",
+     "name": "# (Comment)",
      "syntax": "Comment [ text ]",
      "purpose": "Non-executing annotation step for documenting scripts",
      "slug": "comment",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/comment.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier"
     },
     {
      "name": "Flush Cache to Disk",
@@ -1434,7 +2159,14 @@
      "purpose": "Forces the FileMaker cache to be written to disk immediately",
      "slug": "flush-cache-to-disk",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/flush-cache-to-disk.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Exit Application",
@@ -1442,7 +2174,13 @@
      "purpose": "Closes all files and quits FileMaker Pro",
      "slug": "exit-application",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/exit-application.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "Partial",
+      "WebDirect": "Partial",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Install Menu Set",
@@ -1450,7 +2188,14 @@
      "purpose": "Installs a custom menu set for the current window",
      "slug": "install-menu-set",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/install-menu-set.md",
-     "originated_in_version": "8"
+     "originated_in_version": "8.0",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Install Plug-In File",
@@ -1458,7 +2203,10 @@
      "purpose": "Installs a plug-in from a container field",
      "slug": "install-plug-in-file",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/install-plug-in-file.md",
-     "originated_in_version": "12"
+     "originated_in_version": "12.0",
+     "platform_exceptions": {
+      "Go": "No"
+     }
     },
     {
      "name": "Send DDE Execute (Windows)",
@@ -1466,8 +2214,16 @@
      "purpose": "Sends a DDE command to another application (Windows only)",
      "slug": "send-dde-execute-windows",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/send-dde-execute-windows.md",
-     "platform": "Windows only",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "os_restriction": "Windows only",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Send Event",
@@ -1475,8 +2231,16 @@
      "purpose": "Sends an Apple Event to another application (macOS only)",
      "slug": "send-event",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/send-event.md",
-     "platform": "macOS only",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "os_restriction": "macOS only",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Trigger Claris Connect Flow",
@@ -1484,7 +2248,8 @@
      "syntax": "Trigger Claris Connect Flow [ URL: url ; JSON Data: json ; AppID:APIKey for Webhooks: text ; Target: field/variable ; Flow: flow ]",
      "notes": "Passes JSON parameters to a Claris Connect flow and optionally captures the response. Requires Claris Connect configured and the file hosted on FileMaker Server. Not available in FileMaker Go or WebDirect.",
      "originated_in_version": "20.1",
-     "doc_url": "https://help.claris.com/markdown/en/pro-help/trigger-claris-connect-flow.md"
+     "doc_url": "https://help.claris.com/markdown/en/pro-help/trigger-claris-connect-flow.md",
+     "slug": "trigger-claris-connect-flow"
     },
     {
      "name": "Set Session Identifier",
@@ -1492,7 +2257,8 @@
      "syntax": "Set Session Identifier [ Value: <text> ]",
      "notes": "Does not change Get(UserName). Only meaningful for hosted files — used to tag sessions for logging or tracking. Pairs with Get(SessionIdentifier) to retrieve the value in calculations or scripts.",
      "originated_in_version": "19.4.1",
-     "doc_url": "https://help.claris.com/markdown/en/pro-help/set-session-identifier.md"
+     "doc_url": "https://help.claris.com/markdown/en/pro-help/set-session-identifier.md",
+     "slug": "set-session-identifier"
     },
     {
      "name": "Flush Web Viewer Cookies",
@@ -1501,7 +2267,14 @@
      "slug": "flush-web-viewer-cookies",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/flush-web-viewer-cookies.md",
      "notes": "Clears cookies from all web viewer objects in all open files for the current client. Takes effect immediately without requiring a web viewer reload. Useful for session logout workflows or testing authenticated web content.",
-     "originated_in_version": "26"
+     "originated_in_version": "26.0",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Allow Formatting Bar",
@@ -1509,7 +2282,15 @@
      "purpose": "This script step works in all modes except Layout mode.",
      "slug": "allow-formatting-bar",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/allow-formatting-bar.md",
-     "originated_in_version": "6"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Enable Touch Keyboard",
@@ -1517,8 +2298,16 @@
      "purpose": "Use this script to enable or disable the touch keyboard in FileMaker Go or Windows.",
      "slug": "enable-touch-keyboard",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/enable-touch-keyboard.md",
-     "originated_in_version": "14",
-     "notes": "Windows and FileMaker Go — controls the on-screen touch keyboard."
+     "originated_in_version": "14.0",
+     "notes": "Windows and FileMaker Go — controls the on-screen touch keyboard.",
+     "platform_exceptions": {
+      "Pro": "Partial",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Perform AppleScript (macOS)",
@@ -1526,8 +2315,16 @@
      "purpose": "You can create a calculation to generate the AppleScript commands to be sent, or you can type the commands directly into the Native AppleScript text area.",
      "slug": "perform-applescript-os-x",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-applescript-os-x.md",
-     "originated_in_version": "6",
-     "notes": "macOS only. Skipped (error 3) on Windows, FileMaker Go, and WebDirect."
+     "originated_in_version": "6.0 or earlier",
+     "notes": "macOS only. Skipped (error 3) on Windows, FileMaker Go, and WebDirect.",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Perform JavaScript in Web Viewer",
@@ -1535,8 +2332,14 @@
      "purpose": "This script step performs a function in JavaScript code that is loaded by a webpage in a web viewer then waits for the JavaScript function to finish.",
      "slug": "perform-javascript-in-web-viewer",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-javascript-in-web-viewer.md",
-     "originated_in_version": "19",
-     "notes": "Function name is case sensitive. Pair with the JavaScript FileMaker.PerformScript() API for two-way calls."
+     "originated_in_version": "19.0",
+     "notes": "Function name is case sensitive. Pair with the JavaScript FileMaker.PerformScript() API for two-way calls.",
+     "platform_exceptions": {
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Refresh Portal",
@@ -1544,7 +2347,13 @@
      "purpose": "Refresh Portal updates the join relationship and contents of a portal that displays related records.",
      "slug": "refresh-portal",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/refresh-portal.md",
-     "originated_in_version": "14"
+     "originated_in_version": "14.0",
+     "platform_exceptions": {
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Save a Copy as Add-on Package",
@@ -1552,7 +2361,15 @@
      "purpose": "This script step creates an add-on package from an open FileMaker Pro file.",
      "slug": "save-a-copy-as-add-on-package",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/save-a-copy-as-add-on-package.md",
-     "originated_in_version": "19"
+     "originated_in_version": "19.0",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Send Mail",
@@ -1560,8 +2377,16 @@
      "purpose": "Send Mail sends an intranet or internet email through an email application, via SMTP (Simple Mail Transfer Protocol), or via OAuth 2.0.",
      "slug": "send-mail",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/send-mail.md",
-     "originated_in_version": "6",
-     "notes": "E-mail Client mode is not supported server-side or in WebDirect — use SMTP Server or OAuth 2.0 there."
+     "originated_in_version": "6.0 or earlier",
+     "notes": "E-mail Client mode is not supported server-side or in WebDirect — use SMTP Server or OAuth 2.0 there.",
+     "platform_exceptions": {
+      "Go": "Partial",
+      "WebDirect": "Partial",
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "Partial",
+      "CWP": "Partial"
+     }
     },
     {
      "name": "Set Web Viewer",
@@ -1569,7 +2394,14 @@
      "purpose": "This script step works only for named web viewer objects.",
      "slug": "set-web-viewer",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/set-web-viewer.md",
-     "originated_in_version": "8.5"
+     "originated_in_version": "8.5",
+     "platform_exceptions": {
+      "WebDirect": "Partial",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "AVPlayer Play",
@@ -1577,8 +2409,16 @@
      "purpose": "Use this script to play media files from container fields, layout objects, or URLs in FileMaker Go.",
      "slug": "avplayer-play",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/avplayer-play.md",
-     "originated_in_version": "14",
-     "notes": "FileMaker Go only — plays audio, video, or image media from a container field, layout object, or URL."
+     "originated_in_version": "14.0",
+     "notes": "FileMaker Go only — plays audio, video, or image media from a container field, layout object, or URL.",
+     "platform_exceptions": {
+      "Pro": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "AVPlayer Set Options",
@@ -1586,8 +2426,16 @@
      "purpose": "Changes options (position, volume, zoom, presentation) for media currently playing or paused in FileMaker Go.",
      "slug": "avplayer-set-options",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/avplayer-set-options.md",
-     "originated_in_version": "14",
-     "notes": "FileMaker Go only — changes settings of media that is playing or paused."
+     "originated_in_version": "14.0",
+     "notes": "FileMaker Go only — changes settings of media that is playing or paused.",
+     "platform_exceptions": {
+      "Pro": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "AVPlayer Set Playback State",
@@ -1595,8 +2443,16 @@
      "purpose": "Use this script step to pause, resume, or stop playing a media file that is playing or is paused.",
      "slug": "avplayer-set-playback-state",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/avplayer-set-playback-state.md",
-     "originated_in_version": "14",
-     "notes": "FileMaker Go only."
+     "originated_in_version": "14.0",
+     "notes": "FileMaker Go only.",
+     "platform_exceptions": {
+      "Pro": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Dial Phone",
@@ -1604,8 +2460,15 @@
      "purpose": "You can enter a phone number or specify a calculation to create a phone number.",
      "slug": "dial-phone",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/dial-phone.md",
-     "originated_in_version": "6",
-     "notes": "FileMaker Go (iOS) only — letters in the number are translated to digits."
+     "originated_in_version": "6.0 or earlier",
+     "notes": "FileMaker Go (iOS) only — letters in the number are translated to digits.",
+     "platform_exceptions": {
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Execute FileMaker Data API",
@@ -1613,7 +2476,7 @@
      "purpose": "The FileMaker Data API is a REST API available as a web service for FileMaker Server and FileMaker Cloud.",
      "slug": "execute-filemaker-data-api",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/execute-filemaker-data-api.md",
-     "originated_in_version": "19",
+     "originated_in_version": "19.0",
      "notes": "Runs a Data API request against the current file directly — no network call or Data API session required. Request and response are JSON."
     },
     {
@@ -1622,8 +2485,16 @@
      "purpose": "You can use this script step to manage data in an ODBC data source through an ODBC SQL interface.",
      "slug": "execute-sql",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/execute-sql.md",
-     "originated_in_version": "6",
-     "notes": "Legacy ODBC step — sends SQL to an external ODBC data source. Distinct from the ExecuteSQL calculation function, which queries FileMaker tables."
+     "originated_in_version": "6.0 or earlier",
+     "notes": "Legacy ODBC step — sends SQL to an external ODBC data source. Distinct from the ExecuteSQL calculation function, which queries FileMaker tables.",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "Partial",
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "Partial",
+      "CWP": "Partial"
+     }
     },
     {
      "name": "Get Folder Path",
@@ -1631,8 +2502,16 @@
      "purpose": "This script step prompts the user to select a folder, then it sets a variable to the fully qualified path of the selected folder.",
      "slug": "get-directory",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-directory.md",
-     "originated_in_version": "14",
-     "notes": "Formerly named \"Get Directory\" — the doc slug is still get-directory. Prompts the user to select a folder and stores the full path in a variable."
+     "originated_in_version": "14.0",
+     "notes": "Formerly named \"Get Directory\" — the doc slug is still get-directory. Prompts the user to select a folder and stores the full path in a variable.",
+     "platform_exceptions": {
+      "Go": "No",
+      "WebDirect": "No",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     }
    ]
   },
@@ -1647,7 +2526,7 @@
      "slug": "create-pdf",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/create-pdf.md",
      "notes": "Starts the PDF Files workflow. Use Append PDF or Save Records as PDF (with Save to: open PDF option) to add pages, then Close PDF to save to a file path, container, or variable. Only one PDF can be open at a time.",
-     "originated_in_version": "26"
+     "originated_in_version": "26.0"
     },
     {
      "name": "Open PDF",
@@ -1656,7 +2535,10 @@
      "slug": "open-pdf",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/open-pdf.md",
      "notes": "Alternative to Create PDF when modifying an existing document. Accepts a file path or a container field/variable containing a PDF. Use Append PDF or Save Records as PDF (with Save to: open PDF) to add pages, then Close PDF to save.",
-     "originated_in_version": "26"
+     "originated_in_version": "26.0",
+     "platform_exceptions": {
+      "WebDirect": "Partial"
+     }
     },
     {
      "name": "Append PDF",
@@ -1665,7 +2547,10 @@
      "slug": "append-pdf",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/append-pdf.md",
      "notes": "Requires an open PDF (via Create PDF or Open PDF). Source can be a file path, container field, or variable. Pages are appended in document order. Close PDF when finished to persist the result.",
-     "originated_in_version": "26"
+     "originated_in_version": "26.0",
+     "platform_exceptions": {
+      "WebDirect": "Partial"
+     }
     },
     {
      "name": "Save Records as PDF",
@@ -1674,7 +2559,14 @@
      "slug": "save-records-as-pdf",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/save-records-as-pdf.md",
      "notes": "FM 26: moved from Files category to PDF Files. New Save to option: File (original behaviour), Container field, Variable, or Open PDF (appends layout output to the currently open scripted PDF). Fetch live docs for the full Save to option matrix.",
-     "originated_in_version": "8"
+     "originated_in_version": "8.0",
+     "platform_exceptions": {
+      "Go": "Partial",
+      "WebDirect": "Partial",
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "CWP": "No"
+     }
     },
     {
      "name": "Close PDF",
@@ -1683,7 +2575,10 @@
      "slug": "close-pdf",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/close-pdf.md",
      "notes": "Ends the scripted PDF workflow and persists the result. Must follow Create PDF or Open PDF. If Close PDF is not called before a script ends, the in-memory PDF is discarded (same as Cancel PDF). Fetch live docs for output option detail.",
-     "originated_in_version": "26"
+     "originated_in_version": "26.0",
+     "platform_exceptions": {
+      "WebDirect": "Partial"
+     }
     },
     {
      "name": "Cancel PDF",
@@ -1692,7 +2587,7 @@
      "slug": "cancel-pdf",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/cancel-pdf.md",
      "notes": "Discards the in-memory PDF without saving. Use in error-handling branches to clean up when the PDF workflow cannot complete. No output is produced.",
-     "originated_in_version": "26"
+     "originated_in_version": "26.0"
     },
     {
      "name": "Print PDF",
@@ -1701,7 +2596,15 @@
      "slug": "print-pdf",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/print-pdf.md",
      "notes": "Standalone print step — does not require Create PDF or Open PDF. Source can be a file path, a container field holding a PDF, or a variable. The No dialog option suppresses the print dialog.",
-     "originated_in_version": "26"
+     "originated_in_version": "26.0",
+     "platform_exceptions": {
+      "Go": "Partial",
+      "WebDirect": "Partial",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     }
    ]
   },
@@ -1715,7 +2618,15 @@
      "purpose": "Configures page/print settings",
      "slug": "print-setup",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/print-setup.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "Partial",
+      "WebDirect": "Partial",
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Print",
@@ -1723,7 +2634,14 @@
      "purpose": "Prints the current found set or record",
      "slug": "print",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/print.md",
-     "originated_in_version": "legacy"
+     "originated_in_version": "6.0 or earlier",
+     "platform_exceptions": {
+      "Go": "Partial",
+      "Server": "No",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     }
    ]
   },
@@ -1737,7 +2655,7 @@
      "purpose": "Configures a named AI account for use with AI functions and script steps",
      "slug": "configure-ai-account",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/configure-ai-account.md",
-     "originated_in_version": "21"
+     "originated_in_version": "21.0"
     },
     {
      "name": "Configure Machine Learning Model",
@@ -1745,7 +2663,15 @@
      "purpose": "Loads a Core ML model for use with ComputeModel or PredictFromModel (macOS/iOS only)",
      "slug": "configure-machine-learning-model",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/configure-machine-learning-model.md",
-     "originated_in_version": "19"
+     "originated_in_version": "19.0",
+     "platform_exceptions": {
+      "Pro": "Partial",
+      "WebDirect": "No",
+      "Server": "Partial",
+      "Cloud": "No",
+      "DataAPI": "No",
+      "CWP": "No"
+     }
     },
     {
      "name": "Configure Prompt Template",
@@ -1753,7 +2679,8 @@
      "syntax": "Configure Prompt Template [ Account Name: <name> ; Template Name: <name> ; Template: <text> ]",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/configure-prompt-template.md",
      "notes": "Template Types: SQL Query, Find Request, RAG Prompt. Template constants: :schema: (DDL schema), :question: (user prompt), :context: (RAG context), :sql_query: (generated SQL), :sql_results: (query results), :date_format: (date format string). Template names are case-sensitive. Templates are session-scoped and cleared on file close.",
-     "originated_in_version": "22"
+     "originated_in_version": "22.0",
+     "slug": "configure-prompt-template"
     },
     {
      "name": "Configure RAG Account",
@@ -1762,7 +2689,7 @@
      "slug": "configure-rag-account",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/configure-rag-account.md",
      "notes": "Endpoint URL must end with /. API Key obtained from FileMaker Server Admin Console. Verify SSL Certificates option behaves the same as Configure AI Account. Account is cleared on file close (session-scoped).",
-     "originated_in_version": "22"
+     "originated_in_version": "22.0"
     },
     {
      "name": "Configure Regression Model",
@@ -1771,7 +2698,7 @@
      "slug": "configure-regression-model",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/configure-regression-model.md",
      "notes": "Actions: Train (uses Random Forest algorithm), Save, Load, Unload. Train parameters: numTrees (default 10), maxDepth (10), minSamplesSplit (2), numFeatures (-1 = all), maxFeatures (1 = sqrt of features). Models remain in memory until Unload action or session end. Pairs with PredictFromModel function.",
-     "originated_in_version": "22"
+     "originated_in_version": "22.0"
     },
     {
      "name": "Fine-Tune Model",
@@ -1779,15 +2706,17 @@
      "syntax": "Fine-Tune Model [ Account Name: name ; Base Model: model ; Training Data: Table/File ; Response Target: field/variable ; Fine-Tune Parameters: JSON ]",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/fine-tune-model.md",
      "notes": "Training data source: Table or JSONL File. Uses LoRA (Low-Rank Adaptation) technique. ONLY supported on OpenAI or AI Model Server running on Apple silicon Mac — not available for other providers or Linux/Windows hosts. Fine-tune parameters: max_steps (1000), learning_rate (2e-4), lora_layers (4), batch_size (1), fine_tuned_model_name. AI Model Server prefixes model name with fm-mlx- (e.g. my-model → fm-mlx-my-model). Response Target returns job JSON with status 'queued' — training is asynchronous; monitor via Admin Console. Pairs with Save Records as JSONL for training data preparation.",
-     "originated_in_version": "22"
+     "originated_in_version": "22.0",
+     "slug": "fine-tune-model"
     },
     {
      "name": "Generate Response from Model",
      "purpose": "Facilitate multistep agentic interaction between your custom app and AI models, supporting built-in and custom function tool calls.",
      "syntax": "Generate Response from Model [ Account Name: name ; Model: model ; User Prompt: text ; Agentic mode: On/Off ; Response: field/variable ; Instructions: text ; Messages: field/variable ]",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/generate-response-from-model.md",
-     "notes": "Agentic mode On: enables full multi-round tool execution. Agentic mode Off: stops after first tool call and returns tool call JSON (useful for debugging). Built-in tool definitions: execute_sql (generates and runs SQL; append DDL schema to parameter description), retrieve_image (fetches image from container field via SQL ROWID). Custom function tools: name must exactly match FileMaker custom function name; parameters must be in same order and count, always typed as string. Stream On: incremental delivery; target field must be on current layout. Messages/Save Message History To/Message History Count: manage multi-turn conversation history. Temperature range varies by model provider. Error: 'No tool call exists for the prompt' when model doesn't call a tool. Error: 'Function not found' when custom function is missing. Full platform compatibility.",
-     "originated_in_version": "22"
+     "notes": "Agentic mode On: enables full multi-round tool execution. Agentic mode Off: stops after first tool call and returns tool call JSON (useful for debugging). Built-in tool definitions: execute_sql (generates and runs SQL; append DDL schema to parameter description), retrieve_image (fetches image from container field via SQL ROWID). Custom function tools: name must exactly match FileMaker custom function name; parameters must be in same order and count, always typed as string. Stream On: incremental delivery; target field must be on current layout. Messages/Save Message History To/Message History Count: manage multi-turn conversation history. Temperature range varies by model provider. Error: 'No tool call exists for the prompt' when model doesn't call a tool. Error: 'Function not found' when custom function is missing. Full platform compatibility. FM 26 adds an 'Include tool calls and tool results' option. Google Gemini is supported as a text-generation provider. Fetch live — AI options change fast.",
+     "originated_in_version": "22.0",
+     "slug": "generate-response-from-model"
     },
     {
      "name": "Insert Embedding",
@@ -1795,7 +2724,7 @@
      "purpose": "Generates an embedding vector and stores it in a container field",
      "slug": "insert-embedding",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-embedding.md",
-     "originated_in_version": "21"
+     "originated_in_version": "21.0"
     },
     {
      "name": "Insert Embedding in Found Set",
@@ -1803,7 +2732,8 @@
      "syntax": "Insert Embedding in Found Set [ Account Name: <name> ; Embedding Model: <model> ; Input: <field> ; Target: <field> ]",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-embedding-in-found-set.md",
      "notes": "Parameters JSON keys: MaxRecPerCall (default 20, max 500), MaxRetryPerWorker (5), MaxWaitPerRetry (60000 ms, OpenAI only), TruncateTokenLimit (8185), TruncateEnabled (1), RetryOnError (0). RetryOnError overrides the Continue on error option.",
-     "originated_in_version": "21"
+     "originated_in_version": "21.0",
+     "slug": "insert-embedding-in-found-set"
     },
     {
      "name": "Perform Find by Natural Language",
@@ -1811,7 +2741,8 @@
      "syntax": "Perform Find by Natural Language [ Account Name: <name> ; Model: <model> ; Prompt: <text> ; Response Target: <field/variable> ]",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-find-by-natural-language.md",
      "notes": "Get options: Found Set (updates current found set), Found Set as JSON (Data API format), Find Request as JSON (debug — inspect the find criteria without performing the find). Uses GetFieldsOnLayout to determine which fields are sent to the model. Supports context_prompt parameter key for date/time context. Cannot perform finds requiring aggregate functions (e.g. find the record with the highest value in a field). Returns error 401 when no records match.",
-     "originated_in_version": "22"
+     "originated_in_version": "22.0",
+     "slug": "perform-find-by-natural-language"
     },
     {
      "name": "Perform RAG Action",
@@ -1819,7 +2750,8 @@
      "syntax": "Perform RAG Action [ RAG Account Name: <name> ; AI Account Name: <name> ; Action: Add Data / Send Prompt / Remove Data ; Input: <field/file/container/variable> ; Prompt Template Name: <name> ; Response Target: <field/variable> ]",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-rag-action.md",
      "notes": "Add Data actions: From Text, From File, From File (Async), From Container, From Container (Async). Async is recommended for large PDFs. WebDirect ignores Input File path and opens Insert dialog instead. Send Prompt: uses both a RAG Account and an AI Account; supports context_prompt parameter key; optional Prompt Template Name. Remove Data: pass JSON with id array; irreversible — warn users to retain originals. PDF with encryption cannot be added. Adding a PDF with the same filename removes the existing entry.",
-     "originated_in_version": "22"
+     "originated_in_version": "22.0",
+     "slug": "perform-rag-action"
     },
     {
      "name": "Perform SQL Query by Natural Language",
@@ -1827,7 +2759,14 @@
      "syntax": "Perform SQL Query by Natural Language [ Account Name: <name> ; Model: <model> ; Prompt: <text> ; Data Tables: <tables> ; Action: Query ; Response Target: <field/variable> ]",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-sql-query-by-natural-language.md",
      "notes": "Action options: Query (run SQL and return data), Query for Data Only (suppress column headers), Get SQL (return all generated SQL without executing), Get First SQL Only (first SQL only — saves tokens), Get DDL (returns schema only, no model call). Data Tables: From list (select in dialog), By name (field/variable), By DDL (custom DDL for fine-grained schema control). Options: From list or By JSON data (dynamic configuration). Field comments in Manage Database dialog are sent to the model as schema context. Compatibility partial for Server, Cloud, Data API, Custom Web Publishing — Perform JavaScript in Web Viewer not supported server-side.",
-     "originated_in_version": "22"
+     "originated_in_version": "22.0",
+     "slug": "perform-sql-query-by-natural-language",
+     "platform_exceptions": {
+      "Server": "Partial",
+      "Cloud": "Partial",
+      "DataAPI": "Partial",
+      "CWP": "Partial"
+     }
     },
     {
      "name": "Perform Semantic Find",
@@ -1836,7 +2775,7 @@
      "slug": "perform-semantic-find",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-semantic-find.md",
      "notes": "Query by: Embedding (vector) or Image (pass a container field or variable containing an image — the step generates the query embedding internally). Save result option: set a variable to receive a JSON array of objects with recordID and cosineSimilarity scores for each matched record. Normalised embedding vectors required for accurate results. Both query and stored embeddings must have identical dimensions.",
-     "originated_in_version": "21"
+     "originated_in_version": "21.0"
     },
     {
      "name": "Set AI Call Logging",
@@ -1844,7 +2783,8 @@
      "syntax": "Set AI Call Logging [ On/Off ; Mode: Standard/Verbose ; Truncate Messages: On/Off ]",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/set-ai-call-logging.md",
      "notes": "Verbose mode: logs embedding vectors, token counts, semantic find return count, and cosine similarity scores. Truncate Messages: shortens verbose output for large embedding vectors. Standard mode logs prompts and responses without embedding detail.",
-     "originated_in_version": "21"
+     "originated_in_version": "21.0",
+     "slug": "set-ai-call-logging"
     },
     {
      "name": "Insert Image Caption",
@@ -1853,7 +2793,7 @@
      "slug": "insert-image-caption",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-image-caption.md",
      "notes": "Requires a configured AI account. Image source can be a container field or a variable containing image data. Caption is inserted into the target field or variable. Use Insert Image Captions in Found Set for batch processing.",
-     "originated_in_version": "26"
+     "originated_in_version": "26.0"
     },
     {
      "name": "Insert Image Captions in Found Set",
@@ -1862,7 +2802,7 @@
      "slug": "insert-image-captions-in-found-set",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-image-captions-in-found-set.md",
      "notes": "Batch version of Insert Image Caption. Processes every record in the found set sequentially. Requires a configured AI account. Both the image source and target must be fields (not variables) since the step iterates records.",
-     "originated_in_version": "26"
+     "originated_in_version": "26.0"
     }
    ]
   },
@@ -1877,7 +2817,8 @@
      "slug": "configure-persistent-data",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/configure-persistent-data.md",
      "notes": "Entries are keyed by a name and an instance ID, allowing multiple values under the same name. Delete an entry by passing empty or null as the Value. Use ListPersistentDataIDs() to enumerate instance IDs before iterating. Use GetPersistentData() to retrieve values. Fetch live docs for scope and platform restrictions.",
-     "originated_in_version": "26"
+     "originated_in_version": "26.0",
+     "concept_doc_url": "https://help.claris.com/markdown/en/pro-help/about-persistent-data-store.md"
     }
    ]
   }

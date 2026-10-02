@@ -1,5 +1,58 @@
 # Text & Text Formatting Functions — Examples
 
+## Contents
+- Text Functions
+  - Char ( number )
+  - Code ( text )
+  - Exact ( originalText ; comparisonText )
+  - Filter ( textToFilter ; filterText )
+  - FilterValues ( textToFilter ; filterValues )
+  - GetAsCSS ( text )
+  - GetAsDate ( text )
+  - GetAsNumber ( text )
+  - GetAsSVG ( text )
+  - GetAsText ( data )
+  - GetAsTime ( text )
+  - GetAsTimestamp ( text )
+  - GetAsURLEncoded ( text )
+  - GetValue ( listOfValues ; valueNumber )
+  - Left ( text ; numberOfCharacters )
+  - LeftValues ( text ; numberOfValues )
+  - LeftWords ( text ; numberOfWords )
+  - Length ( text )
+  - Lower ( text )
+  - Middle ( text ; start ; numberOfCharacters )
+  - MiddleValues ( text ; startingValue ; numberOfValues )
+  - MiddleWords ( text ; startingWord ; numberOfWords )
+  - PatternCount ( text ; searchString )
+  - Position ( text ; searchString ; start ; occurrence )
+  - Proper ( text )
+  - Quote ( text )
+  - Replace ( text ; start ; numberOfCharacters ; replacementText )
+  - Right ( text ; numberOfCharacters )
+  - RightValues ( text ; numberOfValues )
+  - RightWords ( text ; numberOfWords )
+  - SerialIncrement ( text ; incrementBy )
+  - SortValues ( values {; datatype ; locale } )
+  - Substitute ( text ; searchString ; replaceString )
+  - Trim ( text )
+  - TrimAll ( text ; trimSpaces ; trimType )
+  - UniqueValues ( values {; datatype ; locale } )
+  - Upper ( text )
+  - ValueCount ( text )
+  - WordCount ( text )
+- Text Formatting Functions
+  - RGB ( red ; green ; blue )
+  - TextColor ( text ; RGB ( red ; green ; blue ) )
+  - TextColorRemove ( text {; RGB ( red ; green ; blue )} )
+  - TextFont ( text ; fontName )
+  - TextFontRemove ( text {; fontToRemove } )
+  - TextFormatRemove ( text )
+  - TextSize ( text ; fontSize )
+  - TextSizeRemove ( text {; sizeToRemove } )
+  - TextStyleAdd ( text ; styles )
+  - TextStyleRemove ( text ; styles )
+
 ---
 
 # FileMaker Text Functions — Syntax & Examples
@@ -17,14 +70,15 @@ Returns the character(s) for the given Unicode code point(s).
 ---
 
 ## Code ( text )
-Returns the Unicode code point for the first character of text.  
+Returns the Unicode code points of **all** characters in `text`. With more than one character, each code point is a five-digit group, the first character in the lowest five digits. `""` returns empty. Useful with `Get ( TriggerKeystroke )` (tab = 9, return = 13, arrows = 28–31).  
 `Code ( "A" )` → `65`  
-`Code ( "☺" )` → `9786`
+`Code ( "☺" )` → `9786`  
+`Code ( "ab" )` → `9800097`
 
 ---
 
-## Exact ( text1 ; text2 )
-Returns 1 (true) if both values match exactly (case-sensitive); otherwise 0.  
+## Exact ( originalText ; comparisonText )
+Returns 1 (true) if both values match exactly (case-sensitive); otherwise 0. Text styles are ignored. Container data must also be stored the same way (embedded or by reference).  
 `Exact ( "Hello" ; "Hello" )` → `1`  
 `Exact ( "Hello" ; "hello" )` → `0`
 
@@ -38,12 +92,14 @@ Returns only the characters from *textToFilter* that appear in *filterText*, in 
 ---
 
 ## FilterValues ( textToFilter ; filterValues )
-Returns only the values (return-delimited) from *textToFilter* that appear in *filterValues*.  
+Returns only the values from *textToFilter* that appear in *filterValues*, in their original order. **Not** case-sensitive. Every returned value ends with ¶.  
 ```
 FilterValues ( "Plaid¶Canvas¶Suitcase" ; "Plaid¶Canvas" )
 // → Plaid¶Canvas¶
+
+FilterValues ( "Plaid¶Canvas¶Suitcase" ; "plaid¶canvas" )
+// → Plaid¶Canvas¶
 ```
-→ `Banana¶Cherry`
 
 ---
 
@@ -55,8 +111,8 @@ Returns text with its FileMaker formatting converted to CSS (Cascading Style She
 
 ## GetAsDate ( text )
 Returns text interpreted as a date, typed as Date.  
-`GetAsDate ( "12/25/2024" )` → `12/25/2024` (as Date type)  
-`GetAsDate ( "25.12.2024" )` → `12/25/2024` (system locale dependent)
+Text must be in the date format of the system the **file was created on** — a file created on an en_AU Mac expects `25/12/2024`, a US one `12/25/2024`. Use `Date ( month ; day ; year )` for locale-proof constants. A number is treated as days since 1/1/0001.  
+`GetAsDate ( 737342 )` → `10/10/2019` (US display)
 
 ---
 
@@ -76,8 +132,9 @@ Returns text with its FileMaker formatting converted to SVG (Scalable Vector Gra
 
 ## GetAsText ( data )
 Returns any data type as Text.  
-`GetAsText ( Date ( 12 ; 25 ; 2024 ) )` → `"12/25/2024"`  
-`GetAsText ( 42 )` → `"42"`
+`GetAsText ( 42 )` → `42`  
+`GetAsText ( Date ( 12 ; 25 ; 2024 ) )` returns 12/25/2024 in a US-format file and 25/12/2024 in an Australian one — dates convert using the file's date format.  
+For a container: the external path information, or `?` if the data is embedded.
 
 ---
 
@@ -89,8 +146,9 @@ Returns text interpreted as a time, typed as Time.
 ---
 
 ## GetAsTimestamp ( text )
-Returns text interpreted as a timestamp, typed as Timestamp.  
-`GetAsTimestamp ( "12/25/2024 09:30:00" )` → `12/25/2024 9:30:00 AM` (as Timestamp type)
+Returns text as a timestamp. Text must be a date then a time, in the date and time formats of the system the **file was created on**. A number is read as seconds since 1/1/0001.  
+`GetAsTimestamp ( 50000 )` → `1/1/0001 1:53:20 PM` (US display)  
+For locale-proof constants use `Timestamp ( Date ( 12 ; 25 ; 2024 ) ; Time ( 9 ; 30 ; 0 ) )`.
 
 ---
 
@@ -142,8 +200,8 @@ Returns all letters in text as lowercase.
 
 ---
 
-## Middle ( text ; startCharacter ; numberOfCharacters )
-Returns *numberOfCharacters* characters starting at *startCharacter*.  
+## Middle ( text ; start ; numberOfCharacters )
+Returns *numberOfCharacters* characters starting at *start* (values ≤ 1 start at 1).  
 `Middle ( "FileMaker" ; 5 ; 4 )` → `Make`  
 `Middle ( "Hello World" ; 7 ; 5 )` → `World`
 
@@ -185,14 +243,15 @@ Returns text with the first letter of each word capitalised, all others lowercas
 ---
 
 ## Quote ( text )
-Returns text enclosed in double quotation marks, with internal quotes escaped.  
+Returns text enclosed in double quotation marks, with special characters escaped — protects text from being run by `Evaluate`.  
 `Quote ( "Hello" )` → `"Hello"`  
-`Quote ( "He said "hello"" )` → `"He said \"hello\""`
+`Quote ( "say \"hello\" fred" )` → `"say \"hello\" fred"`  
+`Evaluate ( Quote ( "1 + 2" ) )` → `1 + 2`
 
 ---
 
-## Replace ( text ; startCharacter ; numberOfCharacters ; replacementText )
-Replaces *numberOfCharacters* characters in *text* starting at *startCharacter* with *replacementText*.  
+## Replace ( text ; start ; numberOfCharacters ; replacementText )
+Replaces *numberOfCharacters* characters in *text* starting at *start* with *replacementText*. Use `0` characters to insert.  
 `Replace ( "Hello World" ; 7 ; 5 ; "FileMaker" )` → `Hello FileMaker`  
 `Replace ( "2024-01-15" ; 5 ; 1 ; "/" )` → `2024/01-15`
 
@@ -225,20 +284,26 @@ Returns text with the trailing number incremented by *incrementBy*.
 
 ---
 
-## SortValues ( listOfValues ; sortType { ; locale } )
-Returns a return-delimited list sorted by *sortType*: 1=text, 2=numeric, 3=date, 4=time, 5=timestamp.  
-`SortValues ( "Banana¶Apple¶Cherry" ; 1 )` → `Apple¶Banana¶Cherry¶`  
-`SortValues ( "10¶2¶20¶1" ; 2 )` → `1¶2¶10¶20¶`
+## SortValues ( values {; datatype ; locale } )
+Sorts a list of values. Both extra parameters are optional — with neither, values sort as text, ascending, in the file's locale. *Originated: 16.0*  
+- *datatype*: 1 text · 2 number · 3 date · 4 time · 5 timestamp. **Negative sorts descending** (`-2` = numbers, high to low).
+- *locale*: a name such as `English`, `German`, `Japanese`, `Unicode_Raw`; an unrecognised name returns `?`.
+
+Every returned value ends with ¶.  
+`SortValues ( "Banana¶Apple¶Cherry" )` → `Apple¶Banana¶Cherry¶`  
+`SortValues ( "10¶2¶20¶1" ; 2 )` → `1¶2¶10¶20¶`  
+`SortValues ( "34¶600¶18¶29" ; -2 )` → `600¶34¶29¶18¶`
 
 ---
 
 ## Substitute ( text ; searchString ; replaceString )
-Replaces every occurrence of *searchString* in *text* with *replaceString*.  
+Replaces every occurrence of *searchString* in *text* with *replaceString*. **Case-sensitive** (unlike `PatternCount` and `Position`).  
 `Substitute ( "Hello World" ; "World" ; "FileMaker" )` → `Hello FileMaker`  
 `Substitute ( "aabbcc" ; "b" ; "x" )` → `aaxxcc`
 
-Substitute also accepts lists to replace multiple strings in one call:  
-`Substitute ( "Hello World" ; ["Hello" ; "World"] ; ["Goodbye" ; "FileMaker"] )` → `Goodbye FileMaker`
+Multiple substitutions: each bracket is one `[ search ; replace ]` **pair**, applied in order (a later pair can change an earlier pair's output):  
+`Substitute ( "Hello World" ; [ "Hello" ; "Goodbye" ] ; [ "World" ; "FileMaker" ] )` → `Goodbye FileMaker`  
+⚠️ `[ "Hello" ; "World" ]` means *replace Hello **with** World* — `Substitute ( "Hello World" ; ["Hello" ; "World"] ; ["Goodbye" ; "FileMaker"] )` → `World World`.
 
 ---
 
@@ -250,16 +315,20 @@ Removes leading and trailing spaces from text.
 ---
 
 ## TrimAll ( text ; trimSpaces ; trimType )
-Removes or normalises spaces based on *trimType* and *trimSpaces* settings.  
-- *trimSpaces*: 1 = trim all spaces, 0 = normalise only  
-- *trimType*: 0 = all spaces, 1 = leading/trailing only  
-`TrimAll ( "Hello   World" ; 1 ; 0 )` → `Hello World` (collapses multiple spaces)
+Removes or inserts spaces, mainly for mixing **roman** and **non-roman** (CJK) text. For plain leading/trailing spaces use `Trim`.  
+- *trimSpaces*: `1` also removes **full-width** spaces; `0` keeps them.  
+- *trimType* (spacing between non-roman and roman characters; non-roman ↔ non-roman spaces are always removed):  
+  `0` remove; one space between roman words · `1` always one half-width space between non-roman and roman · `2` reduce multiple spaces to one, add none · `3` remove all spaces.
+
+`TrimAll ( "Hello   World" ; 1 ; 0 )` → `Hello World`  
+`TrimAll ( "  FileMaker  Pro " ; 0 ; 3 )` → `FileMakerPro`
 
 ---
 
-## UniqueValues ( listOfValues { ; sortType ; locale } )
-Returns a return-delimited list with duplicate values removed.  
-`UniqueValues ( "Apple¶Banana¶Apple¶Cherry¶Banana" ; 1 )` → `Apple¶Banana¶Cherry¶`
+## UniqueValues ( values {; datatype ; locale } )
+Returns the list with duplicates removed, in original order — it does **not** sort. *datatype* (1–5, as SortValues) and *locale* only change how uniqueness is judged; `Unicode_Raw` makes it case- and accent-sensitive. *Originated: 16.0*  
+`UniqueValues ( "Apple¶Banana¶Apple¶Cherry¶Banana" )` → `Apple¶Banana¶Cherry¶`  
+`UniqueValues ( "34¶600¶18¶600¶18.0" ; 2 )` → `34¶600¶18¶`
 
 ---
 
@@ -270,7 +339,7 @@ Returns all letters in text as uppercase.
 
 ---
 
-## ValueCount ( listOfValues )
+## ValueCount ( text )
 Returns the count of values in a return-delimited list.  
 `ValueCount ( "Apple¶Banana¶Cherry" )` → `3`  
 `ValueCount ( "" )` → `0`
@@ -310,29 +379,16 @@ Formula: `red × 65536 + green × 256 + blue`
 `RGB ( 0 ; 0 ; 255 )` → `255` (blue)  
 `RGB ( 0 ; 0 ; 0 )` → `0` (black)  
 `RGB ( 255 ; 255 ; 255 )` → `16777215` (white)  
-`RGB ( 255 ; 165 ; 0 )` → `16744192` (orange)
+`RGB ( 255 ; 165 ; 0 )` → `16753920` (orange)
 
-Combine with TextColor to display FirstName in orange and LastName in purple:
+Combine with TextColor — FirstName in orange, LastName in purple:
 ```
-RGB(255;0;0)
-// → `16711680` representing red
-
-RGB(0;255;0)
-// → `65280` representing green
-
-RGB(0;0;255)
-// → `255` representing blue
-
-RGB(0;0;0)
-// → `0` representing black
-
-RGB(255;255;255)
-// → `16777215` representing white
+TextColor ( FirstName ; RGB ( 255 ; 165 ; 0 ) ) & " " & TextColor ( LastName ; RGB ( 160 ; 32 ; 240 ) )
 ```
 ---
 
 ## TextColor ( text ; RGB ( red ; green ; blue ) )
-Changes the colour of `text` to the colour specified by the RGB function.  
+Changes the colour of `text` to the colour specified by the RGB function. Not supported in FileMaker WebDirect.  
 Returns: text (with colour applied)
 
 `TextColor ( "Warning" ; RGB ( 255 ; 0 ; 0 ) )` → `Warning` rendered in red  
@@ -340,7 +396,7 @@ Returns: text (with colour applied)
 
 ---
 
-## TextColorRemove ( text { ; RGB ( red ; green ; blue ) } )
+## TextColorRemove ( text {; RGB ( red ; green ; blue )} )
 Removes font colours from text. Without the optional RGB parameter, removes all colours; with it, removes only the specified colour.  
 Returns: text
 
@@ -349,8 +405,9 @@ Returns: text
 
 ---
 
-## TextFont ( text ; fontName { ; fontScript } )
-Changes the font of `text` to `fontName`. Optional `fontScript` specifies the font script (e.g. "Roman", "Japanese").  
+## TextFont ( text ; fontName )
+Changes the font of `text` to `fontName` (exact spelling). Formatting is lost if the result is stored in a non-text field.  
+Legacy: older releases documented a third `fontScript` parameter. The engine still accepts it, but current Claris docs omit it — don't add it to new code.  
 Returns: text
 
 `TextFont ( "Hello" ; "Courier" )` → `Hello` in Courier  
@@ -358,8 +415,8 @@ Returns: text
 
 ---
 
-## TextFontRemove ( text { ; fontToRemove { ; fontScript } } )
-Removes all fonts or a specific font from text. Without parameters it removes all fonts; with `fontToRemove` it removes only that font.  
+## TextFontRemove ( text {; fontToRemove } )
+Removes all fonts, or only `fontToRemove`, reverting that text to the field's default font. (Legacy `fontScript` third parameter: as TextFont.)  
 Returns: text
 
 `TextFontRemove ( FormattedField )` → all font assignments removed  
@@ -389,7 +446,7 @@ Returns: text
 
 ---
 
-## TextSizeRemove ( text { ; sizeToRemove } )
+## TextSizeRemove ( text {; sizeToRemove } )
 Removes all font sizes from text, or only the specified `sizeToRemove`.  
 Returns: text
 
@@ -410,17 +467,13 @@ Available style names (not case-sensitive, no spaces):
 - `Plain` is ignored when combined with other styles.
 - Negative values are not valid.
 
-`TextStyleAdd ( "Plaid" ; Italic )` → *Plaid* (italic)  
+`TextStyleAdd ( "Plaid" ; Italic )` returns Plaid in italics  
 `TextStyleAdd ( FirstName ; Bold + Underline )` → **Sophie** underlined  
-`TextStyleAdd ( "draft" ; Uppercase )` → `DRAFT`
+`TextStyleAdd ( "draft" ; Uppercase )` → *displays* as DRAFT; the stored text is still `draft`. To change the data, use `Upper`.
 
 Reset then re-style in one expression:
 ```
-TextStyleAdd ( "Plaid" ; Italic )
-// → the word `Plaid` in italics
-
-TextStyleAdd ( FirstName ; Bold+Underline )
-// → `Sophie` in bold, underlined text when the FirstName field contains Sophie
+TextStyleAdd ( TextStyleAdd ( FirstName ; Plain ) ; Italic )
 ```
 Use with `Let` for multiple style blocks:
 ```

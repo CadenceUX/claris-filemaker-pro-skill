@@ -1,12 +1,58 @@
 # Specialty Functions — Examples (Aggregate, Japanese, Mobile, Miscellaneous)
 
+## Contents
+- Aggregate Functions
+  - Average ( field {; field...} )
+  - Count ( field {; field...} )
+  - List ( field {; field...} )
+  - Max ( field {; field...} )
+  - Min ( field {; field...} )
+  - StDev ( field {; field...} )
+  - StDevP ( field {; field...} )
+  - Sum ( field {; field...} )
+  - Variance ( field {; field...} )
+  - VarianceP ( field {; field...} )
+  - Common patterns
+- Japanese Functions
+  - DayNameJ ( date )
+  - MonthNameJ ( date )
+  - YearName ( date ; format )
+  - Furigana ( text {; option } )
+  - Hiragana ( text )
+  - Katakana ( text )
+  - KanaHankaku ( text )
+  - KanaZenkaku ( text )
+  - RomanHankaku ( text )
+  - RomanZenkaku ( text )
+  - KanjiNumeral ( text )
+  - NumToJText ( number ; separator ; characterType )
+  - Normalisation pattern (common data-entry workflow)
+- Mobile Functions
+  - GetAVPlayerAttribute ( attributeName )
+  - GetSensor ( sensorName {; option1 ; option2 } )
+  - Location ( accuracy {; timeout } )
+  - LocationValues ( accuracy {; timeout } )
+  - RangeBeacons ( UUID {; timeout ; major ; minor } )
+- Miscellaneous Functions
+  - ConvertFromFileMakerPath ( filemakerPath ; format )
+  - ConvertToFileMakerPath ( standardPath ; format )
+  - GetAddonInfo ( addonID )
+  - GetBaseTableName ( field )
+  - GetFieldName ( field )
+  - GetLayoutObjectAttribute ( objectName ; attributeName {; repetitionNumber ; portalRowNumber } )
+  - GetLayoutObjectOwnerInfo ( objectID )
+  - GetRecordIDsFromFoundSet ( type { ; tableOccurrenceOrPortal } )
+  - LayoutObjectUUID
+- Persistent Data Functions
+  - GetPersistentData ( name ; instanceID )
+  - ListPersistentDataIDs ( name )
+
 ---
 
 # FileMaker Aggregate Functions — Syntax & Examples
 
 Source: https://help.claris.com/en/pro-help/content/aggregate-functions.html  
 All 10 aggregate functions with verified syntax, parameters, return types, and usage patterns.  
-Last verified: 2026-06 against live Claris Help Centre.
 
 **Overview:** Aggregate functions operate across repeating field repetitions OR across related records via a relationship. When passed a related field (e.g. `LineItems::Total`), they aggregate across all related records in the current relationship context — this is how sub-totals, counts, and lists are built without scripting.
 
@@ -17,7 +63,7 @@ Last verified: 2026-06 against live Claris Help Centre.
 
 ---
 
-## Average ( field {; field2…} )
+## Average ( field {; field...} )
 Returns the arithmetic mean of all non-empty values.  
 Parameters: one or more field references (related or repeating).  
 Returns: number
@@ -36,7 +82,7 @@ Average ( Survey::Responses )
 ```
 ---
 
-## Count ( field {; field2…} )
+## Count ( field {; field...} )
 Returns the number of non-empty values.  
 Parameters: one or more fields.  
 Returns: number
@@ -54,33 +100,30 @@ Difference from `Get(FoundCount)`: Count traverses the relationship; Get(FoundCo
 
 ---
 
-## List ( field {; field2…} )
-Returns a return-delimited list of all non-empty values, in record order.  
-Parameters: one or more fields.  
+## List ( field {; field...} )
+Returns the non-blank values as a return-delimited list (no trailing ¶). Accepts related fields, repeating fields, several fields, and variables.  
 Returns: text
 ```
-List (Field1; Field2)
-// returns:
+List ( Field1 ; Field2 )
+// → white¶black   (Field1 = white, Field2 = black)
+
+List ( Related::Field4 )
+// → 100¶200¶300   (every related record, in the relationship's sort order)
 ```
-Multi-field list (values from each field concatenated per record, then newline between records):
-```
-List ( Contacts::FirstName ; Contacts::LastName )
-// → Alice¶Smith¶Bob¶Jones  (interleaved, not paired)
-```
-⚠️ List does NOT pair fields per record. For paired output, use a calculation field on the related table:
+⚠️ With **several** related fields, List uses only the **first** related record — `List ( Contacts::FirstName ; Contacts::LastName )` → `Alice¶Smith`, not every contact. To list a combination per record, define a calculation in the related table and list that:
 ```
 // In Contacts: FullLine = FirstName & " " & LastName
 List ( Contacts::FullLine )
 // → Alice Smith¶Bob Jones
 ```
-Build a comma-separated string:
+Comma-separated string:
 ```
 Substitute ( List ( Tags::TagName ) ; ¶ ; ", " )
 // → Design, Development, Marketing
 ```
 ---
 
-## Max ( field {; field2…} )
+## Max ( field {; field...} )
 Returns the largest value across all non-empty values.  
 Parameters: one or more fields.  
 Returns: number, date, time, or timestamp (matches field type)
@@ -94,7 +137,7 @@ Max ( Scores::Value )
 ```
 ---
 
-## Min ( field {; field2…} )
+## Min ( field {; field...} )
 Returns the smallest value across all non-empty values.  
 Parameters: one or more fields.  
 Returns: number, date, time, or timestamp
@@ -107,7 +150,7 @@ Min ( Temperatures::Reading )
 ```
 ---
 
-## StDev ( field {; field2…} )
+## StDev ( field {; field...} )
 Returns the sample standard deviation (divides by n−1).  
 Parameters: one or more fields.  
 Returns: number
@@ -119,7 +162,7 @@ Used in quality control / statistical process control calcs.
 
 ---
 
-## StDevP ( field {; field2…} )
+## StDevP ( field {; field...} )
 Returns the population standard deviation (divides by n).  
 Parameters: one or more fields.  
 Returns: number
@@ -129,7 +172,7 @@ StDevP ( Measurements::Value )
 ```
 ---
 
-## Sum ( field {; field2…} )
+## Sum ( field {; field...} )
 Returns the total of all non-empty numeric values.  
 Parameters: one or more fields.  
 Returns: number
@@ -151,7 +194,7 @@ Sum ( LineItems_sorted::ExtendedPrice )
 ```
 ---
 
-## Variance ( field {; field2…} )
+## Variance ( field {; field...} )
 Returns the sample variance (square of StDev — divides by n−1).  
 Parameters: one or more fields.  
 Returns: number
@@ -161,7 +204,7 @@ Variance(table::Scores)
 ```
 ---
 
-## VarianceP ( field {; field2…} )
+## VarianceP ( field {; field...} )
 Returns the population variance (square of StDevP — divides by n).  
 Parameters: one or more fields.  
 Returns: number
@@ -175,49 +218,46 @@ VarianceP(table::Scores)
 
 **Invoice sub-total, tax, total:**
 ```
-// On Invoices layout, fields referencing LineItems relationship
-Subtotal    = Sum ( LineItems::ExtendedPrice )
-TaxAmount   = Sum ( LineItems::TaxableAmount ) * TaxRate
+// Calculation fields in Invoices, via the LineItems relationship
+Subtotal     = Sum ( LineItems::ExtendedPrice )
+TaxAmount    = Sum ( LineItems::TaxableAmount ) * TaxRate
 InvoiceTotal = Subtotal + TaxAmount
 ```
 **Count related with status filter:**
 ```
-// Relationship: Invoice_OpenItems (LineItems where Status = "Open")
+// Relationship Invoice_OpenItems: LineItems where Status = "Open"
 Count ( Invoice_OpenItems::ItemID )
 ```
-**Unique value detection:**
+**Duplicate detection:**
 ```
-// On a Contacts record, check if email is duplicated elsewhere
+// Self-join Contacts_sameEmail relates Email = Email
 Count ( Contacts_sameEmail::ContactID ) > 1
-// where Contacts_sameEmail relates on Email field
 ```
-**Build a summary string:**
+**Summary string:**
 ```
 Let ( [
-  names  = List ( TeamMembers::FullName ) ;
-  total  = Count ( TeamMembers::MemberID ) ;
-  joined = Substitute ( names ; ¶ ; ", " )
+  names = List ( TeamMembers::FullName ) ;
+  total = Count ( TeamMembers::MemberID )
 ] ;
-  joined & " (" & total & " members)"
+  Substitute ( names ; ¶ ; ", " ) & " (" & total & " members)"
 )
 ```
-**Get the most recent related date:**
+**Most recent related date:**
 ```
 Max ( Interactions::InteractionDate )
-// → "Last contacted" date, computed from relationship
 ```
-**Portal row running total:**
+**Running total in a portal / list:** sorting a relationship doesn't limit which records it returns. Use a self-join whose predicates select "this and earlier" rows — `InvoiceID = InvoiceID` **and** `LineNo ≥ LineNo` — then:
 ```
-// Calc field in LineItems, uses a self-relationship sorted by line number
-Sum ( LineItems_byLine::ExtendedPrice )
+Sum ( LineItems_upToThis::ExtendedPrice )
 ```
+(For a report, a running-total summary field is simpler.)
+
 ---
 
 # FileMaker Japanese Functions — Syntax & Examples
 
 Source: https://help.claris.com/en/pro-help/content/japanese-functions.html  
 All 12 Japanese language functions with verified syntax, parameters, return types, and usage patterns.  
-Last verified: 2026-06 against live Claris Help Centre.
 
 **Overview:** FileMaker's Japanese functions handle text transformations specific to the Japanese writing system. They cover conversion between kana scripts (hiragana ↔ katakana), width normalisation (hankaku ↔ zenkaku), kanji numeral rendering, number-to-Japanese-text conversion, furigana generation, and Japanese calendar / date-name functions. These functions are particularly important for Japanese-locale databases where data may be entered in multiple scripts or character widths.
 
@@ -232,186 +272,145 @@ Last verified: 2026-06 against live Claris Help Centre.
 ---
 
 ## DayNameJ ( date )
-Returns the Japanese name of the day of the week for a given date.  
-Parameters: `date` — a date value.  
-Returns: text (Japanese weekday name)
+Returns the Japanese weekday name.  
+Returns: text
 ```
 DayNameJ ( Date ( 1 ; 1 ; 2021 ) )
-// → ![Japanese text for the full name of the weekday occurring on January 1, 2021]()
-```
-Compare with English `DayName()`:
-```
-DayName ( Get(CurrentDate) ) & " = " & DayNameJ ( Get(CurrentDate) )
-// → "Wednesday = 水曜日"
+// → 金曜日
 ```
 ---
 
 ## MonthNameJ ( date )
-Returns the Japanese name for the month of a given date.  
-Parameters: `date` — a date value.  
-Returns: text (Japanese month name)
+Returns the Japanese month name.  
+Returns: text
 ```
-MonthNameJ ( "6/6/2019" )
-// → ![Japanese text for the name of the month occurring on June 6, 2014]()
+MonthNameJ ( Date ( 6 ; 6 ; 2019 ) )
+// → 6月
 ```
 ---
 
 ## YearName ( date ; format )
-Returns the Japanese calendar year name for a given date. Japan uses two year systems: the Western (Gregorian) year and the Imperial era year.  
-Parameters: `date` — a date value; `format` — numeric code controlling output format.  
+Returns the Japanese era (emperor) year for a date. `format`: `0` long era name · `1` abbreviated era in parentheses · `2` roman letter (M, T, S, H, R). Any other value means 0. Dates before 8 Sept 1868 return the Western (Seireki) year. The first year of an era shows as 元 with format 1.  
 Returns: text
+```
+YearName ( Date ( 7 ; 15 ; 2026 ) ; 0 )
+// → 令和8
 
-**format values:**
-| Value | Output | Example (2026) |
-|---|---|---|
-| 0 | Western year in kanji | 二〇二六 |
-| 1 | Imperial era name + year (kanji) | 令和八年 |
-| 2 | Imperial era abbreviation + year number | R8 |
-| 3 | Full era name + year number (mixed) | 令和8年 |
+YearName ( Date ( 7 ; 15 ; 2026 ) ; 1 )
+// → (令)8
+
+YearName ( Date ( 7 ; 15 ; 2026 ) ; 2 )
+// → R8
+
+YearName ( Date ( 5 ; 1 ; 2019 ) ; 1 )
+// → (令)元
 ```
-YearName ( DateField ; 0 )
-// → ![Japanese text for the year name occurring on July 15, 2008]() when DateField contains 7/15/2008
-```
-**Imperial era reference:**
-- Reiwa (令和) era began 1 May 2019 (year 1 = 2019)
-- Heisei (平成) era: 1989–2019
-- Showa (昭和) era: 1926–1989
+Eras: Reiwa (令和) from 1 May 2019 · Heisei (平成) 1989–2019 · Shōwa (昭和) 1926–1989.
 
 ---
 
 ## Furigana ( text {; option } )
-Converts Japanese text (kanji and mixed text) to its phonetic reading (furigana). The conversion uses FileMaker's built-in Japanese input method to derive the reading.  
-Parameters: `text` — Japanese text; `option` — optional numeric code for output character type (default: 0).  
-Returns: text (phonetic reading)
-
-**option values:**
-| Value | Output |
-|---|---|
-| 0 | Hiragana (default) |
-| 1 | Katakana |
-| 2 | Hankaku (half-width) katakana |
-| 3 | Roman (Romaji) |
+Converts Japanese text (including kanji) to its reading — useful as a sort key, because kanji sort meaningfully only by reading. *Originated: 14.0*  
+`option`: `1` hiragana · `2` full-width katakana · `3` full-width romaji · `4` half-width katakana · `5` half-width romaji. Omitted or any other value → hiragana.  
+Returns: text
 ```
-Furigana ( "東京" ; 0 )
-// → "とうきょう"  (hiragana reading of 東京 Tokyo)
+Furigana ( "東京都" )
+// → とうきょうと
 
-Furigana ( "東京" ; 1 )
-// → "トウキョウ"  (katakana)
+Furigana ( "東京都" ; 2 )
+// → トウキョウト
 
-Furigana ( "東京" ; 3 )
-// → "tōkyō"  or "toukyou" (roman/romaji)
+Furigana ( "東京都" ; 4 )
+// → ﾄｳｷｮｳﾄ
 
-Furigana ( "田中様" ; 0 )
-// → "たなかさま"
-```
-Sorting by pronunciation (readings often differ from visual order):
-```
-// Use Furigana as a sort key field for kanji names
-// so records sort phonetically rather than by stroke order
+Furigana ( "東京都" ; 5 )
+// → toukyouto
 ```
 ---
 
 ## Hiragana ( text )
-Converts zenkaku (full-width) katakana to hiragana. Non-katakana characters pass through unchanged.  
-Parameters: `text` — text containing katakana.  
-Returns: text (katakana converted to hiragana)
+Converts katakana — half-width and full-width — to hiragana.  
+Returns: text
 ```
-Hiragana ( "` ![Japanese text string of katakana characters]()`" )
-// → ![Japanese text string of hiragana characters]()
+Hiragana ( "カタカナ" )
+// → かたかな
+
+Hiragana ( "ｶﾀｶﾅ" )
+// → かたかな
 ```
 ---
 
 ## Katakana ( text )
-Converts hiragana to zenkaku (full-width) katakana. Non-hiragana characters pass through unchanged.  
-Parameters: `text` — text containing hiragana.  
-Returns: text (hiragana converted to katakana)
+Converts hiragana to full-width (zenkaku) katakana.  
+Returns: text
 ```
-Katakana ( "` ![Japanese text string of hiragana characters]()`" )
-// → ![Japanese text string of zenkaku (2-byte) katakana characters]()
+Katakana ( "ひらがな" )
+// → ヒラガナ
 ```
 ---
 
 ## KanaHankaku ( text )
-Converts **zenkaku** (full-width, double-byte) katakana to **hankaku** (half-width, single-byte) katakana. Other characters (hiragana, kanji, ASCII) pass through unchanged.  
-Parameters: `text` — text containing zenkaku katakana.  
+Converts full-width (zenkaku) katakana to half-width (hankaku) katakana.  
 Returns: text
 ```
-KanaHankaku ( "` ![Japanese text string of zenkaku (2-byte) katakana characters]()`" )
-// → ![Japanese text string of hankaku (1-byte) katakana characters]()
+KanaHankaku ( "カタカナ" )
+// → ｶﾀｶﾅ
 ```
-Use case: legacy systems or barcodes requiring half-width kana output.
-
 ---
 
 ## KanaZenkaku ( text )
-Converts **hankaku** (half-width) katakana to **zenkaku** (full-width) katakana. Inverse of `KanaHankaku`.  
-Parameters: `text` — text containing hankaku katakana.  
+Converts half-width (hankaku) katakana to full-width (zenkaku) katakana.  
 Returns: text
 ```
-KanaZenkaku ( "` ![Japanese text string of hankaku (1-byte) katakana characters]()`" )
-// → ![Japanese text string of zenkaku (2-byte) katakana characters]()
+KanaZenkaku ( "ｶﾀｶﾅ" )
+// → カタカナ
 ```
-Use case: normalise imported data from legacy systems into standard full-width format.
-
 ---
 
 ## RomanHankaku ( text )
-Converts **zenkaku** (full-width) alphanumeric characters and punctuation to their **hankaku** (half-width, standard ASCII) equivalents.  
-Parameters: `text` — text containing zenkaku roman characters.  
+Converts full-width (zenkaku) letters, digits and symbols to half-width (standard ASCII).  
 Returns: text
 ```
-RomanHankaku ( "M  a  c  i  n  t  o  s  h" )
+RomanHankaku ( "Ｍａｃｉｎｔｏｓｈ" )
 // → Macintosh
 ```
-Use case: normalise user-entered data before validation or comparison (Japanese keyboards often default to zenkaku for all input).
-
 ---
 
 ## RomanZenkaku ( text )
-Converts **hankaku** (half-width, standard ASCII) alphanumeric characters to **zenkaku** (full-width) characters. Inverse of `RomanHankaku`.  
-Parameters: `text` — text containing hankaku (ASCII) characters.  
+Converts half-width letters, digits and symbols to full-width (zenkaku).  
 Returns: text
 ```
 RomanZenkaku ( "Macintosh" )
-// → M  a  c  i  n  t  o  s  h
+// → Ｍａｃｉｎｔｏｓｈ
 ```
-Use case: formatting for Japanese print layouts that require full-width presentation of alphanumerics.
-
 ---
 
 ## KanjiNumeral ( text )
-Converts Arabic (Western) numerals in a text string to their **kanji numeral** equivalents.  
-Parameters: `text` — text containing Arabic numerals.  
-Returns: text (numerals replaced with kanji)
+Converts Arabic digits in text to kanji digits, digit by digit (no place values — for those, use NumToJText).  
+Returns: text
 ```
-KanjiNumeral ( 123 )
-// → ![Japanese text string of kanji numerals 1 2 3]()
+KanjiNumeral ( "2026年" )
+// → 二〇二六年
 ```
-Note: This is digit-by-digit conversion (二〇二六), not place-value conversion (二千二十六 = 2,026). For place-value kanji numbers, use `NumToJText()`.
-
 ---
 
 ## NumToJText ( number ; separator ; characterType )
-Converts a number to its Japanese text representation, with control over the separator style and character set. More powerful than `KanjiNumeral()` — supports place-value notation (thousands, ten-thousands, etc.) and multiple output styles.  
-Parameters: `number` — the number to convert; `separator` — controls grouping separators; `characterType` — controls output character style.  
+Converts a number to Japanese text. Blank or out-of-range values for either option mean 0.  
+`separator`: `0` none · `1` comma every 3 digits · `2` 万 / 億 units · `3` every unit (十, 百, 千, 万, 億)  
+`characterType`: `0` half-width digits · `1` full-width digits · `2` kanji · `3` traditional kanji (大字)  
 Returns: text
-
-**separator values:**
-| Value | Behaviour |
-|---|---|
-| 0 | No separator |
-| 1 | Comma separator at each 万 (10,000) boundary |
-
-**characterType values:**
-| Value | Output style |
-|---|---|
-| 0 | Kanji with place-value units (万, 億, etc.) |
-| 1 | Full-width Arabic numerals |
-| 2 | Half-width Arabic numerals |
-| 3 | Kanji digits only (no place-value units) |
 ```
-NumToJText(123456789;2;0)
-// → ![Arabic numeral 123456789 with half-width hankaku (1-byte) separators between the thousands and ten thousands places, and between the ten millions and hundred millions places]()
+NumToJText ( 123456789 ; 1 ; 0 )
+// → 123,456,789
+
+NumToJText ( 123456789 ; 2 ; 0 )
+// → 1億2345万6789
+
+NumToJText ( 123456789 ; 3 ; 2 )
+// → 一億二千三百四十五万六千七百八十九
+
+NumToJText ( 2026 ; 3 ; 3 )
+// → 弐阡弐拾六
 ```
 ---
 
@@ -436,14 +435,13 @@ Let ( [
 
 Source: https://help.claris.com/en/pro-help/content/mobile-functions.html  
 All 5 mobile functions with verified syntax, parameters, return types, and usage patterns.  
-Last verified: 2026-06 against live Claris Help Centre.
 
-**Overview:** FileMaker's mobile functions are exclusively for **FileMaker Go** (iOS/iPadOS). They expose native device hardware: GPS location, sensor data (accelerometer, gyroscope, magnetometer, barometer, ambient light), AV player state, and iBeacon ranging. Always check `Get(Device)` or `Get(ApplicationVersion)` before calling these functions on platforms that don't support them — on FileMaker Pro (desktop), they return empty or an error.
+**Overview:** these functions read device hardware in **FileMaker Go** (iOS / iPadOS): location, sensors, AV player state and iBeacons. Elsewhere they return empty, so branch on the client first.
 
 **Platform guard pattern:**
 ```
 // Check before calling any mobile function:
-If ( Left ( Get(ApplicationVersion) ; 2 ) = "Go" ;
+If ( Left ( Get ( ApplicationVersion ) ; 2 ) = "Go" ;   // "Go …" on iPhone, "Go_iPad …" on iPad
   Location ( 10 ) ;
   "Not available on this platform"
 )
@@ -451,83 +449,77 @@ If ( Left ( Get(ApplicationVersion) ; 2 ) = "Go" ;
 ---
 
 ## GetAVPlayerAttribute ( attributeName )
-Returns the current state of the native AV (audio/video) player when a container field is playing media in FileMaker Go. Use in scripts to monitor playback position, duration, or status.  
-Parameters: `attributeName` — text name of the attribute to retrieve.  
-Returns: varies by attribute
+FileMaker Go only. Returns a setting of the audio, video or image currently (or most recently) played. Before anything has played: empty or 0. *Originated: 14.0*  
+Main attributes:
+- `playbackState` — 0 stopped · 1 playing · 2 paused
+- `position`, `startOffset`, `endOffset`, `duration` — seconds
+- `sourceType` (0 none · 1 URL · 2 field · 3 layout object · 4 active object) and `source`
+- `presentation` — 0 embedded · 1 full screen · 2 full screen only · 3 audio only · 4 embedded only
+- `volume`, `zoom`, `hideControls`, `disableInteraction`, `pictureInPicture`, `externalPlayback` …
+- `triggerEvent`, `triggerEventDetail` — why OnObjectAVPlayerChange / OnFileAVPlayerChange fired
+- `all` — every attribute
 
-**Common attributeName values:**
-| Attribute | Returns | Notes |
-|---|---|---|
-| `"state"` | text | `"playing"`, `"paused"`, `"stopped"`, `"ended"` |
-| `"currentTime"` | number | Playback position in seconds |
-| `"duration"` | number | Total media duration in seconds |
-| `"rate"` | number | Playback rate (1.0 = normal, 2.0 = double speed) |
-| `"isMuted"` | number | 1 if muted, 0 if not |
+Returns: text or number
 ```
-If [GetAVPlayerAttribute("playbackState") = 1]
-    AVPlayer Set Playback State [Stopped]
+If [ GetAVPlayerAttribute ( "playbackState" ) = 1 ]
+    AVPlayer Set Playback State [ Stopped ]
 End If
 ```
 ---
 
 ## GetSensor ( sensorName {; option1 ; option2 } )
-Returns a real-time reading from a named hardware sensor on the iOS/iPadOS device. The function blocks until a reading is available (or times out). Sensor availability depends on the device model.  
-Parameters: `sensorName` — text name of the sensor; `option1`, `option2` — optional sensor-specific parameters.  
-Returns: number or JSON (depending on sensor)
+FileMaker Go only (iOS / iPadOS). Returns a sensor reading; availability depends on the device. *Originated: 17.0*  
+Sensor names (case as shown):
+- Battery: `batteryLevel` (0.0–1.0), `batteryStatus` (1 unplugged · 2 charging · 3 full)
+- Location: `location`, `locationValues` — option1 accuracy (m), option2 timeout (s)
+- Motion: `attitude` (roll, pitch, yaw), `rotationRate`, `accelerationByUser`, `accelerationByGravity`, `speed`, `heading`
+- Magnetic: `magneticField`, `compassMagneticHeading`, `compassTrueHeading`
+- Pedometer: `stepCount`, `stepDistance`, `stepFloorsUp`, `stepFloorsDown` — option1 seconds to look back
+- `airPressure`
+- `available` — lists the sensors this device supports
 
-**Available sensors and their returns:**
-
-| sensorName | Returns | Notes |
-|---|---|---|
-| `"Acceleration"` | JSON with x, y, z (g-force) | Device acceleration |
-| `"Gravity"` | JSON with x, y, z | Gravity component only |
-| `"RotationRate"` | JSON with x, y, z (rad/s) | Gyroscope |
-| `"Attitude"` | JSON with roll, pitch, yaw (radians) | Device orientation |
-| `"MagneticField"` | JSON with x, y, z (microteslas) + accuracy | Magnetometer |
-| `"Altitude"` | number (meters above sea level) | Barometric altitude |
-| `"Pressure"` | number (kilopascals) | Barometric pressure |
-| `"Luminosity"` | number (lux) | Ambient light sensor |
+Multi-value readings come back as return-delimited lists. Returns: text or number.
 ```
-GetSensor ( "stepCount"; 3600 )
-// → `8000` if the user has taken 8000 steps in the past hour
+GetSensor ( "stepCount" ; 3600 )
+// → 8000 if the user took 8000 steps in the past hour
+
+GetSensor ( "available" )
 ```
 ---
 
 ## Location ( accuracy {; timeout } )
-Returns the device's current GPS coordinates as a newline-delimited text value.  
-Parameters: `accuracy` — desired accuracy in metres (smaller = higher accuracy but slower); `timeout` — optional max seconds to wait for a fix (default: no limit).  
-Returns: text — two values separated by a newline: latitude on line 1, longitude on line 2
+FileMaker Go only — FileMaker Pro returns empty. Returns one line: `latitude, longitude, accuracy` (accuracy in metres achieved). `accuracy` is the requested accuracy in metres; `timeout` is in seconds, **default 60**. Returns empty if no location is received.  
+Returns: text
 ```
-Location ( 100; 40 )
-// takes up to 40 seconds to return the latitude and longitude with a requested accuracy of 100 meters (the achieved accuracy was 65 meters).
+Location ( 100 ; 40 )
+// → +37.343123, -122.017593, +65.000000
 ```
-Store coordinates in a script:
+Store coordinates (split on the commas):
 ```
-Set Variable [ $loc     ; Location ( 20 ) ]
-Set Variable [ $lat     ; GetValue ( $loc ; 1 ) ]
-Set Variable [ $lng     ; GetValue ( $loc ; 2 ) ]
-Set Field [ Record::Latitude  ; $lat ]
-Set Field [ Record::Longitude ; $lng ]
+Set Variable [ $loc ; Value: Substitute ( Location ( 20 ; 30 ) ; ", " ; ¶ ) ]
+Set Field [ Record::Latitude  ; GetValue ( $loc ; 1 ) ]
+Set Field [ Record::Longitude ; GetValue ( $loc ; 2 ) ]
 ```
+For separate values plus altitude, use LocationValues.
+
 ---
 
 ## LocationValues ( accuracy {; timeout } )
-Like `Location()`, but returns **four values** (more detail): latitude, longitude, altitude, and horizontal accuracy of the fix.  
-Parameters: `accuracy` — desired accuracy in metres; `timeout` — optional max seconds to wait.  
-Returns: text — four values separated by newlines
+FileMaker Go only. Returns **six** return-delimited values: latitude · longitude · altitude (m) · horizontal accuracy (m) · vertical accuracy (m) · age of the reading (minutes). Timeout default 60 s.  
+Returns: text
 ```
 LocationValues ( 100 ; 40 )
-// → the following location for a device:
+// → 37.406489¶-121.983428¶0.0545050¶65¶10¶0.001236
 ```
 Reject imprecise fixes:
 ```
 Let ( lv = LocationValues ( 10 ; 8 ) ;
-  If ( GetValue(lv;4) > 50 ;
-    "GPS fix too imprecise (±" & GetValue(lv;4) & "m)" ;
+  If ( GetValue ( lv ; 4 ) > 50 ;
+    "GPS fix too imprecise (±" & GetValue ( lv ; 4 ) & " m)" ;
     JSONSetElement ( "{}" ;
-      ["lat" ; GetValue(lv;1) ; JSONNumber] ;
-      ["lng" ; GetValue(lv;2) ; JSONNumber] ;
-      ["alt" ; GetValue(lv;3) ; JSONNumber]
+      [ "lat" ; GetValue ( lv ; 1 ) ; JSONNumber ] ;
+      [ "lng" ; GetValue ( lv ; 2 ) ; JSONNumber ] ;
+      [ "alt" ; GetValue ( lv ; 3 ) ; JSONNumber ]
     )
   )
 )
@@ -535,79 +527,61 @@ Let ( lv = LocationValues ( 10 ; 8 ) ;
 ---
 
 ## RangeBeacons ( UUID {; timeout ; major ; minor } )
-Scans for nearby Bluetooth Low Energy (BLE) iBeacons that match the given UUID and returns information about each detected beacon as a newline-delimited list.  
-Parameters: `UUID` — the iBeacon Proximity UUID (text, standard UUID format); `timeout` — optional seconds to scan (default: implementation-defined); `major` — optional major value filter (0–65535); `minor` — optional minor value filter (0–65535).  
-Returns: text — each beacon on a separate line; each line contains tab-separated values: UUID, major, minor, proximity, accuracy (meters), RSSI (signal strength dBm)
+FileMaker Go only. Returns one line per nearby iBeacon matching `UUID` (and optional major / minor), as **comma-separated** values: UUID, major, minor, proximity, accuracy (m; negative = unknown), RSSI (dB). `timeout` defaults to **5 seconds**. *Originated: 15.0*  
+`proximity`: `0` unknown · `1` immediate · `2` near · `3` far. Empty if nothing matches or Location Services is off; `?` for an invalid query.  
+Returns: text
 ```
-RangeBeacons("D9B9EC1F-XXXX-YYYY-80A9-1E39D4CEA95C")
-// → information about all nearby iBeacons with the specified `UUID`:
+RangeBeacons ( "D9B9EC1F-XXXX-YYYY-80A9-1E39D4CEA95C" )
+// → D9B9EC1F-XXXX-YYYY-80A9-1E39D4CEA95C, 5, 1, 3, 14.68, -79
 ```
-**Proximity values:** `immediate` (<0.5m), `near` (0.5–3m), `far` (>3m), `unknown` (cannot determine).
-
-Use cases: retail proximity experiences, museum exhibit triggers, warehouse zone detection, indoor navigation, automatic record lookup when entering a tagged area.
-
 ---
 
 # FileMaker Miscellaneous Functions — Syntax & Examples
 
 Source: https://help.claris.com/en/pro-help/content/miscellaneous-functions.html  
 All 9 miscellaneous functions with verified syntax, parameters, return types, and usage patterns.  
-Last verified: 2026-06 against live Claris Help Centre.
 
 **Overview:** The Miscellaneous category contains utility functions that do not fit neatly into other categories. They cover path conversion (FileMaker ↔ native OS formats), add-on metadata, field name introspection, layout object attribute inspection, found-set record ID retrieval, and layout object UUID access. Several are essential for dynamic scripting and add-on development.
 
 ---
 
 ## ConvertFromFileMakerPath ( filemakerPath ; format )
-Converts a FileMaker internal path (e.g. `filemac:/Macintosh HD/Users/…` or `filewin:/C:/…`) to a standard OS path or URL.  
-Parameters: `filemakerPath` — text in FileMaker path format; `format` — numeric code for output format.  
+Converts a FileMaker path (`file:`, `filemac:`, `filewin:`, `image:`, `movie:`, `fmnet:` …) to a standard path. *Originated: 19.0*  
+`format` (named constant or number): `PosixPath` (1) — `/directory/file` · `WinPath` (2) — `C:\directory\file` · `URLPath` (3) — `file:///…`, or `fmp://host/…` for an `fmnet:` path. Returns `?` if the path can't be converted to that format.  
 Returns: text
+```
+ConvertFromFileMakerPath ( "file:/Macintosh HD/etc/hosts" ; PosixPath )
+// → /etc/hosts
 
-**format values:**
-| Value | Output format |
-|---|---|
-| 0 | Native OS path (Mac: `/Volume/…`, Win: `C:\…`) |
-| 1 | `file://` URL |
+ConvertFromFileMakerPath ( "file:/Macintosh HD/etc/hosts" ; URLPath )
+// → file:///etc/hosts
 ```
-ConvertFromFileMakerPath ( Get(DocumentsPath) ; 0 )
-// Mac → /Users/username/Documents/
-// Win → C:\Users\username\Documents\
-
-ConvertFromFileMakerPath ( Get(FilePath) ; 1 )
-// → file:///Users/username/Documents/MyFile.fmp12
+Pass a native path to a plug-in or shell command:
 ```
-Typical use — pass a FileMaker path to a script or plugin that requires a native path:
-```
-Let ( nativePath = ConvertFromFileMakerPath ( Get(DocumentsPath) & "export.csv" ; 0 ) ;
-  // pass nativePath to a shell command or MBS plugin
-  nativePath
-)
+ConvertFromFileMakerPath ( Get ( DocumentsPath ) & "export.csv" ; PosixPath )
 ```
 ---
 
 ## ConvertToFileMakerPath ( standardPath ; format )
-Converts a native OS path or URL to a FileMaker internal path format.  
-Parameters: `standardPath` — text in native OS or URL format; `format` — numeric code for input format.  
+The reverse: converts a standard path in `format` (`PosixPath` 1, `WinPath` 2, `URLPath` 3) to a FileMaker path. `fmp://` URLs become `fmnet:` paths; everything else gets the `file` prefix. *Originated: 19.0*  
 Returns: text
-
-**format values:**
-| Value | Input format |
-|---|---|
-| 0 | Native OS path |
-| 1 | `file://` URL |
 ```
 ConvertToFileMakerPath ( "/Users/John Smith/Documents/test.xlsx" ; PosixPath )
-// returns:
+// → file:/Macintosh HD/Users/John Smith/Documents/test.xlsx   (Mac, boot volume "Macintosh HD")
+
+ConvertToFileMakerPath ( "C:\Users\John Smith\Documents\test.xlsx" ; WinPath )
+// → file:/C:/Users/John Smith/Documents/test.xlsx
 ```
 ---
 
 ## GetAddonInfo ( addonID )
-Returns a JSON object containing metadata about a FileMaker add-on (name, version, description, author, minimum FileMaker version required, etc.).  
-Parameters: `addonID` — the text identifier of the add-on (as defined in the add-on manifest).  
+Returns JSON describing an installed or packaged add-on, looked up by its UUID. Keys: `APIVers`, `Installed` (`Name`, `UUID`, `UsesLayoutPayload`, `UsesRelationship`) and `Package` (`Name`, `UUID`). *Originated: 19.2.2*  
 Returns: text (JSON)
 ```
 GetAddonInfo ( "B79DDD6D-DDF2-4370-A3C9-F9DEF2C52992" )
 ```
+Pair with GetLayoutObjectOwnerInfo to find which add-on a layout object belongs to.
+
 ---
 
 ## GetBaseTableName ( field )
@@ -663,165 +637,116 @@ Let ( fieldName = GetFieldName ( Self ) ;
 ---
 
 ## GetLayoutObjectAttribute ( objectName ; attributeName {; repetitionNumber ; portalRowNumber } )
-Returns the value of a named **layout object attribute** at runtime — position, size, visibility, style, fill colour, bounds, content, and more. Requires the layout object to have a name set in the Inspector.  
-Parameters: `objectName` — text name of the layout object; `attributeName` — name of the attribute to retrieve; `repetitionNumber` — optional (for repeating fields); `portalRowNumber` — optional (for portal rows).  
-Returns: varies by attribute (number, text, or JSON)
+Returns an attribute of a **named** object on the current layout. *Originated: 8.5*  
+Attributes:
+- State: `objectType`, `hasFocus`, `containsFocus`, `isFrontPanel`, `isActive`, `isObjectHidden` (1 when hidden for the current record)
+- Geometry: `bounds` (space-separated: left top right bottom rotation), `left`, `right`, `top`, `bottom`, `width`, `height`, `rotation`, `startPoint`, `endPoint`
+- Content: `source` (web viewer URL, field name, container reference…), `content` (displayed content), `enclosingObject`, `containedObjects`
 
-**Common attributeName values:**
-| Attribute | Returns |
-|---|---|
-| `"bounds"` | JSON with top, left, bottom, right (layout units) |
-| `"left"`, `"top"`, `"right"`, `"bottom"` | Individual position values |
-| `"width"`, `"height"` | Dimensions in layout units |
-| `"visible"` | 1 (visible) or 0 (hidden) |
-| `"content"` | Field value or button label text |
-| `"isFocused"` | 1 if the object currently has focus |
-| `"enabled"` | 1 if the object is enabled |
-| `"style"` | CSS-like style info as JSON |
+Returns: text
 ```
-Set Field [Search::Homepage ; GetLayoutObjectAttribute ( "Web Viewer" ; "source" )]
-```
-Responsive layout logic:
-```
-// Conditionally show a panel based on another object's position:
-If ( GetLayoutObjectAttribute ( "Sidebar" ; "visible" ) ;
-  "Sidebar is showing" ; "Sidebar is hidden" )
+Set Field [ Search::Homepage ; GetLayoutObjectAttribute ( "Web Viewer" ; "source" ) ]
+
+If ( GetLayoutObjectAttribute ( "Sidebar" ; "isObjectHidden" ) ; "Sidebar is hidden" ; "Sidebar is showing" )
 ```
 ---
 
 ## GetLayoutObjectOwnerInfo ( objectID )
-Returns a JSON object describing which layout and table own a layout object, identified by its internal numeric objectID.  
-Parameters: `objectID` — the internal numeric ID of the layout object (obtain via `LayoutObjectUUID`).  
-Returns: text (JSON)
+Returns JSON about who owns a layout object — the layout it's on and, if any, the add-on instance it belongs to. `objectID` is the object's **UUID** (see LayoutObjectUUID) or an add-on instance's owner ID, as text. *Originated: 19.2.2*  
+Returns: text (JSON — `APIVers`, `Object.UUID`, `Object.Index`, `Object.Name`, `Object.Owners.Add-on.InstanceID`, `Object.Owners.Layout.UUID` / `.Name`)
 ```
 GetLayoutObjectOwnerInfo ( "970E9CAE-D6FA-40DE-ACFA-14D110731F82" )
 ```
 ---
 
-## GetRecordIDsFromFoundSet ( type {; tableOccurrenceName} )
-Returns the record IDs of all records in the current found set as a list or a JSON array.  
-Parameters: `type` — numeric 0–4 selecting the result format (constant name or number accepted);
-`tableOccurrenceName` *(optional, FM 26+)* — a table occurrence or portal object name; when supplied,
-IDs come from the related record set or filtered portal instead of the current found set.  
+## GetRecordIDsFromFoundSet ( type { ; tableOccurrenceOrPortal } )
+Returns the record IDs of the current found set, in its current order. With the optional second parameter (FM 26) it returns the records related through a table occurrence (in the relationship's sort order), or shown in a named portal (with its filter and sort). *Originated: 22.0*  
 Returns: text
 
-| type | Constant | Result format |
+| type | Constant | Result |
 |---|---|---|
-| 0 | `ValueNumber` | Carriage return–separated list of IDs |
-| 1 | `JSONString` | JSON array of IDs as strings |
-| 2 | `JSONNumber` | JSON array of IDs as numbers |
-| 3 | `ValueNumberRanges` | Return-separated list with consecutive IDs compressed into ranges |
-| 4 | `JSONStringRanges` | JSON array with consecutive IDs compressed into range strings |
+| 0 | `ValueNumber` | return-delimited list: `1¶5¶21¶22¶23¶7` |
+| 1 | `JSONString` | `["1","5","21","22","23","7"]` |
+| 2 | `JSONNumber` | `[1,5,21,22,23,7]` |
+| 3 | `ValueNumberRanges` | `1¶5¶21-23¶7` |
+| 4 | `JSONStringRanges` | `["1","5","21-23","7"]` |
 
-The two Ranges formats reduce result size for large, contiguous found sets. An empty found set
-returns `""` for list formats and `"[]"` for JSON formats. Pair with the `Go to List of Records`
-script step to recreate the found set.
+An empty found set returns `""` (types 0 and 3) or `[]` (JSON types). Pass the result to **Go to List of Records** to restore the found set later.
 ```
-GetRecordIDsFromFoundSet ( 0 )
-// → "101\n105\n108\n112"  (newline-separated record IDs)
-
-GetRecordIDsFromFoundSet ( 1 )
-// → "[101,105,108,112]"  (JSON array)
-
-// Count of IDs in result:
-ValueCount ( GetRecordIDsFromFoundSet ( 0 ) )
-// Same as Get(FoundCount) but gives you the actual IDs
-
-// Check if a specific record ID is in the found set:
-PatternCount ( ¶ & GetRecordIDsFromFoundSet(0) & ¶ ; ¶ & targetID & ¶ ) > 0
+// Is a record in the found set?
+PatternCount ( ¶ & GetRecordIDsFromFoundSet ( 0 ) & ¶ ; ¶ & $targetID & ¶ ) > 0
 ```
-Common use — pass the found set to a script for batch processing:
+Pass the found set to a script:
 ```
-// In a calculation to generate a script parameter:
 JSONSetElement ( "{}" ;
-  ["recordIDs" ; GetRecordIDsFromFoundSet(1) ; JSONArray] ;
-  ["timestamp" ; Get(CurrentTimestamp) ; JSONString]
+  [ "recordIDs" ; GetRecordIDsFromFoundSet ( JSONNumber ) ; JSONArray ] ;
+  [ "layout"    ; Get ( LayoutName ) ; JSONString ]
 )
 ```
 ---
 
 ## LayoutObjectUUID
-Returns the **UUID** (Universal Unique Identifier) of the layout object in which this calculation is being evaluated. No parameters — this is a constant in the context of a specific layout object.  
-Parameters: none.  
-Returns: text (UUID string)
+Returns the UUID of the layout object whose calculation is being evaluated. Works **only** in a web viewer's **Web Address** calculation — anywhere else, including scripts, it returns `?`. *Originated: 19.2.2*  
+Returns: text
 ```
 If ( LayoutObjectUUID = "393877C5-D0A2-43D0-88B5-08F9305852DA" ; 1 ; 0 )
-// → `1` (true) in a web viewer's Web Address box if the web viewer's UUID is 393877C5-D0A2-43D0-88B5-08F9305852DA
+// → 1 in the Web Address box of the web viewer with that UUID
 ```
-Use cases — uniquely identify which object triggered an event, store object IDs for cross-reference in add-on development, or track layout objects in a dynamic UI system.
+Pass the web viewer's own UUID to its JavaScript:
 ```
-// Log which object was clicked (in a button script trigger):
-Set Field [ Log::LastObjectClicked ; LayoutObjectUUID ]
-
-// Store in JSON for later reference:
-JSONSetElement ( "{}" ; "clickedObject" ; LayoutObjectUUID ; JSONString )
+"data:text/html,<script>var UUID = " & Quote ( LayoutObjectUUID ) & ";</script>…"
 ```
 ---
 
 # FileMaker Persistent Data Functions — Syntax & Examples (FM 26+)
 
 Source: https://help.claris.com/en/pro-help/content/persistent-data-functions.html  
-2 persistent data functions introduced in FileMaker Pro 26 (2026).  
-Last verified: 2026-06 against live Claris Help Centre.
+2 persistent data functions, introduced in FileMaker Pro 26.
 
-**Overview:** The persistent data store is a key-value store that survives session end and file close. Entries are keyed by a **name** and an **instance ID**, allowing multiple values under the same name. Use `Configure Persistent Data` (script step) to write/delete entries; use these functions to read them.
+**Overview:** the persistent data store is a set of named values saved in the file's **schema**, not its record data. Entries persist across sessions until deleted and are shared by every user of the file. Each entry is a **name** plus an optional **instance ID** (a namespace, e.g. an add-on instance), holding any FileMaker data type.
+- Write or delete with the **Configure Persistent Data** script step — needs **Full Access** (or a script granted it). Reading doesn't.
+- Names and instance IDs aren't case-sensitive.
+- Entries travel with a clone, but the **Data Migration Tool does not copy them** (they're schema, not record data) — re-create them after a migration.
 
 ---
 
 ## GetPersistentData ( name ; instanceID )
-*Introduced in FileMaker Pro 26 (2026).*  
-Returns a value from the persistent data store by name and instance ID.  
-Parameters: `name` — text key; `instanceID` — text or number identifying the specific instance.  
-Returns: text (the stored value, or empty if not found)
+Returns the stored value, in the data type it was stored with. **If no entry matches, returns `?`** (error 10), not empty. `""` as instanceID matches an entry stored without one. *Originated: 26.0*  
+Returns: text, number, date, time, timestamp or container
 ```
 GetPersistentData ( "AppVersion" ; "" )
-// → `2.1.0` if AppVersion was set with no instance ID as in Example 1 for the [Configure Persistent Data script step](https://help.claris.com/en/pro-help/content/configure-persistent-data.html)
+// → 2.1.0
 ```
-Read multiple instances of the same key:
+Fall back to a default when the entry doesn't exist:
 ```
-Let ( [
-  ids   = ListPersistentDataIDs ( "syncToken" ) ;
-  first = GetValue ( ids ; 1 ) ;
-  token = GetPersistentData ( "syncToken" ; first )
-] ;
-  token
+Let ( config = GetPersistentData ( "com.example.settings" ; $instanceID ) ;
+  If ( config = "?" ; "{}" ; config )
 )
 ```
 ---
 
 ## ListPersistentDataIDs ( name )
-*Introduced in FileMaker Pro 26 (2026).*  
-Returns a return-delimited list of all instance IDs stored under the specified name in the persistent data store.  
-Parameters: `name` — the key name to query.  
-Returns: text (return-delimited list of instance IDs; empty if no instances exist)
+Returns the instance IDs stored under `name`, in creation order. An entry with an empty instance ID shows as a blank line. Empty if there are none. *Originated: 26.0*  
+Returns: text (return-delimited)
 ```
-38EA3124-9CFD-4490-A634-A0A72A613145
-E53DE16C-282E-44B0-BDB8-D59B15419D1B
+ListPersistentDataIDs ( "com.example.addon.script" )
+// → 38EA3124-9CFD-4490-A634-A0A72A613145
+//   E53DE16C-282E-44B0-BDB8-D59B15419D1B
+//
+//   B2F4C8D1-5A3E-4F9B-8C7D-1E6A9B4D2F5C
+```
+Read every instance (script):
+```
+Set Variable [ $ids ; Value: ListPersistentDataIDs ( "cachedResult" ) ]
+Set Variable [ $i ; Value: 1 ]
+Loop [ Flush: Always ]
+  Exit Loop If [ $i > ValueCount ( $ids ) ]
+  Set Variable [ $val ; Value: GetPersistentData ( "cachedResult" ; GetValue ( $ids ; $i ) ) ]
+  # … process $val …
+  Set Variable [ $i ; Value: $i + 1 ]
+End Loop
+```
+Use the real instance ID returned by ListPersistentDataIDs — an invented one like `1` returns `?`.
 
-B2F4C8D1-5A3E-4F9B-8C7D-1E6A9B4D2F5C
-```
-Enumerate all instances of a key and read each value:
-```
-Let ( [
-  ids   = ListPersistentDataIDs ( "cachedResult" ) ;
-  count = ValueCount ( ids )
-] ;
-  // Use in a script with a loop:
-  // Set Variable [ $i = 1 ]
-  // Loop
-  //   Set Variable [ $id = GetValue ( ids ; $i ) ]
-  //   Set Variable [ $val = GetPersistentData ( "cachedResult" ; $id ) ]
-  //   ... process $val ...
-  //   Set Variable [ $i = $i + 1 ]
-  //   Exit Loop If [ $i > $count ]
-  // End Loop
-  count & " instances found"
-)
-```
-Check whether any instance exists before reading:
-```
-If ( IsEmpty ( ListPersistentDataIDs ( "userPrefs" ) ) ;
-  "No preferences saved yet" ;
-  GetPersistentData ( "userPrefs" ; 1 )
-)
-```
+---
+

@@ -1,18 +1,75 @@
 # Logical, JSON & AI Functions — Examples
 
+## Contents
+- Logical Functions
+  - Case ( test1 ; result1 {; test2 ; result2 ; ... ; defaultResult } )
+  - Choose ( test ; result0 {; result1 ; result2...} )
+  - Evaluate ( expression {; [field1 ; field2 ;...]} )
+  - EvaluationError ( expression )
+  - ExecuteSQL ( sqlQuery ; fieldSeparator ; rowSeparator { ; arguments... } )
+  - ExecuteSQLe ( sqlQuery ; fieldSeparator ; rowSeparator { ; arguments... } )
+  - GetAsBoolean ( data )
+  - GetField ( fieldName )
+  - GetNthRecord ( field ; recordNumber )
+  - GetSummary ( summaryField ; breakField )
+  - If ( test ; result1 {; result2 } )
+  - IsEmpty ( field )
+  - IsValid ( field )
+  - IsValidExpression ( expression )
+  - Let ( {[} var1 = expression1 {; var2 = expression2...]} ; calculation )
+  - Lookup ( sourceField {; failExpression } )
+  - LookupNext ( sourceField ; lower/higherFlag )
+  - Self
+  - SetRecursion ( expression ; maxIterations )
+  - While ( [ initialVariable ] ; condition ; [ logic ] ; result )
+  - Common patterns
+- JSON Functions
+  - JSONDeleteElement ( json ; keyOrIndexOrPath )
+  - JSONFormatElements ( json )
+  - JSONGetElement ( json ; keyOrIndexOrPath )
+  - JSONGetElementType ( json ; keyOrIndexOrPath )
+  - JSONListKeys ( json ; keyOrIndexOrPath )
+  - JSONListValues ( json ; keyOrIndexOrPath )
+  - JSONMakeArray ( listOfValues ; separator ; type )
+  - JSONParse ( json )
+  - JSONParsedState ( json )
+  - JSONSetElement ( json ; keyOrIndexOrPath ; value ; type )
+  - Common patterns
+- AI Functions
+  - AddEmbeddings ( v1 ; v2 )
+- Use $Combined with Perform Semantic Find to find "premium smartphone" records
+  - ComputeModel ( modelName ; parameterName1 ; value1 )
+  - CosineSimilarity ( v1 ; v2 )
+  - GetEmbedding ( account ; model ; input )
+  - GetEmbeddingAsFile ( text {; fileNameWithExtension } )
+  - GetEmbeddingAsText ( data )
+  - GetFieldsOnLayout ( layoutName )
+  - GetModelAttributes ( modelName )
+  - GetRAGSpaceInfo ( ragAccountName {; spaceID } )
+  - GetTableDDL ( tableOccurrenceNames ; ignoreError )
+  - GetTokenCount ( text )
+  - NormalizeEmbedding ( data { ; dimension } )
+  - PredictFromModel ( modelName ; v1 )
+  - SubtractEmbeddings ( v1 ; v2 )
+  - Common patterns
+- 1. Configure the account first — every AI call needs it
+- 2. Store embeddings (batch: Insert Embedding in Found Set)
+- 3. At search time — the step embeds the query itself
+- Perform SQL Query by Natural Language builds this DDL itself; use Data Tables: By DDL
+- when you want to send a hand-edited schema instead.
+
 ---
 
 # FileMaker Logical Functions — Syntax & Examples
 
 Source: https://help.claris.com/en/pro-help/content/logical-functions.html  
 All 20 logical functions with verified syntax, parameters, return types, and usage patterns.  
-Last verified: 2026-06 against live Claris Help Centre.
 
 **Overview:** Logical functions control flow, evaluate expressions, access field contents dynamically, and bridge scripting with calculations. `Let` and `While` are the two most powerful — master these first.
 
 ---
 
-## Case ( test1 ; result1 {; test2 ; result2 ; … ; defaultResult} )
+## Case ( test1 ; result1 {; test2 ; result2 ; ... ; defaultResult } )
 Evaluates tests in order and returns the result paired with the first true test. Returns `defaultResult` (or empty) if no test is true.  
 Parameters: alternating test/result pairs; optional trailing `defaultResult` with no paired test.  
 Returns: any type (matches the result expressions)
@@ -39,7 +96,8 @@ Case (
 ```
 ---
 
-## Choose ( test ; result0 {; result1 ; result2…} )
+## Choose ( test ; result0 {; result1 ; result2...} )
+Use Choose (not Case) to map a 0-based number to a result — `Case ( Get ( Device ) ; … )` treats the number as a true/false test.
 Returns the result at position `test` (0-based). Returns empty if `test` is out of range or negative.  
 Parameters: `test` — integer index; `result0…resultN` — return values.  
 Returns: any type
@@ -53,7 +111,7 @@ Choose ( StatusCode ; "New" ; "Active" ; "On Hold" ; "Closed" )
 ```
 ---
 
-## Evaluate ( expression {; [field1 ; field2 ;…]} )
+## Evaluate ( expression {; [field1 ; field2 ;...]} )
 Evaluates `expression` (a text string) as a FileMaker calculation at runtime. The optional field list tells FileMaker to recalculate when those fields change.  
 Parameters: `expression` — text containing a valid FileMaker calculation; optional field dependency list.  
 Returns: any type (result of the evaluated expression)
@@ -81,30 +139,34 @@ Let ( expr = "Round ( " & Table::Rate & " * " & Table::Units & " ; 2 )" ;
   Evaluate ( expr )
 )
 ```
-⚠️ Performance: avoid in auto-enter or unstored calcs on large tables — Evaluate recalculates every time any referenced field changes.
+⚠️ Server-side scripts: use English function names inside the Evaluate text — localised names aren't recognised there.
 
 ---
 
 ## EvaluationError ( expression )
-Returns the FileMaker error code that would result from evaluating `expression`, or 0 if no error.  
-Parameters: `expression` — text (same as Evaluate).  
+Returns the error code from evaluating `expression`, or 0 if there's no error. To catch **syntax** errors in formula text, `EvaluationError` must enclose `Evaluate` — given a plain text string it just sees text and returns 0.  
+Parameters: `expression` — any calculation expression.  
 Returns: number (error code)
 ```
 EvaluationError( GetField ( "total" ) + 1 )
 // → `102` (Field Missing) when the field total has been deleted or renamed
 ```
-Guard before using Evaluate:
+Guard before using Evaluate (wrap `Evaluate`, not the text):
 ```
 Let ( expr = "Table::" & $fieldName ;
-  If ( EvaluationError ( expr ) = 0 ;
+  If ( EvaluationError ( Evaluate ( expr ) ) = 0 ;
     Evaluate ( expr ) ;
     "Field not found"
   )
 )
 ```
+```
+EvaluationError ( Evaluate ( "1 +" ) )
+// → 1204
+```
 ---
 
-## ExecuteSQL ( sqlQuery ; fieldSeparator ; rowSeparator {; arguments…} )
+## ExecuteSQL ( sqlQuery ; fieldSeparator ; rowSeparator { ; arguments... } )
 Runs a SQL SELECT statement against a table occurrence and returns results as text. Field and row separators define the output format.  
 Parameters: `sqlQuery` — SQL text; `fieldSeparator` — separator between fields (e.g. `","` or `¶`); `rowSeparator` — separator between rows; `arguments` — optional `?` parameter substitution values.  
 Returns: text (or `"?"` on error)
@@ -125,24 +187,27 @@ Aggregate:
 ExecuteSQL ( "SELECT SUM(Total) FROM Invoices WHERE CustomerID = ?" ; "" ; "" ; Customers::ID )
 ```
 ⚠️ Important notes:
-- Field names in SQL must match **base table** field names (not table occurrence names)
-- No relationship-driven finds — all data must be in the query
+- `FROM` and `JOIN` name **table occurrences** (as in the relationships graph), not base tables
+- Ignores relationships defined in FileMaker — join explicitly in the query
+- SELECT only: no INSERT, UPDATE, DELETE or schema changes
 - Returns `"?"` on any error; wrap with `If ( result = "?" ; … )` or use `ExecuteSQLe`
 - Date/time literals use ODBC format: `DATE 'YYYY-MM-DD'`, `TIME 'HH:MM:SS'`
 - Use `?` parameters instead of concatenating values — handles quoting automatically
 
 ---
 
-## ExecuteSQLe ( sqlQuery ; fieldSeparator ; rowSeparator {; arguments…} )
-Identical to `ExecuteSQL` but returns a descriptive error message string instead of `"?"` on failure.  
+## ExecuteSQLe ( sqlQuery ; fieldSeparator ; rowSeparator { ; arguments... } )
+Identical to `ExecuteSQL`, except that on failure it returns `?` followed by an error in the form `? ERROR: FQLnnnn/(line:offset): message`.  
 Returns: text (results or error message)
 ```
 ExecuteSQLe ( "SELECT Title FROM Employees WHERE EmpID = 1"; ""; "" )
+// → ? ERROR: FQL0007/(1:7): The column named "Title" does not exist in any table in the column reference's scope.
 ```
+Check with `Left ( $result ; 1 ) = "?"`.
 ---
 
 ## GetAsBoolean ( data )
-Returns 1 if `data` is non-zero/non-empty, 0 otherwise. Converts any data type to a boolean.  
+Returns 1 if `data` converts to a **non-zero number**, or if a container holds data; otherwise 0. Text with no digits is 0 — it's not an "is not empty" test.  
 Returns: number (0 or 1)
 ```
 GetAsBoolean ( "" )
@@ -150,6 +215,9 @@ GetAsBoolean ( "" )
 
 GetAsBoolean ( "Some text here." )
 // → 0
+
+GetAsBoolean ( "5x" )
+// → 1
 
 GetAsBoolean ( Container Field )
 // → `1` when the field named Container Field contains data, or returns `0` when Container Field is empty
@@ -161,13 +229,14 @@ If ( GetAsBoolean ( Contacts::Newsletter ) ; "Subscribed" ; "Not subscribed" )
 ---
 
 ## GetField ( fieldName )
-Returns the contents of the field named by the text expression `fieldName`. Field name must be fully qualified: `"TableOccurrence::FieldName"`.  
+Returns the contents of the field whose name `fieldName` evaluates to. An unqualified name resolves in the table the calculation is evaluated in; use `"TableOccurrence::FieldName"` for any other table.  
 Returns: any type (field contents)
 ```
-Go to Layout ["Invoices" (Invoices)]
-Sort Records [Restore; With dialog: Off]
-#Sort by the SortKey field
-Go to Record/Request/Page [First]
+GetField ( "Phone" )
+// → Customer::Phone when evaluated in the Customer table
+
+GetField ( ContactMethod )
+// → the contents of Phone or Email, whichever name ContactMethod holds
 ```
 Dynamic field access (combine with a variable):
 ```
@@ -185,7 +254,7 @@ Returns: any type
 GetNthRecord(First Name;2)
 // → the contents of the First Name field for record 2 in the current table
 ```
-Loop through found set without navigating:
+Compare with the previous record without navigating:
 ```
 Let ( [
   total = Get ( FoundCount ) ;
@@ -200,21 +269,22 @@ Let ( [
 ---
 
 ## GetSummary ( summaryField ; breakField )
-Returns the value of a summary field for the current sort group. `breakField` must be the field the records are currently sorted by.  
+Returns the value of a summary field for the current sort group. The result is blank unless the found set is sorted by `breakField`. Pass the summary field as its own break field to get the grand summary.  
 Parameters: `summaryField` — a summary field; `breakField` — the sort break field.  
-Returns: number/text (summary result for the current group)
+Returns: number, date, time or timestamp. Calculations using it are unstored.
 ```
 GetSummary(Total Sales;Country)
 // → a summary of all records pertaining to the value in the Country field
 ```
 Sub-summary percentage:
 ```
-GetSummary ( Sales::GroupTotal ; Sales::Region ) / GetSummary ( Sales::GrandTotal ; Sales::Region ) * 100
+GetSummary ( Sales::Total ; Sales::Region ) / GetSummary ( Sales::Total ; Sales::Total ) * 100
+// group total ÷ grand total (summary field used as its own break field)
 ```
 ---
 
-## If ( test ; resultIfTrue {; resultIfFalse} )
-Returns `resultIfTrue` if `test` is non-zero/non-empty, otherwise `resultIfFalse` (or empty).  
+## If ( test ; result1 {; result2 } )
+Returns `resultIfTrue` if `test` evaluates to a non-zero number, otherwise `resultIfFalse` (or empty). Text with no digits counts as false: `If ( "abc" ; 1 ; 0 )` → `0`.  
 Parameters: `test` — boolean expression; `resultIfTrue`; optional `resultIfFalse`.  
 Returns: any type
 ```
@@ -232,7 +302,7 @@ If ( Denominator ≠ 0 ; Numerator / Denominator ; 0 )
 ---
 
 ## IsEmpty ( field )
-Returns 1 if `field` is empty (null, zero-length text, or 0 for numbers depending on field type); 0 otherwise.  
+Returns 1 if `field` is empty — and also if the field, related table, relationship or file is missing, or another error occurs. Returns 0 otherwise; zero is not empty: `IsEmpty ( 0 )` → `0`. For a container, returns 0 when it holds a file.  
 Returns: number (0 or 1)
 ```
 IsEmpty ( OrderNum )
@@ -266,7 +336,7 @@ Parameters: `expression` — text.
 Returns: number (0 or 1)
 ```
 IsValidExpression(calculationField)
-// → 1` (true) if `calculationField` contains `total + 1.
+// → 1 (true) if calculationField contains total + 1; 0 if it contains abs(-1
 ```
 Validate user-entered formula before Evaluate:
 ```
@@ -277,8 +347,8 @@ If ( IsValidExpression ( $userFormula ) ;
 ```
 ---
 
-## Let ( [var1 = expr1 ; var2 = expr2 ; …] ; result )
-Declares local variables within the calculation, then evaluates `result` using those variables. Variables only exist for the duration of the Let expression.  
+## Let ( {[} var1 = expression1 {; var2 = expression2...]} ; calculation )
+Declares variables, then evaluates `result` using them. Plain names last for the calculation only; `$var` / `$$var` names set real local / global variables (a `$var` set outside a script is file-scoped until a script runs).  
 Parameters: variable assignment list (use `[]`); `result` expression.  
 Returns: any type (result of the final expression)
 ```
@@ -298,7 +368,7 @@ Let ( [
   subtotal - discount + tax
 )
 ```
-Recursive Let (self-referencing via custom function — Let itself is not recursive):
+Last word of a name:
 ```
 Let ( [
   parts    = Substitute ( FullName ; " " ; ¶ ) ;
@@ -309,7 +379,7 @@ Let ( [
 ```
 ---
 
-## Lookup ( sourceField {; failExpression} )
+## Lookup ( sourceField {; failExpression } )
 Returns the value of `sourceField` from a related record via a relationship. If no related record is found, returns `failExpression` (or empty).  
 Parameters: `sourceField` — a field in a related table occurrence; `failExpression` — optional fallback value.  
 Returns: any type
@@ -319,7 +389,7 @@ Lookup ( Products::Price ; 0 )
 ```
 ---
 
-## LookupNext ( sourceField ; lower/higher )
+## LookupNext ( sourceField ; lower/higherFlag )
 Returns the next lower or higher value from `sourceField` in the related table when no exact match exists.  
 Parameters: `sourceField` — related field; `lower` or `higher` keyword.  
 Returns: any type
@@ -330,8 +400,8 @@ LookupNext ( PriceBreaks::Price ; lower )
 ---
 
 ## Self
-Returns the current contents of the object that contains the calculation. Used in field validation, button scripts, and conditional formatting to refer to the field or object being evaluated without naming it explicitly.  
-Returns: any type (current object's value)
+Returns the content of the object the calculation is defined in. Usable only in conditional formatting, tooltips, placeholder text, **Hide object when**, the Accessibility **Title** and **Help** options, and field definition calculations (including auto-enter and validation). Not in scripts.  
+Returns: text, number, date, time or timestamp
 ```
 self > 10
 // → `1` (True) when applied to a layout field object whose value is greater than 10
@@ -343,8 +413,8 @@ Self < 0
 ---
 
 ## SetRecursion ( expression ; maxIterations )
-Sets the maximum number of recursion iterations for a custom function or `While` expression. Default is 10,000; maximum is 10,000,000.  
-Parameters: `expression` — a recursive expression; `maxIterations` — integer.  
+Sets the iteration limit for `While` loops and recursive custom functions inside `expression`. The default limit is **50,000**; past the limit the calculation returns `?`. Non-tail-recursive custom functions can also fail earlier when stack space runs out.  
+Parameters: `expression` — any calculation; `maxIterations` — the new limit.  
 Returns: any type (result of expression)
 ```
 SetRecursion ( 
@@ -358,15 +428,21 @@ SetRecursion (
         out 
     ) ; 
 5 )
+// → ? (11 iterations exceeds the limit of 5)
+```
+Raise the limit above the default:
+```
+SetRecursion ( While ( i = 0 ; i < 100000 ; i = i + 1 ; i ) ; 200000 )
+// → 100000   (without SetRecursion this returns ? — over 50,000 iterations)
 ```
 ---
 
-## While ( [initialVars] ; condition ; [logicVars] ; result )
-Repeats `logicVars` while `condition` is true, then returns `result`. Replaces recursive custom functions for most iteration patterns.  
+## While ( [ initialVariable ] ; condition ; [ logic ] ; result )
+Repeats `logicVars` while `condition` is true, then returns `result`. Replaces recursive custom functions for most iteration patterns. Limited to 50,000 iterations unless wrapped in `SetRecursion`.  
 Parameters: `[initialVars]` — initial variable assignments; `condition` — loop test; `[logicVars]` — variables updated each iteration; `result` — expression to return after loop ends.  
 Returns: any type
 
-Sum values in a return-delimited list:
+5 to the power of 3:
 ```
 Let (
     [
@@ -380,6 +456,7 @@ Let (
         result
     )
 )
+// → 125
 ```
 Build a list of squares:
 ```
@@ -389,7 +466,7 @@ While (
   [output = output & i^2 & ¶ ; i = i + 1] ;
   Left ( output ; Length ( output ) - 1 )
 )
-// → "1¶4¶9¶16¶25"
+// → 1¶4¶9¶16¶25
 ```
 Find first value in list matching a condition:
 ```
@@ -443,12 +520,15 @@ While (
 # FileMaker JSON Functions — Syntax & Examples
 
 Source: https://help.claris.com/en/pro-help/content/json-functions-category.html  
-All 10 native JSON functions with verified syntax, parameters, return types, and usage patterns.  
-Last verified: 2026-06 against live Claris Help Centre.
+All 10 native JSON functions.
 
-**Overview:** FileMaker's JSON functions provide full read/write access to JSON structures. `JSONGetElement` and `JSONSetElement` do the heavy lifting; `JSONListKeys`/`JSONListValues` are essential for iteration; `JSONParse`/`JSONParsedState` (added later) cache parsed JSON in memory for performance.
+**Overview:** `JSONGetElement` and `JSONSetElement` do the heavy lifting; `JSONListKeys` / `JSONListValues` drive iteration; `JSONParse` / `JSONParsedState` (FM 22) avoid re-parsing large JSON.
 
-**JSON type constants** (used as the `type` parameter in JSONSetElement and returned by JSONGetElementType):
+**Paths** (`keyOrIndexOrPath`): key `"a"`, index `"[0]"`, dot path `"items[0].name"`, bracket path `"['a.b'][0]"` for keys containing dots, `"[:]"` for the last array element, and `"[+]"` (in JSONSetElement) for the position after the last element.
+
+**Key order:** FileMaker sorts object keys alphabetically in the JSON it returns — don't rely on insertion order.
+
+**JSON type constants** (the `type` parameter of JSONSetElement and JSONMakeArray; JSONGetElementType returns 1–6, never JSONRaw):
 | Constant | Value | Meaning |
 |---|---|---|
 | `JSONString` | 1 | String (quoted) |
@@ -457,13 +537,13 @@ Last verified: 2026-06 against live Claris Help Centre.
 | `JSONArray` | 4 | Array `[]` |
 | `JSONBoolean` | 5 | `true` or `false` |
 | `JSONNull` | 6 | `null` |
-| `JSONRaw` | 7 | Raw (unquoted) — inserts value as-is |
+| `JSONRaw` | 0 | JSON element (or JSON string, if `value` is not valid JSON) — valid JSON is inserted as-is |
 
 ---
 
-## JSONDeleteElement ( json ; keyOrIndex )
+## JSONDeleteElement ( json ; keyOrIndexOrPath )
 Deletes an element from a JSON object or array by key name, index, or dot-notation path.  
-Parameters: `json` — JSON text; `keyOrIndex` — key name string, 0-based array index, or dot-notation path.  
+Parameters: `json` — JSON text; `keyOrIndexOrPath` — key, 0-based array index, or path.  
 Returns: text (modified JSON)
 ```
 JSONDeleteElement ( "{ \"a\" : 11 , \"b\" : 12 , \"c\" : 13 }" ; "b" )
@@ -481,23 +561,20 @@ JSONDeleteElement ( myJSON ; "address.city" )
 ---
 
 ## JSONFormatElements ( json )
-Formats JSON text with indentation and line breaks for human readability. Does not change the data — only whitespace.  
-Parameters: `json` — any valid JSON text.  
-Returns: text (pretty-printed JSON)
+Adds tabs and line breaks for readability **and sorts object keys alphabetically**. Returns `?` plus an error message if the JSON is invalid.  
+Parameters: `json` — any JSON text.  
+Returns: text (formatted JSON)
 ```
-{
-    "a" : 
-    {
-        "id" : 12,
-        "lnk" : false
-    }
-}
+JSONFormatElements ( "{ \"a\" : { \"lnk\" : false, \"id\" : 12 } }" )
 ```
 →
-```json
+```
 {
-	"name" : "Alice",
-	"age" : 30
+	"a" : 
+	{
+		"id" : 12,
+		"lnk" : false
+	}
 }
 ```
 Use in a Show Custom Dialog for debugging:
@@ -506,10 +583,10 @@ Show Custom Dialog [ JSONFormatElements ( $apiResponse ) ]
 ```
 ---
 
-## JSONGetElement ( json ; keyOrIndex )
-Extracts a single value, object, or array from JSON by key, index, or dot-notation path. Returns empty if the key doesn't exist.  
-Parameters: `json` — JSON text; `keyOrIndex` — key name, 0-based index number, or dot-notation path.  
-Returns: text (the element value, unquoted if string)
+## JSONGetElement ( json ; keyOrIndexOrPath )
+Extracts a value, object or array by key, index or path. Returns empty for a key that doesn't exist.  
+Parameters: `json` — JSON text; `keyOrIndexOrPath` — key, 0-based index, or path.  
+Returns: **number** for JSON numbers and Booleans (true → 1, false → 0); otherwise text (strings unquoted, objects and arrays as JSON).
 ```
 JSONGetElement ( "{ \"a\" : 11, \"b\" : 22, \"c\" : 33 }" ; "b" )
 // → `22` as a number
@@ -531,10 +608,10 @@ JSONGetElement ( data ; "address" )
 ```
 ---
 
-## JSONGetElementType ( json ; keyOrIndex )
-Returns the JSON data type of an element as a number constant.  
+## JSONGetElementType ( json ; keyOrIndexOrPath )
+Validates JSON and returns the type of an element. *Originated: 19.5*  
 Parameters: same as JSONGetElement.  
-Returns: number (1=String, 2=Number, 3=Object, 4=Array, 5=Boolean, 6=Null, 0=does not exist)
+Returns: number 1–6 (String, Number, Object, Array, Boolean, Null) when valid. A missing key or index, or invalid JSON, returns **text** starting with `?` — e.g. `? Incorrect key, index, or path` — never 0. JSONRaw is never returned.
 ```
 (JSONGetElementType( "{ \"a\" : 11 }"; "" ) = JSONObject)
 // → `1` (true) as a number
@@ -542,24 +619,32 @@ Returns: number (1=String, 2=Number, 3=Object, 4=Array, 5=Boolean, 6=Null, 0=doe
 (JSONGetElementType( "{ a : 11 }"; "" ) = JSONObject)
 // → `0` (false) as a number
 ```
-Type-safe extraction pattern:
+```
+JSONGetElementType ( "{ \"a\" : 11 , \"b\" : false }" ; "b" )
+// → 5
+
+JSONGetElementType ( "[100, 200]" ; "3" )
+// → ? Incorrect key, index, or path
+```
+Type-safe extraction pattern (test for the error text, not 0):
 ```
 Let ( [
   t   = JSONGetElementType ( $json ; "startDate" ) ;
   val = JSONGetElement ( $json ; "startDate" )
 ] ;
   Case (
-    t = 0 ; ""         ;  // missing
-    t = 6 ; ""         ;  // null
+    Left ( t ; 1 ) = "?" ; ""   ;  // missing key or invalid JSON
+    t = JSONNull         ; ""   ;
     GetAsDate ( val )
   )
 )
 ```
 ---
 
-## JSONListKeys ( json ; keyOrIndex )
+## JSONListKeys ( json ; keyOrIndexOrPath )
 Returns a return-delimited list of keys (object) or indexes (array) at the specified path.  
-Parameters: `json` — JSON text; `keyOrIndex` — path to the object/array (use `""` for top level).  
+Parameters: `json` — JSON text; `keyOrIndexOrPath` — path to the object or array (`""` for the top level).  
+Object keys come back in alphabetical order.  
 Returns: text (return-delimited list)
 
 Top-level keys of an object:
@@ -597,7 +682,7 @@ While (
 ```
 ---
 
-## JSONListValues ( json ; keyOrIndex )
+## JSONListValues ( json ; keyOrIndexOrPath )
 Returns a return-delimited list of values at the specified path (object or array).  
 Parameters: same as JSONListKeys.  
 Returns: text (return-delimited list of values)
@@ -614,14 +699,19 @@ JSONListValues ( "[\"Alice\",\"Bob\",\"Carol\"]" ; "" )
 ```
 ---
 
-## JSONMakeArray ( valueList ; separator ; type )
-Converts a delimited list into a JSON array. Handles quoting and encoding.  
-Parameters: `valueList` — delimited text; `separator` — delimiter character (e.g. `","` or `¶`); `type` — JSON type constant for elements.  
+## JSONMakeArray ( listOfValues ; separator ; type )
+Converts a list of separated values into a JSON array of one type. *Originated: 21.0*  
+Parameters: `listOfValues` — the values; `separator` — text between values (`""` = any line separator); `type` — JSON type constant (JSONRaw inserts each valid JSON value as-is).  
 Returns: text (JSON array)
 
-From a return-delimited list:
 ```
-[34,600,18,600,18]
+JSONMakeArray ( "34,600,18,600,18.0" ; "," ; JSONNumber )
+// → [34,600,18,600,18]
+```
+From a return-delimited field:
+```
+JSONMakeArray ( Product::Colors ; "" ; JSONString )
+// → ["green","red","yellow"] when Colors holds green¶red¶yellow
 ```
 Number array from comma-delimited:
 ```
@@ -638,59 +728,49 @@ GetTableDDL ( JSONMakeArray ( "Orders,Customers,Products" ; "," ; JSONString ) ;
 ```
 ---
 
-## JSONParse ( json ; parseName )
-Parses and caches a JSON structure in memory under `parseName`. Subsequent calls using the same name avoid re-parsing — significant performance improvement for large JSON accessed many times.  
-Parameters: `json` — JSON text; `parseName` — text name for the cached parse.  
-Returns: number (0 = success, non-zero = error)
+## JSONParse ( json )
+Parses `json` once and keeps the parsed (binary) form attached to the value. Store the result in a variable or pass it as a script parameter, and later JSON functions on that value skip re-parsing. *Originated: 22.0*  
+Parameters: `json` — JSON text.  
+Returns: text — the original JSON unchanged if valid; `?` followed by the parse error if not.
 ```
-Let ( parseResult = JSONParse ( $largeJSON ; "myData" ) ;
-  If ( parseResult = 0 ;
-    JSONGetElement ( "myData" ; "records[0].name" ) ;
-    "Parse failed: " & parseResult
-  )
-)
+JSONParse ( "[3]" )
+// → [3]
 ```
-Parse once, read many times in a loop:
+Parse once, read many times — the parsed form travels with the variable, not a name:
 ```
-// Parse once
-Set Variable [ $err ; Value: JSONParse ( Data::JSONField ; "inventory" ) ]
-// Then use "inventory" as the json parameter in JSONGetElement calls
-While (
-  [keys = JSONListKeys ( "inventory" ; "items" ) ; i = 0 ; out = ""] ;
-  i < ValueCount ( keys ) ;
-  [
-    name = JSONGetElement ( "inventory" ; "items[" & i & "].name" ) ;
-    qty  = JSONGetElement ( "inventory" ; "items[" & i & "].qty" ) ;
-    out  = out & name & " × " & qty & ¶ ;
-    i    = i + 1
-  ] ;
-  Trim ( out )
-)
+Set Variable [ $inventory ; Value: JSONParse ( Data::JSONField ) ]
+Set Variable [ $count ; Value: ValueCount ( JSONListKeys ( $inventory ; "items" ) ) ]
+Set Variable [ $first ; Value: JSONGetElement ( $inventory ; "items[0].name" ) ]
 ```
+For a single lookup, calling JSONGetElement on the text directly performs about as well.  
+**Insert from URL** (FM 26.0.1+) already parses an `application/json` response stored in a variable — no JSONParse needed after it.
+
 ---
 
-## JSONParsedState ( parseName )
-Returns the current parse state of a named cached JSON structure.  
-Parameters: `parseName` — name used in a prior JSONParse call.  
-Returns: number (0 = not parsed, 1 = parsed and available, -1 = parse error)
+## JSONParsedState ( json )
+Reports whether `json` already carries a parsed representation, and whether it's valid. *Originated: 22.0*  
+Parameters: `json` — a JSON value (usually a variable).  
+Returns: number — `0` not parsed · `-1` parsed but invalid · `1`–`6` parsed and valid, the value's JSON type (same numbers as the JSONSetElement type constants).
 ```
-JSONParsedState ( "myData" )
-// → 1 if JSONParse("myData") succeeded and is still in cache
-// → 0 if not yet parsed or cache was cleared
-// → -1 if parse failed
+JSONParsedState ( JSONParse ( "[3]" ) )
+// → 4
+
+JSONParsedState ( JSONParse ( "[3" ) )
+// → -1
+
+JSONParsedState ( "[3]" )
+// → 0
+
+JSONParsedState ( JSONSetElement ( "{}" ; "a" ; 1 ; JSONNumber ) )
+// → 3
 ```
-Guard pattern:
-```
-If ( JSONParsedState ( "inventory" ) ≠ 1 ;
-  Set Variable [ $$parseErr ; Value: JSONParse ( Data::JSONField ; "inventory" ) ]
-)
-// Now safe to use "inventory" in JSONGetElement
-```
+JSONSetElement's output is already parsed — no JSONParse needed after building JSON.
+
 ---
 
-## JSONSetElement ( json ; keyOrIndex ; value ; type )
-Adds or modifies an element in a JSON structure. Creates nested objects/arrays if they don't exist. Pass multiple key/value/type triples to set several elements at once.  
-Parameters: `json` — JSON text (or `""` to start new); `keyOrIndex` — key/path; `value` — new value; `type` — JSON type constant.  
+## JSONSetElement ( json ; keyOrIndexOrPath ; value ; type )
+Adds or modifies an element. Creates nested objects and arrays as needed. Pass several `[ key ; value ; type ]` groups to set many elements at once. With `json` = `""` it starts a new object — or an array if the path starts with `[`.  
+Parameters: `json` — JSON text; `keyOrIndexOrPath` — key or path (`"[+]"` appends to an array); `value` — the value; `type` — JSON type constant (table above). For JSONBoolean, `true` / non-zero is true and `false` / zero is false.  
 Returns: text (modified JSON)
 
 Set a key on a new object:
@@ -705,28 +785,28 @@ JSONSetElement ( "{}" ;
   ["age"  ; 30      ; JSONNumber] ;
   ["active" ; True  ; JSONBoolean]
 )
-// → {"name":"Alice","age":30,"active":true}
+// → {"active":true,"age":30,"name":"Alice"}   (keys come back sorted)
 ```
 Nested key (creates intermediate objects):
 ```
 JSONSetElement ( "{}" ; "address.city" ; "Melbourne" ; JSONString )
 // → {"address":{"city":"Melbourne"}}
 ```
-Append to an array by using array length as index:
+Append to an array with `[+]`:
 ```
-Let ( [
-  arr = "[1,2,3]" ;
-  len = ValueCount ( JSONListKeys ( arr ; "" ) )
-] ;
-  JSONSetElement ( arr ; len ; 4 ; JSONNumber )
-)
+JSONSetElement ( "[1,2,3]" ; "[+]" ; 4 ; JSONNumber )
 // → [1,2,3,4]
+```
+Insert existing JSON without quoting it (JSONRaw = 0):
+```
+JSONSetElement ( "{}" ; "a" ; "[1,2]" ; JSONRaw )
+// → {"a":[1,2]}
 ```
 Build a JSON payload for Insert From URL:
 ```
 Let ( [
   payload = JSONSetElement ( "{}" ;
-    ["model"       ; "gpt-4o"     ; JSONString] ;
+    ["model"       ; $model       ; JSONString] ;
     ["temperature" ; 0.7          ; JSONNumber] ;
     ["max_tokens"  ; 1000         ; JSONNumber]
   )
@@ -780,10 +860,10 @@ While (
 ```
 Let ( [
   raw    = $apiResponse ;
-  errTyp = JSONGetElementType ( raw ; "error" ) ;
+  hasErr = Left ( JSONGetElementType ( raw ; "error" ) ; 1 ) ≠ "?" ;   // "?…" = no such key
   data   = JSONGetElement ( raw ; "data" )
 ] ;
-  If ( errTyp ≠ 0 ;
+  If ( hasErr ;
     "Error: " & JSONGetElement ( raw ; "error.message" ) ;
     data
   )
@@ -799,12 +879,13 @@ JSONMakeArray ( ValueListItems ( Get(FileName) ; "Status Values" ) ; ¶ ; JSONSt
 # FileMaker AI Functions — Syntax & Examples
 
 Source: https://help.claris.com/en/pro-help/content/artificial-intelligence-functions.html  
-All 14 native AI functions with verified format, parameters, version introduced, and usage patterns.
-Last verified: 2026-06 against live Claris Help Centre.
+All 14 native AI functions.
 
-**Prerequisites:** All LLM functions require an AI account configured in the current file via the `Configure AI Account` script step. Functions that take `account` and `model` parameters call out to the external provider (OpenAI, Anthropic, or a custom OpenAI-compatible endpoint such as the FileMaker Server AI Model Server).
+**Prerequisites:** functions that take an `account` parameter need an AI account set up earlier in the current file with the `Configure AI Account` script step. Supported model providers change between releases (FM 26 added Google Gemini) — fetch the live Configure AI Account page for the current list rather than relying on one here.
 
-**Core ML functions** (`ComputeModel`, `GetModelAttributes`, `PredictFromModel`) require a model loaded first via `Configure Machine Learning Model` or `Configure Regression Model`. Core ML functions are supported only on iOS, iPadOS, and macOS.
+**Model-loading functions:**
+- `ComputeModel`, `GetModelAttributes` — **Core ML** models loaded with `Configure Machine Learning Model`; iOS, iPadOS and macOS only.
+- `PredictFromModel` — **regression** models trained or loaded with `Configure Regression Model` (Random Forest). Not Core ML.
 
 **Error codes relevant to AI functions:**
 - `877` — Can't find AI account (no account configured for the given name)
@@ -877,10 +958,7 @@ Must first load model with `Configure Machine Learning Model` script step.
 ```json
 [{"classification": "grand piano, grand", "confidence": 0.998}, ...]
 ```
-With confidence filter (returns top result even if nothing beats 1.0):
-```
-ComputeModel ( "MobileNet" ; "image" ; myImageField ; "confidenceLowerLimit" ; 1.0 ; "returnAtLeastOne" ; 1 )
-```
+Vision models also accept `confidenceLowerLimit` (0.0–1.0, drops lower-confidence results) and `returnAtLeastOne` (non-zero returns the best result even when all are below the limit). Claris's Format line for these is ambiguous — fetch the ComputeModel page before relying on their exact positions.
 ---
 
 ## CosineSimilarity ( v1 ; v2 )
@@ -917,14 +995,10 @@ Go to Layout [ "Meeting Details" (Meetings) ; Animation: None ]
 
 Set Field [ Meetings::Note_Embedding ; GetEmbedding ( "my-account" ; "text-embedding-3-small" ; "Claris" ) ]
 ```
-Image embedding (FileMaker Server AI Model Server):
-```
-Set Field [ Products::Image_Embedding ;
-  GetEmbedding ( "my-account" ; "clip-vit-base-patch32" ; Products::ProductImage ) ]
-```
+Image embedding uses an image model on Claris AI Model Server (see the server's model list). Errors: `?` with EvaluationError 877 (no AI account) or 882 (unsupported image type or file too large).
 ---
 
-## GetEmbeddingAsFile ( text { ; fileNameWithExtension } )
+## GetEmbeddingAsFile ( text {; fileNameWithExtension } )
 Converts an embedding vector from **text (JSON array) format to binary container data**.  
 Parameters: `text` — JSON array of embedding values; `fileNameWithExtension` (optional) — filename for the container, e.g. `"embedding.fve"`.  
 Returns: container  
@@ -941,10 +1015,10 @@ Parameters: `data` — container field or variable holding binary embedding data
 Returns: text (JSON array)  
 *Originated: 21.0*
 ```
-GetEmbeddingAsFile ( Meetings::Note_Embedding )
-// → `[-0.06650865,0.0034368848,0.051363964,...]` for the embedding vector in the Meetings::Note_Embedding container field
+GetEmbeddingAsText ( Meetings::Note_Embedding )
+// → [-0.06650865,0.0034368848,0.051363964,...]
 ```
-→ `[-0.06650865, 0.0034368848, 0.051363964, ...]`
+(Claris's own example on this page calls GetEmbeddingAsFile by mistake.)
 
 ---
 
@@ -956,7 +1030,7 @@ Returns: text (JSON)
 
 Excludes: fields outside the layout area, hidden fields with "Apply in Find mode", fields with Find Mode entry disabled, fields excluded from Quick Find, fields with no read access, and summary/global/container fields.
 
-If any field comment starts with `[LLM]`, only fields tagged `[LLM]` include a description (prefix stripped from output).
+A field's `description` key comes from its **annotation** (Advanced Options, FM 26.0.1+) if it has one, otherwise from its **comment**. A leading `[LLM]` tag is stripped, for compatibility with the pre-26.0.1 tagging convention.
 ```
 JSONFormatElements ( GetFieldsOnLayout ( "Products" ) )
 ```
@@ -990,7 +1064,7 @@ Let ( [
 Returns metadata in JSON format about a named Core ML model that is currently loaded.  
 Parameters: `modelName` — text name of a model loaded via `Configure Machine Learning Model`.  
 Returns: text (JSON)  
-*Originated: 19.3.1*  
+*Originated: 19.3*  
 *Supported: iOS, iPadOS, macOS only*
 ```
 Configure Machine Learning Model [ Operation: Vision ; Name: "TestModel" ; From: Table::ModelContainerField ]
@@ -1012,7 +1086,7 @@ Let ( [
 ```
 ---
 
-## GetRAGSpaceInfo ( ragAccountName { ; spaceID } )
+## GetRAGSpaceInfo ( ragAccountName {; spaceID } )
 Returns information about a specific RAG space or all RAG spaces for the given RAG account.  
 Parameters: `ragAccountName` — name of a RAG account configured via `Configure RAG Account` script step; `spaceID` (optional) — ID of a specific RAG space.  
 Returns: text (JSON)  
@@ -1192,21 +1266,25 @@ SubtractEmbeddings ( Concepts::Winter_Embedding ; Concepts::Cold_Embedding )
 
 **Semantic search pipeline (full):**
 ```
-# 1. Store embeddings when records are created/updated
-Set Field [ Table::Embedding ; GetEmbedding ( "acct" ; "text-embedding-3-small" ; Table::Content ) ]
+# 1. Configure the account first — every AI call needs it
+Configure AI Account [ Account Name: "acct" ; Model Provider: OpenAI ; API key: Global::API_Key ]
 
-# 2. At search time
-Configure AI Account [ Account Name: "acct" ; Model Provider: OpenAI ; API key: "sk-..." ]
-Show Custom Dialog [ "Search:" ; $Query ]
-Set Variable [ $QueryEmb ; Value: GetEmbedding ( "acct" ; "text-embedding-3-small" ; $Query ) ]
+# 2. Store embeddings (batch: Insert Embedding in Found Set)
+Insert Embedding in Found Set [ Account Name: "acct" ; Embedding Model: "text-embedding-3-small" ;
+  Source Field: Notes::Content ; Target Field: Notes::Embedding ; Replace target contents ]
 
-# 3. Perform Semantic Find (script step, not a function)
-Perform Semantic Find [ Table::Embedding ; Query Embedding: $QueryEmb ; Top K: 10 ]
+# 3. At search time — the step embeds the query itself
+Perform Semantic Find [ Query by: Natural language ; Account Name: "acct" ;
+  Embedding Model: "text-embedding-3-small" ; Text: $Query ; Record set: All records ;
+  Target field: Notes::Embedding ; Return count: 10 ;
+  Cosine similarity condition: greater than ; Cosine similarity value: .4 ]
 ```
+Query and stored vectors must come from the same model. Use `Query by: Vector data` to reuse a stored query embedding.
 **Passing schema to a model for natural-language SQL:**
 ```
 Set Variable [ $Schema ; Value: GetTableDDL ( "[\"Orders\",\"Customers\"]" ; True ) ]
-# Include $Schema in your Perform SQL Query by Natural Language prompt
+# Perform SQL Query by Natural Language builds this DDL itself; use Data Tables: By DDL
+# when you want to send a hand-edited schema instead.
 ```
-**LLM-tagged field comments for GetFieldsOnLayout:**  
-In Manage Database, prefix field comments with `[LLM]` to control exactly which fields and descriptions are exposed to the model. Only tagged fields get descriptions; untagged fields appear with type only; the `[LLM]` prefix is stripped in output.
+**Controlling schema descriptions sent to models (FM 26.0.1+):**  
+Field **annotations** (Advanced Options for Field) are the preferred source: when any field in a table is annotated, only annotated fields appear in that table's generated DDL. GetFieldsOnLayout uses the annotation, falling back to the field comment. The older `[LLM]` comment prefix is still stripped for compatibility.

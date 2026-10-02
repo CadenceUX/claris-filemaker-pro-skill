@@ -1,5 +1,13 @@
 # FileMaker Go — Reference
 
+## Contents
+  - Script step support — measured
+  - Not supported at all
+  - Behaviour differences
+  - Device capabilities
+  - Files, security and transfer
+  - When to fetch live
+
 Verified against the live `go-help` (29 pages) and `go-development-guide` (9 pages), plus the
 per-step Compatibility tables, on **2026-07-25**, FileMaker 26.
 
@@ -39,8 +47,8 @@ PDF`, `Export Records`, `Export Field Contents`, `Import Records`, `Insert File`
 
 Conversely, a small set of steps are **Go-only** and unsupported in FileMaker Pro — the
 `AVPlayer` family (`AVPlayer Play`, `AVPlayer Set Options`, `AVPlayer Set Playback State`),
-`Configure NFC Reading`, `Configure Region Monitor Script`, `Enable Touch Keyboard`, and
-`Insert from Device`.
+`Configure NFC Reading`, `Configure Region Monitor Script` and `Insert from Device`.
+`Enable Touch Keyboard` is Go plus **Windows** touch devices (Partial in Pro).
 
 ---
 

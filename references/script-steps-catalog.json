@@ -3,15 +3,17 @@
   "description": "Canonical catalog of all FileMaker Pro script steps, organised by category. Use this for prototype/syntax lookups before fetching live docs. doc_url points to the authoritative Claris Help Centre page for each step.",
   "help_centre": "https://help.claris.com/markdown/en/pro-help/script-steps-reference.md",
   "version": "FileMaker Pro 26 / Claris 2026",
-  "last_updated": "2026-07-04 (v1.9.2 content correction, second pass — full sweep of all 1,104 en/pro-help pages by topic_type confirmed 215 script-step pages; catalog now matches exactly. 215 unique steps.)",
+  "last_updated": "2026-10 (v2.1.0 — syntax and notes corrected; platform matrix re-checked against live 26.0.3 pages)",
   "update_instructions": "Re-fetch https://help.claris.com/markdown/en/pro-help/script-steps-reference.md and compare category listings. Add new steps, update slugs, bump last_updated.",
   "note": "Syntax uses [] for required fields/options and {} for optional. Steps marked platform list restrictions (Pro, Server, Go, WebDirect, Cloud).",
   "step_count": 216,
   "last_known_fm_version": "26",
-  "verified_on": "2026-07-25",
+  "verified_on": "2026-10-02",
   "platform_encoding": "Delta-encoded. `platform_exceptions` lists ONLY products where the step is not fully supported, keyed Pro/Go/WebDirect/Server/Cloud/DataAPI/CWP with values No or Partial. ABSENT platform_exceptions means Yes on all seven. 'No' = step is skipped and returns error 3 (Command is unavailable); 'Partial' = performed but one or more features differ (see the step's Notes).",
   "os_restriction_note": "`os_restriction` is a desktop-OS limit (macOS only / Windows only) and is orthogonal to `platform_exceptions`, which is the client/host matrix.",
-  "verification_method": "Every entry re-derived from its live help.claris.com markdown page (## Compatibility, ## Originated in version). Roster determined structurally: set-dictionary is a real script step that Claris mislabels as topic_type: conceptual, so a topic_type sweep alone undercounts by one."
+  "verification_method": "Every entry re-derived from its live help.claris.com markdown page (## Compatibility, ## Originated in version). Roster determined structurally: set-dictionary is a real script step that Claris mislabels as topic_type: conceptual, so a topic_type sweep alone undercounts by one.",
+  "latest_public_release": "26.0.3 (Pro, Server, Go, Cloud — September 2026; checked 2026-10-02)",
+  "prerelease_note": "FileMaker builds newer than latest_public_release (for example a newer engine shipped with ADT) are pre-release. A script step the engine knows but this catalog and Claris's docs do not is undocumented and probably pre-release."
  },
  "categories": [
   {
@@ -194,12 +196,12 @@
      "syntax": "Set Revert Transaction on Error [On/Off]",
      "purpose": "Controls whether a transaction is automatically reverted when an error occurs within an Open Transaction / Commit Transaction block. Default is On (auto-revert on error).",
      "originated_in_version": "21.1.1",
-     "notes": "When set to Off, the script continues after an error inside a transaction block, allowing the script to handle errors itself before deciding to commit or revert. Use Get(RevertTransactionOnErrorState) to query the current setting. The setting is scoped to the current script — it does not propagate to subscripts. Reset to On before exiting scripts that set it to Off.",
+     "notes": "Off lets steps inside a transaction continue after errors that would otherwise revert it (validation failures, privilege errors), so the script can handle them. Off stays in effect for the current script and any sub-scripts it calls, and returns to On automatically when the current script ends. Also useful in Script Debugger. Query with Get(RevertTransactionOnErrorState).",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/set-revert-transaction-on-error.md"
     },
     {
      "name": "Configure Local Notification",
-     "syntax": "Configure Local Notification [ Action: Queue/Clear ; Local Notification Name: name ; Delay Time (seconds): n ; Title: title ; Body: body ; Script: script ; Parameter: parameter ]",
+     "syntax": "Configure Local Notification [ Action: Queue/Clear ; Name: <name> ; Script: <script> ; Parameter: <param> ; Delay: <seconds> ; Title: <title> ; Body: <body> ; Button 1–3 Label / Foreground ; Show when app in foreground ]",
      "purpose": "Use this script step to display a notification alert after an optional delay.",
      "slug": "configure-local-notification",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/configure-local-notification.md",
@@ -270,12 +272,12 @@
     },
     {
      "name": "Perform Script On Server with Callback",
-     "syntax": "Perform Script On Server with Callback [ Specified: From list ; \"scriptName\" ; Parameter: param ; Wait for completion: Off ; Callback script: \"scriptName\" ; Parameter: param ]",
+     "syntax": "Perform Script on Server with Callback [ Specified: From list ; \"scriptName\" ; Parameter: param ; Callback script specified: From list ; \"callbackScript\" ; Parameter: param ; State: Continue/Halt/Exit/Resume/Pause ]",
      "purpose": "The current file must be hosted on FileMaker Server or FileMaker Cloud.",
      "slug": "perform-script-on-server-callback",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-script-on-server-callback.md",
      "originated_in_version": "20.1",
-     "notes": "Requires the file to be hosted on FileMaker Server or FileMaker Cloud (errors otherwise). The callback script runs in the client once the server script finishes.",
+     "notes": "Runs the script on the host without waiting, then runs the callback script on the client when it finishes. State controls what happens to a script already running on the client when the callback runs. Requires a hosted file.",
      "platform_exceptions": {
       "Server": "No",
       "Cloud": "No",
@@ -435,14 +437,15 @@
     },
     {
      "name": "Select Window",
-     "syntax": "Select Window [ Name: \"WindowName\" ; Current File / Any File ]",
+     "syntax": "Select Window [ Current Window / Name: <window name or UUID> ; Current file only ]",
      "purpose": "Brings the specified window to the front",
      "slug": "select-window",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/select-window.md",
      "originated_in_version": "6.0 or earlier",
      "platform_exceptions": {
       "WebDirect": "Partial"
-     }
+     },
+     "notes": "FM 26.0.1+: the window can be named by its UUID (Get ( WindowUUID )) as well as its name — reliable when several windows share a name."
     },
     {
      "name": "Close Popover",
@@ -539,11 +542,12 @@
     },
     {
      "name": "Insert from URL",
-     "syntax": "Insert From URL [ Select ; With dialog: On/Off ; Table::Field ; URL expression ; cURL options ]",
+     "syntax": "Insert from URL [ Select ; With dialog: On/Off ; Target: field/variable ; URL ; Automatically encode URL ; Verify SSL Certificates ; cURL options ]",
      "purpose": "Fetches URL content and inserts it into a field; supports cURL options for headers, auth, POST",
      "slug": "insert-from-url",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-from-url.md",
-     "originated_in_version": "12.0"
+     "originated_in_version": "12.0",
+     "notes": "FM 26.0.1+: when the response is application/json and the target is a variable, the JSON is parsed and cached as if by JSONParse. cURL adds --proxy-negotiate and --proxy-ntlm."
     },
     {
      "name": "Insert Current Date",
@@ -632,7 +636,7 @@
     },
     {
      "name": "Replace Field Contents",
-     "syntax": "Replace Field Contents [ No dialog ; Table::Field ; Calculated result / Serial numbers / Values from index ]",
+     "syntax": "Replace Field Contents [ With dialog: On/Off ; Table::Field ; Current contents / Serial numbers / Calculated result ; Perform auto-enter options for fields ]",
      "purpose": "Replaces values in a field across all records in the found set",
      "slug": "replace-field-contents",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/replace-field-contents.md",
@@ -644,7 +648,8 @@
       "Cloud": "Partial",
       "DataAPI": "Partial",
       "CWP": "Partial"
-     }
+     },
+     "notes": "FM 26.0.1+: Perform auto-enter options for fields lets replacements skip updating other auto-enter fields."
     },
     {
      "name": "Relookup Field Contents",
@@ -946,7 +951,8 @@
       "Cloud": "Partial",
       "DataAPI": "No",
       "CWP": "No"
-     }
+     },
+     "notes": "FM 26.0.1+: ODBC data source credentials can be given by calculation."
     },
     {
      "name": "Export Records",
@@ -1001,7 +1007,7 @@
      "slug": "truncate-table",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/truncate-table.md",
      "originated_in_version": "15.0",
-     "notes": "Deletes ALL records in the specified table (regardless of found set) in a single fast operation. Cannot be undone; does not trigger record-level script triggers.",
+     "notes": "Deletes every record in the source table regardless of the found set, faster than Delete All Records. Cannot be undone. Needs Full Access; locks all records first and stops with an error if any is in use. Does NOT delete related records even when the relationship is set to cascade — use Delete All Records for that. Clears global container fields in that table. Server, Data API and CWP run it as if With dialog were Off.",
      "platform_exceptions": {
       "Server": "Partial",
       "Cloud": "Partial",
@@ -1129,7 +1135,7 @@
      "syntax": "Go to List of Records [Layout; Record IDs]",
      "purpose": "Goes to a layout and returns the found set specified by a list of record IDs. Accepts a carriage-return-separated value list, a JSON array of record IDs as strings or numbers, or a JSON array of objects with recordId keys.",
      "originated_in_version": "22.0",
-     "notes": "Use with GetRecordIDsFromFoundSet to preserve and restore found sets across script jumps or file switches. Layout option: specify a layout name (defaults to current layout). The Record IDs parameter accepts: (1) value list — one ID per line, (2) JSONArray of number or string IDs, (3) JSONArray of objects with 'recordId' key. Records not found are silently skipped. If none of the IDs match, the found set is empty. Not supported in FileMaker WebDirect.",
+     "notes": "Goes to a layout and makes the found set exactly the given record IDs, in that order. Record IDs: a return-delimited list, a JSON array of numbers or strings, or a JSON array of objects with a recordId key (the format Perform Semantic Find and Execute FileMaker Data API return). Ranges like 21-23 work in lists and JSON string arrays. Missing IDs are ignored, and the step returns 101 or 401. Pairs with GetRecordIDsFromFoundSet. Can show the records in a new window. WebDirect: Partial (see platform_exceptions).",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-list-of-records.md",
      "platform_exceptions": {
       "Pro": "Partial",
@@ -1169,15 +1175,16 @@
     },
     {
      "name": "Close Window",
-     "syntax": "Close Window [ Current Window / Name: text ; Current file only ]",
+     "syntax": "Close Window [ Current Window / Name: <window name or UUID> ; Current file only ]",
      "purpose": "Closes the current or named window",
      "slug": "close-window",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/close-window.md",
-     "originated_in_version": "6.0 or earlier"
+     "originated_in_version": "6.0 or earlier",
+     "notes": "FM 26.0.1+: the window can be named by its UUID (Get ( WindowUUID )) as well as its name — reliable when several windows share a name."
     },
     {
      "name": "Move/Resize Window",
-     "syntax": "Move/Resize Window [ Current Window / Name: text ; Current file only ; Height: n ; Width: n ; Top: n ; Left: n ]",
+     "syntax": "Move/Resize Window [ Current Window / Name: <window name or UUID> ; Current file only ; Height: n ; Width: n ; Top: n ; Left: n ]",
      "purpose": "Moves and/or resizes a window",
      "slug": "move-resize-window",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/move-resize-window.md",
@@ -1189,7 +1196,8 @@
       "Cloud": "No",
       "DataAPI": "No",
       "CWP": "No"
-     }
+     },
+     "notes": "FM 26.0.1+: the window can be named by its UUID (Get ( WindowUUID )) as well as its name — reliable when several windows share a name."
     },
     {
      "name": "Arrange All Windows",
@@ -1245,15 +1253,16 @@
     },
     {
      "name": "Set Window Title",
-     "syntax": "Set Window Title [ Current Window / Name: text ; Current file only ; New Title: expression ]",
+     "syntax": "Set Window Title [ Current Window / Name: <window name or UUID> ; Current file only ; New Title: expression ]",
      "purpose": "Sets the title of a window",
      "slug": "set-window-title",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/set-window-title.md",
-     "originated_in_version": "6.0 or earlier"
+     "originated_in_version": "6.0 or earlier",
+     "notes": "FM 26.0.1+: the window can be named by its UUID (Get ( WindowUUID )) as well as its name — reliable when several windows share a name."
     },
     {
      "name": "Set Zoom Level",
-     "syntax": "Set Zoom Level [ Lock ; n% ]",
+     "syntax": "Set Zoom Level [ Lock ; 100% / Zoom In / Zoom Out / Custom: <25–400> ]",
      "purpose": "Sets the zoom level of the current window",
      "slug": "set-zoom-level",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/set-zoom-level.md",
@@ -1265,7 +1274,8 @@
       "Cloud": "No",
       "DataAPI": "No",
       "CWP": "No"
-     }
+     },
+     "notes": "FM 26.0.1+: Custom sets any integer zoom from 25 to 400 by calculation."
     },
     {
      "name": "Show/Hide Menubar",
@@ -1426,9 +1436,9 @@
     {
      "name": "Save Records as JSONL",
      "purpose": "Saves records to a specified JSONL file; each line is a JSON object representing a record. Used to output record data for fine-tuning a model.",
-     "syntax": "Save Records as JSONL [ No dialog ; File: <path> ; Fields: <field list> ]",
+     "syntax": "Save Records as JSONL [ Format for fine-tuning: On/Off ; Table: <TO> ; System Prompt / User Prompt / Assistant Prompt (On) | Completion Field: <field> (Off) ; <output file> ; Create folders: On/Off ]",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/save-records-as-jsonl.md",
-     "notes": "Format for fine-tuning On: requires three explicit prompts — System Prompt (optional), User Prompt, Assistant Prompt. Format for fine-tuning Off: Completion Field required; all other fields become user prompt content. Container fields are skipped (Off mode) or exported as filename string (On mode). Compatibility: not supported on FileMaker Go or WebDirect.",
+     "notes": "Writes one JSON object per record (messages array) for AI fine-tuning. On: system/user/assistant prompts from expressions (System Prompt optional). Off: Completion Field is the assistant answer, every other field in Table becomes the user prompt, plus a predefined system prompt. Container fields are skipped (Off) or exported as their filename (On). Not supported in FileMaker Go or WebDirect.",
      "originated_in_version": "22.0",
      "slug": "save-records-as-jsonl",
      "platform_exceptions": {
@@ -1579,12 +1589,12 @@
     },
     {
      "name": "Save a Copy as XML",
-     "syntax": "Save a Copy as XML [ Window Name: name ; \"destination.xml\" ; Include details for analysis tools: On/Off ; Save each layout object's binary data: On/Off ]",
+     "syntax": "Save a Copy as XML [ Window name: <name> ; Destination file: <path> ; Include details for analysis tools ; Save each layout object's binary data under its node ; Specify options as JSON: <json> ]",
      "purpose": "This script step is similar to choosing Tools > Save a Copy as XML.",
      "slug": "save-a-copy-as-xml",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/save-a-copy-as-xml.md",
      "originated_in_version": "18.0",
-     "notes": "Saves the entire file's design (schema, layouts, scripts) as XML for analysis tools — same output as Tools menu, Save a Copy as XML.",
+     "notes": "Same output as Tools > Save a Copy as XML; needs full access. Specify options as JSON accepts catalogs_included (array of catalog names), include_details, split_catalogs (true = one XML file per catalog, Destination file becomes a folder, standalone_binarydata forced true, LibraryCatalog ignored) and standalone_binarydata. Bad JSON returns error 878. The XML format can change between releases — compare files saved by the same version.",
      "platform_exceptions": {
       "Go": "No",
       "WebDirect": "No",
@@ -1670,7 +1680,7 @@
     },
     {
      "name": "Re-Login",
-     "syntax": "Re-Login [ No dialog ; Account Name: name ; Password: pwd ]",
+     "syntax": "Re-Login [ With dialog: On/Off ; Account Name: name ; Password: pwd ; <data source> ]",
      "purpose": "Re-authenticates the current user, switching privilege sets without reopening the file",
      "slug": "re-login",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/re-login.md",
@@ -1681,7 +1691,8 @@
       "Cloud": "No",
       "DataAPI": "Partial",
       "CWP": "Partial"
-     }
+     },
+     "notes": "FM 26.0.1+: can name an external data source (file) to re-authenticate, re-triggering its sign-in without closing every file."
     }
    ]
   },
@@ -2078,7 +2089,7 @@
     },
     {
      "name": "Open Upload To Host",
-     "syntax": "Open Upload To Host [ With dialog: On/Off ]",
+     "syntax": "Open Upload To Host",
      "purpose": "This script step is the same as choosing File menu > Sharing > Upload to Host.",
      "slug": "upload-to-server",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/upload-to-server.md",
@@ -2090,7 +2101,8 @@
       "Cloud": "No",
       "DataAPI": "No",
       "CWP": "No"
-     }
+     },
+     "notes": "Opens the Upload to Host dialog. No options."
     }
    ]
   },
@@ -2100,7 +2112,7 @@
    "steps": [
     {
      "name": "Show Custom Dialog",
-     "syntax": "Show Custom Dialog [ Title: text ; Message: text ; Buttons ; Input fields ]",
+     "syntax": "Show Custom Dialog [ Title: text ; Message: text ; Buttons ; Height ; Width ; Top ; Left ; Input fields ]",
      "purpose": "Displays a custom dialog with title, message, up to 3 buttons, and up to 3 input fields",
      "slug": "show-custom-dialog",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/show-custom-dialog.md",
@@ -2111,7 +2123,8 @@
       "Cloud": "No",
       "DataAPI": "No",
       "CWP": "No"
-     }
+     },
+     "notes": "FM 26.0.1+: Height, Width, From Top and From Left set the dialog size and position (points); long messages scroll."
     },
     {
      "name": "Beep",
@@ -2357,7 +2370,7 @@
     },
     {
      "name": "Save a Copy as Add-on Package",
-     "syntax": "Save a Copy as Add-on Package [ \"packageName\" ; Replace existing package: On/Off ]",
+     "syntax": "Save a Copy as Add-on Package [ Window name: <name> ; Replace UUIDs: On/Off ]",
      "purpose": "This script step creates an add-on package from an open FileMaker Pro file.",
      "slug": "save-a-copy-as-add-on-package",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/save-a-copy-as-add-on-package.md",
@@ -2369,7 +2382,8 @@
       "Cloud": "No",
       "DataAPI": "No",
       "CWP": "No"
-     }
+     },
+     "notes": "Saves the file in the window as an add-on package. Replace UUIDs generates new UUIDs for every element first and can't be undone."
     },
     {
      "name": "Send Mail",
@@ -2486,7 +2500,7 @@
      "slug": "execute-sql",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/execute-sql.md",
      "originated_in_version": "6.0 or earlier",
-     "notes": "Legacy ODBC step — sends SQL to an external ODBC data source. Distinct from the ExecuteSQL calculation function, which queries FileMaker tables.",
+     "notes": "Legacy ODBC step — sends SQL to an external ODBC data source. Distinct from the ExecuteSQL calculation function, which queries FileMaker tables. FM 26.0.1+: ODBC data source credentials can be given by calculation.",
      "platform_exceptions": {
       "Go": "No",
       "WebDirect": "Partial",
@@ -2498,7 +2512,7 @@
     },
     {
      "name": "Get Folder Path",
-     "syntax": "Get Folder Path [ Allow Folder Creation ; Target: $folderPath ]",
+     "syntax": "Get Folder Path [ Allow Folder Creation ; <variable> ; <dialog title> ; <default location> ]",
      "purpose": "This script step prompts the user to select a folder, then it sets a variable to the fully qualified path of the selected folder.",
      "slug": "get-directory",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/get-directory.md",
@@ -2530,31 +2544,25 @@
     },
     {
      "name": "Open PDF",
-     "syntax": "Open PDF [ File Path: <path or variable> ]",
+     "syntax": "Open PDF [ From: File ; Source file: <path> | From: Source ; Source: <field/variable> ; Password: <password> ]",
      "purpose": "Opens an existing PDF for modification within the scripted PDF workflow",
      "slug": "open-pdf",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/open-pdf.md",
-     "notes": "Alternative to Create PDF when modifying an existing document. Accepts a file path or a container field/variable containing a PDF. Use Append PDF or Save Records as PDF (with Save to: open PDF) to add pages, then Close PDF to save.",
-     "originated_in_version": "26.0",
-     "platform_exceptions": {
-      "WebDirect": "Partial"
-     }
+     "notes": "Alternative to Create PDF when modifying an existing document. Accepts a file path or a container field/variable containing a PDF. Use Append PDF or Save Records as PDF (with Save to: open PDF) to add pages, then Close PDF to save. WebDirect (26.0.3+): with From: File the Source file option is ignored — the user picks a PDF to upload in a browser dialog.",
+     "originated_in_version": "26.0"
     },
     {
      "name": "Append PDF",
-     "syntax": "Append PDF [ Source: <file path, container, or variable> ]",
+     "syntax": "Append PDF [ From: File ; Source file: <path> | From: Source ; Source: <field/variable> ; Password: <password> ]",
      "purpose": "Appends pages from an existing PDF to the currently open PDF in memory",
      "slug": "append-pdf",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/append-pdf.md",
-     "notes": "Requires an open PDF (via Create PDF or Open PDF). Source can be a file path, container field, or variable. Pages are appended in document order. Close PDF when finished to persist the result.",
-     "originated_in_version": "26.0",
-     "platform_exceptions": {
-      "WebDirect": "Partial"
-     }
+     "notes": "Requires an open PDF (via Create PDF or Open PDF). Source can be a file path, container field, or variable. Pages are appended in document order. Close PDF when finished to persist the result. WebDirect (26.0.3+): with From: File the Source file option is ignored — the user picks a PDF to upload in a browser dialog.",
+     "originated_in_version": "26.0"
     },
     {
      "name": "Save Records as PDF",
-     "syntax": "Save Records as PDF [ No dialog ; Append ; Save to: File / Container / Variable / Open PDF ; Output file ; Current record / Records being browsed / Blank record ]",
+     "syntax": "Save Records as PDF [ Restore ; Save to: File ; <output file> ; Create folders: On/Off ; With dialog: On/Off ; Append to existing PDF | Save to: Target ; Target: <field/variable> | Save to: Currently open PDF ; Records being browsed / Current record / Blank record ]",
      "purpose": "Saves records or a blank layout to a PDF; in FM 26 moved to PDF Files category and gained Save to option (file path, container, variable, or append to an open PDF)",
      "slug": "save-records-as-pdf",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/save-records-as-pdf.md",
@@ -2570,15 +2578,12 @@
     },
     {
      "name": "Close PDF",
-     "syntax": "Close PDF [ Save to: File Path / Container / Variable ; Output: <field or path> ]",
+     "syntax": "Close PDF [ Save to: File ; <output file> ; Create folders: On/Off | Save to: Target ; Target: <field/variable> ; Filename: <name> ]",
      "purpose": "Closes the open PDF and saves it to a file path, container field, or variable",
      "slug": "close-pdf",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/close-pdf.md",
-     "notes": "Ends the scripted PDF workflow and persists the result. Must follow Create PDF or Open PDF. If Close PDF is not called before a script ends, the in-memory PDF is discarded (same as Cancel PDF). Fetch live docs for output option detail.",
-     "originated_in_version": "26.0",
-     "platform_exceptions": {
-      "WebDirect": "Partial"
-     }
+     "notes": "Saves and closes the PDF opened by Create PDF or Open PDF. Until Close PDF or Cancel PDF runs, the PDF stays open in memory — another Create PDF / Open PDF returns 833 — and it is lost only when the client session ends or the file that opened it closes. Error 5 if no PDF is open. Overwrites an existing file without warning. WebDirect (26.0.3+): Save to: File ignores Output file and Create folders — the PDF is offered to the user as a browser download.",
+     "originated_in_version": "26.0"
     },
     {
      "name": "Cancel PDF",
@@ -2591,7 +2596,7 @@
     },
     {
      "name": "Print PDF",
-     "syntax": "Print PDF [ No dialog ; Source: <file path, container, or variable> ]",
+     "syntax": "Print PDF [ From: File ; Source file: <path> | From: Source ; Source: <field/variable> ; Password: <password> ; Specify print options ; Save print options to: <field/variable> ; Use print options from: <field/variable> ; With dialog: On/Off ]",
      "purpose": "Prints a PDF from a file path, container field, or variable without opening it for editing",
      "slug": "print-pdf",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/print-pdf.md",
@@ -2676,15 +2681,15 @@
     {
      "name": "Configure Prompt Template",
      "purpose": "Set up a named prompt template to use in other AI script steps.",
-     "syntax": "Configure Prompt Template [ Account Name: <name> ; Template Name: <name> ; Template: <text> ]",
+     "syntax": "Configure Prompt Template [ Template Name: <name> ; Model Provider: <provider> ; Template Type: SQL Query / Find Request / RAG Prompt ; <prompts for that type> ]",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/configure-prompt-template.md",
-     "notes": "Template Types: SQL Query, Find Request, RAG Prompt. Template constants: :schema: (DDL schema), :question: (user prompt), :context: (RAG context), :sql_query: (generated SQL), :sql_results: (query results), :date_format: (date format string). Template names are case-sensitive. Templates are session-scoped and cleared on file close.",
+     "notes": "Template types: SQL Query (SQL Prompt, Natural Language Prompt), Find Request (Find Request Prompt), RAG Prompt (RAG Prompt). Constants: :schema:, :question:, :context:, :sql_query:, :sql_results:, :date_format: (which are available depends on the prompt). Names are case-sensitive; a same-named template is replaced. Available to scripts in the current file for the rest of the client session.",
      "originated_in_version": "22.0",
      "slug": "configure-prompt-template"
     },
     {
      "name": "Configure RAG Account",
-     "syntax": "Configure RAG Account [ Account Name: name ; API key: key ; Endpoint: url ]",
+     "syntax": "Configure RAG Account [ RAG Account Name: <name> ; Endpoint: <url ending in /> ; API Key: <key> ; Verify SSL Certificates ]",
      "purpose": "Configure a named RAG account connecting to a FileMaker Server AI Model Server knowledge store.",
      "slug": "configure-rag-account",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/configure-rag-account.md",
@@ -2714,7 +2719,7 @@
      "purpose": "Facilitate multistep agentic interaction between your custom app and AI models, supporting built-in and custom function tool calls.",
      "syntax": "Generate Response from Model [ Account Name: name ; Model: model ; User Prompt: text ; Agentic mode: On/Off ; Response: field/variable ; Instructions: text ; Messages: field/variable ]",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/generate-response-from-model.md",
-     "notes": "Agentic mode On: enables full multi-round tool execution. Agentic mode Off: stops after first tool call and returns tool call JSON (useful for debugging). Built-in tool definitions: execute_sql (generates and runs SQL; append DDL schema to parameter description), retrieve_image (fetches image from container field via SQL ROWID). Custom function tools: name must exactly match FileMaker custom function name; parameters must be in same order and count, always typed as string. Stream On: incremental delivery; target field must be on current layout. Messages/Save Message History To/Message History Count: manage multi-turn conversation history. Temperature range varies by model provider. Error: 'No tool call exists for the prompt' when model doesn't call a tool. Error: 'Function not found' when custom function is missing. Full platform compatibility. FM 26 adds an 'Include tool calls and tool results' option. Google Gemini is supported as a text-generation provider. Fetch live — AI options change fast.",
+     "notes": "Agentic mode On: enables full multi-round tool execution. Agentic mode Off: stops after first tool call and returns tool call JSON (useful for debugging). Built-in tool definitions: execute_sql (generates and runs SQL; append DDL schema to parameter description), retrieve_image (fetches image from container field via SQL ROWID). Custom function tools: name must exactly match FileMaker custom function name; parameters must be in same order and count, always typed as string. Stream On: incremental delivery; target field must be on current layout. Messages/Save Message History To/Message History Count: manage multi-turn conversation history. Temperature range varies by model provider. Error: 'No tool call exists for the prompt' when model doesn't call a tool. Error: 'Function not found' when custom function is missing. Full platform compatibility. FM 26 adds an 'Include tool calls and tool results' option. Google Gemini is supported as a text-generation provider. Fetch live — AI options change fast. FM 26.0.1+: CURLOPT_TIMEOUT (seconds) in Parameters for AI steps.",
      "originated_in_version": "22.0",
      "slug": "generate-response-from-model"
     },
@@ -2729,7 +2734,7 @@
     {
      "name": "Insert Embedding in Found Set",
      "purpose": "Insert embedding vectors for all records in the current found set.",
-     "syntax": "Insert Embedding in Found Set [ Account Name: <name> ; Embedding Model: <model> ; Input: <field> ; Target: <field> ]",
+     "syntax": "Insert Embedding in Found Set [ Account Name: <name> ; Embedding Model: <model> ; Source Field: <field> ; Target Field: <field> ; Replace target contents ; Continue on error ; Show summary ; Parameters: <json> ]",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-embedding-in-found-set.md",
      "notes": "Parameters JSON keys: MaxRecPerCall (default 20, max 500), MaxRetryPerWorker (5), MaxWaitPerRetry (60000 ms, OpenAI only), TruncateTokenLimit (8185), TruncateEnabled (1), RetryOnError (0). RetryOnError overrides the Continue on error option.",
      "originated_in_version": "21.0",
@@ -2747,9 +2752,9 @@
     {
      "name": "Perform RAG Action",
      "purpose": "Add or remove data in a RAG knowledge space, or send a prompt to a RAG space for context-aware AI responses.",
-     "syntax": "Perform RAG Action [ RAG Account Name: <name> ; AI Account Name: <name> ; Action: Add Data / Send Prompt / Remove Data ; Input: <field/file/container/variable> ; Prompt Template Name: <name> ; Response Target: <field/variable> ]",
+     "syntax": "Perform RAG Action [ RAG Account Name: <name> ; Space ID: <id> ; Action: Add Data / Send Prompt / Remove Data ; … ]",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-rag-action.md",
-     "notes": "Add Data actions: From Text, From File, From File (Async), From Container, From Container (Async). Async is recommended for large PDFs. WebDirect ignores Input File path and opens Insert dialog instead. Send Prompt: uses both a RAG Account and an AI Account; supports context_prompt parameter key; optional Prompt Template Name. Remove Data: pass JSON with id array; irreversible — warn users to retain originals. PDF with encryption cannot be added. Adding a PDF with the same filename removes the existing entry.",
+     "notes": "Add Data actions: From Text, From File, From File (Async), From Container, From Container (Async). Async is recommended for large PDFs. WebDirect ignores Input File path and opens Insert dialog instead. Send Prompt: uses both a RAG Account and an AI Account; supports context_prompt parameter key; optional Prompt Template Name. Remove Data: pass JSON with id array; irreversible — warn users to retain originals. PDF with encryption cannot be added. Adding a PDF with the same filename removes the existing entry. Space IDs may contain only letters, numbers, _ and - (a slash returns error 887; Admin Console blocks it from 26.0.2). FM 26.0.1+: returns the document ID when adding data; Tokens per Text Chunk (75–512); per-request Similarity Threshold and top-results in Parameters.",
      "originated_in_version": "22.0",
      "slug": "perform-rag-action"
     },
@@ -2774,15 +2779,15 @@
      "purpose": "Finds the top K records most semantically similar to a query embedding vector",
      "slug": "perform-semantic-find",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-semantic-find.md",
-     "notes": "Query by: Embedding (vector) or Image (pass a container field or variable containing an image — the step generates the query embedding internally). Save result option: set a variable to receive a JSON array of objects with recordID and cosineSimilarity scores for each matched record. Normalised embedding vectors required for accurate results. Both query and stored embeddings must have identical dimensions.",
+     "notes": "Query by: Natural language (Text — embedded by the model), Vector data (an embedding as container data), or Image (container data, embedded by the model). Return count defaults to 10. Optional cosine similarity condition/value (-1 to 1). Save result writes a JSON array of record IDs with cosine similarity, highest first. Query and stored vectors must come from the same model with the same dimensions.",
      "originated_in_version": "21.0"
     },
     {
      "name": "Set AI Call Logging",
      "purpose": "Control logging of AI calls made from the current file.",
-     "syntax": "Set AI Call Logging [ On/Off ; Mode: Standard/Verbose ; Truncate Messages: On/Off ]",
+     "syntax": "Set AI Call Logging [ On/Off ; Filename: <name> ; Verbose: On/Off ; Truncate Messages: On/Off ]",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/set-ai-call-logging.md",
-     "notes": "Verbose mode: logs embedding vectors, token counts, semantic find return count, and cosine similarity scores. Truncate Messages: shortens verbose output for large embedding vectors. Standard mode logs prompts and responses without embedding detail.",
+     "notes": "Logs every AI script step and function call for scripts in the current file until the file closes or logging is turned Off. Default filename LLMDebug.log — in the Documents folder on Pro/Go, the host's Logs folder on a server. Verbose adds embedding vectors, token counts and semantic-find details; Truncate Messages shortens long verbose entries.",
      "originated_in_version": "21.0",
      "slug": "set-ai-call-logging"
     },
@@ -2792,7 +2797,7 @@
      "purpose": "Sends an image to a captioning AI model and inserts the returned caption into a target field or variable",
      "slug": "insert-image-caption",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-image-caption.md",
-     "notes": "Requires a configured AI account. Image source can be a container field or a variable containing image data. Caption is inserted into the target field or variable. Use Insert Image Captions in Found Set for batch processing.",
+     "notes": "Supported only with Claris AI Model Server: configure the AI account with Model Provider: Custom and the server's endpoint. Requires a configured AI account. Image source can be a container field or a variable containing image data. Caption is inserted into the target field or variable. Use Insert Image Captions in Found Set for batch processing.",
      "originated_in_version": "26.0"
     },
     {
@@ -2801,7 +2806,7 @@
      "purpose": "Runs Insert Image Caption for every record in the current found set in sequence",
      "slug": "insert-image-captions-in-found-set",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/insert-image-captions-in-found-set.md",
-     "notes": "Batch version of Insert Image Caption. Processes every record in the found set sequentially. Requires a configured AI account. Both the image source and target must be fields (not variables) since the step iterates records.",
+     "notes": "Supported only with Claris AI Model Server: configure the AI account with Model Provider: Custom and the server's endpoint. Batch version of Insert Image Caption. Processes every record in the found set sequentially. Requires a configured AI account. Both the image source and target must be fields (not variables) since the step iterates records.",
      "originated_in_version": "26.0"
     }
    ]
@@ -2812,11 +2817,11 @@
    "steps": [
     {
      "name": "Configure Persistent Data",
-     "syntax": "Configure Persistent Data [ Name: <name> ; Instance ID: <id> ; Value: <value> ]",
+     "syntax": "Configure Persistent Data [ <name> ; Instance ID: <id> ; Value: <expression> | Delete Entry ]",
      "purpose": "Sets or deletes an entry in the persistent data store; store survives session end and file close",
      "slug": "configure-persistent-data",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/configure-persistent-data.md",
-     "notes": "Entries are keyed by a name and an instance ID, allowing multiple values under the same name. Delete an entry by passing empty or null as the Value. Use ListPersistentDataIDs() to enumerate instance IDs before iterating. Use GetPersistentData() to retrieve values. Fetch live docs for scope and platform restrictions.",
+     "notes": "Sets or deletes one entry in the file's persistent data store, keyed by name + optional instance ID (blank = \"\"). Use the Delete Entry option to remove an entry; deleting one that doesn't exist returns error 10. Requires Full Access (or a script granted full access). The data type of Value is preserved. Read with GetPersistentData / ListPersistentDataIDs. Entries are schema: copied by clones, NOT by the Data Migration Tool.",
      "originated_in_version": "26.0",
      "concept_doc_url": "https://help.claris.com/markdown/en/pro-help/about-persistent-data-store.md"
     }

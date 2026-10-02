@@ -1,0 +1,159 @@
+{
+  "skill": "claris-filemaker-pro",
+  "version": "2.1.0",
+  "notes": "Each case lists the facts a correct answer must contain (must) and the errors earlier versions made (must_not). Cases marked mode=adt assume the Claris ADT plugin is installed; mode=standalone assume it isn't; mode=any applies to both. Grade each answer against must / must_not.",
+  "cases": [
+    {
+      "id": "jsonraw",
+      "mode": "any",
+      "prompt": "What value does JSONRaw have, and what does JSONSetElement do with it?",
+      "must": [
+        "JSONRaw is 0",
+        "valid JSON is inserted as-is (not quoted)",
+        "invalid JSON is inserted as a JSON string"
+      ],
+      "must_not": [
+        "JSONRaw is 7",
+        "JSONGetElementType can return JSONRaw"
+      ]
+    },
+    {
+      "id": "ipad-detect",
+      "mode": "any",
+      "prompt": "Write a FileMaker calculation that returns \"iPad\", \"iPhone\" or \"Desktop\" depending on the device.",
+      "must": [
+        "Get ( Device ) 3 = iPad",
+        "Get ( Device ) 4 = iPhone"
+      ],
+      "must_not": [
+        "4 = iPad",
+        "5 = iPhone",
+        "Case ( Get ( Device ) ; … ) used like Choose"
+      ]
+    },
+    {
+      "id": "webdirect-steps",
+      "mode": "any",
+      "prompt": "I'm porting a desktop FileMaker solution to WebDirect. Which script steps won't work, and what happens when one runs?",
+      "must": [
+        "answers from platform_exceptions (catalog searched, not guessed)",
+        "No = step skipped, error 3, no alert",
+        "Partial is not the same as supported"
+      ],
+      "must_not": [
+        "claims the script halts with an alert"
+      ]
+    },
+    {
+      "id": "jsonparse",
+      "mode": "any",
+      "prompt": "How do I parse a large JSON API response once and then read many values from it in a loop?",
+      "must": [
+        "JSONParse takes one argument",
+        "store JSONParse's result in a variable and pass that variable to JSONGetElement",
+        "JSONParsedState returns 0 / -1 / 1-6"
+      ],
+      "must_not": [
+        "a second 'parse name' argument",
+        "reading by a cache name string"
+      ]
+    },
+    {
+      "id": "utc-ms",
+      "mode": "any",
+      "prompt": "I need a Unix epoch timestamp in milliseconds for an API call. How do I get it in FileMaker?",
+      "must": [
+        "Get ( CurrentTimeUTCMilliseconds ) counts from 1/1/0001",
+        "subtract 62135596800000"
+      ],
+      "must_not": [
+        "Get ( CurrentTimeUTCMilliseconds ) is already Unix milliseconds"
+      ]
+    },
+    {
+      "id": "data-api-script",
+      "mode": "any",
+      "prompt": "Call a FileMaker script through the Data API and pass it a parameter.",
+      "must": [
+        "GET /fmi/data/{version}/databases/{db}/layouts/{layout}/script/{scriptName}",
+        "?script.param=",
+        "Bearer token from a session"
+      ],
+      "must_not": [
+        "scriptParam"
+      ]
+    },
+    {
+      "id": "hmac",
+      "mode": "any",
+      "prompt": "Verify a webhook's HMAC-SHA256 signature (Base64) in a FileMaker calculation.",
+      "must": [
+        "CryptAuthCode ( payload ; \"SHA256\" ; secret )",
+        "Base64EncodeRFC ( 4648 ; … )",
+        "compares with Exact() — FileMaker \"=\" ignores case"
+      ],
+      "must_not": [
+        "Base64Encode ( CryptAuthCode ( … ) ) compared directly (it ends with CR+LF)",
+        "computed = received"
+      ]
+    },
+    {
+      "id": "adt-validate",
+      "mode": "adt",
+      "prompt": "Write a calculation that returns the last day of the current month.",
+      "must": [
+        "reads references/adt-mode.md",
+        "validates (and evaluates) the formula with the filemaker CLI on a scratch file before answering",
+        "says it was engine-verified"
+      ],
+      "must_not": [
+        "runs anything against the user's own solution file"
+      ]
+    },
+    {
+      "id": "adt-engine-only-step",
+      "mode": "adt",
+      "prompt": "The ADT engine lists a script step I can't find in Claris's Help. Can I use it in a client solution?",
+      "must": [
+        "checks the step against script-steps-catalog.json and `filemaker help script steps`",
+        "says an engine-only step is undocumented / probably pre-release and not safe to ship",
+        "describes only what help shows"
+      ],
+      "must_not": [
+        "recommends shipping it",
+        "invents options or behaviour"
+      ]
+    },
+    {
+      "id": "standalone-no-adt",
+      "mode": "standalone",
+      "prompt": "What does PMT return for a $21,000 loan at 6.9% over 48 months?",
+      "must": [
+        "PMT ( 21000 ; .069/12 ; 48 )",
+        "about 501.90, positive"
+      ],
+      "must_not": [
+        "the result is negative",
+        "wrap it in Abs()",
+        "tries to call the filemaker CLI"
+      ]
+    }
+  ],
+  "near_misses": [
+    {
+      "prompt": "My FileMaker Server Admin Console won't load after I updated it.",
+      "expected_to_trigger": false,
+      "why": "Server administration is out of scope (cadenceux-fms-docker-setup)."
+    },
+    {
+      "prompt": "What naming convention should I use for table occurrences?",
+      "expected_to_trigger": false,
+      "why": "Naming standards: filemaker-standards (ADT) or fmp-dev-design-patterns."
+    },
+    {
+      "prompt": "Set up a Claris Connect flow that posts new records to Slack.",
+      "expected_to_trigger": false,
+      "why": "Claris Connect is out of scope."
+    }
+  ]
+}

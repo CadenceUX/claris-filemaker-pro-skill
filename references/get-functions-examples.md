@@ -1,12 +1,26 @@
 # FileMaker Get() Functions — Quick Reference
 
+## Contents
+  - Date & Time
+  - Account & Privileges
+  - File & Database
+  - Paths & File System
+  - Record & Found Set
+  - Layout & Window
+  - Script & Trigger
+  - Field & Object State
+  - Sorting & Printing
+  - Network & Connectivity
+  - Device & Screen (FileMaker Go / iOS)
+  - Calculation & Custom Function Context
+  - Common Get() patterns
+
 Source: https://help.claris.com/en/pro-help/content/get-functions.html  
-All 138 Get() functions grouped by category with return type, typical use, and examples (135 through FM 22 + 3 new in FM 26: Get(AccountPasswordDaysRemaining), Get(GuidedAccessState), Get(WindowUUID)).  
-Last verified: 2026-06 against live Claris Help Centre.
+All 138 Get() functions grouped by category (FM 26 added Get(AccountPasswordDaysRemaining), Get(GuidedAccessState) and Get(WindowUUID)).
 
-**Overview:** Get() functions return environmental and contextual information — the current user, file, record, window, device, date/time, and system state. They take no arguments and are recalculated dynamically. All return text or number unless noted.
+**Overview:** Get() functions report the current user, file, record, window, device, time and system state. Most enumerations are **numbers whose meaning isn't obvious** — check the table rather than guessing; several look similar but differ (`Get(Device)` 3 = iPad, `Get(SystemPlatform)` 3 = iOS).
 
-> **Removed/renamed functions:** `Get(ExtendedPrivileges)` → use `Get(AccountExtendedPrivileges)`;  `Get(PrivilegeSetName)` → use `Get(AccountPrivilegeSetName)`; `Get(RecordCount)` → use `Get(TotalRecordCount)` or `Get(FoundCount)`; `Get(LastExternalErrorDetail)` → use `Get(LastErrorDetail)`; `Get(LastODBCError)` → use `Get(LastErrorDetail)`. `Get(LocationValues)` and `Get(LocationAccuracy)` are FileMaker Go–only and may not be available on all platforms.
+> Only the parameters listed here exist. A made-up one such as `Get ( RecordCount )` is a calculation error (1215), not an empty result.
 
 ---
 
@@ -17,14 +31,14 @@ Last verified: 2026-06 against live Claris Help Centre.
 | `Get(CurrentDate)` | date | Today's date per system clock |
 | `Get(CurrentTime)` | time | Current time per system clock |
 | `Get(CurrentTimestamp)` | timestamp | Current date+time |
-| `Get(CurrentTimeUTCMilliseconds)` | number | Milliseconds since Unix epoch (UTC) |
-| `Get(CurrentTimeUTCMicroseconds)` | number | Microseconds since Unix epoch (UTC) |
+| `Get(CurrentTimeUTCMilliseconds)` | number | Milliseconds since **1/1/0001** UTC (not the Unix epoch). Unix ms = this − 62135596800000 |
+| `Get(CurrentTimeUTCMicroseconds)` | number | Microseconds since **1/1/0001** UTC (not the Unix epoch) |
 | `Get(CurrentHostTimestamp)` | timestamp | Server-side timestamp (consistent across all clients) |
 
 ```
 Get ( CurrentDate )               // → 6/4/2026
 Get ( CurrentTimestamp )          // → 6/4/2026 9:15:00 AM
-Get ( CurrentTimeUTCMilliseconds ) // → 1748996100000
+Get ( CurrentTimeUTCMilliseconds ) // → 63926499600000  (2 Oct 2026 01:00 UTC — counted from 1/1/0001)
 Get ( CurrentHostTimestamp )      // use on server or PSOS for consistent timestamps
 ```
 
@@ -51,20 +65,20 @@ Right ( "0" & Day ( Get ( CurrentDate ) ) ; 2 )
 | Function | Returns | Notes |
 |---|---|---|
 | `Get(AccountName)` | text | Current user's account name |
-| `Get(AccountType)` | number | 0=FileMaker, 1=External server, 2=Claris ID |
+| `Get(AccountType)` | text | `FileMaker File`, `Guest`, `External`, `Apple ID`, `Amazon`, `Google`, `Azure`, `Custom OAuth`, or `Claris ID <Team Name>` |
 | `Get(AccountGroupName)` | text | External server group name (LDAP/Active Directory) |
 | `Get(AccountPrivilegeSetName)` | text | Name of the current privilege set |
 | `Get(AccountExtendedPrivileges)` | text | Return-delimited list of extended privilege keywords |
-| `Get(AccountPasswordDaysRemaining)` | number | **FM 26+** — Days before current password must change; empty if no expiry set |
-| `Get(CurrentPrivilegeSetName)` | text | Synonym for `AccountPrivilegeSetName` |
-| `Get(CurrentExtendedPrivileges)` | text | Synonym for `AccountExtendedPrivileges` |
-| `Get(UserName)` | text | OS-level username (not account name) |
+| `Get(AccountPasswordDaysRemaining)` | number | **FM 26+** — days until the password must change; `0` if expired; `-1` if no expiry, no password, or not a FileMaker File account |
+| `Get(CurrentPrivilegeSetName)` | text | Privilege set **evaluating this calculation** — `[Full Access]` inside a script set to run with full access, even when the account's set differs |
+| `Get(CurrentExtendedPrivileges)` | text | Extended privileges of the privilege set currently in effect (differs from the account's under full-access scripts) |
+| `Get(UserName)` | text | User name set in FileMaker Pro / Go Settings (not the OS login, not the account); `[WebDirect-xxxxx]` in WebDirect |
 | `Get(UserCount)` | number | Number of users connected to the hosted file |
 
 ```
 Get ( AccountName )               // → "bjones"
 Get ( AccountPrivilegeSetName )   // → "[Full Access]"
-Get ( AccountExtendedPrivileges ) // → "fmwebdirect¶fmmobileapp"
+Get ( AccountExtendedPrivileges ) // → "fmapp¶fmwebdirect"   (also fmrest, fmodata, fmxml, fmphp, fmurlscript, fmextscriptaccess, fmreauthenticate10)
 Get ( UserCount )                 // → 14  (users on server)
 ```
 
@@ -87,48 +101,49 @@ PatternCount ( Get ( AccountExtendedPrivileges ) ; "fmwebdirect" ) > 0
 | `Get(FileName)` | text | File name without extension |
 | `Get(FilePath)` | text | Full path to the file on disk |
 | `Get(FileSize)` | number | File size in bytes |
-| `Get(EncryptionState)` | number | 1 if file is encrypted at rest |
+| `Get(EncryptionState)` | text | `0` not encrypted; `1¶<shared ID>` if encrypted at rest |
 | `Get(FileLocaleElements)` | text | JSON of file locale settings |
 | `Get(HostName)` | text | Server hostname or "localhost" |
 | `Get(HostIPAddress)` | text | IP address of the host |
 | `Get(HostApplicationVersion)` | text | FileMaker Server version string |
 | `Get(ApplicationVersion)` | text | FileMaker Pro/Go/WebDirect version |
 | `Get(ApplicationLanguage)` | text | UI language of the application |
-| `Get(ApplicationArchitecture)` | text | `"x86"` or `"arm64"` |
-| `Get(FileMakerPath)` | text | Path to the FileMaker application executable |
+| `Get(ApplicationArchitecture)` | text | `x86_64` (Intel Mac, Windows, Server, Cloud, WebDirect…) or `arm64` (Apple silicon, Go, ARM Linux Server) |
+| `Get(FileMakerPath)` | text | Path to the **folder** of the running FileMaker app (Pro and Server only) |
 | `Get(CacheFileName)` | text | Name of the local cache file (hosted files) |
 | `Get(CacheFilePath)` | text | Path to the local cache file |
 | `Get(OpenDataFileInfo)` | text | Info about any open data files |
-| `Get(SessionIdentifier)` | text | Unique ID for the current session |
+| `Get(SessionIdentifier)` | text | Value set by **Set Session Identifier** in this session on a hosted file; otherwise empty |
 | `Get(SystemVersion)` | text | OS version string |
 | `Get(SystemDrive)` | text | Boot drive path |
 | `Get(SystemIPAddress)` | text | Client's IP address (newline-delimited if multiple) |
 | `Get(SystemNICAddress)` | text | Network interface card MAC address |
 | `Get(SystemLanguage)` | text | OS language setting |
-| `Get(SystemPlatform)` | number | 1=macOS, 2=Windows, 3=unused, 4=iOS/iPadOS |
-| `Get(SystemAppearance)` | text | `"Light"` or `"Dark"` (OS appearance mode) |
+| `Get(SystemPlatform)` | number | `1` macOS · `-2` Windows · `3` iOS/iPadOS · `4` WebDirect · `5` CentOS Linux · `8` Ubuntu Linux |
+| `Get(SystemAppearance)` | text | macOS/iOS: the system appearance name (e.g. `Dark`); Windows: the active high-contrast scheme name, else empty |
 | `Get(SystemLocaleElements)` | text | JSON of OS locale settings |
 | `Get(SystemStorageAvailable)` | number | Available storage in bytes |
-| `Get(MultiUserState)` | number | 0=local only, 1=hosted/no share, 2=network sharing |
+| `Get(MultiUserState)` | number | `0` sharing off · `1` sharing on, accessed on the host · `2` sharing on, accessed from a client |
 | `Get(InstalledFMPlugins)` | text | Return-delimited list of installed plug-ins |
 | `Get(InstalledFMPluginsAsJSON)` | text | JSON array of installed plug-in details |
 
 ```
 Get ( FileName )             // → "CRM"
-Get ( FilePath )             // → "filemacosx:/Volumes/Data/CRM.fmp12"
+Get ( FilePath )             // → "file:/Macintosh HD/Users/bjones/CRM.fmp12"  (fmnet:/host/CRM.fmp12 when hosted)
 Get ( SystemPlatform )       // → 1 (macOS)
-Get ( ApplicationVersion )   // → "ProAdvanced 22.0.4.401"
+Get ( ApplicationVersion )   // → "Pro 26.0.1"  (also Go, Go_iPad, Server, Web Publishing Engine, FileMaker Data API Engine…)
 Get ( ApplicationArchitecture ) // → "arm64"
 Get ( SystemAppearance )     // → "Dark"
-Get ( EncryptionState )      // → 1 (file is encrypted)
+Get ( EncryptionState )      // → 0, or 1¶<shared ID> when encrypted at rest
 ```
 
 Platform-conditional logic:
 ```
 Case (
   Get ( SystemPlatform ) = 1 ; "mac" ;
-  Get ( SystemPlatform ) = 2 ; "win" ;
-  Get ( SystemPlatform ) = 4 ; "ios" ;
+  Get ( SystemPlatform ) = -2 ; "win" ;
+  Get ( SystemPlatform ) = 3 ; "ios" ;
+  Get ( SystemPlatform ) = 4 ; "webdirect" ;
   "other"
 )
 ```
@@ -171,20 +186,20 @@ Get ( TemporaryPath ) & "export_" &
 |---|---|---|
 | `Get(RecordID)` | number | Internal unique record ID (never reused) |
 | `Get(RecordNumber)` | number | Position in current found set (1-based) |
-| `Get(ActiveRecordNumber)` | number | Row number of active record in portal (0 if not in portal) |
+| `Get(ActiveRecordNumber)` | number | Record number shown in the status toolbar (position in the found set) — not a portal row |
 | `Get(TotalRecordCount)` | number | All records in the table |
 | `Get(FoundCount)` | number | Records in current found set |
 | `Get(RecordOpenCount)` | number | Number of records currently open/locked |
-| `Get(RecordOpenState)` | number | 0=unmodified, 1=modified, 2=new |
+| `Get(RecordOpenState)` | number | `0` closed (committed) · `1` **new** uncommitted · `2` **modified** uncommitted · `3` deleted uncommitted |
 | `Get(RecordModificationCount)` | number | Cumulative modification count for current record |
-| `Get(RecordAccess)` | number | Access level for current record (bitmask) |
+| `Get(RecordAccess)` | number | `0` no view/edit · `1` view only · `2` edit (privilege-set record access for the current record) |
 | `Get(ModifiedFields)` | text | Return-delimited list of modified field names (unsaved) |
 
 ```
 Get ( RecordID )              // → 1042
 Get ( RecordNumber )          // → 3  (3rd record in found set)
 Get ( FoundCount )            // → 47
-Get ( RecordOpenState )       // → 1 if unsaved changes exist
+Get ( RecordOpenState )       // → 2 for an existing record with uncommitted changes (1 = new record)
 Get ( RecordModificationCount ) // → 23  (modified 23 times total)
 Get ( ModifiedFields )        // → "FirstName¶Email"  (fields changed but not committed)
 ```
@@ -212,7 +227,7 @@ Progress indicator:
 | `Get(LayoutCount)` | number | Total number of layouts |
 | `Get(LayoutTableName)` | text | Table occurrence the layout is based on |
 | `Get(LayoutViewState)` | number | 0=form, 1=list, 2=table |
-| `Get(LayoutAccess)` | number | Access level for current layout (bitmask) |
+| `Get(LayoutAccess)` | number | `0` no access · `1` view only (also for read-only files) · `2` modifiable — via this layout |
 | `Get(WindowName)` | text | Current window title |
 | `Get(WindowHeight)` | number | Window height in points |
 | `Get(WindowWidth)` | number | Window width in points |
@@ -222,26 +237,26 @@ Progress indicator:
 | `Get(WindowContentWidth)` | number | Usable content area width |
 | `Get(WindowDesktopHeight)` | number | Total desktop/screen height |
 | `Get(WindowDesktopWidth)` | number | Total desktop/screen width |
-| `Get(WindowMode)` | number | 0=Browse, 1=Find, 2=Preview, 3=disabled |
-| `Get(WindowStyle)` | number | 0=Document, 1=Floating document, 2=Dialog |
-| `Get(WindowZoomLevel)` | number | Current zoom percentage |
+| `Get(WindowMode)` | number | `0` Browse · `1` Find · `2` Preview · `3` printing · `4` Layout mode (Data Viewer only; scripts switch to Browse) |
+| `Get(WindowStyle)` | number | `0` document · `1` floating document · `2` dialog · `3` card |
+| `Get(WindowZoomLevel)` | text | Zoom percentage of the current window; WebDirect returns 100 |
 | `Get(WindowVisible)` | number | 1=visible, 0=hidden |
-| `Get(WindowOrientation)` | number | 0=portrait, 1=landscape (FileMaker Go only) |
+| `Get(WindowOrientation)` | number | Pro & Go: `-2` landscape left · `-1` landscape right · `0` square · `1` portrait · `2` portrait upside down |
 | `Get(WindowUUID)` | text | **FM 26+** — Unique stable UUID for the active window; useful for managing multiple windows of the same file |
 | `Get(ActiveLayoutObjectName)` | text | Name of the currently focused layout object |
-| `Get(StatusAreaState)` | number | 0=hidden, 1=visible, 2=locked |
-| `Get(MenubarState)` | number | 0=hidden, 1=locked, 2=normal |
+| `Get(StatusAreaState)` | number | `0` hidden · `1` visible · `2` visible & locked · `3` hidden & locked |
+| `Get(MenubarState)` | number | `0` hidden & unlocked · `1` visible & unlocked · `2` visible & locked · `3` hidden & locked |
 | `Get(CustomMenuSetName)` | text | Name of the active custom menu set |
 | `Get(AllowFormattingBarState)` | number | 1 if formatting bar is allowed |
 | `Get(TextRulerVisible)` | number | 1 if text ruler is visible |
-| `Get(TouchKeyboardState)` | number | 1 if touch keyboard is visible (Go) |
+| `Get(TouchKeyboardState)` | number | FileMaker Go and Windows: `1` touch keyboard enabled · `0` disabled |
 
 ```
 Get ( LayoutName )         // → "Invoices - Detail"
 Get ( LayoutTableName )    // → "Invoices"
 Get ( WindowMode )         // → 0 (Browse)
 Get ( WindowContentWidth ) // → 1024
-Get ( WindowOrientation )  // → 1 (landscape, on iPad)
+Get ( WindowOrientation )  // → 1 (portrait); -1 / -2 landscape
 Get ( StatusAreaState )    // → 1 (status toolbar visible)
 Get ( CustomMenuSetName )  // → "Customer Portal Menus"
 ```
@@ -269,7 +284,7 @@ If ( Get ( WindowMode ) = 1 ; "" ; actualCalculation )
 | `Get(LastErrorDetail)` | text | Detail message for the last error |
 | `Get(LastErrorLocation)` | text | Script name and step where last error occurred |
 | `Get(LastMessageChoice)` | number | Button pressed in last dialog (1=first, 2=second, 3=third) |
-| `Get(LastStepTokensUsed)` | number | AI tokens consumed by the last AI script step |
+| `Get(LastStepTokensUsed)` | text | JSON for the last AI script step: `model`, `summary` (records embedded/skipped), `usage` (`prompt_tokens`, `total_tokens`) |
 | `Get(ErrorCaptureState)` | number | 1 if Set Error Capture is On |
 | `Get(AllowAbortState)` | number | 1 if Allow User Abort is On |
 | `Get(ScriptAnimationState)` | number | 1 if script animations are enabled |
@@ -277,21 +292,21 @@ If ( Get ( WindowMode ) = 1 ; "" ; actualCalculation )
 | `Get(RequestOmitState)` | number | 1 if current find request is set to Omit |
 | `Get(TransactionOpenState)` | number | 1 if inside an open transaction block |
 | `Get(RevertTransactionOnErrorState)` | number | 1 if Revert Transaction on Error is active |
-| `Get(TriggerCurrentPanel)` | number | Panel index being navigated to (panel triggers) |
-| `Get(TriggerTargetPanel)` | number | Target panel in a panel navigation trigger |
-| `Get(TriggerGestureInfo)` | text | JSON describing touch/swipe gesture |
+| `Get(TriggerCurrentPanel)` | text | `index¶objectName` of the panel being left (OnPanelSwitch only); `0` if invalid |
+| `Get(TriggerTargetPanel)` | text | `index¶objectName` of the panel being switched to (OnPanelSwitch only); `0` if invalid |
+| `Get(TriggerGestureInfo)` | text | List (OnGestureTap, Go and Windows): `Tap`, tap count, finger count, x, y, object name |
 | `Get(TriggerKeystroke)` | text | Key pressed in an OnObjectKeystroke trigger |
 | `Get(TriggerModifierKeys)` | number | Modifier keys held during trigger (bitmask) |
-| `Get(TriggerExternalEvent)` | text | External event name that fired the trigger |
+| `Get(TriggerExternalEvent)` | number | FileMaker Go remote-control event: `0` unknown · `1` play · `2` pause · `3` toggle · `4` next · `5` previous · `6` seek · `7` stop |
 
 ```
 Get ( ScriptParameter )   // → JSON or text passed from calling context
 Get ( LastError )         // → 401 (no records match)
 Get ( LastErrorDetail )   // → human-readable error description
-Get ( LastErrorLocation ) // → "InvoicesSave : Set Field [Invoice::Status]"
+Get ( LastErrorLocation ) // → script name, step name and line number of the last error
 Get ( LastMessageChoice ) // → 2 (user clicked second button)
 Get ( ScriptResult )      // → result from last Perform Script
-Get ( LastStepTokensUsed ) // → 342 (tokens used by last AI step)
+Get ( LastStepTokensUsed ) // → {"model":"…","usage":{"prompt_tokens":…,"total_tokens":342}}
 ```
 
 Parse JSON script parameter:
@@ -359,16 +374,16 @@ Get ( PageCount )  // → 12 (total pages in Preview)
 | Function | Returns | Notes |
 |---|---|---|
 | `Get(NetworkProtocol)` | text | Network protocol in use (e.g. "TCP/IP") |
-| `Get(NetworkType)` | text | Connection type |
-| `Get(ConnectionState)` | number | 1=connected to host, 0=not connected |
+| `Get(NetworkType)` | number | FileMaker Go: `0` local file · `1` unknown · `2` cellular · `3` Wi-Fi |
+| `Get(ConnectionState)` | number | `0` no network connection · `1` unencrypted · `2` encrypted, certificate **not** verified · `3` encrypted & verified |
 | `Get(ConnectionAttributes)` | text | Encrypted connection details JSON |
-| `Get(PersistentID)` | text | Unique persistent ID for the current file instance |
-| `Get(UUID)` | text | Generates a new UUID (v4) each time evaluated |
-| `Get(UUIDNumber)` | text | UUID formatted as a large number |
+| `Get(PersistentID)` | text | 32-hex-digit ID of the **device / computer** (or WebDirect session) — not the file. On FileMaker Server 26+, stable across restarts and upgrades |
+| `Get(UUID)` | text | New 16-byte UUID each evaluation (unstored) |
+| `Get(UUIDNumber)` | number | New 24-byte (192-bit) unique number each evaluation; may index faster than Get(UUID) as a key |
 
 ```
 Get ( UUID )             // → "A1B2C3D4-E5F6-7890-ABCD-EF1234567890"
-Get ( ConnectionState )  // → 1 (connected to server)
+Get ( ConnectionState )  // → 3 (encrypted, verified certificate)
 ```
 
 Generate a unique key:
@@ -383,7 +398,7 @@ Get ( UUID )
 
 | Function | Returns | Notes |
 |---|---|---|
-| `Get(Device)` | number | 0=unknown, 1=Mac, 2=Windows, 3=unused, 4=iPad, 5=iPhone |
+| `Get(Device)` | number | `0` unknown · `1` Mac · `2` Windows · `3` **iPad** · `4` **iPhone** · `5` Android · `6` Linux |
 | `Get(ScreenDepth)` | number | Colour depth in bits |
 | `Get(ScreenHeight)` | number | Screen height in points |
 | `Get(ScreenWidth)` | number | Screen width in points |
@@ -393,7 +408,7 @@ Get ( UUID )
 | `Get(RegionMonitorEvents)` | text | JSON of pending region monitor events (Go only) |
 
 ```
-Get ( Device )             // → 4 (iPad)
+Get ( Device )             // → 3 (iPad)
 Get ( ScreenWidth )        // → 1024
 Get ( ScreenScaleFactor )  // → 2  (Retina display)
 Get ( HighContrastState )  // → 0 (normal mode)
@@ -402,8 +417,8 @@ Get ( HighContrastState )  // → 0 (normal mode)
 Detect iPad vs iPhone:
 ```
 Case (
-  Get ( Device ) = 4 ; "iPad layout" ;
-  Get ( Device ) = 5 ; "iPhone layout" ;
+  Get ( Device ) = 3 ; "iPad layout" ;
+  Get ( Device ) = 4 ; "iPhone layout" ;
   "Desktop layout"
 )
 ```
@@ -479,7 +494,7 @@ End If
 **AI tokens budget check:**
 ```
 // After an AI script step:
-If [ Get ( LastStepTokensUsed ) > 5000 ]
+If [ JSONGetElement ( Get ( LastStepTokensUsed ) ; "usage.total_tokens" ) > 5000 ]
   // Log or warn — high token usage
 End If
 ```

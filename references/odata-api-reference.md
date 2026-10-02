@@ -1,5 +1,17 @@
 # FileMaker OData API — Reference
 
+## Contents
+  - Choosing between OData and the Data API
+  - Terminology mapping
+  - Base URL and authentication
+  - Query options
+  - Operations
+  - Running scripts
+  - Not supported
+  - Script step support
+  - Error codes
+  - When to fetch live
+
 Verified against the live `odata-guide` (57 pages) on **2026-07-25**, FileMaker 26.
 
 FileMaker supports OData at the **intermediate conformance level**, with documented exceptions
@@ -144,9 +156,15 @@ OData contexts.
 
 ---
 
+## Release notes that matter (FileMaker 2026)
+
+- 26.0.1: `$metadata` includes table and field **comments** and field **AI annotations**.
+- 26.0.1: a number field holding `?` now returns `null` (was invalid JSON); text that looks like a timestamp stays text.
+- 26.0.2 (Cloud): decimals written through OData are no longer rounded to six significant figures.
+
 ## Error codes
 
-OData and Data API share the REST error range **1700–1715** — see `quickrefs.md`. Error **953**
+OData and Data API share the REST error range **1700–1715** — see `error-codes.md`. Error **953**
 (*Exceeded limit on data the FileMaker Data API and OData can transmit*) indicates the response
 payload is too large.
 

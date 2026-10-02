@@ -1,12 +1,54 @@
 # Numeric Functions — Examples (Number, Financial, Trigonometric, Repeating)
 
+## Contents
+- Number Functions
+  - Abs ( number )
+  - Ceiling ( number )
+  - Combination ( setSize ; numberOfChoices )
+  - Div ( number ; divisor )
+  - Exp ( number )
+  - Factorial ( number {; numberOfFactors } )
+  - Floor ( number )
+  - Int ( number )
+  - Lg ( number )
+  - Ln ( number )
+  - Log ( number )
+  - Mod ( number ; divisor )
+  - Random
+  - Round ( number ; precision )
+  - SetPrecision ( expression ; precision )
+  - Sign ( number )
+  - Sqrt ( number )
+  - Truncate ( number ; precision )
+- Financial Functions
+  - FV ( payment ; interestRate ; periods )
+  - NPV ( payment ; interestRate )
+  - PMT ( principal ; interestRate ; term )
+  - PV ( payment ; interestRate ; periods )
+  - Combined example: Loan amortisation summary
+- Trigonometric Functions
+  - Pi
+  - Degrees ( angleInRadians )
+  - Radians ( angleInDegrees )
+  - Sin ( angleInRadians )
+  - Cos ( angleInRadians )
+  - Tan ( angleInRadians )
+  - Acos ( number )
+  - Asin ( number )
+  - Atan ( number )
+  - Practical examples
+- Repeating Functions
+  - Extend ( non-repeatingField )
+  - GetRepetition ( repeatingField ; number )
+  - Last ( repeatingField )
+  - Interaction patterns
+
 ---
 
 # FileMaker Number Functions — Syntax & Examples
 
 Source: https://help.claris.com/en/pro-help/content/number-functions.html  
 All 18 native number functions with format, parameters, and examples.
-Last verified: 2026-06 against live Claris Help Centre.
 
 ---
 
@@ -43,13 +85,14 @@ Returns the integer quotient of `number ÷ divisor`, always rounding **toward ne
 
 ## Exp ( number )
 Returns the value of the mathematical constant *e* (~2.71828) raised to the power of `number`.  
-`Exp ( 1 )` → `2.71828182845904523536...`  
+`Exp ( 1 )` → `2.7182818284590452`  
 `Exp ( 0 )` → `1`  
-`Exp ( 2 )` → `7.38905609893065022723...`
+`Exp ( 2 )` → `7.3890560989306502`  
+More digits need `SetPrecision`: `SetPrecision ( Exp ( 1 ) ; 25 )` → `2.7182818284590452353602875`
 
 ---
 
-## Factorial ( number { ; numberOfFactors } )
+## Factorial ( number {; numberOfFactors } )
 Returns the factorial of `number` (n!), stopping at 1 by default, or stopping after `numberOfFactors` multiplications if specified. Useful in statistics and combinatorics.  
 `Factorial ( 3 )` → `6` (= 3 × 2 × 1)  
 `Factorial ( 5 )` → `120` (= 5 × 4 × 3 × 2 × 1)  
@@ -85,7 +128,7 @@ Returns the base-2 logarithm of `number`.
 Returns the natural (base-*e*) logarithm of `number`.  
 `Ln ( 1 )` → `0`  
 `Ln ( Exp(1) )` → `1`  
-`Ln ( 10 )` → `2.30258509299404568402...`
+`Ln ( 10 )` → `2.3025850929940457`
 
 ---
 
@@ -101,6 +144,7 @@ Returns the common (base-10) logarithm of `number`.
 Returns the remainder after `number` is divided by `divisor`. Useful for unit conversions and cyclic calculations.  
 `Mod ( 210 ; 4 )` → `2`  
 `Mod ( 10 ; 3 )` → `1`  
+`Mod ( -7 ; 3 )` → `2` (the result takes the divisor's sign)  
 
 Convert 24-hour time to 12-hour:  
 `Mod ( 16 ; 12 )` → `4` (4 PM)
@@ -123,7 +167,7 @@ Random integer between 1 and 100:
 ---
 
 ## Round ( number ; precision )
-Rounds `number` to `precision` decimal places. Always rounds up at exactly 0.5. Use a negative `precision` to round to tens, hundreds, etc.  
+Rounds `number` to `precision` decimal places. Halves round **away from zero**: `Round ( 14.5 ; 0 )` → `15`, `Round ( -2.5 ; 0 )` → `-3`. FileMaker uses decimal arithmetic, so `Round ( 14.45 ; 1 )` → `14.5` (no binary-float surprise). Use a negative `precision` to round to tens, hundreds, etc.  
 `Round ( 123.456 ; 2 )` → `123.46`  
 `Round ( 14.5 ; 0 )` → `15`  
 `Round ( 14.45 ; 1 )` → `14.5`  
@@ -148,15 +192,15 @@ Returns `-1` if `number` is negative, `0` if zero, `1` if positive.
 `Sign ( 0 )` → `0`  
 `Sign ( 99 )` → `1`
 
-Useful for conditional logic without If:  
-`Sign ( Balance ) * "Overdrawn"` — returns `"Overdrawn"` only when Balance is negative.
+Branch on the sign with Case:  
+`Case ( Sign ( Balance ) = -1 ; "Overdrawn" ; Sign ( Balance ) = 0 ; "Nil" ; "In credit" )`
 
 ---
 
 ## Sqrt ( number )
 Returns the square root of `number`.  
 `Sqrt ( 9 )` → `3`  
-`Sqrt ( 2 )` → `1.41421356237309504880...`  
+`Sqrt ( 2 )` → `1.414213562373095`  
 `Sqrt ( 0 )` → `0`
 
 ---
@@ -178,15 +222,13 @@ Removes digits beyond `precision` decimal places **without rounding**. Unlike `R
 
 Source: https://help.claris.com/en/pro-help/content/financial-functions.html  
 All 4 financial functions with verified syntax, parameters, return types, and usage patterns.  
-Last verified: 2026-06 against live Claris Help Centre.
 
 **Overview:** FileMaker's four financial functions cover standard time-value-of-money calculations: present value, future value, loan payments, and net present value of unequal cash flows. All assume **periodic** (equal-interval) payments unless otherwise noted. Interest rates must be expressed **per period** (e.g. annual rate ÷ 12 for monthly calculations).
 
 **Key concepts:**
-- `payment` — the fixed payment amount per period (positive = cash in, negative = cash out — convention varies by function; see each)
-- `interestRate` — rate per period as a decimal (5% annual monthly = 0.05/12)
+- `interestRate` — rate **per period** as a decimal (5% a year paid monthly = 0.05/12)
 - `periods` / `term` — number of payment periods
-- Signs follow the cash-flow convention: money you receive is positive, money you pay out is negative
+- **Signs:** unlike spreadsheet functions, FileMaker's PMT, PV and FV return **positive** results for positive inputs — no `Abs()` needed. All assume payment at the end of each period. With `interestRate` 0, PV and FV return `payment * periods`.
 
 ---
 
@@ -224,14 +266,14 @@ Returns: number
 NPV(Loan;.05)
 // → `156.91277445...`, when the repeating field, Loan, contains -2000 (the initial payment), 600, 300, 500, 700, and 400. The result (156.91277445...) is the actual profit in today's dollars that will be realized from this transaction
 ```
-Note: FileMaker's NPV treats `payment` as a repeating field; each repetition is one period's cash flow. Period 0 (initial investment) is typically subtracted from the result manually.
+Note: `payment` must be a **repeating field** (or an expression returning a reference to one). Put the initial investment in repetition 1 as a negative value. FileMaker discounts **every** repetition, the first included: repetition *i* is divided by (1 + rate)^*i*. That's why the example above gives 156.91 rather than the 164.76 you'd get by leaving the first payment undiscounted.
 
 ---
 
 ## PMT ( principal ; interestRate ; term )
-Returns the **payment amount** required per period to fully repay a loan of `principal` over `term` periods at `interestRate` per period. The result is negative (cash flowing out to repay the loan).  
+Returns the **payment amount** required per period to fully repay a loan of `principal` over `term` periods at `interestRate` per period. The result is **positive**.  
 Parameters: `principal` — loan amount (positive); `interestRate` — rate per period as decimal; `term` — number of payment periods.  
-Returns: number (negative = payment you make)
+Returns: number
 ```
 PMT(21000;.069/12;48)
 // → the payment amount `$501.90`
@@ -242,7 +284,7 @@ Let ( [
   p = LoanAmount ;
   r = AnnualRate / 12 ;
   n = TermYears * 12 ;
-  monthly = Abs ( PMT ( p ; r ; n ) )
+  monthly = PMT ( p ; r ; n )   // already positive
 ] ;
   monthly * n - p   // total paid minus principal = total interest
 )
@@ -252,7 +294,7 @@ Let ( [
 ## PV ( payment ; interestRate ; periods )
 Returns the **present value** of an investment that makes equal periodic payments — the lump sum today that is equivalent to receiving `payment` each period for `periods` periods, discounted at `interestRate`. Useful for valuing an annuity or calculating how much to invest now to receive a fixed income stream.  
 Parameters: `payment` — fixed payment received per period (positive); `interestRate` — rate per period as decimal; `periods` — number of periods.  
-Returns: number (negative = amount you must invest today; use Abs() for display)
+Returns: number — positive for a positive `payment` (enter money you pay out as negative).
 ```
 PV(500;.05;5)
 // → 2164.73833531...
@@ -262,8 +304,8 @@ Pension/retirement: how long will savings last?
 // If you have $500,000 and withdraw $3,000/month at 4% return,
 // PV tells you the present value of your withdrawal plan.
 // If PV ≥ savings, the plan is sustainable:
-Abs ( PV ( 3000 ; 0.04/12 ; 240 ) )   // 20-year horizon
-// → approx 495,975 (just under $500k, so barely sustainable at 20 years)
+PV ( 3000 ; 0.04/12 ; 240 )   // 20-year horizon
+// → 495065.57… (just under $500k, so barely sustainable at 20 years)
 ```
 ---
 
@@ -275,7 +317,7 @@ Let ( [
   termYears   = 30 ;
   r           = annualRate / 12 ;
   n           = termYears * 12 ;
-  monthly     = Abs ( PMT ( principal ; r ; n ) ) ;
+  monthly     = PMT ( principal ; r ; n ) ;
   totalPaid   = monthly * n ;
   totalInterest = totalPaid - principal
 ] ;
@@ -283,9 +325,10 @@ Let ( [
   & "Total paid: $" & Round ( totalPaid ; 2 ) & ¶
   & "Total interest: $" & Round ( totalInterest ; 2 )
 )
-// → Monthly payment: $1,847.15
-//   Total paid: $664,973.61
-//   Total interest: $364,973.61
+// → Monthly payment: $1847.15
+//   Total paid: $664974.58
+//   Total interest: $364974.58
+// (concatenation doesn't add thousands separators — format on the layout instead)
 ```
 ---
 
@@ -293,13 +336,12 @@ Let ( [
 
 Source: https://help.claris.com/en/pro-help/content/trigonometric-functions.html  
 All 9 trigonometric functions with verified syntax, parameters, return types, and usage patterns.  
-Last verified: 2026-06 against live Claris Help Centre.
 
-**Overview:** FileMaker's trigonometric functions work in **radians** (not degrees). Use `Degrees()` and `Radians()` to convert. All functions return numeric values with FileMaker's standard precision (~15 significant digits).
+**Overview:** FileMaker's trigonometric functions work in **radians** (not degrees). Use `Degrees()` and `Radians()` to convert. Results carry about 16–17 significant digits (`Pi` → `3.1415926535897932`). Trigonometric functions don't support `SetPrecision`, so expect tiny rounding: `Degrees ( Atan ( 1 ) )` → `44.9999999999999983`. Round before comparing or displaying.
 
 **Key constants and conversions:**
 ```
-Pi                              // → 3.14159265358979323846…
+Pi                              // → 3.1415926535897932
 Radians ( 180 )                 // → Pi  (π radians = 180°)
 Degrees ( Pi )                  // → 180
 
@@ -509,7 +551,6 @@ Let ( [
 
 Source: https://help.claris.com/en/pro-help/content/repeating-functions.html  
 All 3 repeating functions with verified syntax, parameters, return types, and usage patterns.  
-Last verified: 2026-06 against live Claris Help Centre.
 
 **Overview:** Repeating fields store multiple values in a single field, indexed 1 through N (where N is the number of repetitions configured in the field definition). FileMaker's three Repeating functions let you: extend a non-repeating value across all repetitions of a calculation (`Extend`), access a specific repetition by index (`GetRepetition`), and retrieve the last non-blank value from a repeating field (`Last`). Repeating fields are a legacy feature; consider JSON arrays or related records for new designs, but these functions remain essential for maintaining existing solutions.
 
@@ -555,7 +596,7 @@ GetRepetition ( ParcelBids ; 2 )
 GetRepetition ( ParcelBids ; 5 )
 // → nothing
 ```
-Dynamic access — access the repetition matching the current record count:
+Dynamic access — pick the repetition for the current month:
 ```
 GetRepetition ( MonthlyBudget ; Month ( Get(CurrentDate) ) )
 // → budget for the current month (1=Jan, 12=Dec)
@@ -615,25 +656,11 @@ not IsEmpty ( GetRepetition ( Scores ; 10 ) )
 
 ## Interaction patterns
 
-Convert repeating field to JSON array (bridging legacy to modern):
+Convert a repeating field to a JSON array (bridging legacy to modern):
 ```
-// For a repeating field with known max repetitions (e.g. 5):
-Let ( [
-  vals = List (
-    GetRepetition(Scores;1) ; GetRepetition(Scores;2) ;
-    GetRepetition(Scores;3) ; GetRepetition(Scores;4) ;
-    GetRepetition(Scores;5)
-  ) ;
-  count = ValueCount ( vals )
-] ;
-  // Build JSON array from the list
-  Substitute (
-    JSONSetElement ( "[]" ; [0 ; GetValue(vals;1) ; JSONNumber] ) ;
-    // ...extend pattern for each value
-    "" ; ""
-  )
-)
-// In practice, use a While() loop for arbitrary repetition counts
+// List() skips empty repetitions; JSONMakeArray turns the list into an array
+JSONMakeArray ( List ( Scores ) ; "" ; JSONNumber )
+// → [85,90,78] when the non-empty repetitions hold 85, 90 and 78
 ```
 Sum all non-blank repetitions using Aggregate functions:
 ```

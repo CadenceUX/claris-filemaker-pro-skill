@@ -1,3 +1,101 @@
+## [2.1.0] — 2026-10-02
+
+Accuracy release, plus support for the Claris Agentic Development Toolkit (ADT). Fixes
+[issue #2](https://github.com/CadenceUX/claris-filemaker-pro-skill/issues/2) and a wider class
+of errors it pointed to.
+
+### How this release was verified
+
+- Every function and script step re-checked against Claris FileMaker Pro Help (v26 corpus):
+  rosters (368 / 216), return types and all 216 platform matrices matched; the hand-written
+  example files did not.
+- **New engine gate:** `maintainer/verify_examples.py` runs every example that can execute
+  without a record through the real FileMaker calculation engine (ADT's `filemaker` CLI).
+  Result: **255 examples evaluated correctly, 79 environment-dependent formulas
+  parsed, 0 failures.** 77 field-based examples need record context and are not
+  engine-checked.
+- Model-tested with helper agents on Haiku, Sonnet and Opus, plus a no-skill baseline
+  (`evals/results-2026-10-02.md`): baseline 2/8, Haiku 10/10 (after fixes), Sonnet 10/10, Opus 10/10.
+
+### Added
+
+- **ADT mode** (`references/adt-mode.md`). The skill detects ADT and defers to Claris's own
+  pages (`filemaker-help`) and the FileMaker engine for signatures; it tells the agent to
+  validate and evaluate calculations before answering. Without ADT it works as before.
+- ADT mode flags any script step the engine knows but Claris hasn't documented as undocumented
+  and probably pre-release.
+- `evals/evals.json` — 10 cases across both modes, plus 3 near-misses.
+- Error codes 604–608 and 829–833 (FM 26 PDF steps).
+- Contents lists in every reference file over 100 lines.
+- **Plugin packaging:** `.claude-plugin/plugin.json` makes this repo an installable plugin
+  (version 2.1.0); published through the `cadenceux` marketplace
+  (github.com/CadenceUX/cadenceux-skills) for Claude Code, claude.ai and Cowork.
+- Related skills: Andrew Kear's current open-source FileMaker skills, credited and linked —
+  `filemaker-xml`, `filemaker-layout-xml`, `filemaker-field-xml`, `filemaker-ai-grammar`,
+  `filemaker-ai-vocabulary`, `filemaker-xml-bit-flags` — plus his XML Inspector and Scrubber.
+
+### Changed
+
+- `quickrefs.md` split into `error-codes.md`, `sql-reference.md`, `data-api-reference.md` and
+  `help-sitemap.md`.
+- SKILL.md restructured (Anthropic skill best practices): one routing table, a checklist with a
+  validation loop, catalog search commands, mode detection. Description rewritten (third
+  person, what + when, no counts); `license` frontmatter added.
+- Maintainer scripts moved from `scripts/` to `maintainer/` (not part of the skill package).
+- Every function heading now matches Claris's Format line exactly.
+- "Local reference files are authoritative" removed: with ADT, Claris's page and the engine win;
+  without it, the live page wins.
+
+### Updated to the latest releases (26.0.3)
+
+- Catalogs re-checked against the live Claris pages for **26.0.3** (Pro, Server, Go and Cloud,
+  September 2026): every function signature, return type and version, and every step's
+  platform matrix, matches.
+- **Open PDF, Append PDF and Close PDF are fully supported in WebDirect from 26.0.3** (upload
+  and download via browser dialogs). WebDirect now: 106 supported / 35 partial / 75 not.
+- 26.0.1–26.0.3 changes added to step notes: window steps accept a window **UUID**; Show Custom
+  Dialog size and position; Set Zoom Level Custom (25–400); Re-Login can target a data source;
+  Insert from URL auto-parses `application/json` into variables; Replace Field Contents can skip
+  auto-enter; ODBC credentials by calculation; RAG Space ID character rules; CURLOPT_TIMEOUT.
+- OData: comments and AI annotations in `$metadata`; `?` → `null`; Cloud decimal-rounding fix.
+- `Get(PersistentID)` is stable on FileMaker Server 26; field entry by calculation (1 / 2 / other).
+- `meta.latest_public_release` and `meta.prerelease_note` in the catalogs: builds newer than the
+  latest public release are pre-release.
+
+### Fixed — high impact (selected; full list in the pass-1 review)
+
+- `JSONRaw` is **0**, not 7 (#2); JSONGetElementType never returns it.
+- `JSONParse` / `JSONParsedState` sections described a "named cache" API that doesn't exist.
+- `JSONGetElementType` returns `?…` text for a missing key, not 0 (two patterns relied on 0).
+- JSON object keys come back sorted; multi-key examples showed insertion order.
+- `Get(RecordOpenState)` 1 = new, 2 = modified (were swapped); `Get(Device)` 3 = iPad, 4 = iPhone;
+  `Get(SystemPlatform)` -2 = Windows, 3 = iOS; `Get(AccountType)` returns text.
+- `Get(CurrentTimeUTCMilliseconds)` counts from 1/1/0001, not the Unix epoch.
+- `SetRecursion` default limit is 50,000, not 10,000.
+- `Substitute` multi-pair example gave the wrong result; `TrimAll` parameters were invented.
+- `TableNames` / `TableIDs` describe table occurrences (was "base tables").
+- `FieldStyle`, `FieldType`, `RelationInfo`, `FieldDisplayNames` return formats corrected.
+- `GetSensor`, `GetAVPlayerAttribute`, `GetLayoutObjectAttribute` attribute names replaced with
+  Claris's real lists; `Location` returns one comma-separated line.
+- `ConvertFromFileMakerPath` formats are `PosixPath` (1), `WinPath` (2), `URLPath` (3).
+- `TextEncode` line endings are numbers 1–4; text values are silently ignored.
+- `Base64Encode` ends with CR+LF — the HMAC webhook pattern now uses `Base64EncodeRFC ( 4648 ; … )`.
+- `PMT` and `PV` return positive values (also removed from SKILL.md tips).
+- "Business days" formula replaced (old one failed most test cases; new one engine-tested on 140).
+- `Date ( timestamp )` is an error; use `GetAsDate`. "Add N months" now clamps to month end.
+- `GetPersistentData` returns `?` when nothing matches; `Configure Persistent Data` deletes with
+  its Delete Entry option.
+- `Set Revert Transaction on Error` Off applies to sub-scripts and resets when the script ends.
+- `Close PDF`, `Perform RAG Action`, `Perform Script on Server with Callback`, `Save Records as
+  JSONL`, `Save a Copy as XML` (JSON options), PDF and AI step syntax corrected.
+- ExecuteSQL: tables are named by **table occurrence**; subqueries **are** supported.
+- Data API script parameter is `script.param`, not `scriptParam`.
+- Furigana, NumToJText and YearName option tables replaced; Japanese examples now show real
+  output instead of image placeholders.
+- `originated_in_version` for 9 entries (e.g. JSONGetElementType 19.5, ExecuteSQLe 21.1).
+  Claris revised these pages after 2026-07-25 (v2.0.0 matched them at the time).
+- Field advanced options (DDL annotation, display names) and WebP dated 26.0.1.
+
 ## [2.0.0] — 2026-07-25
 
 Major release. The organising principle changes from **fetch-live-by-topic** to

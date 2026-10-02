@@ -1,6 +1,6 @@
 # claris-filemaker-pro-skill
 
-A [Claude skill](https://docs.claude.ai/skills) for Claris FileMaker Pro development. Gives Claude accurate, version-aware knowledge of every FileMaker calculation function, script step, field type, and platform support matrix — verified against Claris documentation rather than relying on training data.
+A [Claude skill](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) (and plugin) for Claris FileMaker Pro development. Gives Claude accurate, version-aware knowledge of every FileMaker calculation function, script step, field type, and platform support matrix — verified against Claris documentation rather than relying on training data.
 
 Built and maintained by [Darrin Southern](https://www.linkedin.com/in/darrin-southern/) from [CadenceUX](https://cadenceux.com.au).
 
@@ -17,6 +17,7 @@ When this skill is active, Claude will:
 - Reference **accurate error codes** with official descriptions
 - Cover the **OData API**, **FileMaker Data API**, **WebDirect** and **FileMaker Go** surfaces directly
 - Detect **version drift** — if a fetched page's "Originated in version" is newer than the version the reference files were verified against, it flags it
+- **Work with Claris's Agentic Development Toolkit (ADT).** When ADT is installed, the skill defers to Claris's own Help pages and the real FileMaker engine for exact signatures, validates every calculation it writes, and adds the platform, version and API detail ADT doesn't carry. Without ADT it works exactly as before
 
 ### Scope
 
@@ -38,7 +39,7 @@ ODBC/JDBC configuration.
 | `script-steps-catalog.json` | All 216 script steps through FM 26 across 16 categories — syntax, purpose, notes, doc_url, originated_in_version, and delta-encoded **seven-product platform support** |
 | `field-types-catalog.json` | Six data types × three field types, applicable options, indexing and storage semantics, eight summary types, FM 26 advanced field options |
 | `odata-api-reference.md` | Base URL, auth, query options, CRUD, `$batch`, schema modification, running scripts, unsupported features |
-| `webdirect-reference.md` | Measured step support (103 yes / 38 partial / 75 no), feature limits, connection limits, design guidance |
+| `webdirect-reference.md` | Measured step support (106 yes / 35 partial / 75 no, as of 26.0.3), feature limits, connection limits, design guidance |
 | `filemaker-go-reference.md` | Measured step support (154 / 20 / 42), Go-only steps, behaviour differences, device capabilities |
 | `logical-json-ai-functions-examples.md` | Logical + JSON + AI/embedding functions with usage examples |
 | `get-functions-examples.md` | All Get() functions across 12 categories |
@@ -47,15 +48,32 @@ ODBC/JDBC configuration.
 | `date-time-functions-examples.md` | Date + Time/Timestamp functions |
 | `numeric-functions-examples.md` | Number + Financial + Trigonometric + Repeating |
 | `specialty-functions-examples.md` | Aggregate + Japanese + Mobile/Go + Miscellaneous + Persistent Data |
-| `quickrefs.md` | Error codes, ExecuteSQL syntax and system columns, Data API reference, FileMaker-Pro-scoped sitemap |
+| `error-codes.md` | Every FileMaker error code with Claris's description |
+| `sql-reference.md` | ExecuteSQL / FileMaker SQL syntax, joins, subqueries, ROWID / ROWMODID |
+| `data-api-reference.md` | FileMaker Data API endpoints, auth, scripts, containers |
+| `help-sitemap.md` | FileMaker-Pro-scoped map of the Claris Help Centre |
+| `adt-mode.md` | How the skill works alongside ADT: engine validation, page lookup, hand-offs |
 
-**Version coverage:** verified against FileMaker 26 (26.0.1) documentation on 2026-07-25.
+**Version coverage:** FileMaker 26 — catalogs re-checked against the live Claris pages for
+26.0.3 (the latest public release) on 2026-10-02. Every example that can
+run without a record was evaluated on the FileMaker engine (via ADT) — 255 passed, 0 failed.
 
 ---
 
 ## Installation
 
-**Easiest — double-click (macOS):** download the `.skill` file from the
+**Recommended — as a plugin (updates automatically).** The skill is part of the
+[CadenceUX skills marketplace](https://github.com/CadenceUX/cadenceux-skills):
+
+- **Claude Code:** `claude plugin marketplace add https://github.com/CadenceUX/cadenceux-skills.git`
+  then `claude plugin install claris-filemaker-pro@cadenceux`
+- **claude.ai / Cowork:** Customize → Plugins → Add → marketplace from GitHub →
+  `CadenceUX/cadenceux-skills`, then install **Claris FileMaker Pro**. It also appears in Claude Code.
+
+This repository is itself a valid plugin (`.claude-plugin/plugin.json`), so
+`claude --plugin-dir <this folder>` loads it for local testing.
+
+**Manual — double-click (macOS):** download the `.skill` file from the
 [Releases](../../releases) page and double-click it. Claude Desktop registers the `.skill`
 extension and opens its install flow directly. (The `.skill` file is the release zip with a
 different extension. Not yet confirmed on Windows.)
@@ -68,15 +86,16 @@ isn't available.
 
 ## How it works
 
-The skill is **local-first**: the bundled reference files are treated as authoritative, because
-every entry was re-derived from its own live Claris page at build time. Claude fetches live
-documentation only when the topic is genuinely volatile (AI/model providers), when an entry
-post-dates the last verification, when you signal recency, or when it is uncertain the local
-data is complete.
+**Without ADT** the skill is local-first: Claude answers from the bundled reference files and
+fetches the live Claris page only when a topic is volatile (AI providers), an entry is newer
+than the last verification, you ask for "latest", or it's unsure the local data is complete.
+If a live page contradicts a local file, the live page wins and Claude says so.
 
-That matters for generation speed — composing a script or a set of field definitions shouldn't
-need a network fetch per step. When a live page does contradict a local file, the live page wins
-and Claude says so.
+**With ADT** (Claris's Agentic Development Toolkit, macOS) the order changes: the FileMaker
+engine first (Claude validates and evaluates the calculations it writes), then Claris's own
+Help pages bundled with ADT, then this skill. The skill still supplies the seven-product
+platform matrix, version notes, the Data API / OData / WebDirect / Go / SQL references, and
+the steps the engine knows that the documentation doesn't yet.
 
 ---
 
@@ -85,13 +104,31 @@ and Claude says so.
 `last_known_fm_version` is `26`. Two mechanisms keep the skill honest:
 
 1. **Version drift detection** flags any fetched page whose "Originated in version" exceeds it.
-2. **Bundled rebuild scripts** (`scripts/`) re-derive the catalogs from source, so coverage
-   claims are re-verified each release rather than inherited. See `scripts/README.md` — these
-   are maintainer tools you run locally, not something Claude executes in a conversation.
+2. **Maintainer tools** (`maintainer/`, not part of the installed skill):
+   - `rebuild_harvest.py` / `rebuild_extract.py` re-derive the catalogs from Claris's pages.
+   - `verify_examples.py` runs every runnable example through the FileMaker engine (needs ADT)
+     and fails on any mismatch — the release gate since 2.1.0.
 
-The rebuild scripts encode two traps found the hard way: Claris's page `topic_type` metadata is
-unreliable for determining the roster, and the frontmatter `version:` field tracks the
-documentation build rather than the feature release.
+The rebuild scripts encode a trap found the hard way: Claris's page `topic_type` metadata is
+unreliable for determining the roster — derive it from page structure instead.
+
+---
+
+## Related skills
+
+This skill pairs with **Andrew Kear's** open-source FileMaker skills from
+[Clockwork Creative Technology](https://www.clockworkct.co.uk) — all CC BY 4.0:
+
+| Skill | Repository | Covers |
+|---|---|---|
+| `filemaker-xml` | [FileMaker-XMLsnippet-Claude-Skill](https://github.com/andykear/FileMaker-XMLsnippet-Claude-Skill) | Paste-ready script XML |
+| `filemaker-layout-xml` | [FileMaker-XMLsnippet-Layout-Claude-Skill](https://github.com/andykear/FileMaker-XMLsnippet-Layout-Claude-Skill) | Paste-ready layout XML |
+| `filemaker-field-xml` | [FileMaker-XML-field-definitions](https://github.com/andykear/FileMaker-XML-field-definitions) | Field and table definition XML |
+| `filemaker-ai-grammar` | [FileMaker-AI-Grammar](https://github.com/andykear/FileMaker-AI-Grammar) | Engine-measured operator and coercion rules |
+| `filemaker-ai-vocabulary` | [FileMaker-AI-vocabulary](https://github.com/andykear/FileMaker-AI-vocabulary) | Compact function and step vocabulary |
+| `filemaker-xml-bit-flags` | [FileMaker-XML-bit-flags](https://github.com/andykear/FileMaker-XML-bit-flags) | Save as XML `<Options>` bit flags |
+| — | [FileMaker-XML-inspector-open-source](https://github.com/andykear/FileMaker-XML-inspector-open-source) | Browser-based Save as XML analyser |
+| — | [FileMaker-XML-scrubber](https://github.com/andykear/FileMaker-XML-scrubber) | Redacts secrets from XML before sharing with AI |
 
 ---
 

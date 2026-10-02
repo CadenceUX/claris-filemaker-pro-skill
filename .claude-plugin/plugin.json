@@ -1,0 +1,26 @@
+{
+  "name": "claris-filemaker-pro",
+  "displayName": "Claris FileMaker Pro",
+  "version": "2.1.0",
+  "description": "FileMaker Pro reference: every calculation function and script step with exact syntax, return types, versions and seven-product platform support, plus the Data API, OData, SQL, WebDirect and FileMaker Go. Works with the Claris Agentic Development Toolkit (ADT) when it's installed.",
+  "author": {
+    "name": "Darrin Southern",
+    "url": "https://cadenceux.com.au"
+  },
+  "homepage": "https://github.com/CadenceUX/claris-filemaker-pro-skill",
+  "repository": "https://github.com/CadenceUX/claris-filemaker-pro-skill",
+  "license": "CC-BY-4.0",
+  "keywords": [
+    "filemaker",
+    "claris",
+    "filemaker-pro",
+    "calculations",
+    "script-steps",
+    "data-api",
+    "odata",
+    "webdirect"
+  ],
+  "skills": [
+    "./"
+  ]
+}

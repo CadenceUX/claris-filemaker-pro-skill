@@ -19,10 +19,10 @@ rather than inheriting the previous version's counts.
 curl -s --compressed https://help.claris.com/llms-full.txt -o llms-full.txt
 
 # 2. Harvest every en/pro-help page (~1,100 pages, ~30s at 12-way parallelism)
-python3 rebuild_harvest.py
+python3 maintainer/rebuild_harvest.py
 
 # 3. Extract structured facts -> facts.json
-python3 rebuild_extract.py
+python3 maintainer/rebuild_extract.py
 ```
 
 `rebuild_harvest.py` writes `pages/` and `harvest.json`. `rebuild_extract.py` writes
@@ -52,3 +52,19 @@ small; investigate anything that isn't. Then update:
 - `meta.verified_on` in each catalog
 - `meta.step_count` / `meta.function_count`
 - `VERSION`, `metadata.version` in SKILL.md, and CHANGELOG.md — all three must match
+
+## Engine-testing the examples (release gate)
+
+```bash
+python3 maintainer/verify_examples.py --report /tmp/verify.md
+```
+
+Needs the Claris Agentic Development Toolkit on macOS (it drives ADT's `fm-cli`). Every example
+that pairs a runnable formula with a concrete result is evaluated on the FileMaker engine;
+environment-dependent formulas (Get(), design functions, AI, mobile) are parsed instead.
+Exits 1 on any failure. Don't release with failures.
+
+## Packaging
+
+The installable skill is `SKILL.md`, `references/` and `evals/`. Leave `maintainer/`,
+`README.md` and `CHANGELOG.md` out of the `.skill` / `.zip`.

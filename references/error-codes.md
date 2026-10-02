@@ -1,12 +1,34 @@
-# Quick References — Error Codes, SQL, Data API & Sitemap
-
----
-
 # FileMaker Error Codes — Quick Reference
 
+## Contents
+  - -1 — Unknown error
+  - 0 — Success
+  - System errors (1–21)
+  - Object missing errors (100–131)
+  - Account / access errors (200–219)
+  - Concurrency / locking errors (300–310)
+  - Find / sort / data errors (400–418)
+  - Validation errors (500–513)
+  - Print and PDF errors (600–608)
+  - File type / import / export errors (700–738)
+  - File I/O errors (800–853)
+  - AI / Machine Learning errors (870–892)
+  - Spelling engine errors (900–923)
+  - Web publishing / Custom Web Publishing errors (951–960) *
+  - Calculation errors (1200–1225)
+  - Custom function errors (1300–1301)
+  - ODBC errors (1400–1415)
+  - SMTP / email errors (1501–1507)
+  - JWT / token errors (1541–1543)
+  - Plug-in errors (1550–1559)
+  - Network / SSL / Insert From URL errors (1626–1638)
+  - Data API REST errors (1700–1715) *
+  - Custom errors (5000–5499)
+  - SQL / ExecuteSQL errors
+  - Common error handling patterns
+
 Source: https://help.claris.com/en/pro-help/content/error-codes.html  
-Last verified: 2026-06 against live Claris Help Centre.  
-Last audited: 2026-06 — full replacement against official Claris docs (282 discrete codes + 2 ranges).
+Every code and description matches Claris's error-codes page for FileMaker 26 (292 codes, including the FM 26 PDF codes 604–608 and 829–833) plus the 5000–5499 custom range.
 
 Codes marked with `*` are returned by the web publishing engine or a FileMaker REST API.
 
@@ -181,7 +203,7 @@ No error.
 
 ---
 
-## Print errors (600–603)
+## Print and PDF errors (600–608)
 
 | Code | Official Description | Notes |
 |------|---------------------|-------|
@@ -189,6 +211,11 @@ No error.
 | 601 | Combined header and footer exceed one page | Header + footer height exceeds page size |
 | 602 | Body doesn't fit on a page for current column setup | Column layout too wide for page |
 | 603 | Print connection lost | Printer disconnected during print job |
+| 604 | Specified value isn't container data | Print PDF source isn't container data (FM 26) |
+| 605 | Container field is empty | Print PDF source container is empty (FM 26) |
+| 606 | Specified container data isn't a PDF file | Print PDF source isn't a PDF (FM 26) |
+| 607 | Password missing or incorrect for encrypted PDF file | Print PDF password (FM 26) |
+| 608 | Security settings in PDF file don't allow printing | PDF permissions block printing (FM 26) |
 
 ---
 
@@ -258,6 +285,11 @@ No error.
 | 825 | File is not authorized to reference the protected file | External file reference not authorised |
 | 826 | File path specified is not a valid file path | Path syntax invalid for the OS |
 | 827 | File was not created because the source contained no data or is a reference | Empty or reference-only source |
+| 829 | No PDF file is open to append to | Append PDF / Save Records as PDF without Create PDF or Open PDF (FM 26) |
+| 830 | Invalid PDF file format | Source isn't a readable PDF (FM 26) |
+| 831 | Invalid PDF password | Open PDF / Append PDF password wrong or missing (FM 26) |
+| 832 | PDF password doesn't allow page modification | PDF permissions block appending (FM 26) |
+| 833 | PDF file is already opened | Create PDF / Open PDF while another scripted PDF is open — Close PDF or Cancel PDF first (FM 26) |
 | 850 | Path is not valid for the operating system | OS-specific path format error |
 | 851 | Cannot delete an external file from disk | Permission denied deleting container external file |
 | 852 | Cannot write a file to the external storage | Cannot write to container external storage location |
@@ -472,16 +504,13 @@ Source: https://help.claris.com/en/pro-help/content/error-codes.html (verified 2
 
 ## SQL / ExecuteSQL errors
 
-ExecuteSQL returns `"?"` (not an error code) on failure. Use `ExecuteSQLe` to get a descriptive message, or check:
-- Error 401: No records match (used when ExecuteSQL is inside a script context)
+`ExecuteSQL` returns `?` on failure, with no code. `ExecuteSQLe` (FM 21.1+) returns the reason in the form:
 
-SQL-specific error strings from `ExecuteSQLe`:
-| Message pattern | Likely cause |
-|---|---|
-| `"ERROR: column ... does not exist"` | Wrong field name (remember: base table names, not TO names) |
-| `"ERROR: table ... does not exist"` | Wrong table occurrence name |
-| `"ERROR: syntax error"` | SQL syntax mistake |
-| `"ERROR: type mismatch"` | Comparing wrong data types |
+```
+? ERROR: FQL0007/(1:7): The column named "Title" does not exist in any table in the column reference's scope.
+```
+
+`FQLnnnn` codes are listed in Claris's *FileMaker SQL error codes* page (SQL Reference). Common causes: a column name that isn't a field, a table name that isn't a **table occurrence**, an unquoted name containing spaces or a reserved word, or a date written without `DATE '…'`.
 
 ---
 
@@ -535,566 +564,3 @@ Loop
   Set Variable [ $err ; Value: Get ( LastError ) ]
 End Loop
 ```
-
----
-
-# FileMaker SQL / ExecuteSQL — Quick Reference
-
-Source: https://help.claris.com/en/sql-reference/content/index.html  
-Always fetch the live page for complete syntax details.
-
----
-
-## Two modes of use
-
-1. **ExecuteSQL function** (inside FileMaker): SELECT only, reads any table occurrence in the current file.
-2. **ODBC/JDBC** (external apps): Full SELECT, INSERT, UPDATE, DELETE, CREATE/DROP TABLE/INDEX.
-
----
-
-## ExecuteSQL syntax
-
-```
-ExecuteSQL ( sqlQuery ; fieldSeparator ; rowSeparator { ; arguments... } )
-```
-
-- `fieldSeparator` — character between fields in each row (e.g. `","`)
-- `rowSeparator` — character between rows (e.g. `¶`)
-- Arguments are passed as `?` placeholders in the query
-
-### Simple example
-```
-ExecuteSQL (
-  "SELECT Name, Email FROM Contacts WHERE Status = ?"
-  ; ","
-  ; ¶
-  ; "Active"
-)
-```
-
----
-
-## Supported SQL: SELECT statement
-```sql
-SELECT [DISTINCT] column1, column2, ...
-FROM TableName [AS alias]
-[JOIN TableName2 ON ...]
-[WHERE expression]
-[GROUP BY column]
-[HAVING expression]
-[ORDER BY column [ASC|DESC]]
-[OFFSET n ROWS]
-[FETCH FIRST n ROWS ONLY]
-```
-
----
-
-## Data types in FileMaker SQL
-| FileMaker type | SQL type |
-|---------------|----------|
-| Text | VARCHAR, CHAR |
-| Number | NUMERIC, DECIMAL, INT, FLOAT |
-| Date | DATE — format `date 'yyyy-mm-dd'` |
-| Time | TIME — format `time 'hh:mm:ss'` |
-| Timestamp | TIMESTAMP — format `timestamp 'yyyy-mm-dd hh:mm:ss'` |
-| Container | Not queryable via SQL |
-| Calculation | Queryable as its result type |
-
----
-
-## Date / Time literals
-```sql
-WHERE BirthDate = date '1990-05-15'
-WHERE StartTime = time '09:00:00'
-WHERE CreatedAt = timestamp '2024-01-01 00:00:00'
-```
-
----
-
-## Key SQL functions (FileMaker subset)
-| Function | Description |
-|----------|-------------|
-| `COUNT(*)` | Count rows |
-| `SUM(col)` | Sum of column |
-| `AVG(col)` | Average |
-| `MIN(col)` | Minimum |
-| `MAX(col)` | Maximum |
-| `TRIM(str)` | Remove leading/trailing spaces |
-| `UPPER(str)` / `LOWER(str)` | Case conversion |
-| `SUBSTR(str, start, len)` | Substring |
-| `LENGTH(str)` | String length |
-| `CAST(val AS type)` | Type conversion |
-| `COALESCE(a, b, ...)` | First non-null value |
-| `CASE WHEN ... THEN ... ELSE ... END` | Conditional |
-
----
-
-## JOINs
-```sql
-SELECT C.Name, O.OrderDate
-FROM Customers AS C
-INNER JOIN Orders AS O ON C.CustomerID = O.CustomerID
-```
-Supported: INNER JOIN, LEFT OUTER JOIN  
-Note: Use **table occurrence names** exactly as they appear in the Relationships Graph.
-
----
-
-## Special FileMaker SQL objects
-
-FileMaker adds **system columns** to every row of every table. They are usable in `ExecuteSQL`
-as well as from ODBC/JDBC.
-
-| Object | SQL name | Equivalent function |
-|--------|----------|---------------------|
-| Record ID | `ROWID` | `Get(RecordID)` |
-| Modification count | `ROWMODID` | `Get(RecordModificationCount)` |
-
-```sql
-SELECT ROWID, ROWMODID FROM MyTable WHERE ROWMODID > 3
-```
-
-**Corrected 2026-07-25:** earlier versions of this file listed these as `RECORDID` and `MODID`.
-Those names appear nowhere in the Claris SQL reference and do not work — use `ROWID` and
-`ROWMODID`. Verified against
-`https://help.claris.com/markdown/en/sql-reference/filemaker-system-columns.md`.
-
-**FM 26 changes:** `ROWID` and `ROWMODID` may now be written double-quoted (`"ROWID"`), and both
-are available as named constants.
-
-See also FileMaker **system tables** —
-`https://help.claris.com/markdown/en/sql-reference/filemaker-system-tables.md`
-
----
-
-## CREATE TABLE / ALTER TABLE (ODBC/JDBC and OData — not ExecuteSQL)
-
-`table_element_list` format:
-
-```
-field_name field_type [[repetitions]]
-[DEFAULT expr] [UNIQUE | NOT NULL | PRIMARY KEY | GLOBAL]
-[FOREIGN KEY REFERENCES table_name(column_name)]
-[EXTERNAL relative_path_string [SECURE | OPEN calc_path_string] [FEWER_FOLDERS]]
-```
-
-**FM 26 addition:** `FOREIGN KEY` syntax is supported in both `CREATE TABLE` and `ALTER TABLE`.
-
-Table and field names have a 100-character limit and must begin with an alphabetic character;
-otherwise enclose them in double quotes (quoted identifier).
-
-```sql
-CREATE TABLE "_EMPLOYEE" (ID INT PRIMARY KEY, "_FIRSTNAME" VARCHAR(20), "_LASTNAME" VARCHAR(20))
-```
-
----
-
-## Common gotchas
-- Field names with spaces must be quoted: `"First Name"`
-- Table names must match the **table occurrence** name (not the underlying table name)
-- ExecuteSQL returns text; use `GetAsNumber()` etc. to convert
-- NULL handling: use `IS NULL` / `IS NOT NULL`
-- No subqueries support in ExecuteSQL
-- No INSERT/UPDATE/DELETE in ExecuteSQL (ODBC/JDBC only)
-
----
-
-## Reserved keywords
-Full list: https://help.claris.com/en/sql-reference/content/reserved-sql-keywords.html  
-If a field/table name is a reserved word, quote it with double quotes.
-
----
-
-## Full reference
-- SQL statements: https://help.claris.com/en/sql-reference/content/sql-statements.html
-- SQL clauses: https://help.claris.com/en/sql-reference/content/sql-clauses.html
-- SQL expressions: https://help.claris.com/en/sql-reference/content/sql-expressions.html
-- SQL functions: https://help.claris.com/en/sql-reference/content/sql-functions.html
-- System objects: https://help.claris.com/en/sql-reference/content/filemaker-system-objects.html
-- Error codes: https://help.claris.com/en/sql-reference/content/filemaker-sql-error-codes.html
-
----
-
-# FileMaker Data API — Quick Reference
-
-Source: https://help.claris.com/en/data-api-guide/content/index.html  
-Full detail: always fetch the live page for complete request/response examples.
-
----
-
-## Base URL
-```
-https://{host}/fmi/data/v1/databases/{database-name}
-```
-Or use `vLatest` instead of `v1` to always get the current version.
-
----
-
-## Authentication
-
-### Log in (get session token)
-```
-POST /fmi/data/v1/databases/{db}/sessions
-Content-Type: application/json
-Authorization: Basic {base64(user:password)}
-Body: {}
-```
-Returns: `{ "response": { "token": "..." } }`  
-Token is valid for 15 minutes of inactivity; each call resets the counter.  
-Doc: https://help.claris.com/en/data-api-guide/content/log-in-database-session.html
-
-### Log out
-```
-DELETE /fmi/data/v1/databases/{db}/sessions/{token}
-```
-Doc: https://help.claris.com/en/data-api-guide/content/log-out-database-session.html
-
-### Validate session
-```
-GET /fmi/data/v1/validateSession
-Authorization: Bearer {token}
-```
-Doc: https://help.claris.com/en/data-api-guide/content/validate-database-session.html
-
-### FileMaker Cloud (Claris ID)
-```
-Authorization: FMID {claris-id-token}
-```
-Doc: https://help.claris.com/en/data-api-guide/content/log-in-database-session-claris-id.html
-
----
-
-## Records
-
-### Create record
-```
-POST /fmi/data/v1/databases/{db}/layouts/{layout}/records
-Authorization: Bearer {token}
-Content-Type: application/json
-Body: { "fieldData": { "field1": "value1", ... } }
-```
-Doc: https://help.claris.com/en/data-api-guide/content/create-record.html
-
-### Get single record
-```
-GET /fmi/data/v1/databases/{db}/layouts/{layout}/records/{recordId}
-Authorization: Bearer {token}
-```
-Doc: https://help.claris.com/en/data-api-guide/content/get-single-record.html
-
-### Get range of records
-```
-GET /fmi/data/v1/databases/{db}/layouts/{layout}/records?_offset=1&_limit=100
-Authorization: Bearer {token}
-```
-Doc: https://help.claris.com/en/data-api-guide/content/get-range-of-records.html
-
-### Edit record
-```
-PATCH /fmi/data/v1/databases/{db}/layouts/{layout}/records/{recordId}
-Authorization: Bearer {token}
-Content-Type: application/json
-Body: { "fieldData": { "field1": "newValue" } }
-```
-Doc: https://help.claris.com/en/data-api-guide/content/edit-record.html
-
-### Duplicate record
-```
-POST /fmi/data/v1/databases/{db}/layouts/{layout}/records/{recordId}
-Authorization: Bearer {token}
-```
-Doc: https://help.claris.com/en/data-api-guide/content/duplicate-record.html
-
-### Delete record
-```
-DELETE /fmi/data/v1/databases/{db}/layouts/{layout}/records/{recordId}
-Authorization: Bearer {token}
-```
-Doc: https://help.claris.com/en/data-api-guide/content/delete-record.html
-
----
-
-## Find
-
-### Perform find request
-```
-POST /fmi/data/v1/databases/{db}/layouts/{layout}/_find
-Authorization: Bearer {token}
-Content-Type: application/json
-Body: {
-  "query": [
-    { "field1": "=value", "field2": ">100" }
-  ],
-  "sort": [{ "fieldName": "field1", "sortOrder": "ascend" }],
-  "limit": "50",
-  "offset": "1"
-}
-```
-Doc: https://help.claris.com/en/data-api-guide/content/perform-find-request.html
-
----
-
-## Metadata
-```
-GET /fmi/data/v1/databases/{db}/layouts
-GET /fmi/data/v1/databases/{db}/layouts/{layout}
-GET /fmi/data/v1/databases/{db}/scripts
-Authorization: Bearer {token}
-```
-Doc: https://help.claris.com/en/data-api-guide/content/get-metadata.html
-
----
-
-## Scripts
-```
-GET /fmi/data/v1/databases/{db}/layouts/{layout}/script/{scriptName}
-Authorization: Bearer {token}
-```
-Also: pass `script` and `scriptParam` query params on find/get requests.  
-Doc: https://help.claris.com/en/data-api-guide/content/run-filemaker-scripts.html
-
----
-
-## Global fields
-```
-PATCH /fmi/data/v1/databases/{db}/globals
-Authorization: Bearer {token}
-Content-Type: application/json
-Body: { "globalFields": { "TableName::FieldName": "value" } }
-```
-Doc: https://help.claris.com/en/data-api-guide/content/set-global-field-values.html
-
----
-
-## Upload container data
-```
-POST /fmi/data/v1/databases/{db}/layouts/{layout}/records/{recordId}/containers/{fieldName}/1
-Authorization: Bearer {token}
-Content-Type: multipart/form-data
-Body: file upload
-```
-Doc: https://help.claris.com/en/data-api-guide/content/upload-container-data.html
-
----
-
-## HTTP Headers summary
-| Header | When used |
-|--------|-----------|
-| `Content-Type: application/json` | POST/PATCH with JSON body |
-| `Content-Type: multipart/form-data` | Container upload |
-| `Authorization: Bearer {token}` | All authenticated calls |
-| `Authorization: Basic {b64}` | Login only |
-| `Authorization: FMID {token}` | FileMaker Cloud login |
-
----
-
-## Key notes
-- CORS is **not** supported — Data API must be called server-side
-- Sessions expire after 15 minutes of inactivity
-- Maximum concurrent sessions: configurable in Admin Console
-- JSON responses always include `{ "response": {...}, "messages": [{"code":"0","message":"OK"}] }`
-- Error code `0` = success; any non-zero = error
-
-For full error codes: https://help.claris.com/en/data-api-guide/content/error-responses.html
-
----
-
-# Claris Help Centre — Complete Sitemap Reference
-
-Source: https://help.claris.com/en/claris-help-center/content/index.html  
-Last verified: 2026-06
-
----
-
-## Hub Page
-```
-https://help.claris.com/en/claris-help-center/content/index.html
-```
-
----
-
-## FileMaker Pro Help
-**Guide slug:** `pro-help`  
-**Index:** https://help.claris.com/en/pro-help/content/index.html
-
-### Top-level chapters
-| Topic | URL |
-|-------|-----|
-| New features | `.../new-features.html` |
-| FileMaker Pro basics | `.../basics.html` |
-| Using Help | `.../using-help.html` |
-| About FileMaker Pro custom apps | `.../solutions.html` |
-| About FileMaker Pro modes | `.../modes.html` |
-| Using the status toolbar | `.../status-toolbar.html` |
-| Opening and managing files | `.../opening-managing-files.html` |
-| Adding and viewing data | `.../adding-viewing-data.html` |
-| Finding records | `.../finding-records.html` |
-| Find requests | `.../find-request.html` |
-| Sorting records | `.../sorting-records.html` |
-| Previewing and printing | `.../previewing-printing.html` |
-| Creating a custom app | `.../creating-a-custom-app.html` |
-| Creating a FileMaker Pro file | `.../creating-files.html` |
-| Working with related tables | `.../related-tables-files.html` |
-| Creating and managing layouts and reports | `.../layouts-and-reports.html` |
-| Editing objects, layout parts, background | `.../editing-objects-parts-background.html` |
-| Creating charts from data | `.../creating-charts.html` |
-| Automating tasks with scripts | `.../scripts.html` |
-| Creating and editing scripts | `.../creating-editing-scripts.html` |
-| Managing security | `.../protecting-databases.html` |
-| Sharing files on a network | `.../sharing-files.html` |
-| Saving, importing, and exporting data | `.../saving-importing-exporting-data.html` |
-| Importing data into a file | `.../importing-data-into-file.html` |
-| Publishing databases on the web | `.../publishing-databases-web.html` |
-| Using ODBC and JDBC | `.../odbc-jdbc.html` |
-| Accessing external data sources | `.../external-data-sources.html` |
-| Using advanced tools | `.../using-advanced.html` |
-
-### Reference sections
-| Topic | URL |
-|-------|-----|
-| Functions reference (all functions) | `.../functions-reference.html` |
-| Script steps reference | `.../script-steps-reference.html` |
-| FileMaker error codes | `.../error-codes.html` |
-
-**Base URL for all:** `https://help.claris.com/en/pro-help/content/`
-
----
-
-## FileMaker Data API Guide
-**Guide slug:** `data-api-guide`  
-**Index:** https://help.claris.com/en/data-api-guide/content/index.html
-
-| Topic | URL |
-|-------|-----|
-| Introduction | `.../index.html` |
-| How a Data API call is processed | `.../how-data-api-call-is-processed.html` |
-| Web integration alternatives | `.../web-integration-alternatives.html` |
-| Prepare databases for Data API access | `.../prepare-databases-for-access.html` |
-| Design the Data API solution | `.../design-app.html` |
-| Write FileMaker Data API calls | `.../write-data-api-calls.html` |
-| Connect to or disconnect from a database | `.../connect-disconnect-database.html` |
-| Log in to a database session | `.../log-in-database-session.html` |
-| Log in to an external data source | `.../log-in-external-data-source.html` |
-| Log in using OAuth | `.../log-in-database-session-oauth.html` |
-| Log in using Claris ID (Cloud) | `.../log-in-database-session-claris-id.html` |
-| Log out of a database session | `.../log-out-database-session.html` |
-| Validate a database session | `.../validate-database-session.html` |
-| Get metadata | `.../get-metadata.html` |
-| Work with records | `.../work-with-records.html` |
-| Create a record | `.../create-record.html` |
-| Edit a record | `.../edit-record.html` |
-| Duplicate a record | `.../duplicate-record.html` |
-| Delete a record | `.../delete-record.html` |
-| Get a single record | `.../get-single-record.html` |
-| Get a range of records | `.../get-range-of-records.html` |
-| Upload container data | `.../upload-container-data.html` |
-| Perform a find request | `.../perform-find-request.html` |
-| Set global field values | `.../set-global-field-values.html` |
-| Run FileMaker scripts | `.../run-filemaker-scripts.html` |
-| Run a script | `.../run-a-script.html` |
-| Error responses | `.../error-responses.html` |
-| Host a Data API solution | `.../host-data-api-app.html` |
-| Test the Data API solution | `.../test-data-api-app.html` |
-| Monitor Data API solutions | `.../monitor-data-api-app.html` |
-
-**Base URL for all:** `https://help.claris.com/en/data-api-guide/content/`
-
----
-
-## FileMaker OData API Guide
-**Guide slug:** `odata-guide`  
-**Index:** https://help.claris.com/en/odata-guide/content/index.html
-
-**Base URL:** `https://help.claris.com/en/odata-guide/content/`
-
----
-
-## FileMaker SQL Reference
-**Guide slug:** `sql-reference`  
-**Index:** https://help.claris.com/en/sql-reference/content/index.html
-
-| Topic | URL |
-|-------|-----|
-| Introduction | `.../index.html` |
-| Using a FileMaker Pro database as a data source | `.../using-filemaker-pro-database-as-data-source.html` |
-| Using the ExecuteSQL function | `.../using-executesql-function.html` |
-| SQL statements | `.../sql-statements.html` |
-| SQL clauses | `.../sql-clauses.html` |
-| SQL expressions | `.../sql-expressions.html` |
-| SQL functions | `.../sql-functions.html` |
-| FileMaker system objects | `.../filemaker-system-objects.html` |
-| FileMaker SQL error codes | `.../filemaker-sql-error-codes.html` |
-| Reserved SQL keywords | `.../reserved-sql-keywords.html` |
-
-**Base URL for all:** `https://help.claris.com/en/sql-reference/content/`
-
----
-
-## FileMaker WebDirect Guide
-**Guide slug:** `webdirect-guide`  
-**Index:** https://help.claris.com/en/webdirect-guide/content/index.html
-
-**Base URL:** `https://help.claris.com/en/webdirect-guide/content/`
-
----
-
-## FileMaker Go Release Notes
-**Guide slug:** `go-release-notes`  
-**Index:** https://help.claris.com/en/go-release-notes/content/index.html
-
----
-
-## FileMaker Go Help
-**Guide slug:** `go-help`  
-**Index:** https://help.claris.com/en/go-help/content/index.html
-
----
-
-## FileMaker Go Development Guide
-**Guide slug:** `go-development-guide`  
-**Index:** https://help.claris.com/en/go-development-guide/content/index.html
-
----
-
-## FileMaker Data Migration Tool Guide
-**Guide slug:** `data-migration-tool-guide`  
-**Index:** https://help.claris.com/en/data-migration-tool-guide/content/index.html
-
----
-
-## FileMaker Developer Tool Guide
-**Guide slug:** `developer-tool-guide`  
-**Index:** https://help.claris.com/en/developer-tool-guide/content/index.html
-
----
-
-## FileMaker Upgrade Tool Guide
-**Guide slug:** `app-upgrade-tool-guide`  
-**Index:** https://help.claris.com/en/app-upgrade-tool-guide/content/index.html
-
----
-
-## FileMaker Pro Release Notes
-**Guide slug:** `pro-release-notes`  
-**Index:** https://help.claris.com/en/pro-release-notes/content/index.html
-
----
-
-## FileMaker Pro SVG Grammar for Button Icons
-**Guide slug:** `pro-svg-grammar-for-button-icons`  
-**Index:** https://help.claris.com/en/pro-svg-grammar-for-button-icons/content/index.html
-
----
-
-## Documentation Archive
-```
-https://help.claris.com/en/claris-help-center/content/archive.html
-```
-Append `?fmp` (Pro), `?fms` (Server), `?fmc` (Cloud), `?fmg` (Go), `?cc` (Connect), `?cs` (Studio) for filtered views.
-
----
-
-## PDF/Binary Docs (not HTML guides)
-- FileMaker ODBC and JDBC Guide: https://help.claris.com/en/odbc-jdbc-guide.pdf
-- FileMaker Server Custom Web Publishing Guide: https://help.claris.com/en/server-custom-web-publishing-guide.pdf
-- Apple Remote Desktop Deployment Script: https://www.claris.com/resources/documentation/docs/fmp_osx_deployment.zip

@@ -1,7 +1,7 @@
 # FileMaker WebDirect — Reference
 
-Verified against the live `webdirect-guide` (40 pages) and the per-step Compatibility tables on
-**2026-07-25**, FileMaker 26.
+Verified against the live `webdirect-guide` (40 pages) on 2026-07-25 and the per-step
+Compatibility tables on **2026-10-02** (FileMaker 26.0.3).
 
 WebDirect runs a hosted custom app in a browser. It resembles FileMaker Pro but is **not**
 feature-equivalent — the differences below are the ones that break layouts and scripts.
@@ -14,8 +14,8 @@ Of the **216** script steps, under `WebDirect`:
 
 | | Count |
 |---|---|
-| Fully supported (Yes) | 103 |
-| **Partial** | 38 |
+| Fully supported (Yes) | 106 |
+| **Partial** | 35 |
 | **Not supported (No)** | 75 |
 
 Per-step truth is in `script-steps-catalog.json` → `platform_exceptions.WebDirect`. Absent means
@@ -31,7 +31,44 @@ supported.
 A frequent authoring mistake is treating *Partial* as *supported*. Several very common steps are
 Partial in WebDirect, including `Go to Layout`, `Go to Portal Row`, `Go to List of Records`,
 `Execute SQL`, `Export Records`, `Export Field Contents`, `Copy`, `Cut`, `Clear`,
-`Delete Portal Row`, and the PDF steps `Append PDF` / `Close PDF`.
+and `Delete Portal Row`.
+
+**FileMaker 26.0.3** made `Open PDF`, `Append PDF` and `Close PDF` fully supported: with
+**From: File**, the user picks a PDF to upload in a browser dialog, and `Close PDF` with
+**Save to: File** offers the result as a browser download. Older 26.0.x hosts treat them as
+Partial.
+
+---
+
+## Steps that don't run in WebDirect (generated from script-steps-catalog.json)
+
+**Not supported — skipped, error 3:**
+
+- **Control:** Configure Local Notification, Configure NFC Reading, Configure Region Monitor Script
+- **Navigation:** Enter Preview Mode, Scroll Window
+- **Editing:** Insert from Index, Perform Find/Replace
+- **Fields:** Set Use System Formats, Insert from Device
+- **Records:** Copy Record/Request, Copy All Records/Requests, Save Records as Excel
+- **Windows:** Arrange All Windows, Set Zoom Level, Show/Hide Text Ruler
+- **Files:** Close File, Convert File, New File, Open File, Recover File, Save Records as JSONL, Save a Copy as, Set Multi-User, Close Data File, Create Data File, Delete File, Get Data File Position, Get File Exists, Get File Size, Open Data File, Read from Data File, Rename File, Save a Copy as XML, Set Data File Position, Write to Data File
+- **Spelling:** Check Found Set, Check Record, Check Selection, Correct Word, Edit User Dictionary, Select Dictionaries, Set Dictionary, Spelling Options
+- **Open Menu Item:** Open Manage Database, Open Manage Value Lists, Open Manage Data Sources, Open Settings, Open File Options, Open Help, Open Edit Saved Finds, Open Favorites, Open Find/Replace, Open Hosts, Open Manage Containers, Open Manage Layouts, Open Manage Themes, Open Script Workspace, Open Upload To Host
+- **Miscellaneous:** Beep, Speak (macOS), Flush Cache to Disk, Install Menu Set, Send DDE Execute (Windows), Send Event, Flush Web Viewer Cookies, Allow Formatting Bar, Enable Touch Keyboard, Perform AppleScript (macOS), Save a Copy as Add-on Package, AVPlayer Play, AVPlayer Set Options, AVPlayer Set Playback State, Dial Phone, Get Folder Path
+- **AI:** Configure Machine Learning Model
+
+**Partial — runs, but some options differ (read the step's Claris page):**
+
+- **Navigation:** Go to Layout, Go to Related Record, Go to Portal Row, Select Window
+- **Editing:** Insert File, Insert Picture, Insert Audio/Video, Insert PDF, Replace Field Contents, Export Field Contents, Cut, Copy, Paste, Clear
+- **Fields:** Set Selection
+- **Records:** Delete Portal Row, Import Records, Export Records, Save Records as Snapshot Link
+- **Found Sets:** Go to List of Records
+- **Windows:** New Window, Move/Resize Window, Show/Hide Menubar, Adjust Window, View As
+- **Accounts:** Re-Login
+- **Open Menu Item:** Open Sharing, Open URL
+- **Miscellaneous:** Exit Application, Send Mail, Set Web Viewer, Execute SQL
+- **PDF Files:** Save Records as PDF, Print PDF
+- **Printing:** Print Setup
 
 ---
 

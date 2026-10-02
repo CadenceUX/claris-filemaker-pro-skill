@@ -1,295 +1,228 @@
 ---
-compatibility: Claude.ai, Claude Chat, Claude Code
-metadata:
-  "Built and maintained": "Darrin Southern from CadenceUX"
-  version: "2.0.0"
 name: claris-filemaker-pro
-description: |
-  REFERENCE skill — FileMaker Pro script steps, calculation functions, and field types. Use for:
-  syntax lookups, function parameters and return types, per-step platform support across
-  FileMaker Pro, Go, WebDirect, Server, Cloud, Data API and Custom Web Publishing, field type
-  capabilities, usage examples, and live doc fetches. Covers all 368 built-in functions (If,
-  Case, Let, While, ExecuteSQL, JSON, AI/embedding, Persistent Data), all 216 script steps
-  (including the FM 26 PDF Files and Persistent Data categories), plus the Data API, OData,
-  WebDirect, FileMaker Go, SQL/ExecuteSQL, error codes, and custom functions. Not a platform
-  administration guide. Out of scope: FileMaker Server admin, Claris Connect, Claris Studio,
-  ODBC/JDBC configuration. Trigger on any FileMaker function or script step name — even inside
-  code, a calc field, or a script. Local reference files are verified against source and are
-  authoritative; fetch live docs when the topic is volatile or the user signals recency.
+description: >-
+  FileMaker Pro reference for calculation functions, script steps, field types and error codes:
+  exact syntax, parameters, return types, the release that introduced each, and which script
+  steps work in FileMaker Go, WebDirect, Server, Cloud, the Data API and Custom Web Publishing.
+  Also covers the FileMaker Data API, OData, ExecuteSQL and FileMaker SQL, and WebDirect and
+  FileMaker Go limits. Use whenever a FileMaker function or script step is named, written,
+  reviewed or debugged, including inside a calculation, a script or other code, or when asked
+  whether something works on a given FileMaker client or version. When the Claris Agentic
+  Development Toolkit (ADT) is installed, it defers to ADT's filemaker-help pages and the
+  FileMaker engine for exact signatures, and adds platform, version and API detail ADT does not
+  carry. Not for FileMaker Server administration, Claris Connect, Claris Studio or ODBC/JDBC
+  driver setup.
+license: CC-BY-4.0
+compatibility: >-
+  Claude.ai, Claude Desktop, Cowork and Claude Code. ADT mode needs the Claris Agentic
+  Development Toolkit plugin (macOS); everything else works without it.
+metadata:
+  author: Darrin Southern, CadenceUX
+  version: "2.1.0"
 ---
 
-# Claris FileMaker Pro — Skill v2.0.0
+# Claris FileMaker Pro
 
-## What this skill is
+Reference for FileMaker Pro's calculation functions, script steps and field types, the clients
+they run on, and the APIs around them. The source of truth is Claris's FileMaker Pro Help; this
+skill adds structured platform support, version notes and tested patterns.
 
-A **reference skill for FileMaker Pro** — script steps, calculation functions, field types, and
-the client platforms a solution runs on. It is deliberately scoped to FileMaker Pro rather than
-the wider Claris platform, and it goes deep on that one surface: verified call signatures and
-return types, per-step platform support, worked usage examples, error codes, and the API
-surfaces a Pro developer actually reaches for.
+## Mode: check for ADT first
 
-It is **not** a minimal name-and-signature vocabulary list, and **not** a link index that defers
-every real answer to a web fetch. The local reference files carry verified content and are
-designed to answer most questions without a network round-trip. It does not cover FileMaker
-Server administration, Claris Connect, Claris Studio, or deep ODBC/JDBC configuration.
+At the start of the first FileMaker question in a session, decide the mode:
 
-The Claris Help Centre at **https://help.claris.com** remains the authoritative upstream source.
-Every local file records how and when it was verified against it.
+**ADT mode** if any of these is true:
+1. The session lists a `filemaker-agentic-development:` skill (for example `filemaker-help`).
+2. Tools named `mcp__plugin_filemaker-agentic-development_adt-mcp__*` are available.
+3. A shell is available and `"$HOME/Library/Application Support/ADT/MCP/fm-cli/fm-cli"` exists.
 
----
+In ADT mode, read [references/adt-mode.md](references/adt-mode.md) before answering. Claris's
+page and the FileMaker engine become the authority for signatures and behaviour; this skill
+supplies platform support, versions and the API references. Never install ADT from this skill.
 
-## Local-first: when to answer locally, when to fetch
+**Standalone mode** otherwise (Claude.ai chat, Windows, any host without ADT). Answer from the
+files below; fetch the live Claris page when the rules in "When to fetch live" apply.
 
-**Default: answer from the local reference files.** They were re-derived from the live Claris
-documentation on **2026-07-25** — every function signature, return type, and originated-in
-version, and every script step's full seven-product compatibility matrix. Treat them as correct.
+### Which source wins
 
-This matters for generation speed and accuracy: composing a script, or a set of field
-definitions, should not require a network fetch per step.
-
-**Fetch live only when one of these is true:**
-
-| Trigger to fetch | Why |
+| ADT mode | Standalone mode |
 |---|---|
-| The topic is AI / embedding / RAG / model providers | Provider lists and options change between point releases |
-| `originated_in_version` is higher than the catalog's `last_known_fm_version` | The entry post-dates the last verification |
-| The user says "latest", "current", "has this changed", or names a version | Explicit recency signal |
-| You need a full worked request/response body, or an exhaustive option matrix | Catalogs carry signatures and support, not every option permutation |
-| Version drift was already detected this session | Local files are behind |
-| The local entry is absent, or you are unsure it is complete | Uncertainty is itself the trigger |
+| 1. FileMaker engine (`validate` / `evaluate`, `help script steps`) | 1. Live help.claris.com page |
+| 2. Claris page (`filemaker-help`, or live when newer) | 2. This skill's reference files |
+| 3. This skill's reference files | 3. Memory — never alone for a signature |
+| 4. Memory — never alone for a signature | |
 
-**Do not fetch** merely because a function is old, because the question mentions a platform, or
-out of habit. Per-step platform support is local, verified and complete — use it.
+When two sources disagree, say so and name both.
 
-If a live page contradicts a local file, the live page wins; say so explicitly in your answer.
+## Answering a FileMaker question
 
----
+Copy this checklist into your working and tick it off:
 
-## Version drift detection
+```
+- [ ] 1. List every function and script step named or implied
+- [ ] 2. Signature: ADT mode → Claris page; standalone → catalog (live page if volatile)
+- [ ] 2b. A step missing from script-steps-catalog.json but known to the engine
+        (`filemaker help script steps "<name>"`) → say "undocumented, probably pre-release,
+        not safe to ship" before anything else
+- [ ] 3. Platform: check platform_exceptions for the user's client(s) — Partial is not Yes
+- [ ] 4. Version: add the note for originated_in_version (table below)
+- [ ] 5. ADT mode: validate every calculation, evaluate where possible; fix and repeat until valid
+- [ ] 6. Answer with the signature inline, cite the Claris page as
+        https://help.claris.com/en/pro-help/content/<slug>.html, say what was engine-verified
+```
 
-**When you do fetch a page, check `## Originated in version` in the page body — not the YAML
-frontmatter.**
+## Where to look
 
-Every `.md` help page returns YAML with `version:` / `version_year:`, but that tracks the
-documentation build, not the feature release — verified 2026-07-04: FM 26 features still return
-`version: 22 / version_year: 2025`. Comparing frontmatter against `last_known_fm_version` never
-fires, and mislabels current docs as old.
-
-1. Read `## Originated in version` from the page body.
-2. Compare with `last_known_fm_version` in the catalog `meta` block (currently `26`).
-3. If higher, flag it:
-
-   > ⚠️ **Skill version drift detected** — this page documents a feature originated in FM [X],
-   > but this skill's local reference files were last verified for FM 26. New functions, script
-   > steps, or behaviour changes since then may not be reflected locally.
-
-4. Still answer from the fetched content — the flag is advisory.
-5. Don't flag versions ≤ `last_known_fm_version`.
-
-### `topic_type` is not a reliable roster signal
-
-When rebuilding catalogs, derive the roster **structurally** — a script step page has a
-`## Compatibility` table; a function page has `## Format` and `## Data type returned`. Claris
-mislabels at least four pages as `topic_type: conceptual` (`set-dictionary`,
-`getpersistentdata`, `listpersistentdataids`, `get-systemstorageavailable`). A `topic_type`
-sweep alone undercounts, and previously caused a real script step to be missed entirely.
-
----
-
-## Version self-check
-
-At the start of each session, on the first FileMaker question, run once:
-
-1. Fetch `https://github.com/CadenceUX/claris-filemaker-pro-skill/raw/main/VERSION`
-2. Compare with this skill's installed version (currently `"2.0.0"`)
-3. If latest > installed, prepend:
-
-   > ⚠️ **Skill update available**
-   > This skill is v[installed]. v[latest] is available at
-   > https://github.com/CadenceUX/claris-filemaker-pro-skill/releases
-
-4. Don't repeat in the same session. If the fetch fails, skip silently.
-
----
-
-## Mandatory trigger: FileMaker functions, script steps, and fields
-
-**Any request involving a FileMaker calculation function, script step, or field definition — by
-name, by category, or by describing what it should do — must use this skill.**
-
-| Ask | Go to |
+| Question | File |
 |---|---|
-| "How does `While` work?" | `logical-json-ai-functions-examples.md` |
-| "Write a `Let()` calculation that…" | catalog for format, examples for pattern |
-| "`ExecuteSQL` vs `ExecuteSQLe`?" | `logical-json-ai-functions-examples.md` |
-| "Which function returns the current record ID?" | `function-catalog.json` (search by purpose) |
-| "What data type does this function return?" | `function-catalog.json` → `return_type` |
-| "Does this step work in WebDirect / Go / the Data API?" | `script-steps-catalog.json` → `platform_exceptions` |
-| "How do I loop through records?" | `script-steps-catalog.json` |
-| "Get the error code after a find" | `quickrefs.md` |
-| "What field type should I use for…?" | `field-types-catalog.json` |
-| "Which options apply to a summary field?" | `field-types-catalog.json` |
-| "Can I index a container field?" | `field-types-catalog.json` |
-| "How do I query FileMaker over OData?" | `odata-api-reference.md` |
-| "Why doesn't my script work in the browser?" | `webdirect-reference.md` |
-| "What's different on iPad?" | `filemaker-go-reference.md` |
-| "Save persistent data / an app variable" | `script-steps-catalog.json` (Persistent Data), `specialty-functions-examples.md` |
-| "Create / merge / print a PDF in a script" | `script-steps-catalog.json` (PDF Files) |
-| Any code block containing function or step names | identify each, look each up |
+| A function's signature, parameters, return type, version | [function-catalog.json](references/function-catalog.json) — search, don't read |
+| A script step's syntax, notes, version, platform support | [script-steps-catalog.json](references/script-steps-catalog.json) — search, don't read |
+| Logical, JSON, AI / embedding functions | [logical-json-ai-functions-examples.md](references/logical-json-ai-functions-examples.md) |
+| Get() functions and their enumerations | [get-functions-examples.md](references/get-functions-examples.md) |
+| Text and text formatting | [text-functions-examples.md](references/text-functions-examples.md) |
+| Date, time, timestamp | [date-time-functions-examples.md](references/date-time-functions-examples.md) |
+| Number, financial, trigonometric, repeating | [numeric-functions-examples.md](references/numeric-functions-examples.md) |
+| Design (schema) and container / crypto functions | [design-container-functions-examples.md](references/design-container-functions-examples.md) |
+| Aggregate, Japanese, mobile, miscellaneous, persistent data | [specialty-functions-examples.md](references/specialty-functions-examples.md) |
+| Field types, options, indexing, storage, summary types | [field-types-catalog.json](references/field-types-catalog.json) |
+| An error number | [error-codes.md](references/error-codes.md) |
+| ExecuteSQL / FileMaker SQL syntax, ROWID / ROWMODID | [sql-reference.md](references/sql-reference.md) |
+| Data API (REST) | [data-api-reference.md](references/data-api-reference.md) |
+| OData | [odata-api-reference.md](references/odata-api-reference.md) |
+| WebDirect limits | [webdirect-reference.md](references/webdirect-reference.md) |
+| FileMaker Go limits and device features | [filemaker-go-reference.md](references/filemaker-go-reference.md) |
+| A Claris help page URL | [help-sitemap.md](references/help-sitemap.md), else `https://help.claris.com/llms-full.txt` |
+| ADT is installed | [adt-mode.md](references/adt-mode.md) |
 
-**Workflow:** check the relevant example file → confirm format, `return_type` and
-`platform_exceptions` in the catalog → answer with the signature inline and cite the doc URL.
-Fetch live only per the rules above.
+### Searching the catalogs
 
----
+The two JSON catalogs are thousands of lines long. Search them; don't read them whole:
 
-## Reference files — all 14
+```bash
+grep -n -A12 '"name": "JSONSetElement' references/function-catalog.json
+jq '.categories[].steps[] | select(.name == "Go to Layout")' references/script-steps-catalog.json
+jq -r '.categories[].steps[] | select(.platform_exceptions.WebDirect == "No") | .name' references/script-steps-catalog.json
+```
 
-| File | Contains |
-|---|---|
-| `function-catalog.json` | All **368** functions through FM 26 — format, parameters, **return_type**, purpose, category, slug, doc_url, originated_in_version. Master for call signatures and return types. |
-| `script-steps-catalog.json` | All **216** script steps through FM 26 across 16 categories — syntax, purpose, notes, doc_url, originated_in_version, and **`platform_exceptions`** (delta-encoded seven-product support). |
-| `field-types-catalog.json` | The six data types and three field types, which options apply to each, indexing and storage semantics, the eight summary types, container external storage, and FM 26 advanced field options (DDL annotation, custom display names). |
-| `odata-api-reference.md` | OData base URL, auth, query options, CRUD, batch, schema modification, running scripts, and the documented unsupported-feature list. |
-| `webdirect-reference.md` | Measured script step support, feature limitations, connection limits, design guidance. |
-| `filemaker-go-reference.md` | Measured script step support, Go-only steps, behaviour differences, device capabilities. |
-| `logical-json-ai-functions-examples.md` | **Logical** + **JSON** + **AI/embedding** functions with worked examples. |
-| `get-functions-examples.md` | All Get() functions grouped by 12 categories. |
-| `design-container-functions-examples.md` | **Design** + **Container** functions. |
-| `text-functions-examples.md` | **Text** + **Text Formatting** functions. |
-| `date-time-functions-examples.md` | **Date** + **Time/Timestamp** functions. |
-| `numeric-functions-examples.md` | **Number**, **Financial**, **Trigonometric**, **Repeating**. |
-| `specialty-functions-examples.md` | **Aggregate**, **Japanese**, **Mobile/Go**, **Miscellaneous**, **Persistent Data**. |
-| `quickrefs.md` | **Error codes**, **ExecuteSQL** syntax and system columns, **Data API** REST reference, and a FileMaker-Pro-scoped sitemap. |
+Without a shell, open the matching example file first — each starts with a contents list.
 
----
+## Platform support
 
-## Platform support — how to read it
-
-`script-steps-catalog.json` carries verified support for all 216 steps across seven products:
-**Pro, Go, WebDirect, Server, Cloud, DataAPI, CWP**.
-
-Support is **delta-encoded**: `platform_exceptions` lists only the products where a step is *not*
-fully supported. **If `platform_exceptions` is absent, the step is supported everywhere.**
+`script-steps-catalog.json` records support for every step on seven products: **Pro, Go,
+WebDirect, Server, Cloud, DataAPI, CWP**. It's delta-encoded: `platform_exceptions` lists only
+the products where a step isn't fully supported. **No `platform_exceptions` means supported
+everywhere.**
 
 | Value | Meaning |
 |---|---|
-| *(absent)* | Yes — fully supported on all seven |
-| `"No"` | The step is **skipped** and returns error **3** ("Command is unavailable"). No alert, the script continues. Check `Get(LastError)`. |
-| `"Partial"` | The step runs but one or more features differ. Read the step's Notes on its doc page. |
+| *(absent)* | Fully supported on all seven |
+| `"No"` | Skipped. Returns error **3** ("Command is unavailable"), shows no alert, and the script continues |
+| `"Partial"` | Runs, but some options or behaviour differ. Read the step's notes or Claris page |
 
-Measured totals across 216 steps — Pro 204 yes / 6 partial / 6 no · Go 154/20/42 ·
-WebDirect 103/38/75 · Server 108/29/79 · Cloud 106/27/83 · DataAPI 91/26/99 · CWP 99/26/91.
+Treating Partial as supported is a common, costly mistake: `Go to Layout`, `Go to Portal Row`,
+`Go to List of Records`, `Execute SQL` and `Export Records` are all Partial somewhere.
+`os_restriction` is separate: a macOS-only or Windows-only step.
 
-**Treating "Partial" as supported is a common and costly mistake.** Several very common steps
-are Partial rather than Yes, including `Go to Layout`, `Go to Portal Row`,
-`Go to List of Records`, `Execute SQL` and `Export Records` in various contexts.
+Functions have no compatibility table in Claris's docs. Where it matters, read the function's
+page notes, branch on `Get ( ApplicationVersion )`, and watch for error **1225** ("Function
+referred to is not supported in this context").
 
-`os_restriction` is separate and orthogonal — a desktop-OS limit (macOS only / Windows only).
+## Version notes
 
-Calculation **functions do not carry a Compatibility table** in Claris documentation, so
-per-function platform support is not available as structured data. Where it matters, read the
-function's own page notes, or detect at runtime with `Get(ApplicationVersion)`. Error **1225**
-("Function referred to is not supported in this context") is the runtime signal.
+Read `originated_in_version` and add the note without asking which version the user has:
 
----
-
-## Automatic version notes
-
-Read `originated_in_version` from the catalog and inject a version note automatically — don't
-ask the user which version they're on. Versions are stored in Claris's own precise form
-(`6.0 or earlier`, `19.6.1`, `22.0`, `26.0.1`).
-
-| Originated | Note to inject |
+| Originated | Note |
 |---|---|
-| 19.3 – 20.x | "Requires FM 19.3+ — describe a fallback if one exists." |
-| 21.x | "AI/embedding feature — requires FM 21 or later." |
-| 22.x | "Introduced in FM 22 (2025)." |
-| 26.x | "Introduced in FM 26 (2026) — not available in earlier versions." |
+| 26.x | "FileMaker 2026 (26) — not in earlier versions." |
+| 22.x | "Introduced in FileMaker 2025 (22)." |
+| 21.x | "Requires FileMaker 2024 (21) or later." |
+| 19.3 – 20.x | "Requires FileMaker 19.3 or later." Describe a fallback if one exists |
 | 18.x or earlier | No note unless asked |
 
-FM 19 is the practical floor; anything older is noted only as "may not be available on legacy
-versions".
+Claris dates some FileMaker 2026 features as 26.0 and others as 26.0.1 (the first public
+build). Treat both as FileMaker 2026. The latest public release the catalogs were checked
+against is in `meta.latest_public_release` (26.0.3). Point releases can change behaviour
+without a new `originated_in_version` — e.g. 26.0.3 made Open / Append / Close PDF fully
+supported in WebDirect — so check the step's notes.
 
----
+**Engine ahead of the docs:** in ADT mode, the first line of `filemaker --help` shows the engine
+version (`--version` shows only the ADT version). The engine can be newer than the latest public
+release and know script steps no Claris page documents. **When asked about a step that isn't in
+`script-steps-catalog.json` but the engine knows, you MUST say it exists in that engine build but
+is undocumented and probably pre-release — not safe to ship yet** — and describe only what
+`filemaker help script steps "<name>"` shows.
 
-## Fetching strategy — which file first
+## When to fetch live
 
-| Topic | Check first |
-|---|---|
-| Logical / Case / Let / While / ExecuteSQL / JSON / AI | `logical-json-ai-functions-examples.md` |
-| Get() functions | `get-functions-examples.md` |
-| Design / Container / Base64 / Crypt / OCR / PDF text | `design-container-functions-examples.md` |
-| Text / Substitute / formatting | `text-functions-examples.md` |
-| Date / Time / Timestamp | `date-time-functions-examples.md` |
-| Number / Financial / Trigonometric / Repeating | `numeric-functions-examples.md` |
-| Aggregate / Japanese / Mobile / Persistent Data | `specialty-functions-examples.md` |
-| Any function's signature or return type | `function-catalog.json` |
-| Any script step | `script-steps-catalog.json` |
-| Step support on a client or host | `script-steps-catalog.json` → `platform_exceptions` |
-| Field types, storage, indexing, validation, summary types | `field-types-catalog.json` |
-| OData | `odata-api-reference.md` |
-| WebDirect | `webdirect-reference.md` |
-| FileMaker Go | `filemaker-go-reference.md` |
-| Data API / REST | `quickrefs.md` |
-| Error codes | `quickrefs.md` |
-| ExecuteSQL syntax, `ROWID` / `ROWMODID` | `quickrefs.md` |
-| Finding a help page URL | `quickrefs.md` sitemap, else `https://help.claris.com/llms-full.txt` |
+Answer from the files by default. Fetch the Claris page when:
 
----
+- the topic is AI or embedding — providers and options change between point releases
+- `originated_in_version` is newer than the catalog's `last_known_fm_version`
+- the user says "latest", "current", "has this changed", or names a newer version
+- you need a full request/response body or an exhaustive option matrix
+- an entry is missing, or you're unsure it's complete
+
+Check **Originated in version** in the page body, not the YAML frontmatter. If a fetched page
+documents something newer than `last_known_fm_version`, say the skill's files may lag on it,
+and answer from the page. If a live page contradicts a file here, the page wins; say so.
+
+## Version self-check
+
+Once per session, on the first FileMaker question: fetch
+`https://github.com/CadenceUX/claris-filemaker-pro-skill/raw/main/VERSION` and compare it with
+this skill's version (2.1.0). If newer, start the answer with:
+
+> ⚠️ **Skill update available:** this skill is v[installed]; v[latest] is at
+> https://github.com/CadenceUX/claris-filemaker-pro-skill/releases
+
+Skip silently if the fetch fails. If the skill was installed as a plugin, suggest
+`claude plugin update` (or the Plugins page on claude.ai) instead of the releases link.
+
+## Gotchas worth knowing up front
+
+- **JSON:** `JSONRaw` = **0**; `JSONGetElementType` returns `?…` text for a missing key, never
+  0; FileMaker sorts object keys alphabetically; `"[+]"` appends to an array.
+- **Get() enumerations are easy to confuse:** `Get ( Device )` 3 = iPad, 4 = iPhone;
+  `Get ( SystemPlatform )` -2 = Windows, 3 = iOS; `Get ( RecordOpenState )` 1 = new, 2 = modified.
+- **Time since 1/1/0001:** `Get ( CurrentTimeUTCMilliseconds )` counts from year 1 — subtract
+  62135596800000 for Unix milliseconds.
+- **Financial functions return positive values:** `PMT`, `PV` and `FV` — no `Abs()` needed.
+- **Base64:** `Base64Encode` wraps lines and ends with CR+LF; use `Base64EncodeRFC ( 4648 ; … )`
+  for tokens, HMACs and headers.
+- **`=` ignores case for text:** `"abcD" = "ABCd"` is true. Compare signatures, tokens and
+  hashes with `Exact()`.
+- **`Choose` vs `Case`:** map a 0-based number with `Choose ( n ; r0 ; r1 ; … )`;
+  `Case` takes test/result pairs.
+- **`Substitute ( text ; [ search ; replace ] ; … )`:** each bracket is one pair.
+- **Field annotations narrow DDL:** when any field in a table is annotated, only annotated
+  fields appear in that table's generated DDL.
+- **The persistent data store isn't a field type.** It's schema-resident, needs Full Access to
+  write, and isn't copied by the Data Migration Tool. `GetPersistentData` returns `?` when
+  nothing matches.
+- **AI / RAG order:** `Configure AI Account` (and `Configure RAG Account`) before any AI step
+  or function. Always fetch live for provider options.
 
 ## Related skills
 
-For **paste-ready field definition XML** — the `fmxmlsnippet` / `FMObjectList` envelope, the
-auto-enter, validation and storage element structure, and the paste-handler rules that cause
-silent failures — use the **`filemaker-field-xml`** skill. That skill is authoritative for the
-XML layer; `field-types-catalog.json` here covers the capability layer (what a field type can
-*do*) and deliberately does not duplicate the XML shape.
+Andrew Kear's open-source FileMaker skills ([Clockwork Creative Technology](https://www.clockworkct.co.uk),
+[github.com/andykear](https://github.com/andykear), CC BY 4.0) cover what this skill doesn't.
+Name the skill exactly when you rely on it:
 
-Name that skill exactly when you depend on it. Generic phrasing such as "a dedicated FileMaker
-field XML reference" gets substituted for a different same-domain source under context pressure.
+| Need | Skill |
+|---|---|
+| Paste-ready **script** XML (`fmxmlsnippet`, step IDs, paste-handler rules) | `filemaker-xml` |
+| Paste-ready **layout** object XML | `filemaker-layout-xml` |
+| Paste-ready **field / table** definition XML (this skill's `field-types-catalog.json` covers what a field can *do*, not its XML) | `filemaker-field-xml` |
+| Operator precedence and coercion traps (`-2 ^ 2` → 4, `2 ^ 3 ^ 2` → 64, Trim keeps tabs) | `filemaker-ai-grammar` |
+| A compact list of every function and step to keep in context | `filemaker-ai-vocabulary` — when both are installed, use it for "does this exist?", this skill for detail |
+| Packed `<Options>` bit flags in Save as XML | `filemaker-xml-bit-flags` |
 
----
-
-## Tips
-
-- `function-catalog.json` is the master for signatures and return types; the example files are
-  the master for usage patterns. Per-entry `notes` carry behaviour detail.
-- **Mobile functions** (`Location`, `LocationValues`, `GetSensor`, `RangeBeacons`,
-  `GetAVPlayerAttribute`) work only in FileMaker Go — branch on `Get(ApplicationVersion)`.
-- **Japanese functions** require Japanese language support; `Furigana()` depends on the IME and
-  is context-sensitive.
-- **Trig functions** work in radians — convert with `Degrees()` / `Radians()`.
-- **Financial functions** take the rate *per period*, not annual. `PMT()` returns a negative
-  number; wrap in `Abs()` for display.
-- **AI/RAG workflow** requires three steps in order: `Configure RAG Account` →
-  `Configure AI Account` → `Perform RAG Action`. Always fetch live for AI options — provider
-  support (including Google Gemini, added in FM 26) and parameters change between point releases.
-- **`Generate Response from Model`** — in agentic mode, append the DDL schema from
-  `GetTableDDL` to the `execute_sql` tool parameter description. Custom function tool definitions
-  must match the function name and parameter order exactly, all parameters typed `"string"`.
-- **Field annotations narrow DDL.** When *any* field in a table is annotated, only annotated
-  fields appear in that table's generated DDL. Read with `FieldAnnotation()`.
-- **The persistent data store is not a field storage type.** It is a per-file, schema-resident
-  named-value store (Name + optional Instance ID), separate from record data, holding a value of
-  any of the six data types. Write with `Configure Persistent Data`; read with
-  `GetPersistentData` / `ListPersistentDataIDs`. Unrelated to `Get(PersistentID)`, which returns
-  a device identifier.
-- **`ROWID` / `ROWMODID`** are the FileMaker SQL system columns (equivalent to `Get(RecordID)`
-  and `Get(RecordModificationCount)`). They are not named `RECORDID` / `MODID`.
-- **Sub-version doc drift:** Claris updates pages between releases without bumping the version
-  field. Where an exhaustive option matrix matters, fetch the live page.
-
----
+- With ADT installed: **`filemaker-standards`** for naming, **`fm-cli`** for schema work,
+  **`fm-mcp-guide`** for running scripts and SQL against a live file.
 
 ## Licence
 
-This skill is released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-
-Built and maintained by [Darrin Southern](https://www.linkedin.com/in/darrin-southern/) from [CadenceUX](https://cadenceux.com.au).
-
----
-
-## Version history
-
-See [CHANGELOG.md](./CHANGELOG.md) for the full version history.
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Built and maintained by
+[Darrin Southern](https://www.linkedin.com/in/darrin-southern/) from
+[CadenceUX](https://cadenceux.com.au). Version history:
+https://github.com/CadenceUX/claris-filemaker-pro-skill/blob/main/CHANGELOG.md

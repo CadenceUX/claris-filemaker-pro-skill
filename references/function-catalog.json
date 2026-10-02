@@ -4,14 +4,16 @@
   "source_repo": "function-catalog.json (master for name/prototype)",
   "help_centre": "https://help.claris.com/markdown/en/pro-help/functions-reference.md",
   "version": "26.0",
-  "last_updated": "2026-06 (v1.9 — GetRecordIDsFromFoundSet FM 26 optional second parameter; GetTextFromPDF FM 26 scanned-PDF note; total 368)",
+  "last_updated": "2026-10 (v2.1.0 — 9 originated_in_version corrections; ComputeModel vision form)",
   "update_instructions": "Re-fetch source repo and compare against this file. Also re-fetch each category_page from help.claris.com to pick up new functions or updated slugs. For new functions, check the FileMaker Pro Release Notes at https://help.claris.com/en/pro-release-notes/content/ to determine the version introduced.",
   "last_known_fm_version": "26",
-  "verified_on": "2026-07-25",
-  "verification_method": "Every entry re-derived from its live help.claris.com markdown page (## Format, ## Data type returned, ## Originated in version). Roster determined structurally, not from topic_type — Claris mislabels getpersistentdata, listpersistentdataids and get-systemstorageavailable as topic_type: conceptual.",
+  "verified_on": "2026-10-02",
+  "verification_method": "Every entry re-derived from its live help.claris.com markdown page (## Format, ## Data type returned, ## Originated in version). Roster determined structurally, not from topic_type — Claris mislabels getpersistentdata, listpersistentdataids and get-systemstorageavailable as topic_type: conceptual. Re-checked 2026-10-02 against Claris FileMaker Pro Help (v26 corpus) and, where a formula can run without record context, against the FileMaker calculation engine shipped with ADT via ADT fm-cli.",
   "function_count": 368,
   "return_type_source": "Claris '## Data type returned' section, all 368 pages",
-  "fm26_notes": "Google Gemini is supported as an AI model provider for text generation (FM 26). AI provider support changes frequently — always fetch the live page for the current provider list."
+  "fm26_notes": "Google Gemini is supported as an AI model provider for text generation (FM 26). AI provider support changes frequently — always fetch the live page for the current provider list.",
+  "latest_public_release": "26.0.3 (Pro, Server, Go, Cloud — September 2026; checked 2026-10-02)",
+  "prerelease_note": "FileMaker builds newer than latest_public_release (for example a newer engine shipped with ADT) are pre-release. A script step the engine knows but this catalog and Claris's docs do not is undocumented and probably pre-release."
  },
  "functions": [
   {
@@ -292,7 +294,9 @@
    "slug": "compute-model",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/compute-model.md",
    "originated_in_version": "19.0",
-   "return_type": "text"
+   "return_type": "text",
+   "format_vision": "ComputeModel ( modelName ; \"image\" ; value1 ; \"confidenceLowerLimit\" ; returnAtLeastOne )",
+   "notes": "Two forms: general models take parameter-name/value pairs; vision models use \"image\" and optional confidenceLowerLimit / returnAtLeastOne (see format_vision; Claris's own Format line for the vision form is ambiguous). iOS, iPadOS and macOS only."
   },
   {
    "name": "ConvertFromFileMakerPath",
@@ -694,7 +698,7 @@
    "category_url": "logical-functions.html",
    "slug": "executesqle",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/executesqle.md",
-   "originated_in_version": "21.1.1",
+   "originated_in_version": "21.1",
    "return_type": "text"
   },
   {
@@ -1006,7 +1010,7 @@
    "category_url": "get-functions.html",
    "slug": "get-accountpassworddaysremaining",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-accountpassworddaysremaining.md",
-   "originated_in_version": "26.0.1",
+   "originated_in_version": "26.0",
    "return_type": "number"
   },
   {
@@ -1748,7 +1752,7 @@
    "category_url": "get-functions.html",
    "slug": "get-lasterrorlocation",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-lasterrorlocation.md",
-   "originated_in_version": "19.6.1",
+   "originated_in_version": "19.6",
    "return_type": "text"
   },
   {
@@ -2169,7 +2173,7 @@
    "category_url": "get-functions.html",
    "slug": "get-reverttransactiononerrorstate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-reverttransactiononerrorstate.md",
-   "originated_in_version": "21.1.1",
+   "originated_in_version": "21.1",
    "return_type": "number"
   },
   {
@@ -2295,7 +2299,7 @@
    "category_url": "get-functions.html",
    "slug": "get-sessionidentifier",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-sessionidentifier.md",
-   "originated_in_version": "19.4.1",
+   "originated_in_version": "19.4",
    "return_type": "text"
   },
   {
@@ -2519,7 +2523,7 @@
    "category_url": "get-functions.html",
    "slug": "get-transactionopenstate",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/get-transactionopenstate.md",
-   "originated_in_version": "19.6.1",
+   "originated_in_version": "19.6",
    "return_type": "number"
   },
   {
@@ -3213,7 +3217,7 @@
    "category_url": "container-functions.html",
    "slug": "getlivetext",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getlivetext.md",
-   "originated_in_version": "19.5.1",
+   "originated_in_version": "19.5",
    "return_type": "text"
   },
   {
@@ -3242,7 +3246,7 @@
    "category_url": "artificial-intelligence-functions.html",
    "slug": "getmodelattributes",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/getmodelattributes.md",
-   "originated_in_version": "19.3.1",
+   "originated_in_version": "19.3",
    "return_type": "text"
   },
   {
@@ -3640,7 +3644,7 @@
    "category_url": "json-functions-category.html",
    "slug": "jsongetelementtype",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/jsongetelementtype.md",
-   "originated_in_version": "19.5.1",
+   "originated_in_version": "19.5",
    "return_type": "text, number"
   },
   {
@@ -4926,7 +4930,8 @@
    "slug": "textfont",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/textfont.md",
    "originated_in_version": "7.0",
-   "return_type": "text"
+   "return_type": "text",
+   "notes": "Legacy: a third fontScript parameter from older releases is still accepted by the engine but is no longer documented."
   },
   {
    "name": "TextFontRemove",
@@ -4941,7 +4946,8 @@
    "slug": "textfontremove",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/textfontremove.md",
    "originated_in_version": "8.0",
-   "return_type": "text"
+   "return_type": "text",
+   "notes": "Legacy: a third fontScript parameter from older releases is still accepted by the engine but is no longer documented."
   },
   {
    "name": "TextFormatRemove",

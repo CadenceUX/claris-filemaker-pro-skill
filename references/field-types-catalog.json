@@ -1,20 +1,24 @@
 {
  "meta": {
   "description": "FileMaker Pro field type capability catalog. Answers 'what can a field of this type do' — which options apply, how storage and indexing behave, what each summary type computes. Scope is the developer-facing capability surface in Manage Database, NOT the XML/SaXML shape a field definition serialises to.",
-  "scope_note": "This catalog does not describe field-definition XML. For paste-ready field definition XML (fmxmlsnippet FMObjectList with Field elements, auto-enter/validation/storage element structure, and the paste-handler rules that cause silent failures), use the filemaker-field-xml skill — it is the authoritative source for that layer and is deliberately not duplicated here.",
+  "scope_note": "This catalog does not describe field-definition XML. For paste-ready field and table definition XML (fmxmlsnippet FMObjectList, auto-enter / validation / storage elements, and the paste-handler rules that cause silent failures) use Andrew Kear's filemaker-field-xml skill (github.com/andykear/FileMaker-XML-field-definitions) — the authoritative source for that layer, deliberately not duplicated here.",
   "help_centre": "https://help.claris.com/markdown/en/pro-help/choosing-a-field-type.md",
   "version": "26.0",
   "last_known_fm_version": "26",
-  "verified_on": "2026-07-25",
+  "verified_on": "2026-10-02",
   "verification_method": "Re-derived from live help.claris.com pro-help pages: choosing-a-field-type, text-fields, number-fields, date-fields, time-fields, timestamp-fields, container-fields, calculation-fields, summary-fields, field-indexing-options, field-validation, setting-field-options, advanced-field-options, external-storage-container-data, global-fields, repeating-fields.",
-  "persistent_data_note": "The FM 26 persistent data store is NOT a field type and NOT a field storage option. It is a per-file, schema-resident named-value store (Name + optional Instance ID) that lives outside record data. Its values may be any of the six data types below, which is the only relationship to this catalog. Written with the Configure Persistent Data script step; read with GetPersistentData / ListPersistentDataIDs. See references/specialty-functions-examples.md and script-steps-catalog.json (Persistent Data category)."
+  "persistent_data_note": "The FM 26 persistent data store is NOT a field type and NOT a field storage option. It is a per-file, schema-resident named-value store (Name + optional Instance ID) that lives outside record data. Its values may be any of the six data types below, which is the only relationship to this catalog. Written with the Configure Persistent Data script step; read with GetPersistentData / ListPersistentDataIDs. See references/specialty-functions-examples.md and script-steps-catalog.json (Persistent Data category).",
+  "version_note": "Claris dates the field features in its feature-compatibility table to 26.0.1 (the first public FileMaker 2026 build), while the related function pages say 26.0. Treat both as \"FileMaker 2026\"."
  },
  "data_types": [
   {
    "name": "Text",
    "stores": "Letters, symbols and/or numbers used as text, per field repetition, limited by available RAM and disk space",
    "indexable": true,
-   "index_kinds": ["value", "word"],
+   "index_kinds": [
+    "value",
+    "word"
+   ],
    "sorts_as": "Alphabetical — character by character, so 11 sorts before 2. Use Number (or a calculation/summary with a numeric result) for numeric ordering.",
    "can_be_global": true,
    "can_repeat": true,
@@ -24,7 +28,9 @@
    "name": "Number",
    "stores": "Digits or other characters, and the negative values of the same range",
    "indexable": true,
-   "index_kinds": ["value"],
+   "index_kinds": [
+    "value"
+   ],
    "sorts_as": "Numeric",
    "can_be_global": true,
    "can_repeat": true,
@@ -34,7 +40,9 @@
    "name": "Date",
    "stores": "Dates only",
    "indexable": true,
-   "index_kinds": ["value"],
+   "index_kinds": [
+    "value"
+   ],
    "sorts_as": "Chronological",
    "can_be_global": true,
    "can_repeat": true,
@@ -44,7 +52,9 @@
    "name": "Time",
    "stores": "Times only",
    "indexable": true,
-   "index_kinds": ["value"],
+   "index_kinds": [
+    "value"
+   ],
    "sorts_as": "Chronological",
    "can_be_global": true,
    "can_repeat": true,
@@ -54,7 +64,9 @@
    "name": "Timestamp",
    "stores": "Dates and times together, referencing a fixed point in calendar time",
    "indexable": true,
-   "index_kinds": ["value"],
+   "index_kinds": [
+    "value"
+   ],
    "sorts_as": "Chronological",
    "can_be_global": true,
    "can_repeat": true,
@@ -68,8 +80,12 @@
    "sorts_as": "By file name",
    "can_be_global": true,
    "can_repeat": true,
-   "storage_options": ["Embedded in the file", "External — Open storage", "External — Secure storage"],
-   "fm26_change": "Container fields now support WebP images.",
+   "storage_options": [
+    "Embedded in the file",
+    "External — Open storage",
+    "External — Secure storage"
+   ],
+   "fm26_change": "Container fields support WebP images (26.0.1).",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/container-fields.md"
   }
  ],
@@ -77,16 +93,45 @@
   {
    "name": "Normal",
    "description": "A field that stores entered data directly. Takes one of the six data types above.",
-   "option_tabs": ["Auto-Enter", "Validation", "Storage", "Furigana (Japanese)"],
-   "supports": ["auto-enter", "validation", "indexing", "global storage", "repetitions", "advanced options"]
+   "option_tabs": [
+    "Auto-Enter",
+    "Validation",
+    "Storage",
+    "Furigana (Japanese)"
+   ],
+   "supports": [
+    "auto-enter",
+    "validation",
+    "indexing",
+    "global storage",
+    "repetitions",
+    "advanced options"
+   ]
   },
   {
    "name": "Calculation",
    "description": "Returns the result of a calculation formula using values from the current record or related records.",
-   "result_types": ["Text", "Number", "Date", "Time", "Timestamp", "Container"],
-   "option_tabs": ["Storage (indexing, global, repetitions)"],
-   "supports": ["indexing", "global storage", "repetitions", "advanced options"],
-   "not_supported": ["auto-enter", "validation"],
+   "result_types": [
+    "Text",
+    "Number",
+    "Date",
+    "Time",
+    "Timestamp",
+    "Container"
+   ],
+   "option_tabs": [
+    "Storage (indexing, global, repetitions)"
+   ],
+   "supports": [
+    "indexing",
+    "global storage",
+    "repetitions",
+    "advanced options"
+   ],
+   "not_supported": [
+    "auto-enter",
+    "validation"
+   ],
    "storage_note": "May be stored (indexable) or unstored. Unstored calculations cannot be indexed and evaluate on demand.",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/calculation-fields.md"
   },
@@ -95,28 +140,68 @@
    "description": "Produces a value by summarising a field's values across more than one record in the same table.",
    "option_tabs": [],
    "supports": [],
-   "not_supported": ["auto-enter", "validation", "indexing", "global storage", "repetitions"],
+   "not_supported": [
+    "auto-enter",
+    "validation",
+    "indexing",
+    "global storage",
+    "repetitions"
+   ],
    "behaviour_note": "The value depends on layout placement, the size of the found set, and the sort order. Only non-blank values are included. Recalculates when the underlying data or the found set changes.",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/summary-fields.md"
   }
  ],
  "summary_types": [
-  {"name": "Total of", "computes": "The total of values in the field"},
-  {"name": "Average of", "computes": "The average of values in the field"},
-  {"name": "Count of", "computes": "The number of records containing a value for the field"},
-  {"name": "Minimum", "computes": "The lowest number, or earliest date, time or timestamp"},
-  {"name": "Maximum", "computes": "The highest number, or latest date, time or timestamp"},
-  {"name": "Standard Deviation of", "computes": "How widely values differ from the mean of the field's values"},
-  {"name": "Fraction of Total of", "computes": "The ratio of the field's value to the total of all values in that field"},
-  {"name": "List of", "computes": "A return-delimited list of values in the field"}
+  {
+   "name": "Total of",
+   "computes": "The total of values in the field"
+  },
+  {
+   "name": "Average of",
+   "computes": "The average of values in the field"
+  },
+  {
+   "name": "Count of",
+   "computes": "The number of records containing a value for the field"
+  },
+  {
+   "name": "Minimum",
+   "computes": "The lowest number, or earliest date, time or timestamp"
+  },
+  {
+   "name": "Maximum",
+   "computes": "The highest number, or latest date, time or timestamp"
+  },
+  {
+   "name": "Standard Deviation of",
+   "computes": "How widely values differ from the mean of the field's values"
+  },
+  {
+   "name": "Fraction of Total of",
+   "computes": "The ratio of the field's value to the total of all values in that field"
+  },
+  {
+   "name": "List of",
+   "computes": "A return-delimited list of values in the field"
+  }
  ],
  "indexing": {
   "value_index": {
-   "applies_to": ["Text", "Number", "Date", "Time", "Timestamp", "Calculation returning those types"],
+   "applies_to": [
+    "Text",
+    "Number",
+    "Date",
+    "Time",
+    "Timestamp",
+    "Calculation returning those types"
+   ],
    "used_for": "Joining related records; searches in number, date, time and timestamp fields and calculations returning those types"
   },
   "word_index": {
-   "applies_to": ["Text", "Calculation returning text"],
+   "applies_to": [
+    "Text",
+    "Calculation returning text"
+   ],
    "used_for": "Text searches",
    "cost_note": "Stores each unique word in the field. Large text fields generate large indexes and can significantly increase file size."
   },
@@ -133,7 +218,16 @@
   },
   "repeating": {
    "description": "Stores more than one value in a single field, addressed by repetition number.",
-   "applies_to": ["Text", "Number", "Date", "Time", "Timestamp", "Container", "Calculation", "global fields"],
+   "applies_to": [
+    "Text",
+    "Number",
+    "Date",
+    "Time",
+    "Timestamp",
+    "Container",
+    "Calculation",
+    "global fields"
+   ],
    "set_via": "Options for Field, Storage tab, 'Maximum number of repetitions'",
    "doc_url": "https://help.claris.com/markdown/en/pro-help/repeating-fields.md"
   },
@@ -147,25 +241,33 @@
   "options": [
    {
     "name": "Add annotation in Data Definition Language (DDL)",
-    "originated_in_version": "26.0",
+    "originated_in_version": "26.0.1",
     "purpose": "Free text describing the field's purpose. Included as a code comment after the field's definition in generated DDL. Primary use is improving an AI model's ability to generate SQL from the schema.",
     "read_with": "FieldAnnotation()",
     "important": "When ANY field in a table is annotated, only annotated fields are included in that table's generated DDL. When no field is annotated, all fields are included using their comment text."
    },
    {
     "name": "Customize field display names",
-    "originated_in_version": "26.0",
+    "originated_in_version": "26.0.1",
     "purpose": "A JSON object of key-value pairs setting an alternate display name per feature, for when the real field name would not be understood by users.",
-    "keys": ["fm_common", "fm_export", "fm_sort", "fm_table_view"],
+    "keys": [
+     "fm_common",
+     "fm_export",
+     "fm_sort",
+     "fm_table_view"
+    ],
     "read_with": "FieldDisplayNames()"
    }
   ],
   "doc_url": "https://help.claris.com/markdown/en/pro-help/advanced-field-options.md"
  },
  "fm26_additions": [
-  "Container fields support WebP images.",
-  "Customizable field display names for export, sort and table view (Advanced Options).",
-  "DDL annotations per field (Advanced Options), read with FieldAnnotation().",
+  "Container fields support WebP images (26.0.1).",
+  "Customize field display names — fm_common, fm_export, fm_sort, fm_table_view and custom keys (Advanced Options, 26.0.1); read with FieldDisplayNames().",
+  "Add annotation in DDL per field (Advanced Options, 26.0.1); read with FieldAnnotation().",
+  "Field entry by calculation on layout field objects (26.0.1): the calculation returns 1 = full editing, 2 = select and copy only (read-only), anything else = no entry (view only).",
+  "Sort Records: 'In ascending order, sort blank records last' option (26.0.1).",
+  "Excel import: 'Preserve numbers as exact text in text fields' option (26.0.1).",
   "Auto-enter lookup 'Don't copy contents if empty' state is preserved in add-ons.",
   "A Schema tab in File Options controls defaults for newly created fields.",
   "The Advanced Options for Field dialog is reachable by double-clicking the field."

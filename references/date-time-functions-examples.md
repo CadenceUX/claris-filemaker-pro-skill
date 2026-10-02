@@ -1,12 +1,32 @@
 # Date, Time & Timestamp Functions — Examples
 
+## Contents
+- Date Functions
+  - Date ( month ; day ; year )
+  - Day ( date )
+  - DayName ( date )
+  - DayOfWeek ( date )
+  - DayOfYear ( date )
+  - Month ( date )
+  - MonthName ( date )
+  - WeekOfYear ( date )
+  - WeekOfYearFiscal ( date ; startingDay )
+  - Year ( date )
+  - Common patterns
+- Time & Timestamp Functions
+  - Hour ( time )
+  - Minute ( time )
+  - Seconds ( time )
+  - Time ( hours ; minutes ; seconds )
+  - Timestamp ( date ; time )
+  - Interaction patterns
+
 ---
 
 # FileMaker Date Functions — Syntax & Examples
 
 Source: https://help.claris.com/en/pro-help/content/date-functions.html  
 All 10 date functions with verified syntax, parameters, return types, and usage patterns.  
-Last verified: 2026-06 against live Claris Help Centre.
 
 **Overview:** FileMaker stores dates internally as the number of days since 1 January 0001. This means date arithmetic is just integer addition/subtraction — no special functions needed for "days between two dates". The functions here handle construction, decomposition, and week/day-of-week calculations.
 
@@ -53,14 +73,17 @@ Last day of current month (day 0 of next month = last day of this month):
 ```
 Date ( Month ( Get(CurrentDate) ) + 1 ; 0 ; Year ( Get(CurrentDate) ) )
 ```
-Add N months safely (avoids invalid dates like Feb 30):
+Add N months — clamped to the end of the target month. Plain `Date ( Month(d) + n ; Day(d) ; Year(d) )` **overflows**: 31 January + 1 month gives 3 March.
 ```
 Let ( [
-  d = StartDate ;
-  n = 3  // months to add
+  d       = StartDate ;
+  n       = 1 ;   // months to add (negative to subtract)
+  target  = Date ( Month ( d ) + n ; 1 ; Year ( d ) ) ;
+  lastDay = Day ( Date ( Month ( target ) + 1 ; 0 ; Year ( target ) ) )
 ] ;
-  Date ( Month(d) + n ; Day(d) ; Year(d) )
+  Date ( Month ( target ) ; Min ( Day ( d ) ; lastDay ) ; Year ( target ) )
 )
+// 31 Jan 2026 → 28 Feb 2026 · 31 Jan 2024 → 29 Feb 2024
 ```
 Same day next year:
 ```
@@ -150,9 +173,9 @@ Returns: number
 DayOfYear ( Billing Date )
 // → `32`, when Billing Date is 2/1/2019
 ```
-Days remaining in year:
+Days remaining in year (leap-year safe):
 ```
-If ( Mod ( Year ( Get(CurrentDate) ) ; 4 ) = 0 ; 366 ; 365 ) - DayOfYear ( Get(CurrentDate) )
+DayOfYear ( Date ( 12 ; 31 ; Year ( Get ( CurrentDate ) ) ) ) - DayOfYear ( Get ( CurrentDate ) )
 ```
 ---
 
@@ -192,7 +215,7 @@ Left ( MonthName ( myDate ) ; 3 )  // → "Jun"
 ---
 
 ## WeekOfYear ( date )
-Returns the week number of the year (1–54) where week 1 starts on the first Sunday of the year (or January 1 if it's a Sunday).  
+Returns the week number of the year, 1–54. Partial weeks at the start and end of the year count as full weeks, so 1 January is always week 1. For ISO 8601 week numbers use `WeekOfYearFiscal ( date ; 2 )`.  
 Parameters: `date`.  
 Returns: number
 ```
@@ -218,11 +241,15 @@ WeekOfYearFiscal ( Date ( 1 ; 1 ; 2009 ) ; 5 )
 WeekOfYearFiscal ( Date ( 1 ; 2 ; 2009 ) ; 1 )
 // → 53
 ```
-ISO week number (weeks start Monday, week 1 = first week with a Thursday):
+ISO 8601 week number — starting day 2 (Monday) applies exactly the ISO rule (week 1 is the first week with four or more days in the new year):
 ```
-WeekOfYearFiscal ( myDate ; 2 )
-// Close approximation; for strict ISO 8601 use a custom function
+WeekOfYearFiscal ( Date ( 1 ; 1 ; 2021 ) ; 2 )
+// → 53   (belongs to 2020's last ISO week)
+
+WeekOfYearFiscal ( Date ( 12 ; 31 ; 2024 ) ; 2 )
+// → 1    (belongs to 2025's first ISO week)
 ```
+Pair with the ISO week-year when formatting: the week number alone doesn't say which year it belongs to.
 ---
 
 ## Year ( date )
@@ -259,24 +286,22 @@ Let ( [
 ```
 myDate ≥ Date ( 1 ; 1 ; 2025 ) and myDate ≤ Date ( 12 ; 31 ; 2025 )
 ```
-**Business days between two dates (approximate — no public holidays):**
+**Business days (Mon–Fri) from `start` up to, not including, `end`** — no public holidays. Engine-tested on 140 date pairs:
 ```
 Let ( [
-  start   = EarlyDate ;
-  end     = LateDate ;
-  days    = end - start ;
-  weeks   = Int ( days / 7 ) ;
-  rem     = Mod ( days ; 7 ) ;
-  startDow = DayOfWeek ( start ) ;
-  // weekend days in remainder
-  wkend   = If ( startDow + rem > 7 ; // spans a weekend boundary
-    Min ( rem ; 7 - startDow + 1 ) + Max ( 0 ; rem - ( 7 - startDow ) - 5 ) ;
-    Max ( 0 ; startDow + rem - 6 )
-  )
+  start = EarlyDate ;
+  end   = LateDate ;
+  days  = end - start ;
+  full  = Div ( days ; 7 ) ;
+  rem   = Mod ( days ; 7 ) ;
+  dow   = DayOfWeek ( start ) ;
+  extra = While ( [ i = 0 ; n = 0 ] ; i < rem ;
+            [ d = Mod ( dow - 1 + i ; 7 ) + 1 ; n = n + ( d ≠ 1 and d ≠ 7 ) ; i = i + 1 ] ; n )
 ] ;
-  weeks * 5 + rem - wkend
+  full * 5 + extra
 )
 ```
+To include `end` itself, pass `LateDate + 1`. For holidays, subtract a count of matching dates from a holidays table (e.g. `ExecuteSQL` with `BETWEEN`).
 **First business day of next month:**
 ```
 Let ( [
@@ -290,9 +315,10 @@ Let ( [
   )
 )
 ```
-**Age bracket:**
+**Age bracket** (exact age — subtracts a year if the birthday hasn't happened yet):
 ```
-Let ( age = Year(Get(CurrentDate)) - Year(DateOfBirth) ;
+Let ( age = Year ( Get ( CurrentDate ) ) - Year ( DateOfBirth )
+          - ( Get ( CurrentDate ) < Date ( Month ( DateOfBirth ) ; Day ( DateOfBirth ) ; Year ( Get ( CurrentDate ) ) ) ) ;
   Case (
     age < 18  ; "Minor" ;
     age < 25  ; "18–24" ;
@@ -327,7 +353,6 @@ Date (
 
 Source: https://help.claris.com/en/pro-help/content/time-functions.html  
 All 4 time functions + 1 timestamp function with verified syntax, parameters, return types, and usage patterns.  
-Last verified: 2026-06 against live Claris Help Centre.
 
 **Overview:** FileMaker stores time values internally as the number of seconds since midnight. This means time arithmetic is just addition/subtraction of seconds — no special functions needed. A `Timestamp` is stored as the number of seconds since the FileMaker epoch (1 January 0001, 00:00:00). Time fields accept `HH:MM:SS` format; Timestamp fields combine a date and time.
 
@@ -344,12 +369,12 @@ StartTime + ( 90 * 60 )            // → time 90 minutes later
 Time ( 0 ; 0 ; 0 )                 // → 12:00:00 AM
 
 // Check if a timestamp is today
-Date ( Timestamp ) = Get(CurrentDate)
+GetAsDate ( SomeTimestamp ) = Get ( CurrentDate )
 ```
 ---
 
 ## Hour ( time )
-Extracts the hour component from a time or timestamp value (0–23 for standard times; can exceed 23 for time-duration arithmetic results).  
+Extracts the hour from a time or timestamp — 0–23 for a time of day, but a duration keeps counting: `Hour ( Time ( 25 ; 0 ; 0 ) )` → `25`.  
 Parameters: `time` — a time or timestamp value or expression.  
 Returns: number
 ```
@@ -446,16 +471,9 @@ Timestamp ( Date ( 10 ; 21 ; 2019 ) ; Time ( 9 ; 10 ; 30 ) )
 ```
 Convert a timestamp back to its components:
 ```
-// Extract date part
-Date ( Timestamp )              // → date value (FileMaker auto-coerces)
-
-// Or explicitly:
-Let ( ts = Get(CurrentTimestamp) ;
-  Date ( Month(ts) ; Day(ts) ; Year(ts) )
-)
-
-// Extract time part
-Mod ( ts ; 86400 )              // → seconds since midnight = time
+GetAsDate ( ts )                // → the date part   (Date ( ts ) is an error — Date needs 3 parameters)
+GetAsTime ( ts )                // → the time part
+Month ( ts ) ; Day ( ts ) ; Year ( ts ) ; Hour ( ts ) …   // components work directly on a timestamp
 ```
 Timestamp arithmetic:
 ```
@@ -475,8 +493,8 @@ Get(CurrentTimestamp) + ( 48 * 3600 )
 Time in a Timestamp field:
 ```
 // Get only the time portion of a timestamp
-Mod ( SomeTimestamp ; 86400 )
-// → seconds since midnight on that day (= the time)
+GetAsTime ( SomeTimestamp )
+// (Mod ( SomeTimestamp ; 86400 ) gives the same value as a plain number of seconds)
 ```
 Format a duration as "H:MM":
 ```

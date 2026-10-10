@@ -18,7 +18,7 @@ compatibility: >-
   Development Toolkit plugin (macOS); everything else works without it.
 metadata:
   author: Darrin Southern, CadenceUX
-  version: "2.1.0"
+  version: "2.1.1"
 ---
 
 # Claris FileMaker Pro
@@ -204,21 +204,18 @@ Skip silently if the fetch fails. If the skill was installed as a plugin, sugges
 
 ## Related skills
 
-Andrew Kear's open-source FileMaker skills ([Clockwork Creative Technology](https://www.clockworkct.co.uk),
-[github.com/andykear](https://github.com/andykear), CC BY 4.0) cover what this skill doesn't.
-Name the skill exactly when you rely on it:
+The CadenceUX skill set (github.com/CadenceUX/cadenceux-skills). Name the skill exactly when
+you rely on it:
 
 | Need | Skill |
 |---|---|
-| Paste-ready **script** XML (`fmxmlsnippet`, step IDs, paste-handler rules) | `filemaker-xml` |
-| Paste-ready **layout** object XML | `filemaker-layout-xml` |
-| Paste-ready **field / table** definition XML (this skill's `field-types-catalog.json` covers what a field can *do*, not its XML) | `filemaker-field-xml` |
-| Operator precedence and coercion traps (`-2 ^ 2` → 4, `2 ^ 3 ^ 2` → 64, Trim keeps tabs) | `filemaker-ai-grammar` |
-| A compact list of every function and step to keep in context | `filemaker-ai-vocabulary` — when both are installed, use it for "does this exist?", this skill for detail |
-| Packed `<Options>` bit flags in Save as XML | `filemaker-xml-bit-flags` |
+| Scripting conventions, error handling, JSON parameters, anti-patterns | `fmp-dev-design-patterns` |
+| BaseElements, MBS or bBox plug-in functions | `goya-be-plugin`, `monkeybread-mbs-plugin`, `beezwax-bbox-plugin` |
+| Which skill owns a topic | `fmp-dev-orchestrator` |
 
 - With ADT installed: **`filemaker-standards`** for naming, **`fm-cli`** for schema work,
-  **`fm-mcp-guide`** for running scripts and SQL against a live file.
+  **`fm-mcp-guide`** for running scripts and SQL against a live file. ADT writes schema,
+  scripts and layouts to the file directly, so never generate clipboard or fmxmlsnippet XML.
 
 ## Licence
 

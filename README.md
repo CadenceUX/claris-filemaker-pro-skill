@@ -116,19 +116,19 @@ unreliable for determining the roster — derive it from page structure instead.
 
 ## Related skills
 
-This skill pairs with **Andrew Kear's** open-source FileMaker skills from
-[Clockwork Creative Technology](https://www.clockworkct.co.uk) — all CC BY 4.0:
+Part of the CadenceUX skill set, installed together from the
+[`cadenceux` marketplace](https://github.com/CadenceUX/cadenceux-skills):
 
-| Skill | Repository | Covers |
-|---|---|---|
-| `filemaker-xml` | [FileMaker-XMLsnippet-Claude-Skill](https://github.com/andykear/FileMaker-XMLsnippet-Claude-Skill) | Paste-ready script XML |
-| `filemaker-layout-xml` | [FileMaker-XMLsnippet-Layout-Claude-Skill](https://github.com/andykear/FileMaker-XMLsnippet-Layout-Claude-Skill) | Paste-ready layout XML |
-| `filemaker-field-xml` | [FileMaker-XML-field-definitions](https://github.com/andykear/FileMaker-XML-field-definitions) | Field and table definition XML |
-| `filemaker-ai-grammar` | [FileMaker-AI-Grammar](https://github.com/andykear/FileMaker-AI-Grammar) | Engine-measured operator and coercion rules |
-| `filemaker-ai-vocabulary` | [FileMaker-AI-vocabulary](https://github.com/andykear/FileMaker-AI-vocabulary) | Compact function and step vocabulary |
-| `filemaker-xml-bit-flags` | [FileMaker-XML-bit-flags](https://github.com/andykear/FileMaker-XML-bit-flags) | Save as XML `<Options>` bit flags |
-| — | [FileMaker-XML-inspector-open-source](https://github.com/andykear/FileMaker-XML-inspector-open-source) | Browser-based Save as XML analyser |
-| — | [FileMaker-XML-scrubber](https://github.com/andykear/FileMaker-XML-scrubber) | Redacts secrets from XML before sharing with AI |
+| Skill | Covers |
+|---|---|
+| [fmp-dev-design-patterns](https://github.com/CadenceUX/fmp-dev-design-patterns) | Scripting conventions and patterns |
+| [goya-be-plugin](https://github.com/CadenceUX/goya-be-plugin-skill) | BaseElements plug-in |
+| [monkeybread-mbs-plugin](https://github.com/CadenceUX/monkeybread-mbs-plugin-skill) | MBS plug-in |
+| [beezwax-bbox-plugin](https://github.com/CadenceUX/beezwax-bbox-plugin-skill) | bBox plug-in |
+| [fmp-dev-orchestrator](https://github.com/CadenceUX/fmp-dev-orchestrator-skill) | Routing across the set |
+
+With the Claris Agentic Development Toolkit (ADT) installed, schema, scripts and layouts are
+written to the file directly, so clipboard XML skills aren't needed.
 
 ---
 

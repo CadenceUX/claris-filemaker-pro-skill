@@ -1,7 +1,7 @@
 {
   "name": "claris-filemaker-pro",
   "displayName": "Claris FileMaker Pro",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "FileMaker Pro reference: every calculation function and script step with exact syntax, return types, versions and seven-product platform support, plus the Data API, OData, SQL, WebDirect and FileMaker Go. Works with the Claris Agentic Development Toolkit (ADT) when it's installed.",
   "author": {
     "name": "Darrin Southern",

@@ -8,6 +8,15 @@ feature-equivalent — the differences below are the ones that break layouts and
 
 ---
 
+## Contents
+- Script step support — measured
+- Steps that don't run in WebDirect (generated from script-steps-catalog.json)
+- Feature limitations
+- Connections and sessions
+- Design guidance
+- Related surfaces
+- When to fetch live
+
 ## Script step support — measured
 
 Of the **216** script steps, under `WebDirect`:

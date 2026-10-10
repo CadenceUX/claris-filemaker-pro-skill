@@ -1,3 +1,18 @@
+## [2.1.1] — 2026-10-11
+
+### Changed
+
+- **Related skills now points at the CadenceUX skill set** (`fmp-dev-design-patterns`, the
+  three plug-in skills, `fmp-dev-orchestrator`) instead of the clipboard-XML skills. With the
+  Claris Agentic Development Toolkit (ADT) installed, schema, scripts and layouts are written
+  to the file directly, so paste-ready XML isn't needed. README updated to match.
+
+### Fixed
+
+- `references/webdirect-reference.md` (137 lines since the 26.0.3 update) gained the contents
+  list every reference file over 100 lines should have.
+- Validated with `cadenceux-skill-creator` 2.0.0's `scripts/validate_skill.py`.
+
 ## [2.1.0] — 2026-10-02
 
 Accuracy release, plus support for the Claris Agentic Development Toolkit (ADT). Fixes

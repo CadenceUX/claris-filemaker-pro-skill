@@ -1,3 +1,27 @@
+## [2.2.0] — 2026-10-11
+
+### Changed
+
+- **Works alongside the orchestrator's stack check.** In ADT mode, the skill now notes that
+  Agent Access needs the FileMaker Pro version ADT states, and that `adt doctor` or
+  `fmp-dev-orchestrator`'s stack check diagnoses an unreachable file. The version self-check is
+  skipped when `fmp-dev-orchestrator` is installed, since its stack check covers every skill.
+- **No preview version numbers.** `references/adt-mode.md` no longer names the ADT build it was
+  tested with; ADT is in Claris's preview programs. The skill tells the agent to report ADT and
+  preview FileMaker Pro versions to the user only, never in files or anything published.
+- Related skills: the orchestrator row now covers "is the stack current".
+- New eval case: adt-unreachable.
+
+### Fixed
+
+- The version self-check compared against 2.1.0 instead of the installed version.
+
+### Positioning
+
+Without ADT (until it reaches each developer), this skill is the standalone FileMaker Pro
+reference. With ADT, it adds platform support, versions and the API references ADT's help
+doesn't carry, and `fmp-dev-orchestrator` is the entry point for the whole set.
+
 ## [2.1.1] — 2026-10-11
 
 ### Changed

@@ -6,7 +6,9 @@ page and the FileMaker engine are. This skill adds what they don't carry: platfo
 as data, version awareness, the Data API / OData / WebDirect / Go / SQL references, and
 engine-tested patterns.
 
-*Last tested with ADT 0.9.0 on 2026-10-02. Nothing below depends on a particular ADT version.*
+*Written for Claris ADT in its preview program (October 2026). Nothing below depends on a
+particular ADT version. For which ADT and FileMaker Pro you have, and whether they're current,
+use `fmp-dev-orchestrator`'s stack check or `adt doctor`.*
 
 ---
 

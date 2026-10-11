@@ -18,7 +18,7 @@ compatibility: >-
   Development Toolkit plugin (macOS); everything else works without it.
 metadata:
   author: Darrin Southern, CadenceUX
-  version: "2.1.1"
+  version: "2.2.0"
 ---
 
 # Claris FileMaker Pro
@@ -39,6 +39,11 @@ At the start of the first FileMaker question in a session, decide the mode:
 In ADT mode, read [references/adt-mode.md](references/adt-mode.md) before answering. Claris's
 page and the FileMaker engine become the authority for signatures and behaviour; this skill
 supplies platform support, versions and the API references. Never install ADT from this skill.
+
+ADT reaches the file through FileMaker Pro's Agent Access, which needs the FileMaker Pro version
+ADT states. If an ADT tool can't reach the file, run `adt doctor` (or `fmp-dev-orchestrator`'s
+stack check) and relay its fix. ADT is in Claris's preview programs: report ADT and preview
+FileMaker Pro version numbers to the user only; never write them into files or anything published.
 
 **Standalone mode** otherwise (Claude.ai chat, Windows, any host without ADT). Answer from the
 files below; fetch the live Claris page when the rules in "When to fetch live" apply.
@@ -170,13 +175,15 @@ and answer from the page. If a live page contradicts a file here, the page wins;
 
 Once per session, on the first FileMaker question: fetch
 `https://github.com/CadenceUX/claris-filemaker-pro-skill/raw/main/VERSION` and compare it with
-this skill's version (2.1.0). If newer, start the answer with:
+this skill's version (2.2.0). If newer, start the answer with:
 
 > ⚠️ **Skill update available:** this skill is v[installed]; v[latest] is at
 > https://github.com/CadenceUX/claris-filemaker-pro-skill/releases
 
 Skip silently if the fetch fails. If the skill was installed as a plugin, suggest
-`claude plugin update` (or the Plugins page on claude.ai) instead of the releases link.
+`claude plugin update` (or the Plugins page on claude.ai) instead of the releases link. If
+`fmp-dev-orchestrator` is installed, skip this check: its stack check covers every CadenceUX
+skill, plus ADT, FileMaker Pro and the ADT project.
 
 ## Gotchas worth knowing up front
 
@@ -211,7 +218,7 @@ you rely on it:
 |---|---|
 | Scripting conventions, error handling, JSON parameters, anti-patterns | `fmp-dev-design-patterns` |
 | BaseElements, MBS or bBox plug-in functions | `goya-be-plugin`, `monkeybread-mbs-plugin`, `beezwax-bbox-plugin` |
-| Which skill owns a topic | `fmp-dev-orchestrator` |
+| Which skill owns a topic; is the stack current (skills, ADT, FileMaker Pro, ADT project) | `fmp-dev-orchestrator` |
 
 - With ADT installed: **`filemaker-standards`** for naming, **`fm-cli`** for schema work,
   **`fm-mcp-guide`** for running scripts and SQL against a live file. ADT writes schema,

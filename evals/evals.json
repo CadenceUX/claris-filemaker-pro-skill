@@ -1,6 +1,6 @@
 {
   "skill": "claris-filemaker-pro",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "notes": "Each case lists the facts a correct answer must contain (must) and the errors earlier versions made (must_not). Cases marked mode=adt assume the Claris ADT plugin is installed; mode=standalone assume it isn't; mode=any applies to both. Grade each answer against must / must_not.",
   "cases": [
     {
@@ -136,6 +136,19 @@
         "the result is negative",
         "wrap it in Abs()",
         "tries to call the filemaker CLI"
+      ]
+    },
+    {
+      "id": "adt-unreachable",
+      "mode": "adt",
+      "prompt": "ADT says it can't reach my FileMaker file. What do I check?",
+      "must": [
+        "Agent Access in FileMaker Pro (File > Manage > Agents), which needs the FileMaker Pro version ADT states",
+        "run adt doctor (or fmp-dev-orchestrator's stack check) and follow its fix"
+      ],
+      "must_not": [
+        "generates clipboard XML as a workaround",
+        "writes ADT or preview FileMaker Pro version numbers into a file"
       ]
     }
   ],

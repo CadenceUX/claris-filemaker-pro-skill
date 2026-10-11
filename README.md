@@ -4,6 +4,12 @@ A [Claude skill](https://platform.claude.com/docs/en/agents-and-tools/agent-skil
 
 Built and maintained by [Darrin Southern](https://www.linkedin.com/in/darrin-southern/) from [CadenceUX](https://cadenceux.com.au).
 
+**Which skill to start with.** If you have Claris's Agentic Development Toolkit (ADT), start
+with [fmp-dev-orchestrator](https://github.com/CadenceUX/fmp-dev-orchestrator-skill): it routes
+each task, ADT included, and checks that your skills, ADT and FileMaker Pro are current. This
+skill is the reference it calls on. If you don't have ADT yet, this skill works on its own as
+your FileMaker Pro reference.
+
 ---
 
 ## What it does

@@ -1,3 +1,28 @@
+## [2.2.1] — 2026-10-16
+
+Packaging fix for GitHub installs, using `cadenceux-skill-creator` 2.1.2. No change to the skill's instructions or reference data.
+
+### Fixed
+
+- **GitHub source zips no longer install as a plugin.** The repository root carries
+  `.claude-plugin/plugin.json` for the plugin marketplace, so GitHub's **Code → Download
+  ZIP** and a release's **Source code (zip)** looked like a plugin to the Claude desktop app,
+  which pointed to the plugin installer instead of installing the skill. A new `.gitattributes`
+  leaves `.claude-plugin/`, `evals/`, `maintainer/` and the git dotfiles out of those archives.
+  The marketplace is unaffected: it reads the repository, not the archive.
+
+### Changed
+
+- README install section links straight to the latest release's `.skill` and `.zip`, and
+  warns against the source zips.
+- Each release now also attaches unversioned copies (`<name>.skill`, `<name>.zip`) so the
+  README's `releases/latest/download/…` links don't change between versions.
+
+### Verified
+
+- `validate_skill.py` clean on the folder and on both release archives.
+- Evals not re-run: no instruction or data change since the last run.
+
 ## [2.2.0] — 2026-10-11
 
 ### Changed

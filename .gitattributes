@@ -1,0 +1,4 @@
+.claude-plugin/ export-ignore
+evals/ export-ignore
+maintainer/ export-ignore
+.gitattributes export-ignore

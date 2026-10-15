@@ -68,25 +68,29 @@ run without a record was evaluated on the FileMaker engine (via ADT) — 255 pas
 
 ## Installation
 
-**Recommended — as a plugin (updates automatically).** The skill is part of the
-[CadenceUX skills marketplace](https://github.com/CadenceUX/cadenceux-skills):
+**Claude Code** (from the `cadenceux` plugin marketplace):
 
-- **Claude Code:** `claude plugin marketplace add https://github.com/CadenceUX/cadenceux-skills.git`
-  then `claude plugin install claris-filemaker-pro@cadenceux`
-- **claude.ai / Cowork:** Customize → Plugins → Add → marketplace from GitHub →
-  `CadenceUX/cadenceux-skills`, then install **Claris FileMaker Pro**. It also appears in Claude Code.
+```bash
+claude plugin marketplace add https://github.com/CadenceUX/cadenceux-skills.git
+claude plugin install claris-filemaker-pro@cadenceux
+```
+
+**claude.ai and Cowork:** Customize → Plugins → Add marketplace from GitHub →
+`CadenceUX/cadenceux-skills`, then install **claris-filemaker-pro**.
+
+**Claude desktop app (macOS):** download [`claris-filemaker-pro.skill`](https://github.com/CadenceUX/claris-filemaker-pro-skill/releases/latest/download/claris-filemaker-pro.skill) and
+double-click it.
+
+**Claude.ai in a browser, as a single skill:** Customize → Skills → upload
+[`claris-filemaker-pro.zip`](https://github.com/CadenceUX/claris-filemaker-pro-skill/releases/latest/download/claris-filemaker-pro.zip).
+
+> Both files are attached to the latest [release](https://github.com/CadenceUX/claris-filemaker-pro-skill/releases).
+> Don't use GitHub's green **Code → Download ZIP** button or a release's **Source code (zip)**:
+> those are snapshots of the repository, not a packaged skill, and Claude won't install them
+> as one.
 
 This repository is itself a valid plugin (`.claude-plugin/plugin.json`), so
 `claude --plugin-dir <this folder>` loads it for local testing.
-
-**Manual — double-click (macOS):** download the `.skill` file from the
-[Releases](../../releases) page and double-click it. Claude Desktop registers the `.skill`
-extension and opens its install flow directly. (The `.skill` file is the release zip with a
-different extension. Not yet confirmed on Windows.)
-
-**Fallback — upload the zip:** in Claude.ai, go to **Customize → Skills** and upload the release
-`.zip`. This is the path for the web app and any platform where the double-click association
-isn't available.
 
 ---
 

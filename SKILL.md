@@ -18,7 +18,7 @@ compatibility: >-
   mode needs Claris's ADK (FileMaker Pro 26.1 or later); everything else works without it.
 metadata:
   author: Darrin Southern, CadenceUX
-  version: "3.0.1"
+  version: "3.0.2"
 ---
 
 # Claris FileMaker Pro
@@ -201,7 +201,7 @@ and answer from the page. If a live page contradicts a file here, the page wins;
 
 Once per session, on the first FileMaker question: fetch
 `https://github.com/CadenceUX/claris-filemaker-pro-skill/raw/main/VERSION` and compare it with
-this skill's version (3.0.1). If newer, start the answer with:
+this skill's version (3.0.2). If newer, start the answer with:
 
 > ⚠️ **Skill update available:** this skill is v[installed]; v[latest] is at
 > https://github.com/CadenceUX/claris-filemaker-pro-skill/releases

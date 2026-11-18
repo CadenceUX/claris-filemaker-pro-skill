@@ -16,7 +16,7 @@
   - Common Get() patterns
 
 Source: https://help.claris.com/en/pro-help/content/get-functions.html  
-All 138 Get() functions grouped by category (FM 26 added Get(AccountPasswordDaysRemaining), Get(GuidedAccessState) and Get(WindowUUID)).
+All 139 Get() functions grouped by category (FM 26 added Get(AccountPasswordDaysRemaining), Get(GuidedAccessState) and Get(WindowUUID); FM 26.1 added Get(SortOrder)).
 
 **Overview:** Get() functions report the current user, file, record, window, device, time and system state. Most enumerations are **numbers whose meaning isn't obvious** — check the table rather than guessing; several look similar but differ (`Get(Device)` 3 = iPad, `Get(SystemPlatform)` 3 = iOS).
 
@@ -356,6 +356,7 @@ Get ( QuickFindText )           // → "smith"
 | Function | Returns | Notes |
 |---|---|---|
 | `Get(SortState)` | number | 0=unsorted, 1=sorted, 2=semi-sorted |
+| `Get(SortOrder)` | text (JSON) | FM 26.1+. The window's sort order: `Sort.field[]` (fieldName, sortOrder, overrideLanguage, summary) and `Sort.maintain`. Kept after Unsort, so test `Get(SortState)` first |
 | `Get(PageNumber)` | number | Current page number (Preview mode only) |
 | `Get(PageCount)` | number | Total page count (Preview mode only) |
 | `Get(PrinterName)` | text | Name of the current printer |
@@ -365,6 +366,14 @@ Get ( QuickFindText )           // → "smith"
 Get ( SortState )  // → 1 (sorted)
 Get ( PageNumber ) // → 3 (on page 3 of Preview)
 Get ( PageCount )  // → 12 (total pages in Preview)
+```
+
+Save a window's sort and read it back (FM 26.1+):
+
+```
+Set Variable [ $sort ; Value: If ( Get ( SortState ) ; Get ( SortOrder ) ) ]
+// → {"Sort":{"field":[{"fieldName":"Products::ProductName","sortOrder":"Ascending"}],"maintain":"false"}}
+JSONListValues ( $sort ; "Sort.field" )   // one JSON object per sort field
 ```
 
 ---

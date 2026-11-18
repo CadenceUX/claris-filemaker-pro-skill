@@ -2,18 +2,21 @@
  "meta": {
   "description": "Canonical catalog of all FileMaker Pro script steps, organised by category. Use this for prototype/syntax lookups before fetching live docs. doc_url points to the authoritative Claris Help Centre page for each step.",
   "help_centre": "https://help.claris.com/markdown/en/pro-help/script-steps-reference.md",
-  "version": "FileMaker Pro 26 / Claris 2026",
-  "last_updated": "2026-10 (v2.1.0 — syntax and notes corrected; platform matrix re-checked against live 26.0.3 pages)",
+  "version": "FileMaker Pro 26.1 / Claris 2026",
+  "last_updated": "2026-11 (v3.0.0 — FileMaker 26.1: two new steps, Go to Related Record by calculation, self-closing Show Custom Dialog, Configure Persistent Data delete by Char(9249), Perform Find by Natural Language options; 216 documented steps re-derived from live pages)",
   "update_instructions": "Re-fetch https://help.claris.com/markdown/en/pro-help/script-steps-reference.md and compare category listings. Add new steps, update slugs, bump last_updated.",
   "note": "Syntax uses [] for required fields/options and {} for optional. Steps marked platform list restrictions (Pro, Server, Go, WebDirect, Cloud).",
-  "step_count": 216,
-  "last_known_fm_version": "26",
-  "verified_on": "2026-10-02",
+  "step_count": 218,
+  "last_known_fm_version": "26.1",
+  "verified_on": "2026-11-18",
   "platform_encoding": "Delta-encoded. `platform_exceptions` lists ONLY products where the step is not fully supported, keyed Pro/Go/WebDirect/Server/Cloud/DataAPI/CWP with values No or Partial. ABSENT platform_exceptions means Yes on all seven. 'No' = step is skipped and returns error 3 (Command is unavailable); 'Partial' = performed but one or more features differ (see the step's Notes).",
   "os_restriction_note": "`os_restriction` is a desktop-OS limit (macOS only / Windows only) and is orthogonal to `platform_exceptions`, which is the client/host matrix.",
   "verification_method": "Every entry re-derived from its live help.claris.com markdown page (## Compatibility, ## Originated in version). Roster determined structurally: set-dictionary is a real script step that Claris mislabels as topic_type: conceptual, so a topic_type sweep alone undercounts by one.",
-  "latest_public_release": "26.0.3 (Pro, Server, Go, Cloud — September 2026; checked 2026-10-02)",
-  "prerelease_note": "FileMaker builds newer than latest_public_release (for example a newer engine shipped with ADT) are pre-release. A script step the engine knows but this catalog and Claris's docs do not is undocumented and probably pre-release."
+  "latest_public_release": "26.1.1 (FileMaker Pro 26.1.1, build 26.1.1.54; FileMaker Server 26.1.1; FileMaker Cloud 2.26.1 — checked 2026-11-18)",
+  "prerelease_note": "FileMaker builds newer than latest_public_release (for example the engine shipped with ADK, or a testing build of FileMaker Pro) are pre-release. A script step the engine knows but this catalog and Claris's docs do not is undocumented and probably pre-release.",
+  "documented_step_count": 216,
+  "doc_status_note": "Entries with doc_status 'announced' (Set Variable by Name, Replace Field Contents by Name) are FileMaker 26.1 steps known to the engine with no Claris Help page yet; platform_verified false means their platform_exceptions are not yet confirmed, so do not read the absence of platform_exceptions as 'Yes everywhere' for them.",
+  "engine_only_steps": "The 26.1.1 engine also knows Execute URL and Validate Scripts, which appear in no Claris documentation or 26.1 release material: treat them as undocumented and pre-release."
  },
  "categories": [
   {
@@ -151,6 +154,17 @@
      "slug": "set-variable",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/set-variable.md",
      "originated_in_version": "8.0"
+    },
+    {
+     "name": "Set Variable by Name",
+     "syntax": "Set Variable by Name [ Name: <calculation> ; Value: <calculation> ; Repetition: <calculation> ]",
+     "purpose": "Creates or sets a local ($) or global ($$) variable whose name comes from a calculation",
+     "slug": "set-variable-by-name",
+     "doc_url": null,
+     "originated_in_version": "26.1",
+     "doc_status": "announced",
+     "platform_verified": false,
+     "notes": "The Name calculation must return the full name including $ or $$. Replaces branching or repeated Set Variable steps when the target variable is decided at runtime. Claris's 26.1 materials say it works in WebDirect as well as FileMaker Pro; full platform support is unverified until Claris publishes its Help page. Announced for FileMaker 26.1 and known to the 26.1.1 engine; no Claris Help page yet (checked 2026-11-18). Re-check the live page once Claris publishes it."
     },
     {
      "name": "Install OnTimer Script",
@@ -323,7 +337,7 @@
     },
     {
      "name": "Go to Related Record",
-     "syntax": "Go to Related Record [ Show only related records ; From table: \"TableOccurrence\" ; Using layout: \"LayoutName\" ]",
+     "syntax": "Go to Related Record [ Show only related records ; From table: \"TableOccurrence\" | Table by Calculation: <calculation returning a table occurrence name> ; Using layout: \"LayoutName\" ]",
      "purpose": "Goes to a related record via a relationship, optionally filtering to related records only",
      "slug": "go-to-related-record",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/go-to-related-record.md",
@@ -335,7 +349,8 @@
       "Cloud": "Partial",
       "DataAPI": "Partial",
       "CWP": "Partial"
-     }
+     },
+     "notes": "FM 26.1+: 'Table by Calculation' picks the source table occurrence at runtime, replacing chains of conditional Go to Related Record steps; Claris's 26.1 materials say this works in WebDirect too."
     },
     {
      "name": "Go to Portal Row",
@@ -650,6 +665,17 @@
       "CWP": "Partial"
      },
      "notes": "FM 26.0.1+: Perform auto-enter options for fields lets replacements skip updating other auto-enter fields."
+    },
+    {
+     "name": "Replace Field Contents by Name",
+     "syntax": "Replace Field Contents by Name [ With dialog: On/Off ; Specify target field: <calculation returning Table::Field> ; Current contents / Serial numbers / Calculated result ]",
+     "purpose": "Replaces values in a field chosen by a calculation, across every record in the found set",
+     "slug": "replace-field-contents-by-name",
+     "doc_url": null,
+     "originated_in_version": "26.1",
+     "doc_status": "announced",
+     "platform_verified": false,
+     "notes": "The target calculation must return a fully qualified Table::Field name; with Specify target field off, the active field is used. With dialog Off and no replace option chosen, the step fails. Serial-number options mirror Replace Field Contents. Claris's 26.1 materials say it works in WebDirect as well as FileMaker Pro; full platform support is unverified until Claris publishes its Help page. Announced for FileMaker 26.1 and known to the 26.1.1 engine; no Claris Help page yet (checked 2026-11-18). Re-check the live page once Claris publishes it."
     },
     {
      "name": "Relookup Field Contents",
@@ -2124,7 +2150,7 @@
       "DataAPI": "No",
       "CWP": "No"
      },
-     "notes": "FM 26.0.1+: Height, Width, From Top and From Left set the dialog size and position (points); long messages scroll."
+     "notes": "FM 26.0.1+: Height, Width, From Top and From Left set the dialog size and position (points); long messages scroll. FM 26.1+: a dialog can have no buttons and 'Close after (seconds)' dismisses it automatically; Get(LastMessageChoice) then returns 0. Claris lists the self-closing dialog for FileMaker Go too."
     },
     {
      "name": "Beep",
@@ -2743,9 +2769,9 @@
     {
      "name": "Perform Find by Natural Language",
      "purpose": "Get a found set by sending a natural language prompt and layout fields to a model.",
-     "syntax": "Perform Find by Natural Language [ Account Name: <name> ; Model: <model> ; Prompt: <text> ; Response Target: <field/variable> ]",
+     "syntax": "Perform Find by Natural Language [ Account Name: <name> ; Model: <model> ; Prompt: <text> ; Get: Found Set | Found Set as JSON | Find Request as JSON ; Prompt Template Name: <name> ; Parameters: <JSON> ; Response Target: <field/variable> ]",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/perform-find-by-natural-language.md",
-     "notes": "Get options: Found Set (updates current found set), Found Set as JSON (Data API format), Find Request as JSON (debug — inspect the find criteria without performing the find). Uses GetFieldsOnLayout to determine which fields are sent to the model. Supports context_prompt parameter key for date/time context. Cannot perform finds requiring aggregate functions (e.g. find the record with the highest value in a field). Returns error 401 when no records match.",
+     "notes": "Get options: Found Set (updates current found set), Found Set as JSON (Data API format), Find Request as JSON (debug — inspect the find criteria without performing the find). Uses GetFieldsOnLayout to determine which fields are sent to the model. Supports context_prompt parameter key for date/time context. Cannot perform finds requiring aggregate functions (e.g. find the record with the highest value in a field). Returns error 401 when no records match. Parameters JSON may include the client-side keys CURLOPT_TIMEOUT (seconds) and context_prompt (extra instructions sent before the prompt, e.g. how to interpret 'today'); other keys pass through to the model provider (checked 2026-11-18).",
      "originated_in_version": "22.0",
      "slug": "perform-find-by-natural-language"
     },
@@ -2821,7 +2847,7 @@
      "purpose": "Sets or deletes an entry in the persistent data store; store survives session end and file close",
      "slug": "configure-persistent-data",
      "doc_url": "https://help.claris.com/markdown/en/pro-help/configure-persistent-data.md",
-     "notes": "Sets or deletes one entry in the file's persistent data store, keyed by name + optional instance ID (blank = \"\"). Use the Delete Entry option to remove an entry; deleting one that doesn't exist returns error 10. Requires Full Access (or a script granted full access). The data type of Value is preserved. Read with GetPersistentData / ListPersistentDataIDs. Entries are schema: copied by clones, NOT by the Data Migration Tool.",
+     "notes": "Sets or deletes one entry in the file's persistent data store, keyed by name + optional instance ID (blank = \"\"). Use the Delete Entry option to remove an entry; deleting one that doesn't exist returns error 10. Requires Full Access (or a script granted full access). The data type of Value is preserved. Read with GetPersistentData / ListPersistentDataIDs. Entries are schema: copied by clones, NOT by the Data Migration Tool. FM 26.1+: if the Value calculation returns only Char ( 9249 ) (the ␡ symbol), the entry is deleted as if Delete Entry were chosen, so one step can set or delete.",
      "originated_in_version": "26.0",
      "concept_doc_url": "https://help.claris.com/markdown/en/pro-help/about-persistent-data-store.md"
     }

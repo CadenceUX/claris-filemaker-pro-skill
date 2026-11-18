@@ -1,0 +1,17 @@
+# Reviewed values the validator and scan_for_client_material.sh may skip: placeholder file
+# names, paths and syntax in Claris-style examples, and the scratch files the engine checks use.
+CRM.fmp12
+Functions.fmp12
+verify.fmp12
+calc.fmp12
+/Users/bjones
+/Users/John
+C:\Users\John
+fmp://host
+Password: pwd
+Password: <password>
+API key: "sk-..."
+Account Name: "acct"
+Account Name: "my-account"
+Account Name: "AI_Model_Server"
+sk-RZCtpWT...

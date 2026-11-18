@@ -52,6 +52,11 @@ Conversely, a small set of steps are **Go-only** and unsupported in FileMaker Pr
 
 ---
 
+**FileMaker 26.1** on Go: Show Custom Dialog can have no buttons and close itself after a set
+time (`Get ( LastMessageChoice )` returns 0), edit boxes can show a clipped-content indicator,
+and container fields accept AVIF images. Full Go support for the new by-name steps is
+unconfirmed until Claris publishes their Help pages.
+
 ## Not supported at all
 
 FileMaker Pro features absent from Go:

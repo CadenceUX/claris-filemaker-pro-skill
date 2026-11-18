@@ -2,7 +2,7 @@
 """Run every testable calculation example in the skill through the FileMaker engine.
 
 Maintainer tool — not shipped in the skill package. Needs the Claris Agentic Development
-Toolkit (ADT) installed on macOS: it drives ADT's `filemaker` CLI (fm-cli), which evaluates
+Kit (ADK) installed on macOS: it drives ADK's `filemaker` CLI (fm-cli), which evaluates
 formulas with the real FileMaker calculation engine against a throwaway file.
 
     python3 maintainer/verify_examples.py                 # all reference files
@@ -34,7 +34,10 @@ import sys
 import tempfile
 from decimal import Decimal, InvalidOperation
 
-FM_CLI = os.path.expanduser("~/Library/Application Support/ADT/MCP/fm-cli/fm-cli")
+# ADK's fm-cli; older ADT preview installs kept it under ADT/MCP. The first one present wins.
+FM_CLI_PATHS = [os.path.expanduser("~/Library/Application Support/ADK/fm-cli/fm-cli"),
+                os.path.expanduser("~/Library/Application Support/ADT/MCP/fm-cli/fm-cli")]
+FM_CLI = next((p for p in FM_CLI_PATHS if os.path.exists(p)), FM_CLI_PATHS[0])
 SKILL_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 ARROW = r"(?:→|->)"
@@ -260,7 +263,7 @@ def main():
     ap.add_argument("--show-skips", action="store_true")
     args = ap.parse_args()
     if not os.path.exists(FM_CLI):
-        sys.exit(f"ADT's fm-cli not found at {FM_CLI}. Install the Agentic Development Toolkit.")
+        sys.exit(f"ADK's fm-cli not found at {FM_CLI}. Install Claris's FileMaker Agentic Development Kit (ADK).")
 
     files = args.files or sorted(glob.glob(os.path.join(SKILL_ROOT, "references", "*.md")))
     cases, skipped, validate_only = [], [], []

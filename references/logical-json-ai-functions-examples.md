@@ -878,6 +878,20 @@ JSONMakeArray ( ValueListItems ( Get(FileName) ; "Status Values" ) ; ¶ ; JSONSt
 
 # FileMaker AI Functions — Syntax & Examples
 
+## CreateToolDefinitions ( provider ; functionName {; functionName...} )
+
+FileMaker 26.1+. Returns JSON tool definitions for the named custom functions, formatted for
+one model provider: `OpenAI`, `Anthropic`, `Cohere`, `Google` or `Custom`. The definitions come
+from each custom function's name, parameters and the descriptions 26.1 lets you attach to the
+function and its parameters, so write those first. Claris's materials also show the name
+`GetToolDefinitions`; the 26.1.1 engine accepts both. There's no Claris Help page yet (checked
+2026-11-18): fetch it before relying on the exact output shape.
+
+```
+CreateToolDefinitions ( "Anthropic" ; "CalculateTax" ; "FormatAddress" )
+// → JSON tool definitions for the two custom functions, in Anthropic's tool format
+```
+
 Source: https://help.claris.com/en/pro-help/content/artificial-intelligence-functions.html  
 All 14 native AI functions.
 

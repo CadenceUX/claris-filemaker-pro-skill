@@ -1,3 +1,61 @@
+## [3.0.0] — 2026-11-18
+
+FileMaker 26.1, and Claris's FileMaker Agentic Development Kit (ADK) in place of the ADT preview
+name, using `cadenceux-skill-creator` 2.4.2. Major version: the ADT mode and its reference file
+are renamed, and detection works in any harness.
+
+### Added
+
+- **FileMaker 26.1 functions and steps:** `Get(SortOrder)` (Claris page published),
+  `CreateToolDefinitions` (also accepted as `GetToolDefinitions`), `Set Variable by Name` and
+  `Replace Field Contents by Name`. The last three have no Claris Help page yet, so they carry
+  `doc_status: "announced"`, a null `doc_url`, and for the steps `platform_verified: false`.
+  Options for the new steps come from the 26.1.1 engine (`filemaker help script steps`).
+- **26.1 changes to existing steps:** Go to Related Record by calculation, button-less and
+  self-closing Show Custom Dialog (`Get ( LastMessageChoice )` = 0), Configure Persistent Data
+  delete by `Char ( 9249 )`, and Perform Find by Natural Language's documented Get modes,
+  prompt template and Parameters keys (`CURLOPT_TIMEOUT`, `context_prompt`).
+- **`references/version-26-1.md`:** what 26.1 changed for developers beyond functions and steps
+  (calculated value lists, calculated button icons, single unlabelled checkbox, custom function
+  descriptions, field display names, WebDirect and Go parity, Server), in this skill's words.
+- `Get(SortOrder)` and `CreateToolDefinitions` examples; 26.1 notes in the WebDirect and
+  FileMaker Go references; a 26.1 row in the version-notes table; two gotchas.
+- Evals: `fm261-sortorder`, `fm261-set-variable-by-name`, `fm261-tool-definitions`.
+
+### Changed
+
+- **ADT mode is now ADK mode** (`references/adk-mode.md`, was `adt-mode.md`). Detection covers
+  the Claude Code plugin, `adk-mcp` tools in any harness (Cursor, Codex, Gemini CLI), the `adk`
+  and `filemaker` commands, and `~/Library/Application Support/ADK/`; the old ADT names still
+  count, with a suggestion to update. It names ADK's current skills (`adk-project-setup`,
+  `adk-webviewer-app`) and commands (`adk doctor`, `adk script run`, `adk standards`), and states
+  ADK's requirements: FileMaker Pro 26.1 or later, FileMaker Server 26.1.1 or later for hosted
+  files.
+- **The 26.1 gap:** ADK 0.16.0's engine knows every 26.1 addition but its bundled Help predates
+  them, so in ADK mode the skill answers those from its catalogs.
+- **Engine-only steps:** the 26.1.1 engine also knows `Execute URL` and `Validate Scripts`,
+  which no Claris document mentions; the skill calls them undocumented and pre-release.
+- Version numbers are now published (FileMaker 26.1 is public): `latest_public_release` is
+  FileMaker Pro 26.1.1 (build 26.1.1.54); `last_known_fm_version` is 26.1.
+- `maintainer/verify_examples.py` finds ADK's `fm-cli`, falling back to the old ADT path.
+
+### Verified
+
+- All 369 documented functions and 216 documented steps re-derived from the live Claris pages
+  (2026-11-18) with `maintainer/rebuild_*.py`: `Get(SortOrder)` is the only new page; seven
+  edited pages refreshed. Claris still mislabels four reference pages as conceptual; the
+  catalog is right about them.
+- Every catalogued function validated on the 26.1.1 engine (the 20 that need a field, variable
+  syntax or a calculation context fail only for that reason); the engine roster compared with
+  the documented steps.
+- `verify_examples.py`: 255 evaluated, 79 parsed, 0 failed, 77 skipped (need a record). The new
+  examples validated separately, and the `Get(SortOrder)` JSON example evaluated as shown.
+- Evals (`evals/results-2026-11-18-v3.0.0.md`): Haiku 4.5/5, Sonnet 5/5, Opus 5/5 on the 26.1
+  and ADK cases, run against the real ADK engine; the released 2.2.1 scored 0/3 on the new cases.
+- `validate_skill.py` (cadenceux-skill-creator 2.4.2) clean apart from one false positive
+  ("DDL" read as an environment variable); `scan_skill.sh` and `scan_for_client_material.sh`
+  clean, with reviewed example placeholders in `sensitive-allow.txt`.
+
 ## [2.2.1] — 2026-10-16
 
 Packaging fix for GitHub installs, using `cadenceux-skill-creator` 2.1.2. No change to the skill's instructions or reference data.

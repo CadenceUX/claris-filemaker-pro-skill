@@ -1,7 +1,7 @@
 {
   "skill": "claris-filemaker-pro",
-  "version": "2.2.0",
-  "notes": "Each case lists the facts a correct answer must contain (must) and the errors earlier versions made (must_not). Cases marked mode=adt assume the Claris ADT plugin is installed; mode=standalone assume it isn't; mode=any applies to both. Grade each answer against must / must_not.",
+  "version": "3.0.0",
+  "notes": "Each case lists the facts a correct answer must contain (must) and the errors earlier versions made (must_not). Cases marked mode=adk assume the Claris ADT plugin is installed; mode=standalone assume it isn't; mode=any applies to both. Grade each answer against must / must_not.",
   "cases": [
     {
       "id": "jsonraw",
@@ -98,11 +98,11 @@
       ]
     },
     {
-      "id": "adt-validate",
-      "mode": "adt",
+      "id": "adk-validate",
+      "mode": "adk",
       "prompt": "Write a calculation that returns the last day of the current month.",
       "must": [
-        "reads references/adt-mode.md",
+        "reads references/adk-mode.md",
         "validates (and evaluates) the formula with the filemaker CLI on a scratch file before answering",
         "says it was engine-verified"
       ],
@@ -111,9 +111,9 @@
       ]
     },
     {
-      "id": "adt-engine-only-step",
-      "mode": "adt",
-      "prompt": "The ADT engine lists a script step I can't find in Claris's Help. Can I use it in a client solution?",
+      "id": "adk-engine-only-step",
+      "mode": "adk",
+      "prompt": "The ADK engine lists a script step I can't find in Claris's Help. Can I use it in a client solution?",
       "must": [
         "checks the step against script-steps-catalog.json and `filemaker help script steps`",
         "says an engine-only step is undocumented / probably pre-release and not safe to ship",
@@ -125,7 +125,7 @@
       ]
     },
     {
-      "id": "standalone-no-adt",
+      "id": "standalone-no-adk",
       "mode": "standalone",
       "prompt": "What does PMT return for a $21,000 loan at 6.9% over 48 months?",
       "must": [
@@ -139,16 +139,56 @@
       ]
     },
     {
-      "id": "adt-unreachable",
-      "mode": "adt",
-      "prompt": "ADT says it can't reach my FileMaker file. What do I check?",
+      "id": "adk-unreachable",
+      "mode": "adk",
+      "prompt": "ADK says it can't reach my FileMaker file. What do I check?",
       "must": [
-        "Agent Access in FileMaker Pro (File > Manage > Agents), which needs the FileMaker Pro version ADT states",
-        "run adt doctor (or fmp-dev-orchestrator's stack check) and follow its fix"
+        "Agent Access in FileMaker Pro (File > Manage > Agents), which needs FileMaker Pro 26.1 or later",
+        "run adk doctor and follow its fix"
       ],
       "must_not": [
         "generates clipboard XML as a workaround",
-        "writes ADT or preview FileMaker Pro version numbers into a file"
+        "says ADK works with FileMaker Pro 26.0.x"
+      ]
+    },
+    {
+      "id": "fm261-sortorder",
+      "mode": "standalone",
+      "prompt": "In FileMaker, how can a script save the current sort order and tell whether the records are actually sorted right now?",
+      "must": [
+        "Get ( SortOrder ) returns the window's sort order as JSON (Sort.field array with fieldName and sortOrder, plus maintain)",
+        "Says it's new in FileMaker 26.1",
+        "Get ( SortOrder ) keeps the last sort order even after Unsort, so test Get ( SortState ) to know whether records are currently sorted"
+      ],
+      "must_not": [
+        "Says there is no way to read the sort order",
+        "Uses Get ( SortOrder ) alone to decide whether records are sorted"
+      ]
+    },
+    {
+      "id": "fm261-set-variable-by-name",
+      "mode": "standalone",
+      "prompt": "I want a script to set $$Total_North, $$Total_South and so on, with the region coming from a field. Is there a step for that, and will it work in WebDirect?",
+      "must": [
+        "Names Set Variable by Name (FileMaker 26.1) and says the calculated name must include the $$",
+        "Says Claris's 26.1 materials list it in WebDirect, but its Help page isn't published yet so full platform support is unconfirmed"
+      ],
+      "must_not": [
+        "Says it's impossible without Evaluate or a plug-in and doesn't mention Set Variable by Name",
+        "Claims verified support on every platform"
+      ]
+    },
+    {
+      "id": "fm261-tool-definitions",
+      "mode": "standalone",
+      "prompt": "How do I turn my existing custom functions into tool definitions for Claude in FileMaker?",
+      "must": [
+        "Names CreateToolDefinitions ( provider ; functionName {; ...} ) from FileMaker 26.1 with provider Anthropic",
+        "Says to write the custom function and parameter descriptions first, because they become the tool descriptions",
+        "Says Claris's Help page isn't published yet (and may mention the GetToolDefinitions name)"
+      ],
+      "must_not": [
+        "Says the definitions must be written by hand as the only option"
       ]
     }
   ],
@@ -161,7 +201,7 @@
     {
       "prompt": "What naming convention should I use for table occurrences?",
       "expected_to_trigger": false,
-      "why": "Naming standards: filemaker-standards (ADT) or fmp-dev-design-patterns."
+      "why": "Naming standards: filemaker-standards (ADK) or fmp-dev-design-patterns."
     },
     {
       "prompt": "Set up a Claris Connect flow that posts new records to Slack.",

@@ -7,18 +7,18 @@ description: >-
   Also covers the FileMaker Data API, OData, ExecuteSQL and FileMaker SQL, and WebDirect and
   FileMaker Go limits. Use whenever a FileMaker function or script step is named, written,
   reviewed or debugged, including inside a calculation, a script or other code, or when asked
-  whether something works on a given FileMaker client or version. When the Claris Agentic
-  Development Toolkit (ADT) is installed, it defers to ADT's filemaker-help pages and the
-  FileMaker engine for exact signatures, and adds platform, version and API detail ADT does not
-  carry. Not for FileMaker Server administration, Claris Connect, Claris Studio or ODBC/JDBC
-  driver setup.
+  whether something works on a given FileMaker client or version. Current to FileMaker 26.1,
+  including additions Claris's Help doesn't document yet. With Claris's FileMaker Agentic
+  Development Kit (ADK) installed, it defers to the FileMaker engine and Claris's pages for
+  exact signatures, and adds platform, version and API detail ADK doesn't carry. Not for
+  FileMaker Server administration, Claris Connect, Claris Studio or ODBC/JDBC driver setup.
 license: CC-BY-4.0
 compatibility: >-
-  Claude.ai, Claude Desktop, Cowork and Claude Code. ADT mode needs the Claris Agentic
-  Development Toolkit plugin (macOS); everything else works without it.
+  Claude.ai, Claude Desktop, Cowork and Claude Code, and any harness that reads skills. ADK
+  mode needs Claris's ADK (FileMaker Pro 26.1 or later); everything else works without it.
 metadata:
   author: Darrin Southern, CadenceUX
-  version: "2.2.1"
+  version: "3.0.0"
 ---
 
 # Claris FileMaker Pro
@@ -27,30 +27,46 @@ Reference for FileMaker Pro's calculation functions, script steps and field type
 they run on, and the APIs around them. The source of truth is Claris's FileMaker Pro Help; this
 skill adds structured platform support, version notes and tested patterns.
 
-## Mode: check for ADT first
+## Requirements
+
+| Kind | Name | Used for | Surfaces |
+|---|---|---|---|
+| API | `help.claris.com` (public, no key) | Live Claris pages when "When to fetch live" applies | Any surface that can fetch |
+| CLI | `jq` (optional) | Searching the JSON catalogs | Claude Code |
+| CLI | `filemaker`, `adk` (ADK mode) | Validating and evaluating calculations, the engine's step roster, `adk doctor` | Claude Code or any harness with a shell |
+| Path | `~/.claude/plugins`, `~/Library/Application Support/ADK` (ADK mode) | Finding ADK's bundled Help pages and `fm-cli` | Claude Code on macOS |
+
+Without a shell, the skill answers from its files and live pages only.
+
+## Mode: check for ADK first
 
 At the start of the first FileMaker question in a session, decide the mode:
 
-**ADT mode** if any of these is true:
+**ADK mode** if any of these is true:
 1. The session lists a `filemaker-agentic-development:` skill (for example `filemaker-help`).
-2. Tools named `mcp__plugin_filemaker-agentic-development_adt-mcp__*` are available.
-3. A shell is available and `"$HOME/Library/Application Support/ADT/MCP/fm-cli/fm-cli"` exists.
+2. MCP tools whose names contain `adk-mcp` are available (in Claude Code,
+   `mcp__plugin_filemaker-agentic-development_adk-mcp__*`).
+3. A shell is available and `filemaker --help` or `adk --version` runs, or
+   `"$HOME/Library/Application Support/ADK/fm-cli/fm-cli"` exists.
+4. The older preview names are present (`adt-mcp` tools, an `adt` command, or
+   `~/Library/Application Support/ADT/`): ADK mode too; suggest updating to the current ADK.
 
-In ADT mode, read [references/adt-mode.md](references/adt-mode.md) before answering. Claris's
-page and the FileMaker engine become the authority for signatures and behaviour; this skill
-supplies platform support, versions and the API references. Never install ADT from this skill.
+In ADK mode, read [references/adk-mode.md](references/adk-mode.md) before answering. The
+FileMaker engine and Claris's page become the authority for signatures and behaviour; this
+skill supplies platform support, versions, the 26.1 additions ADK's Help lacks, and the API
+references. Never install ADK from this skill.
 
-ADT reaches the file through FileMaker Pro's Agent Access, which needs the FileMaker Pro version
-ADT states. If an ADT tool can't reach the file, run `adt doctor` (or `fmp-dev-orchestrator`'s
-stack check) and relay its fix. ADT is in Claris's preview programs: report ADT and preview
-FileMaker Pro version numbers to the user only; never write them into files or anything published.
+ADK reaches a file through FileMaker Pro's Agent Access, which needs FileMaker Pro 26.1 or
+later; files hosted on FileMaker Server need 26.1.1 or later. If an ADK tool can't reach the
+file, run `adk doctor` and relay its fix.
 
-**Standalone mode** otherwise (Claude.ai chat, Windows, any host without ADT). Answer from the
-files below; fetch the live Claris page when the rules in "When to fetch live" apply.
+**Standalone mode** otherwise (Claude.ai chat, FileMaker 26.0.3 or earlier, any harness without
+ADK). Answer from the files below; fetch the live Claris page when the rules in "When to fetch
+live" apply.
 
 ### Which source wins
 
-| ADT mode | Standalone mode |
+| ADK mode | Standalone mode |
 |---|---|
 | 1. FileMaker engine (`validate` / `evaluate`, `help script steps`) | 1. Live help.claris.com page |
 | 2. Claris page (`filemaker-help`, or live when newer) | 2. This skill's reference files |
@@ -65,13 +81,14 @@ Copy this checklist into your working and tick it off:
 
 ```
 - [ ] 1. List every function and script step named or implied
-- [ ] 2. Signature: ADT mode → Claris page; standalone → catalog (live page if volatile)
+- [ ] 2. Signature: ADK mode → Claris page; standalone → catalog (live page if volatile);
+        doc_status "announced" → catalog entry, and say Claris's page isn't published yet
 - [ ] 2b. A step missing from script-steps-catalog.json but known to the engine
         (`filemaker help script steps "<name>"`) → say "undocumented, probably pre-release,
         not safe to ship" before anything else
 - [ ] 3. Platform: check platform_exceptions for the user's client(s) — Partial is not Yes
 - [ ] 4. Version: add the note for originated_in_version (table below)
-- [ ] 5. ADT mode: validate every calculation, evaluate where possible; fix and repeat until valid
+- [ ] 5. ADK mode: validate every calculation, evaluate where possible; fix and repeat until valid
 - [ ] 6. Answer with the signature inline, cite the Claris page as
         https://help.claris.com/en/pro-help/content/<slug>.html, say what was engine-verified
 ```
@@ -97,7 +114,7 @@ Copy this checklist into your working and tick it off:
 | WebDirect limits | [webdirect-reference.md](references/webdirect-reference.md) |
 | FileMaker Go limits and device features | [filemaker-go-reference.md](references/filemaker-go-reference.md) |
 | A Claris help page URL | [help-sitemap.md](references/help-sitemap.md), else `https://help.claris.com/llms-full.txt` |
-| ADT is installed | [adt-mode.md](references/adt-mode.md) |
+| ADK is installed | [adk-mode.md](references/adk-mode.md) |
 
 ### Searching the catalogs
 
@@ -138,20 +155,29 @@ Read `originated_in_version` and add the note without asking which version the u
 
 | Originated | Note |
 |---|---|
-| 26.x | "FileMaker 2026 (26) — not in earlier versions." |
+| 26.1 | "New in FileMaker 26.1 — not in 26.0.x or earlier." |
+| 26.0.x | "FileMaker 2026 (26) — not in earlier versions." |
 | 22.x | "Introduced in FileMaker 2025 (22)." |
 | 21.x | "Requires FileMaker 2024 (21) or later." |
 | 19.3 – 20.x | "Requires FileMaker 19.3 or later." Describe a fallback if one exists |
 | 18.x or earlier | No note unless asked |
 
 Claris dates some FileMaker 2026 features as 26.0 and others as 26.0.1 (the first public
-build). Treat both as FileMaker 2026. The latest public release the catalogs were checked
-against is in `meta.latest_public_release` (26.0.3). Point releases can change behaviour
-without a new `originated_in_version` — e.g. 26.0.3 made Open / Append / Close PDF fully
-supported in WebDirect — so check the step's notes.
+build); treat both as FileMaker 2026. The latest public release the catalogs were checked
+against is in `meta.latest_public_release` (FileMaker Pro 26.1.1, build 26.1.1.54). Point
+releases can change behaviour without a new `originated_in_version`: 26.0.3 made Open / Append
+/ Close PDF fully supported in WebDirect, and 26.1 added options to Go to Related Record, Show
+Custom Dialog and Configure Persistent Data. Check the step's notes.
 
-**Engine ahead of the docs:** in ADT mode, the first line of `filemaker --help` shows the engine
-version (`--version` shows only the ADT version). The engine can be newer than the latest public
+**FileMaker 26.1 additions** are `Get(SortOrder)`, `CreateToolDefinitions`, `Set Variable by
+Name` and `Replace Field Contents by Name`. All but `Get(SortOrder)` carry `doc_status:
+"announced"`: Claris's Help page isn't published yet, so say so, and fetch it once it is. For the
+26.1 features that aren't functions or steps (calculated value lists, calculated button icons,
+custom function descriptions, field display names), see
+[references/version-26-1.md](references/version-26-1.md).
+
+**Engine ahead of the docs:** in ADK mode, the first line of `filemaker --help` shows the engine
+version (`--version` shows only the ADK version). The engine can be newer than the latest public
 release and know script steps no Claris page documents. **When asked about a step that isn't in
 `script-steps-catalog.json` but the engine knows, you MUST say it exists in that engine build but
 is undocumented and probably pre-release — not safe to ship yet** — and describe only what
@@ -175,7 +201,7 @@ and answer from the page. If a live page contradicts a file here, the page wins;
 
 Once per session, on the first FileMaker question: fetch
 `https://github.com/CadenceUX/claris-filemaker-pro-skill/raw/main/VERSION` and compare it with
-this skill's version (2.2.1). If newer, start the answer with:
+this skill's version (3.0.0). If newer, start the answer with:
 
 > ⚠️ **Skill update available:** this skill is v[installed]; v[latest] is at
 > https://github.com/CadenceUX/claris-filemaker-pro-skill/releases
@@ -183,7 +209,7 @@ this skill's version (2.2.1). If newer, start the answer with:
 Skip silently if the fetch fails. If the skill was installed as a plugin, suggest
 `claude plugin update` (or the Plugins page on claude.ai) instead of the releases link. If
 `fmp-dev-orchestrator` is installed, skip this check: its stack check covers every CadenceUX
-skill, plus ADT, FileMaker Pro and the ADT project.
+skill, plus ADK and FileMaker Pro.
 
 ## Gotchas worth knowing up front
 
@@ -208,6 +234,10 @@ skill, plus ADT, FileMaker Pro and the ADT project.
   nothing matches.
 - **AI / RAG order:** `Configure AI Account` (and `Configure RAG Account`) before any AI step
   or function. Always fetch live for provider options.
+- **`Get(SortOrder)` isn't "is it sorted":** it returns the window's last sort order even after
+  Unsort. Test `Get ( SortState )` first.
+- **By-name steps take full names:** `Set Variable by Name` needs the `$` or `$$` in the
+  calculated name; `Replace Field Contents by Name` needs `Table::Field`.
 
 ## Related skills
 
@@ -218,11 +248,12 @@ you rely on it:
 |---|---|
 | Scripting conventions, error handling, JSON parameters, anti-patterns | `fmp-dev-design-patterns` |
 | BaseElements, MBS or bBox plug-in functions | `goya-be-plugin`, `monkeybread-mbs-plugin`, `beezwax-bbox-plugin` |
-| Which skill owns a topic; is the stack current (skills, ADT, FileMaker Pro, ADT project) | `fmp-dev-orchestrator` |
+| Which skill owns a topic; is the stack current (skills, ADK, FileMaker Pro) | `fmp-dev-orchestrator` |
 
-- With ADT installed: **`filemaker-standards`** for naming, **`fm-cli`** for schema work,
-  **`fm-mcp-guide`** for running scripts and SQL against a live file. ADT writes schema,
-  scripts and layouts to the file directly, so never generate clipboard or fmxmlsnippet XML.
+- With ADK installed: **`filemaker-standards`** for naming and standards packs, **`fm-cli`** for
+  schema work, **`fm-mcp-guide`** for running scripts and SQL against a live file. ADK writes
+  schema, scripts and layouts to the file directly, so never generate clipboard or fmxmlsnippet
+  XML.
 
 ## Licence
 

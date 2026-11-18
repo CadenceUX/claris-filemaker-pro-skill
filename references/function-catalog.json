@@ -3,17 +3,19 @@
   "description": "FileMaker calculation function catalog. Prototype signatures are canonical from the source repository. Category, slug, doc_url and purpose are sourced from the Claris Help Centre index.",
   "source_repo": "function-catalog.json (master for name/prototype)",
   "help_centre": "https://help.claris.com/markdown/en/pro-help/functions-reference.md",
-  "version": "26.0",
-  "last_updated": "2026-10 (v2.1.0 — 9 originated_in_version corrections; ComputeModel vision form)",
+  "version": "26.1",
+  "last_updated": "2026-11 (v3.0.0 — FileMaker 26.1: Get(SortOrder) and CreateToolDefinitions added; all 369 documented functions re-derived from live pages and checked against the 26.1.1 engine)",
   "update_instructions": "Re-fetch source repo and compare against this file. Also re-fetch each category_page from help.claris.com to pick up new functions or updated slugs. For new functions, check the FileMaker Pro Release Notes at https://help.claris.com/en/pro-release-notes/content/ to determine the version introduced.",
-  "last_known_fm_version": "26",
-  "verified_on": "2026-10-02",
-  "verification_method": "Every entry re-derived from its live help.claris.com markdown page (## Format, ## Data type returned, ## Originated in version). Roster determined structurally, not from topic_type — Claris mislabels getpersistentdata, listpersistentdataids and get-systemstorageavailable as topic_type: conceptual. Re-checked 2026-10-02 against Claris FileMaker Pro Help (v26 corpus) and, where a formula can run without record context, against the FileMaker calculation engine shipped with ADT via ADT fm-cli.",
-  "function_count": 368,
+  "last_known_fm_version": "26.1",
+  "verified_on": "2026-11-18",
+  "verification_method": "Every entry re-derived from its live help.claris.com markdown page (## Format, ## Data type returned, ## Originated in version). Roster determined structurally, not from topic_type — Claris mislabels getpersistentdata, listpersistentdataids and get-systemstorageavailable as topic_type: conceptual. Re-checked 2026-10-02 against Claris FileMaker Pro Help (v26 corpus) and, where a formula can run without record context, against the FileMaker calculation engine shipped with ADK via ADK fm-cli.",
+  "function_count": 370,
   "return_type_source": "Claris '## Data type returned' section, all 368 pages",
   "fm26_notes": "Google Gemini is supported as an AI model provider for text generation (FM 26). AI provider support changes frequently — always fetch the live page for the current provider list.",
-  "latest_public_release": "26.0.3 (Pro, Server, Go, Cloud — September 2026; checked 2026-10-02)",
-  "prerelease_note": "FileMaker builds newer than latest_public_release (for example a newer engine shipped with ADT) are pre-release. A script step the engine knows but this catalog and Claris's docs do not is undocumented and probably pre-release."
+  "latest_public_release": "26.1.1 (FileMaker Pro 26.1.1, build 26.1.1.54; FileMaker Server 26.1.1; FileMaker Cloud 2.26.1 — checked 2026-11-18)",
+  "prerelease_note": "FileMaker builds newer than latest_public_release (for example the engine shipped with ADK) are pre-release. A script step the engine knows but this catalog and Claris's docs do not is undocumented and probably pre-release.",
+  "documented_function_count": 369,
+  "doc_status_note": "Entries with doc_status 'announced' exist in the FileMaker engine and Claris's release materials but have no Claris Help page yet; their doc_url is null. Say so when answering, and fetch the live page if one has appeared."
  },
  "functions": [
   {
@@ -5327,6 +5329,38 @@
    "doc_url": "https://help.claris.com/markdown/en/pro-help/yearname.md",
    "originated_in_version": "6.0 or earlier",
    "return_type": "text"
+  },
+  {
+   "name": "Get(SortOrder)",
+   "format": "Get ( SortOrder )",
+   "parameters": [
+    "SortOrder"
+   ],
+   "purpose": "Returns the active window's sort order as a JSON object",
+   "category": "Get functions",
+   "category_url": "get-functions.html",
+   "slug": "get-sortorder",
+   "doc_url": "https://help.claris.com/markdown/en/pro-help/get-sortorder.md",
+   "originated_in_version": "26.1",
+   "return_type": "text",
+   "notes": "Returns {\"Sort\":{\"field\":[{\"fieldName\":\"Table::Field\",\"sortOrder\":\"Ascending|Descending|<value list name>\",\"overrideLanguage\":\"<language>\",\"summary\":\"<summary field>\"}],\"maintain\":\"true|false\"}}. Each window has its own sort order. Returns the window's most recent sort order even after Unsort: use Get(SortState) to test whether records are currently sorted. Language names are listed on Claris's 'Language names for sorting and indexing' page."
+  },
+  {
+   "name": "CreateToolDefinitions",
+   "format": "CreateToolDefinitions ( provider ; functionName {; functionName...} )",
+   "parameters": [
+    "provider",
+    "functionName"
+   ],
+   "purpose": "Returns AI tool definitions in JSON, formatted for a model provider, built from the named custom functions' names, parameters and descriptions",
+   "category": "Artificial intelligence functions",
+   "category_url": "artificial-intelligence-functions.html",
+   "slug": "createtooldefinitions",
+   "doc_url": null,
+   "originated_in_version": "26.1",
+   "return_type": "text",
+   "doc_status": "announced",
+   "notes": "provider is one of OpenAI, Anthropic, Cohere, Google or Custom. Pairs with 26.1's custom function and parameter descriptions: write the descriptions first, since they become the tool descriptions the model sees. Claris's 26.1 materials name it CreateToolDefinitions in text but show GetToolDefinitions in the calculation dialog; the 26.1.1 engine accepts both names. Announced for FileMaker 26.1 and known to the 26.1.1 engine; no Claris Help page yet (checked 2026-11-18). Re-check the live page once Claris publishes it."
   }
  ]
 }

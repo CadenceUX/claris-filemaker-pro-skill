@@ -1,7 +1,8 @@
 # FileMaker WebDirect — Reference
 
 Verified against the live `webdirect-guide` (40 pages) on 2026-07-25 and the per-step
-Compatibility tables on **2026-10-02** (FileMaker 26.0.3).
+Compatibility tables on **2026-10-02** (FileMaker 26.0.3); FileMaker 26.1 additions below
+checked on 2026-11-18.
 
 WebDirect runs a hosted custom app in a browser. It resembles FileMaker Pro but is **not**
 feature-equivalent — the differences below are the ones that break layouts and scripts.
@@ -46,6 +47,14 @@ and `Delete Portal Row`.
 **From: File**, the user picks a PDF to upload in a browser dialog, and `Close PDF` with
 **Save to: File** offers the result as a browser download. Older 26.0.x hosts treat them as
 Partial.
+
+**FileMaker 26.1** brings its new dynamic steps to WebDirect in the same release:
+`Set Variable by Name`, `Replace Field Contents by Name` and Go to Related Record by
+calculation (Claris's 26.1 release materials; the steps' Help pages aren't published yet, so the
+counts above still cover the 216 documented steps). Also in 26.1: a single unlabelled checkbox
+and a clipped-content indicator with an expander. Claris certified WebDirect against WCAG 2.2
+Level AA, for WebDirect in FileMaker Server 26.0.2 and later; say "certified against WCAG 2.2
+Level AA", not "fully compliant".
 
 ---
 

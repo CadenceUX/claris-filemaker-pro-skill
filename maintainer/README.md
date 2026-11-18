@@ -59,7 +59,7 @@ small; investigate anything that isn't. Then update:
 python3 maintainer/verify_examples.py --report /tmp/verify.md
 ```
 
-Needs the Claris Agentic Development Toolkit on macOS (it drives ADT's `fm-cli`). Every example
+Needs the Claris FileMaker Agentic Development Kit (ADK) on macOS (it drives ADK's `fm-cli`). Every example
 that pairs a runnable formula with a concrete result is evaluated on the FileMaker engine;
 environment-dependent formulas (Get(), design functions, AI, mobile) are parsed instead.
 Exits 1 on any failure. Don't release with failures.

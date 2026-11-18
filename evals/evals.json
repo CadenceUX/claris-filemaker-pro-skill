@@ -1,7 +1,7 @@
 {
   "skill": "claris-filemaker-pro",
   "version": "3.0.0",
-  "notes": "Each case lists the facts a correct answer must contain (must) and the errors earlier versions made (must_not). Cases marked mode=adk assume the Claris ADT plugin is installed; mode=standalone assume it isn't; mode=any applies to both. Grade each answer against must / must_not.",
+  "notes": "Each case lists the facts a correct answer must contain (must) and the errors earlier versions made (must_not). Cases marked mode=adk assume the Claris ADK plugin is installed; mode=standalone assume it isn't; mode=any applies to both. Grade each answer against must / must_not.",
   "cases": [
     {
       "id": "jsonraw",

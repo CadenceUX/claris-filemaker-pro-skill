@@ -56,6 +56,23 @@ are renamed, and detection works in any harness.
   ("DDL" read as an environment variable); `scan_skill.sh` and `scan_for_client_material.sh`
   clean, with reviewed example placeholders in `sensitive-allow.txt`.
 
+## [3.0.1] — 2026-11-19
+
+`cadenceux-dx` replaces the retired `fmp-dev-orchestrator`, and Claris's public FileMaker
+Agentic Development Kit (ADK) replaces the ADT preview name. No change to what the skill does.
+
+### Changed
+
+- The skill update self-check skips when `cadenceux-dx` is installed (its stack check covers
+  every CadenceUX skill), in place of `fmp-dev-orchestrator`.
+- README and routing table point to `cadenceux-dx` as the place to start.
+- ADT is now ADK in the instructions, README and evals.
+
+### Verified
+
+- `validate_skill.py` clean; `cadenceux-github` scanners clean.
+- Evals not re-run: names only, no change to instructions or reference data.
+
 ## [2.2.1] — 2026-10-16
 
 Packaging fix for GitHub installs, using `cadenceux-skill-creator` 2.1.2. No change to the skill's instructions or reference data.

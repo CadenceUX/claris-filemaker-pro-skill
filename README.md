@@ -5,7 +5,7 @@ A [Claude skill](https://platform.claude.com/docs/en/agents-and-tools/agent-skil
 Built and maintained by [Darrin Southern](https://www.linkedin.com/in/darrin-southern/) from [CadenceUX](https://cadenceux.com.au).
 
 **Which skill to start with.** If you have Claris's FileMaker Agentic Development Kit (ADK),
-start with [fmp-dev-orchestrator](https://github.com/CadenceUX/fmp-dev-orchestrator-skill): it
+start with [cadenceux-dx](https://github.com/CadenceUX/cadenceux-dx-skill): it
 routes each task, ADK included, and checks that your skills, ADK and FileMaker Pro are current.
 This skill is the reference it calls on. Without ADK (FileMaker 26.0.3 or earlier, or a plain
 chat), this skill works on its own as your FileMaker Pro reference.
@@ -139,7 +139,7 @@ Part of the CadenceUX skill set, installed together from the
 | [goya-be-plugin](https://github.com/CadenceUX/goya-be-plugin-skill) | BaseElements plug-in |
 | [monkeybread-mbs-plugin](https://github.com/CadenceUX/monkeybread-mbs-plugin-skill) | MBS plug-in |
 | [beezwax-bbox-plugin](https://github.com/CadenceUX/beezwax-bbox-plugin-skill) | bBox plug-in |
-| [fmp-dev-orchestrator](https://github.com/CadenceUX/fmp-dev-orchestrator-skill) | Routing across the set |
+| [cadenceux-dx](https://github.com/CadenceUX/cadenceux-dx-skill) | Routing across the set |
 
 With Claris's FileMaker Agentic Development Kit (ADK) installed, schema, scripts and layouts are
 written to the file directly, so clipboard XML skills aren't needed.

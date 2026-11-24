@@ -1,7 +1,7 @@
 {
   "name": "claris-filemaker-pro",
   "displayName": "Claris FileMaker Pro",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "FileMaker Pro reference current to FileMaker 26.1: every calculation function and script step with exact syntax, return types, versions and seven-product platform support, plus the Data API, OData, SQL, WebDirect and FileMaker Go. Works with Claris's FileMaker Agentic Development Kit (ADK) when it's installed.",
   "author": {
     "name": "Darrin Southern",

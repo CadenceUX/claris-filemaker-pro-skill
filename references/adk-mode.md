@@ -6,8 +6,8 @@ FileMaker engine and Claris's own page are. This skill adds what they don't carr
 support as data, version awareness, the FileMaker 26.1 additions ADK's bundled Help doesn't
 document yet, the Data API / OData / WebDirect / Go / SQL references, and engine-tested patterns.
 
-*Checked against ADK 0.16.0 (November 2026), whose engine reports FileMaker 26.1.1. ADK works
-with FileMaker Pro 26.1 or later; files hosted on FileMaker Server need 26.1.1 or later. For
+*Checked against ADK 0.17.0 (November 2026), whose engine reports FileMaker 26.1.1. ADK runs on
+macOS and 64-bit Windows, and works with FileMaker Pro 26.1 or later; files hosted on FileMaker Server need 26.1.1 or later. For
 which ADK you have and whether it's current, run `adk doctor`.*
 
 ---
@@ -35,7 +35,9 @@ Without the command-line tools there's no engine: say results are from documenta
 
 On macOS the tools live in `~/Library/Application Support/ADK/`: `bin/adk` and
 `fm-cli/fm-cli` (what `filemaker` runs). If `filemaker` isn't on PATH, call
-`"$HOME/Library/Application Support/ADK/fm-cli/fm-cli"` with the same arguments.
+`"$HOME/Library/Application Support/ADK/fm-cli/fm-cli"` with the same arguments. On Windows
+they live in `%LOCALAPPDATA%\ADK\`: in PowerShell, call
+`& "$env:LOCALAPPDATA\ADK\fm-cli\fm-cli.exe"` or `& "$env:LOCALAPPDATA\ADK\bin\adk.exe"`.
 
 **Older preview installs** used the name ADT (`adt`, `adt-mcp`, `~/Library/Application
 Support/ADT/MCP/fm-cli/fm-cli`, skills `adt-project-setup` and `adt-webviewer-app`). Treat
@@ -43,14 +45,14 @@ those as ADK mode too, and suggest updating to the current ADK from Claris.
 
 ## 2. The 26.1 gap in ADK's bundled Help
 
-ADK 0.16.0's engine knows every FileMaker 26.1 addition, but its bundled Help pages predate
-them. Claris's live Help has caught up on `Get(SortOrder)` only. Until both are current, answer
-these from this skill's catalogs, which mark them `doc_status: "announced"` where no Claris page
-exists yet:
+ADK's engine knows every FileMaker 26.1 addition. Its bundled Help, like Claris's live Help,
+has a page for `Get(SortOrder)` only (bundled since ADK 0.17.0; ADK 0.16.0 had none). Answer
+the others from this skill's catalogs, which mark them `doc_status: "announced"` while no Claris
+page exists:
 
 | 26.1 addition | Where it is |
 |---|---|
-| `Get(SortOrder)` | `function-catalog.json` (live Claris page exists) |
+| `Get(SortOrder)` | Claris's page, bundled in ADK 0.17.0 or later and live; also `function-catalog.json` |
 | `CreateToolDefinitions` (the dialog also accepts `GetToolDefinitions`) | `function-catalog.json` |
 | `Set Variable by Name`, `Replace Field Contents by Name` | `script-steps-catalog.json` |
 | Go to Related Record by calculation, self-closing Show Custom Dialog, Configure Persistent Data delete by `Char ( 9249 )`, Perform Find by Natural Language options | the steps' `notes` |

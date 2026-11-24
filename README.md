@@ -23,7 +23,7 @@ When this skill is active, Claude will:
 - Reference **accurate error codes** with official descriptions
 - Cover the **OData API**, **FileMaker Data API**, **WebDirect** and **FileMaker Go** surfaces directly
 - Detect **version drift** — if a fetched page's "Originated in version" is newer than the version the reference files were verified against, it flags it
-- **Know FileMaker 26.1 ahead of the docs.** Most 26.1 additions aren't in Claris's Help yet, and ADK's bundled Help predates them all. The catalogs carry them, marked "announced" until Claris publishes the page
+- **Know FileMaker 26.1 ahead of the docs.** Most 26.1 additions aren't in Claris's Help yet; ADK's bundled Help has only `Get(SortOrder)`. The catalogs carry them, marked "announced" until Claris publishes the page
 - **Work with Claris's FileMaker Agentic Development Kit (ADK).** When ADK is installed (Claude Code, or any harness running its `adk-mcp` server), the skill defers to the real FileMaker engine and Claris's own Help pages for exact signatures, validates every calculation it writes, and adds the platform, version and API detail ADK doesn't carry. Without ADK it works on its own
 
 ### Scope

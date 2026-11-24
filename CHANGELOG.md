@@ -1,3 +1,25 @@
+## [3.0.3] — 2026-11-24
+
+Claris's FileMaker Agentic Development Kit (ADK) 0.17.0. Fact updates only; no change to how the
+skill works.
+
+### Changed
+
+- **ADK runs on 64-bit Windows** as well as macOS since 0.17.0. ADK-mode detection and the ADK
+  tool paths now name the Windows location (`%LOCALAPPDATA%\ADK`, `fm-cli\fm-cli.exe`,
+  `bin\adk.exe`) beside the macOS one.
+- **The 26.1 gap is smaller:** ADK 0.17.0's bundled Help adds Claris's `Get(SortOrder)` page.
+  `CreateToolDefinitions`, `Set Variable by Name` and `Replace Field Contents by Name` still have
+  no Claris page, bundled or live (checked 2026-11-24), so they stay `announced`.
+- `adk-mode.md` checked against ADK 0.17.0.
+
+### Verified
+
+- ADK 0.16.0 and 0.17.0 plugins compared file by file: the only Help changes are two new pages
+  (`get-sortorder`, `language-names-sorting-indexing`) and a `date_modified` field on every page.
+- `validate_skill.py` clean.
+- Evals not re-run: wording and paths only, no change to reference data or instructions.
+
 ## [3.0.2] — 2026-11-19
 
 `cadenceux-dx` replaces the retired `fmp-dev-orchestrator`, and Claris's public FileMaker

@@ -18,7 +18,7 @@ compatibility: >-
   mode needs Claris's ADK (FileMaker Pro 26.1 or later); everything else works without it.
 metadata:
   author: Darrin Southern, CadenceUX
-  version: "3.0.2"
+  version: "3.0.3"
 ---
 
 # Claris FileMaker Pro
@@ -34,7 +34,7 @@ skill adds structured platform support, version notes and tested patterns.
 | API | `help.claris.com` (public, no key) | Live Claris pages when "When to fetch live" applies | Any surface that can fetch |
 | CLI | `jq` (optional) | Searching the JSON catalogs | Claude Code |
 | CLI | `filemaker`, `adk` (ADK mode) | Validating and evaluating calculations, the engine's step roster, `adk doctor` | Claude Code or any harness with a shell |
-| Path | `~/.claude/plugins`, `~/Library/Application Support/ADK` (ADK mode) | Finding ADK's bundled Help pages and `fm-cli` | Claude Code on macOS |
+| Path | `~/.claude/plugins`; `~/Library/Application Support/ADK` (macOS) or `%LOCALAPPDATA%\ADK` (Windows) (ADK mode) | Finding ADK's bundled Help pages and `fm-cli` | Claude Code |
 
 Without a shell, the skill answers from its files and live pages only.
 
@@ -46,8 +46,9 @@ At the start of the first FileMaker question in a session, decide the mode:
 1. The session lists a `filemaker-agentic-development:` skill (for example `filemaker-help`).
 2. MCP tools whose names contain `adk-mcp` are available (in Claude Code,
    `mcp__plugin_filemaker-agentic-development_adk-mcp__*`).
-3. A shell is available and `filemaker --help` or `adk --version` runs, or
-   `"$HOME/Library/Application Support/ADK/fm-cli/fm-cli"` exists.
+3. A shell is available and `filemaker --help` or `adk --version` runs, or ADK's `fm-cli`
+   exists: `"$HOME/Library/Application Support/ADK/fm-cli/fm-cli"` on macOS,
+   `"$env:LOCALAPPDATA\ADK\fm-cli\fm-cli.exe"` on Windows.
 4. The older preview names are present (`adt-mcp` tools, an `adt` command, or
    `~/Library/Application Support/ADT/`): ADK mode too; suggest updating to the current ADK.
 
@@ -201,7 +202,7 @@ and answer from the page. If a live page contradicts a file here, the page wins;
 
 Once per session, on the first FileMaker question: fetch
 `https://github.com/CadenceUX/claris-filemaker-pro-skill/raw/main/VERSION` and compare it with
-this skill's version (3.0.2). If newer, start the answer with:
+this skill's version (3.0.3). If newer, start the answer with:
 
 > ⚠️ **Skill update available:** this skill is v[installed]; v[latest] is at
 > https://github.com/CadenceUX/claris-filemaker-pro-skill/releases
